@@ -1,4 +1,4 @@
-package org.Car;
+package org.CarApp;
 
 public class Main {
     public static void main(String[] args) {
