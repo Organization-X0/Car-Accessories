@@ -29,7 +29,7 @@ public class LoginSteps {
     }
     @Then("an error message should be seen")
     public void an_error_message_should_be_seen() {
-        assertTrue(myApp.errorDisplayed());
+        assertTrue(myApp.errorDisplayedLogin());
     }
 
 }

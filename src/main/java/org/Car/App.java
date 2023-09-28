@@ -14,7 +14,14 @@ public class App {
     public void login(String email, String password) {
 
     }
-    public boolean errorDisplayed() {
+    public boolean errorDisplayedLogin() {
+        return false;
+    }
+
+    public void signUp(String fullName, String email, String password, String phone) {
+    }
+
+    public boolean errorDisplayedSignUp() {
         return false;
     }
 }
