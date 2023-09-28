@@ -13,10 +13,6 @@ public class SignUpSteps {
     public void valid_details_are_entered() {
         // Write code here that turns the phrase above into concrete actions
     }
-    @When("the enter key is pressed")
-    public void the_enter_key_is_pressed() {
-        // Write code here that turns the phrase above into concrete actions
-    }
     @Then("go to the main page")
     public void go_to_the_main_page() {
         // Write code here that turns the phrase above into concrete actions
