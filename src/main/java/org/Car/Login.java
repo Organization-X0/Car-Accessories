@@ -24,7 +24,7 @@ public class Login {
 
 
     }
-    public Map<String,String> DisplayLogin(){
+    public Map<String,String> displayLogin(){
 
         Map<String,String>data=new HashMap<>();
 
