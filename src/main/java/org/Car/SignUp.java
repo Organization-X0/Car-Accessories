@@ -29,7 +29,7 @@ public class SignUp {
         data.put("password",scanner.nextLine());
         return data;
     }
-    public void signUpNow(String fullName,String email,String password,String phone){
+    public boolean signUpNow(String fullName,String email,String phone,String password){
         Pattern pattern = Pattern.compile(regexPattern);
         Matcher matcher = pattern.matcher(email);
         if(matcher.matches())
@@ -38,7 +38,8 @@ public class SignUp {
                     if(phone.length()==10){
                         User user =new User(fullName,email,password,phone);
                         myDataBase.addUser(user);
+                        return true;
                     }
-
+        return false;
     }
 }
