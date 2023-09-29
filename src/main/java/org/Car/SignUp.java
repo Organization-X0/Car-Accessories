@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 public class SignUp {
     String regexPattern = "^(.+)@(\\S+)$";
-    DataBase dataBase=new DataBase();
-    public SignUp(){
-
+    DataBase myDataBase;
+    public SignUp(DataBase dataBase){
+       this.myDataBase=dataBase;
     }
     public void signUpNow(String fullName,String email,String password,String phone){
         Pattern pattern = Pattern.compile(regexPattern);
@@ -20,7 +20,7 @@ public class SignUp {
                 if(password.length()>=3 && password.length()<=20)
                     if(phone.length()==10){
                         User user =new User(fullName,email,password,phone);
-                        dataBase.addUser(user);
+                        myDataBase.addUser(user);
                     }
 
     }
