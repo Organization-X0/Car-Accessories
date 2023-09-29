@@ -3,7 +3,7 @@ Feature: User Sign Up
   Scenario: Successful Sign Up
     Given on the sign up page
     When valid details are entered
-    Then go to the main page
+    Then go to the login page
 
   Scenario: Unsuccessful Sign Up
     Given on the sign up page
