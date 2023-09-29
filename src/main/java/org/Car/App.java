@@ -19,6 +19,7 @@ public class App {
     }
 
     public void signUp(String fullName, String email, String password, String phone) {
+
     }
 
     public boolean errorDisplayedSignUp() {
