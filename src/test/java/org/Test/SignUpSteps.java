@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
+import org.Car.SignUp;
 import org.Car.State;
 
 import static org.junit.Assert.assertEquals;
@@ -13,12 +14,13 @@ public class SignUpSteps {
     App myApp=new App();
     @Given("on the sign up page")
     public void on_the_sign_up_page() {
+        myApp.state= State.SIGNUP;
         assertEquals(State.SIGNUP,myApp.getState());
     }
     @When("valid details are entered")
     public void valid_details_are_entered() {
         // Write code here that turns the phrase above into concrete actions
-        myApp.signUp( "userx","abood@gmail.com","123456aa","0568345816");
+        myApp.signUp( "userx","abood@gmail.com","1234567890","123456aa");
     }
     @Then("go to the login page")
     public void go_to_the_login_page() {

@@ -16,7 +16,7 @@ public class LoginSteps {
     }
     @When("valid username and password are entered")
     public void valid_username_and_password_are_entered() {
-        myApp.login("user1","123");
+        myApp.login("user1@gmail.com","u123");
     }
     @Then("redirection to the main page should occur")
     public void redirection_to_the_main_page_should_occur() {
@@ -25,7 +25,7 @@ public class LoginSteps {
 
     @When("invalid username or password are entered")
     public void invalid_username_or_password_are_entered() {
-        myApp.login("AboGhalb","balela");
+        myApp.login("AboGhalb@gmail.com","balela");
     }
     @Then("an error message should be seen")
     public void an_error_message_should_be_seen() {

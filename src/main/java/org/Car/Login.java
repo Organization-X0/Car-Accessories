@@ -18,17 +18,16 @@ public class Login {
         User user=myDatabase.search(Email);
         if(user==null){
             return false;
-
         }
         return user.checkPassword(password);
-
-
     }
+
     public Map<String,String> displayLogin(){
+
 
         Map<String,String>data=new HashMap<>();
 
-        System.out.print(Cli.purpleBoldText("Login"));
+        System.out.println(Cli.purpleBoldText("Login"));
         System.out.print(Cli.blueBoldText("Email:"));
         Scanner scanner=new Scanner(System.in);
         String Email=scanner.nextLine();
@@ -37,6 +36,5 @@ public class Login {
         data.put("email",Email);
         data.put("password",pass);
         return data;
-
     }
 }
