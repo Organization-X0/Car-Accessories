@@ -14,4 +14,7 @@ public class Cli {
     public static Ansi blueBoldText(String text){
         return ansi().eraseScreen().fgBright(BLUE).a(text).reset();
     }
+    public static Ansi purpleBoldText(String text){
+        return ansi().eraseScreen().fgBright(MAGENTA).a(text).reset();
+    }
 }
