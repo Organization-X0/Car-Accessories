@@ -36,6 +36,6 @@ public class SignUpSteps {
     @Then("Show error message indicates what went wrong")
     public void show_error_message_indicates_what_went_wrong() {
         // Write code here that turns the phrase above into concrete actions
-       assertTrue(myApp.errorDisplayedSignUp());
+       assertTrue(myApp.getErrorSignUp());
     }
 }

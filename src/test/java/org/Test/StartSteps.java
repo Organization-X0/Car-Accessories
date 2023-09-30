@@ -29,7 +29,7 @@ public class StartSteps {
     }
     @Then("I should see an error message")
     public void i_should_see_an_error_message() {
-        assertTrue(myApp.errorDisplayedStart());
+        assertTrue(myApp.getErrorStart());
     }
 
 }

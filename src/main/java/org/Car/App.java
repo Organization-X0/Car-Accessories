@@ -2,6 +2,8 @@ package org.Car;
 
 import org.Data.DataBase;
 
+import java.awt.datatransfer.Clipboard;
+import java.io.IOException;
 import java.util.Map;
 
 public class App {
@@ -30,15 +32,35 @@ public class App {
     public void render(){
         while(true) {
             if (state == State.START) {
+
+
+                if(getErrorStart()){
+                    System.out.println(Cli.errorText("Invalid option! try again"));
+
+                }
                 String option = Cli.displayStart();
                 setOption(option);
             } else if (state == State.LOGIN) {
+
+
+                if(getErrorLogin()){
+                    System.out.println(Cli.errorText("Not registered "));
+                }
                 Map<String, String> loginData = Cli.displayLogin();
                 login(loginData.get("email"), loginData.get("password"));
             } else if (state == State.SIGNUP) {
+
+
+                if(getErrorSignUp()){
+
+                    System.out.println(Cli.errorText("Invalid data!"));
+                }
+
                 Map<String, String> signUpData = Cli.displaySignUp();
-                signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
+
+                signUp(signUpData.get("fullname"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
             } else if (state==State.MAIN) {
+
                 Cli.displayMain();
             }
         }
@@ -49,23 +71,26 @@ public class App {
     public void login(String email, String password) {
         if(myLogin.loginNow(email,password)){
             state=State.MAIN;
+            errorDisplayedLogin=false;
             return;
         }
         errorDisplayedLogin=true;
     }
-    public boolean errorDisplayedLogin() {
+    public boolean getErrorLogin() {
         return errorDisplayedLogin;
     }
 
     public void signUp(String fullName, String email,String phone ,String password) {
        if(mySignUp.signUpNow(fullName,email,phone,password)){
            state=State.LOGIN;
+           errorDisplayedSignUp=false;
            return;
+
        }
         errorDisplayedSignUp=true;
     }
 
-    public boolean errorDisplayedSignUp() {
+    public boolean getErrorSignUp() {
         return errorDisplayedSignUp;
     }
 
@@ -79,7 +104,7 @@ public class App {
         }
     }
 
-    public boolean errorDisplayedStart() {
+    public boolean getErrorStart() {
         return errorDisplayedStart;
     }
 }
