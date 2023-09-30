@@ -13,11 +13,14 @@ public class Cli {
     public static Ansi errorText(String text){
         return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();
     }
-    public static Ansi blueText(String text){
-        return ansi().eraseScreen().fg(BLUE).a(text).reset();
+    public static Ansi blueBgText(String text){
+        return ansi().eraseScreen().bg(BLUE).fgBright(WHITE).a(text).reset();
     }
     public static Ansi blueBoldText(String text){
         return ansi().eraseScreen().fgBright(BLUE).a(text).reset();
+    }
+    public static Ansi blueText(String text){
+        return ansi().eraseScreen().fg(BLUE).a(text).reset();
     }
     public static Ansi purpleBoldText(String text){
         return ansi().eraseScreen().fgBright(MAGENTA).a(text).reset();
@@ -27,11 +30,11 @@ public class Cli {
 
         Map<String,String>data=new HashMap<>();
 
-        System.out.println(Cli.purpleBoldText("Login"));
-        System.out.print(Cli.blueBoldText("Email:"));
+        System.out.println(Cli.blueBgText(" Login "));
+        System.out.print(Cli.blueText("Email:"));
         Scanner scanner=new Scanner(System.in);
         String Email=scanner.nextLine();
-        System.out.print(Cli.blueBoldText("Password:"));
+        System.out.print(Cli.blueText("Password:"));
         String pass=scanner.nextLine();
         data.put("email",Email);
         data.put("password",pass);
@@ -41,13 +44,13 @@ public class Cli {
         Map<String,String> data = new HashMap<>();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print(Cli.purpleBoldText("Sing Up")+"\n"+Cli.blueBoldText("Full Name: "));
+        System.out.print(Cli.blueBgText(" Sing Up ")+"\n"+Cli.blueText("Full Name: "));
         data.put("fullname",scanner.nextLine());
-        System.out.print(Cli.blueBoldText("Email: "));
+        System.out.print(Cli.blueText("Email: "));
         data.put("email",scanner.nextLine());
-        System.out.print(Cli.blueBoldText("Phone: "));
+        System.out.print(Cli.blueText("Phone: "));
         data.put("phone",scanner.nextLine());
-        System.out.print(Cli.blueBoldText("Password: "));
+        System.out.print(Cli.blueText("Password: "));
         data.put("password",scanner.nextLine());
         return data;
     }
@@ -59,9 +62,9 @@ public class Cli {
     public static String displayStart(){
         Scanner scanner=new Scanner(System.in);
 
-        System.out.println(Cli.purpleBoldText("Program"));
-        System.out.println(Cli.blueBoldText("1.Login"));
-        System.out.println(Cli.blueBoldText("2.Sign UP"));
+        System.out.println(Cli.blueBgText(" Program "));
+        System.out.println(Cli.blueText("1.Login"));
+        System.out.println(Cli.blueText("2.Sign UP"));
         String option=scanner.nextLine();
         if(option.equals("1")) {
             return "1";

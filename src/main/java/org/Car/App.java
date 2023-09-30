@@ -30,19 +30,19 @@ public class App {
         while(true) {
             if (state == State.START) {
                 if(getErrorStart()){
-                    System.out.println(Cli.errorText("Invalid option! try again"));
+                    System.out.println(Cli.errorText(" Invalid option! "));
                 }
                 String option = Cli.displayStart();
                 setOption(option);
             } else if (state == State.LOGIN) {
                 if(getErrorLogin()){
-                    System.out.println(Cli.errorText("Not registered "));
+                    System.out.println(Cli.errorText(" Not registered! "));
                 }
                 Map<String, String> loginData = Cli.displayLogin();
                 login(loginData.get("email"), loginData.get("password"));
             } else if (state == State.SIGNUP) {
                 if(getErrorSignUp()){
-                    System.out.println(Cli.errorText("Invalid data!"));
+                    System.out.println(Cli.errorText(" Invalid data! "));
                 }
                 Map<String, String> signUpData = Cli.displaySignUp();
                 signUp(signUpData.get("fullname"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
