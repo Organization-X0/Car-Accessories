@@ -3,7 +3,7 @@ package org.Data;
 import java.util.ArrayList;
 
 public class DataBase {
-    private ArrayList<User> usersList;
+    private final ArrayList<User> usersList;
     public DataBase(){
         usersList=new ArrayList<User>();
         usersList.add(new User("user1","user1@gmail.com","u123","0599123456"));

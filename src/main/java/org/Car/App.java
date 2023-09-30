@@ -2,8 +2,6 @@ package org.Car;
 
 import org.Data.DataBase;
 
-import java.awt.datatransfer.Clipboard;
-import java.io.IOException;
 import java.util.Map;
 
 public class App {
@@ -15,7 +13,6 @@ public class App {
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
-
 
     public App(){
         errorDisplayedLogin=false;
@@ -32,35 +29,24 @@ public class App {
     public void render(){
         while(true) {
             if (state == State.START) {
-
-
                 if(getErrorStart()){
                     System.out.println(Cli.errorText("Invalid option! try again"));
-
                 }
                 String option = Cli.displayStart();
                 setOption(option);
             } else if (state == State.LOGIN) {
-
-
                 if(getErrorLogin()){
                     System.out.println(Cli.errorText("Not registered "));
                 }
                 Map<String, String> loginData = Cli.displayLogin();
                 login(loginData.get("email"), loginData.get("password"));
             } else if (state == State.SIGNUP) {
-
-
                 if(getErrorSignUp()){
-
                     System.out.println(Cli.errorText("Invalid data!"));
                 }
-
                 Map<String, String> signUpData = Cli.displaySignUp();
-
                 signUp(signUpData.get("fullname"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
             } else if (state==State.MAIN) {
-
                 Cli.displayMain();
             }
         }
@@ -76,9 +62,6 @@ public class App {
         }
         errorDisplayedLogin=true;
     }
-    public boolean getErrorLogin() {
-        return errorDisplayedLogin;
-    }
 
     public void signUp(String fullName, String email,String phone ,String password) {
        if(mySignUp.signUpNow(fullName,email,phone,password)){
@@ -88,10 +71,6 @@ public class App {
 
        }
         errorDisplayedSignUp=true;
-    }
-
-    public boolean getErrorSignUp() {
-        return errorDisplayedSignUp;
     }
 
     public void setOption(String option) {
@@ -106,5 +85,11 @@ public class App {
 
     public boolean getErrorStart() {
         return errorDisplayedStart;
+    }
+    public boolean getErrorLogin() {
+        return errorDisplayedLogin;
+    }
+    public boolean getErrorSignUp() {
+        return errorDisplayedSignUp;
     }
 }

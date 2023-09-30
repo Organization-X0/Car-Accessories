@@ -3,9 +3,6 @@ package org.Car;
 import org.Data.DataBase;
 import org.Data.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
