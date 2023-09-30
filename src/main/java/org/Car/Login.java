@@ -21,17 +21,4 @@ public class Login {
         }
         return user.checkPassword(password);
     }
-    public Map<String,String> displayLogin(){
-        Map<String,String>data=new HashMap<>();
-
-        System.out.println(Cli.purpleBoldText("Login"));
-        System.out.print(Cli.blueBoldText("Email:"));
-        Scanner scanner=new Scanner(System.in);
-        String Email=scanner.nextLine();
-        System.out.print(Cli.blueBoldText("Password:"));
-        String pass=scanner.nextLine();
-        data.put("email",Email);
-        data.put("password",pass);
-        return data;
-    }
 }
