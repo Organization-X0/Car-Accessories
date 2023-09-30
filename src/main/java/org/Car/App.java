@@ -38,7 +38,7 @@ public class App {
     }
     public void displayLoginApp(){
         state=State.LOGIN;
-        Map<String, String> loginData = myLogin.DisplayLogin();
+        Map<String, String> loginData = myLogin.displayLogin();
         login(loginData.get("email"), loginData.get("password"));
     }
     public void displaySingUpApp(){

@@ -21,7 +21,7 @@ public class Login {
         }
         return user.checkPassword(password);
     }
-    public Map<String,String> DisplayLogin(){
+    public Map<String,String> displayLogin(){
         Map<String,String>data=new HashMap<>();
 
         System.out.println(Cli.purpleBoldText("Login"));
