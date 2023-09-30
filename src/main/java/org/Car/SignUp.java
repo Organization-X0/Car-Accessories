@@ -15,20 +15,7 @@ public class SignUp {
     public SignUp(DataBase dataBase){
        this.myDataBase=dataBase;
     }
-    public Map<String,String> displaySignUp(){
-        Map<String,String> data = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print(Cli.purpleBoldText("Sing Up")+"\n"+Cli.blueBoldText("Full Name: "));
-        data.put("fullname",scanner.nextLine());
-        System.out.print(Cli.blueBoldText("Email: "));
-        data.put("email",scanner.nextLine());
-        System.out.print(Cli.blueBoldText("Phone: "));
-        data.put("phone",scanner.nextLine());
-        System.out.print(Cli.blueBoldText("Password: "));
-        data.put("password",scanner.nextLine());
-        return data;
-    }
     public boolean signUpNow(String fullName,String email,String phone,String password){
         Pattern pattern = Pattern.compile(regexPattern);
         Matcher matcher = pattern.matcher(email);
