@@ -10,7 +10,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class StartSteps {
-    App myApp = new App();
+    App myApp;
+    public StartSteps(App myApp){
+        this.myApp=myApp;
+    }
     @Given("I am on the start page")
     public void i_am_on_the_start_page() {
        assertEquals(myApp.getState(), State.START);

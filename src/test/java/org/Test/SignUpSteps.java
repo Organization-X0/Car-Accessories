@@ -11,7 +11,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SignUpSteps {
-    App myApp=new App();
+    App myApp;
+    public SignUpSteps(App myApp){
+        this.myApp=myApp;
+    }
     @Given("on the sign up page")
     public void on_the_sign_up_page() {
         myApp.state= State.SIGNUP;

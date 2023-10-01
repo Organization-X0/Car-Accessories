@@ -9,7 +9,10 @@ import org.Car.State;
 import static org.junit.Assert.*;
 
 public class LoginSteps {
-    App myApp = new App();
+    App myApp;
+    public LoginSteps(App myApp){
+        this.myApp=myApp;
+    }
     @Given("on the login page")
     public void on_the_login_page() {
         assertFalse(myApp.loggedIn);
