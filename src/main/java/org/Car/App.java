@@ -8,7 +8,6 @@ public class App {
     public boolean loggedIn;
     public State state;
     private final SignUp mySignUp;
-
     private final Login myLogin;
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
@@ -46,7 +45,7 @@ public class App {
                 }
                 Map<String, String> signUpData = Cli.displaySignUp();
                 signUp(signUpData.get("fullname"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
-            } else if (state==State.MAIN) {
+            } else if (state==State.CUSTOMER_DASHBOARD) {
                 Cli.displayMain();
             }
         }
@@ -56,8 +55,7 @@ public class App {
     }
     public void login(String email, String password) {
         if(myLogin.loginNow(email,password)){
-            this.email=email;
-            state=State.MAIN;
+            state=State.CUSTOMER_DASHBOARD;
             errorDisplayedLogin=false;
             return;
         }
@@ -94,9 +92,6 @@ public class App {
         return errorDisplayedSignUp;
     }
 
-    public String getEmail() {
-        return "";
-    }
 
     public boolean viewInstallationRequests() {
         return false;
