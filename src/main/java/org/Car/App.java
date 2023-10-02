@@ -9,7 +9,6 @@ public class App {
     public State state;
     private final SignUp mySignUp;
     private final Login myLogin;
-    public String option;
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
