@@ -91,4 +91,8 @@ public class App {
     public boolean getErrorSignUp() {
         return errorDisplayedSignUp;
     }
+
+    public String getEmail() {
+        return "";
+    }
 }
