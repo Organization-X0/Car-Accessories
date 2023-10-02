@@ -4,8 +4,9 @@ public enum State {
     LOGIN(0),
     SIGNUP(1),
     MAIN(2),
-    DASHBOARD(3),
-    START(4);
+    ADMIN_DASHBOARD(3),
+    INSTALLER_DASHBORD(4),
+    START(5);
     private final int value;
     private State(int value) {
         this.value = value;

@@ -8,10 +8,12 @@ public class App {
     public boolean loggedIn;
     public State state;
     private final SignUp mySignUp;
+
     private final Login myLogin;
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
+    private String email;
 
     public App(){
         errorDisplayedLogin=false;
@@ -55,6 +57,7 @@ public class App {
     }
     public void login(String email, String password) {
         if(myLogin.loginNow(email,password)){
+            this.email=email;
             state=State.MAIN;
             errorDisplayedLogin=false;
             return;
@@ -90,5 +93,21 @@ public class App {
     }
     public boolean getErrorSignUp() {
         return errorDisplayedSignUp;
+    }
+
+    public Object getEmail() {
+
+        return email;
+    }
+
+
+
+    public boolean canViewInstallationRequests() {
+        return false;
+    }
+
+    public boolean canScheduleAppointments() {
+        return false;
+
     }
 }

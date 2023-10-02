@@ -5,6 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class UserRolesSteps {
     App myApp;
     UserRolesSteps(App myApp){
@@ -65,23 +68,23 @@ public class UserRolesSteps {
 
     @Given("an installer is logged in")
     public void an_installer_is_logged_in() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-//        assertEquals(myApp.getEmail(),"admin@gmail.com");
+
+         myApp.login("installer@gmail.com","i123");
     }
     @When("the installer accesses their dashboard")
     public void the_installer_accesses_their_dashboard() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(myApp.state,"INSTALLER_DASHBORD");
+
+
     }
     @Then("the installer should be able to view installation requests")
     public void the_installer_should_be_able_to_view_installation_requests() {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(myApp.canViewInstallationRequests());
     }
     @Then("schedule appointments")
     public void schedule_appointments() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(myApp.canScheduleAppointments());
+
     }
 }
