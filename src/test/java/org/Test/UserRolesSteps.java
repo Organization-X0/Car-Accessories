@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
+import org.Car.State;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -73,7 +74,7 @@ public class UserRolesSteps {
     }
     @When("the installer accesses their dashboard")
     public void the_installer_accesses_their_dashboard() {
-        assertEquals(myApp.state,"INSTALLER_DASHBORD");
+        assertEquals(myApp.getState(), State.INSTALLER_DASHBOARD);
 
 
     }

@@ -5,7 +5,7 @@ public enum State {
     SIGNUP(1),
     MAIN(2),
     ADMIN_DASHBOARD(3),
-    INSTALLER_DASHBORD(4),
+    INSTALLER_DASHBOARD(4),
     START(5);
     private final int value;
     private State(int value) {
