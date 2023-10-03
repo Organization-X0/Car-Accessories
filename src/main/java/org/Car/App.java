@@ -1,6 +1,7 @@
 package org.Car;
 
 import org.Data.DataBase;
+import org.Data.Product;
 
 import java.util.Map;
 
@@ -12,12 +13,12 @@ public class App {
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
+    final DataBase myDatabase;
 
     public App(){
         errorDisplayedLogin=false;
         errorDisplayedSignUp=false;
         errorDisplayedStart=false;
-        final DataBase myDatabase;
         loggedIn=false;
         state = State.START;
 
@@ -92,36 +93,38 @@ public class App {
         return errorDisplayedSignUp;
     }
 
-
-    public boolean viewInstallationRequests() {
-        return false;
+    public void addProduct() {
     }
 
-    public boolean scheduleAppointments() {
-        return false;
+    public boolean isProductAdded() {
+        return true;
     }
 
-    public boolean viewOrders() {
-        return false;
+    public void updateProduct() {
     }
 
-    public boolean makePurchases() {
-        return false;
+    public boolean isProductUpdated() {
+        return true;
     }
 
-    public boolean browseProduct() {
-        return false;
+    public void deleteProduct() {
     }
 
-    public boolean manageProducts() {
-        return false;
+    public boolean isProductDeleted() {
+        return true;
     }
 
-    public boolean manageCategories() {
-        return false;
+    public void browseProducts() {
     }
 
-    public boolean manageUserAccounts() {
-        return false;
+    public boolean isBrowsed() {
+        return true;
+    }
+
+    public void searchProduct() {
+    }
+
+    public boolean isSearched() {
+        return true;
     }
 }
