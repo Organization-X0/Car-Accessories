@@ -6,7 +6,10 @@ public enum State {
     MAIN(2),
     ADMIN_DASHBOARD(3),
     INSTALLER_DASHBOARD(4),
-    START(5);
+
+    START(5),
+    CUSTOMER_DASHBOARD(6);
+
     private final int value;
     private State(int value) {
         this.value = value;

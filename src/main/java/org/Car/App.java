@@ -13,7 +13,6 @@ public class App {
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
-    private String email;
 
     public App(){
         errorDisplayedLogin=false;
@@ -95,19 +94,39 @@ public class App {
         return errorDisplayedSignUp;
     }
 
-    public Object getEmail() {
-
-        return email;
+    public String getEmail() {
+        return "";
     }
 
-
-
-    public boolean canViewInstallationRequests() {
+    public boolean viewInstallationRequests() {
         return false;
     }
 
-    public boolean canScheduleAppointments() {
+    public boolean scheduleAppointments() {
         return false;
+    }
 
+    public boolean viewOrders() {
+        return false;
+    }
+
+    public boolean makePurchases() {
+        return false;
+    }
+
+    public boolean browseProduct() {
+        return false;
+    }
+
+    public boolean manageProducts() {
+        return false;
+    }
+
+    public boolean manageCategories() {
+        return false;
+    }
+
+    public boolean manageUserAccounts() {
+        return false;
     }
 }
