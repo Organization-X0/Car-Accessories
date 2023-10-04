@@ -16,7 +16,8 @@ public class Product {
         this.price = price;
         this.availability = availability;
     }
-
+    public Product(){
+    }
 
     public String getName() {
         return name;
@@ -42,7 +43,7 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
