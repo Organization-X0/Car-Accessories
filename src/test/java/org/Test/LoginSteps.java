@@ -23,7 +23,7 @@ public class LoginSteps {
     }
     @Then("redirection to the main page should occur")
     public void redirection_to_the_main_page_should_occur() {
-        assertEquals(State.MAIN, myApp.getState());
+        assertEquals(State.CUSTOMER_DASHBOARD, myApp.getState());
     }
 
     @When("invalid username or password are entered")

@@ -1,6 +1,8 @@
 package org.Car;
 
+import org.Data.Category;
 import org.Data.DataBase;
+import org.Data.Product;
 
 import java.util.Map;
 
@@ -8,17 +10,17 @@ public class App {
     public boolean loggedIn;
     public State state;
     private final SignUp mySignUp;
-
     private final Login myLogin;
+    public boolean isAccountShown;
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
+    final DataBase myDatabase;
 
     public App(){
         errorDisplayedLogin=false;
         errorDisplayedSignUp=false;
         errorDisplayedStart=false;
-        final DataBase myDatabase;
         loggedIn=false;
         state = State.START;
 
@@ -46,7 +48,7 @@ public class App {
                 }
                 Map<String, String> signUpData = Cli.displaySignUp();
                 signUp(signUpData.get("fullname"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
-            } else if (state==State.MAIN) {
+            } else if (state==State.CUSTOMER_DASHBOARD) {
                 Cli.displayMain();
             }
         }
@@ -56,8 +58,7 @@ public class App {
     }
     public void login(String email, String password) {
         if(myLogin.loginNow(email,password)){
-            this.email=email;
-            state=State.MAIN;
+            state=State.CUSTOMER_DASHBOARD;
             errorDisplayedLogin=false;
             return;
         }
@@ -94,39 +95,72 @@ public class App {
         return errorDisplayedSignUp;
     }
 
-    public String getEmail() {
-        return "";
+    public void addProduct(String name, String category, String description, double price ) {
+//        myDatabase.addProduct(new Product("1",name,category,description,price,true));
+    }
+    public boolean isProductAdded(String name) {
+//        return myDatabase.filterProducts(name) != null;
+        return true;
     }
 
-    public boolean viewInstallationRequests() {
+    public void updateProduct(String id,Product updatedProduct) {
+//        Product product=myDatabase.searchOneProduct(id);
+//        if (product != null) {
+//            product.setName(updatedProduct.getName() != null ? updatedProduct.getName() : product.getName());
+//            product.setPrice(updatedProduct.getPrice() != null ? updatedProduct.getPrice() : product.getPrice());
+//            product.setCategory(updatedProduct.getCategory() != null ? updatedProduct.getCategory() : product.getCategory());
+//            product.setAvailability(updatedProduct.isAvailability() != product.isAvailability() ? updatedProduct.isAvailability():product.isAvailability());
+//            product.setDescription(updatedProduct.getDescription() !=null ? updatedProduct.getDescription() : product.getDescription());
+//        }
+
+    }
+
+
+    public void searchProduct(String id) {
+    }
+
+
+
+    public void addCategory(String name) {
+        Category category=new Category(name);
+        myDatabase.addCategory(category);
+
+    }
+
+    public boolean searchCategory(String cat1) {
+        return myDatabase.searchCategory(cat1) != null;
+    }
+
+    public void updateCategory(String name, String newName) {
+        Category category=myDatabase.searchCategory(name);
+        if(category!=null){
+            category.setName(newName);
+        }
+    }
+
+    public void deleteCategory(String name) {
+       Category category=myDatabase.searchCategory(name);
+       myDatabase.deleteCategory(category);
+    }
+
+    public void deleteAccount(String Email) {
+
+    }
+
+    public boolean searchAccount(String mail) {
         return false;
     }
 
-    public boolean scheduleAppointments() {
+    public void updateAccount(String mail, String s, String mode) {
+    }
+
+    public void newAppointment(String Email, String productName, String typeOfCar, String date) {
+    }
+
+    public boolean searchAppointment(String id) {
         return false;
     }
 
-    public boolean viewOrders() {
-        return false;
-    }
-
-    public boolean makePurchases() {
-        return false;
-    }
-
-    public boolean browseProduct() {
-        return false;
-    }
-
-    public boolean manageProducts() {
-        return false;
-    }
-
-    public boolean manageCategories() {
-        return false;
-    }
-
-    public boolean manageUserAccounts() {
-        return false;
+    public void deleteAppointment(String number) {
     }
 }
