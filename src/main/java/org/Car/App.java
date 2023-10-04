@@ -96,35 +96,38 @@ public class App {
     }
 
     public void addProduct(String name, String category, String description, double price ) {
-//        myDatabase.addProduct(new Product("1",name,category,description,price,true));
+        Category categoryObj=myDatabase.searchCategory(category);
+        categoryObj.addProduct(new Product(name,category,description,price,true));
     }
     public boolean isProductAdded(String name) {
 //        return myDatabase.filterProducts(name) != null;
         return true;
     }
 
-    public void updateProduct(String id,Product updatedProduct) {
-//        Product product=myDatabase.searchOneProduct(id);
-//        if (product != null) {
-//            product.setName(updatedProduct.getName() != null ? updatedProduct.getName() : product.getName());
-//            product.setPrice(updatedProduct.getPrice() != null ? updatedProduct.getPrice() : product.getPrice());
-//            product.setCategory(updatedProduct.getCategory() != null ? updatedProduct.getCategory() : product.getCategory());
-//            product.setAvailability(updatedProduct.isAvailability() != product.isAvailability() ? updatedProduct.isAvailability():product.isAvailability());
-//            product.setDescription(updatedProduct.getDescription() !=null ? updatedProduct.getDescription() : product.getDescription());
-//        }
+    public void updateProduct(int id,Product updatedProduct) {
 
+        Product product=myDatabase.searchOneProduct(id);
+        if (product != null) {
+            product.setName(updatedProduct.getName() != null ? updatedProduct.getName() : product.getName());
+            product.setPrice(updatedProduct.getPrice() != null ? updatedProduct.getPrice() : product.getPrice());
+            product.setCategory(updatedProduct.getCategory() != null ? updatedProduct.getCategory() : product.getCategory());
+            product.setAvailability(updatedProduct.isAvailability() != product.isAvailability() ? updatedProduct.isAvailability():product.isAvailability());
+            product.setDescription(updatedProduct.getDescription() !=null ? updatedProduct.getDescription() : product.getDescription());
+        }
+    }
+    public void deleteProduct(int id) {
+        Product product=myDatabase.searchOneProduct(id);
+        if(product!=null)
+            myDatabase.deleteProduct(product);
     }
 
-
-    public void searchProduct(String id) {
+    public boolean searchProduct(int id) {
+        return myDatabase.searchOneProduct(id) != null;
     }
-
-
 
     public void addCategory(String name) {
         Category category=new Category(name);
         myDatabase.addCategory(category);
-
     }
 
     public boolean searchCategory(String cat1) {
@@ -163,4 +166,5 @@ public class App {
 
     public void deleteAppointment(String number) {
     }
+
 }

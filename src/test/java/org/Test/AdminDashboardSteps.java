@@ -57,19 +57,28 @@ public class AdminDashboardSteps {
 
     @Then("a new product listing should be created")
     public void a_new_product_listing_should_be_created() {
-        myApp.searchProduct("1");
+        assertTrue(myApp.searchProduct(1));
     }
 
     @When("the admin updates the product")
     public void the_admin_updates_the_product() {
         Product product=new Product();
         product.setName("meooo");
-        myApp.updateProduct("1",product);
+        myApp.updateProduct(1,product);
     }
 
     @Then("the product should be updated")
     public void the_product_should_be_updated() {
         // come back
+    }
+    @When("the admin delete product")
+    public void the_admin_delete_product() {
+        myApp.deleteProduct(1);
+    }
+
+    @Then("the product should be deleted")
+    public void the_product_should_be_deleted() {
+        assertFalse(myApp.searchProduct(1));
     }
 
     @When("the admin delete account")

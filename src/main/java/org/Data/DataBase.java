@@ -13,9 +13,9 @@ public class DataBase {
 
         categoryList=new ArrayList<Category>();
         categoryList.add(new Category("Interior"));
-        categoryList.get(0).addProduct(new Product("1","item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("2","item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("3","item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
+        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
+        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
+        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
     }
     public User search(String email){
         return usersList.stream()
@@ -38,22 +38,23 @@ public class DataBase {
                 .findFirst()
                 .orElse(null);
     }
+    public Product searchOneProduct(int id){
+        return categoryList.stream()
+                .flatMap(category -> category.productArrayList.stream())
+                .filter(product -> product.getId()==(id))
+                .findFirst()
+                .orElse(null);
+    }
+    public void deleteProduct(Product productDelete){
+        categoryList.stream()
+                .filter(category -> category.getName().equals(productDelete.getCategory()))
+                .findFirst().ifPresent(categoryObj -> categoryObj.deleteProduct(productDelete));
 
-//    public void addProduct(Product product){
-//        productsList.add(product);
-//    }
+    }
 //    public ArrayList<Product> filterProducts(String name){
 //        return (ArrayList<Product>) productsList.stream()
 //                .filter(item -> item.getName().equals(name))
 //                .collect(Collectors.toList());
 //    }
-//    public Product searchOneProduct(String id){
-//        return productsList.stream()
-//                .filter(product -> product.getId().equals(id))
-//                .findFirst()
-//                .orElse(null);
-//    }
-//    public void deleteProduct(Product productDelete){
-//        productsList.remove(productDelete);
-//    }
+
 }

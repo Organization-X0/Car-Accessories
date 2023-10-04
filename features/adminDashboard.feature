@@ -25,6 +25,11 @@ Feature: Admin Dashboard
     When the admin updates the product
     Then the product should be updated
 
+  Scenario: Delete an existing product
+    Given an admin is logged in
+    When the admin delete product
+    Then the product should be deleted
+
   Scenario: Delete an existing account
     Given an admin is logged in
     When the admin delete account

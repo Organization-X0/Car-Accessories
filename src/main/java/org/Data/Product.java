@@ -1,15 +1,14 @@
 package org.Data;
 
 public class Product {
-    private String id;
+    private int id;
     private String name;
     private String category;
     private String description;
     private double price;
     private boolean availability;
 
-    public Product(String id, String name, String category, String description, double price, boolean availability) {
-        this.id = id;
+    public Product(String name, String category, String description, double price, boolean availability) {
         this.name = name;
         this.category = category;
         this.description = description;
@@ -59,7 +58,10 @@ public class Product {
         this.availability = availability;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
+    public void setId(int id){
+        this.id=id;
+    };
 }

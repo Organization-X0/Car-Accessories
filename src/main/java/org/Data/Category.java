@@ -10,11 +10,12 @@ public class Category {
         productArrayList=new ArrayList<Product>();
     }
     public void addProduct(Product product) {
+        product.setId(productArrayList.size()+1);
         productArrayList.add(product);
     }
-    public Product searchOneProduct(String id){
+    public Product searchOneProduct(int id){
         return productArrayList.stream()
-                .filter(product -> product.getId().equals(id))
+                .filter(product -> product.getId()==(id))
                 .findFirst()
                 .orElse(null);
     }
