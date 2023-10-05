@@ -52,7 +52,7 @@ Feature: Admin Dashboard
 
   Scenario: Delete installation appointments
     Given an admin is logged in
-    When the admin deletes appiontement
+    When the admin deletes appointment
     Then the appointment should be deleted
 
   Scenario: Update date in appointment

@@ -1,10 +1,13 @@
 package org.Data;
 
+import org.Car.App;
+
 import java.util.ArrayList;
 
 public class DataBase {
     private final ArrayList<User> usersList;
     private final ArrayList<Category> categoryList;
+    private final ArrayList<Appointment> appointmentsList;
     public DataBase(){
         usersList=new ArrayList<User>();
         usersList.add(new User("user1","user1@gmail.com","u123","0599123456"));
@@ -16,6 +19,14 @@ public class DataBase {
         categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
         categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
         categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
+
+        appointmentsList = new ArrayList<Appointment>();
+        Appointment appointment=new Appointment("user1@gmail.com","item1","BMW","2023-10-5");
+        appointment.setId(0);
+        appointmentsList.add(appointment);
+        appointment=new Appointment("user2@gmail.com","item2","TOYOTA","2023-10-20");
+        appointment.setId(1);
+        appointmentsList.add(appointment);
     }
     public User search(String email){
         return usersList.stream()
@@ -49,12 +60,29 @@ public class DataBase {
         categoryList.stream()
                 .filter(category -> category.getName().equals(productDelete.getCategory()))
                 .findFirst().ifPresent(categoryObj -> categoryObj.deleteProduct(productDelete));
-
     }
-//    public ArrayList<Product> filterProducts(String name){
-//        return (ArrayList<Product>) productsList.stream()
-//                .filter(item -> item.getName().equals(name))
-//                .collect(Collectors.toList());
-//    }
-
+    public void addAppointment(Appointment appointment){
+        if(!appointmentsList.isEmpty()){
+            appointment.setId((appointmentsList.get(appointmentsList.size()-1).getId())+1);
+        }
+        appointmentsList.add(appointment);
+    }
+    public Appointment searchAppointment(int id){
+        return appointmentsList.stream()
+                .filter(appointment -> appointment.getId()==id)
+                .findFirst()
+                .orElse(null);
+    }
+    public void deleteAppointment(Appointment appointmentDelete){
+        appointmentsList.remove(appointmentDelete);
+    }
+    public void deleteAccount(User user){
+        usersList.remove(user);
+    }
+    public User searchAccount(String email){
+        return usersList.stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
 }

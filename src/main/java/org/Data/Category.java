@@ -10,7 +10,9 @@ public class Category {
         productArrayList=new ArrayList<Product>();
     }
     public void addProduct(Product product) {
-        product.setId(productArrayList.size()+1);
+        if(!productArrayList.isEmpty()){
+            product.setId((productArrayList.get(productArrayList.size()-1).getId())+1);
+        }
         productArrayList.add(product);
     }
     public Product searchOneProduct(int id){

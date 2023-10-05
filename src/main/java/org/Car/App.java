@@ -1,8 +1,6 @@
 package org.Car;
 
-import org.Data.Category;
-import org.Data.DataBase;
-import org.Data.Product;
+import org.Data.*;
 
 import java.util.Map;
 
@@ -99,10 +97,6 @@ public class App {
         Category categoryObj=myDatabase.searchCategory(category);
         categoryObj.addProduct(new Product(name,category,description,price,true));
     }
-    public boolean isProductAdded(String name) {
-//        return myDatabase.filterProducts(name) != null;
-        return true;
-    }
 
     public void updateProduct(int id,Product updatedProduct) {
 
@@ -121,17 +115,16 @@ public class App {
             myDatabase.deleteProduct(product);
     }
 
-    public boolean searchProduct(int id) {
-        return myDatabase.searchOneProduct(id) != null;
+    public Product searchProduct(int id) {
+        return myDatabase.searchOneProduct(id);
     }
 
     public void addCategory(String name) {
-        Category category=new Category(name);
-        myDatabase.addCategory(category);
+        myDatabase.addCategory(new Category(name));
     }
 
-    public boolean searchCategory(String cat1) {
-        return myDatabase.searchCategory(cat1) != null;
+    public Category searchCategory(String category) {
+        return myDatabase.searchCategory(category);
     }
 
     public void updateCategory(String name, String newName) {
@@ -146,25 +139,44 @@ public class App {
        myDatabase.deleteCategory(category);
     }
 
-    public void deleteAccount(String Email) {
-
+    public void deleteAccount(String email) {
+        User user=myDatabase.searchAccount(email);
+        if(user!=null)
+            myDatabase.deleteAccount(user);
     }
 
-    public boolean searchAccount(String mail) {
-        return false;
+    public User searchAccount(String email) {
+        return myDatabase.searchAccount(email);
     }
 
-    public void updateAccount(String mail, String s, String mode) {
+    public void updateAccount(String email,User updatedUser) {
+        User user=myDatabase.searchAccount(email);
+        if (user != null) {
+            user.setFullName(updatedUser.getFullName() != null ? updatedUser.getFullName() : user.getFullName());
+            user.setPhone(updatedUser.getPhone() != null ? updatedUser.getPhone() : user.getPhone());
+        }
     }
 
-    public void newAppointment(String Email, String productName, String typeOfCar, String date) {
+    public void addAppointment(String email, String productName, String carMake, String date) {
+        myDatabase.addAppointment(new Appointment(email,productName,carMake,date));
     }
 
-    public boolean searchAppointment(String id) {
-        return false;
+    public Appointment searchAppointment(int id) {
+        return myDatabase.searchAppointment(id);
     }
 
-    public void deleteAppointment(String number) {
+    public void deleteAppointment(int id) {
+        Appointment appointment=myDatabase.searchAppointment(id);
+        if(appointment!=null)
+            myDatabase.deleteAppointment(appointment);
     }
-
+    public void updateAppointment(int id,Appointment updatedAppointment){
+        Appointment appointment=myDatabase.searchAppointment(id);
+        if (appointment!= null) {
+            appointment.setEmail(updatedAppointment.getEmail() != null ? updatedAppointment.getEmail() : appointment.getEmail());
+            appointment.setCarMake(updatedAppointment.getCarMake() != null ? updatedAppointment.getCarMake(): appointment.getCarMake());
+            appointment.setDate(updatedAppointment.getDate()!= null ? updatedAppointment.getDate(): appointment.getDate());
+            appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
+        }
+    }
 }

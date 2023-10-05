@@ -12,6 +12,9 @@ public class User {
         this.password=password;
         this.phone=phone;
     }
+    public User(){
+        this.email=null;
+    };
 
     public void setFullName(String fullName){
         this.fullName=fullName;
@@ -23,9 +26,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
-
-
 
     public boolean checkPassword(String password){
         return this.password.equals(password);

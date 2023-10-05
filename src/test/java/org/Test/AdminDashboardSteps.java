@@ -4,10 +4,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
+import org.Car.State;
+import org.Data.Appointment;
 import org.Data.Product;
+import org.Data.User;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AdminDashboardSteps {
     App myApp;
@@ -26,17 +28,17 @@ public class AdminDashboardSteps {
 
     @Then("a new category should be created")
     public void a_new_category_should_be_created() {
-        assertTrue(myApp.searchCategory("cat1"));
+        assertNotNull(myApp.searchCategory("cat1"));
     }
 
     @When("the admin updates the category")
     public void the_admin_updates_the_category() {
-        myApp.updateCategory("Interior","newcat1");
+        myApp.updateCategory("Interior","new cat1");
     }
 
     @Then("the category should be updated")
     public void the_category_should_be_updated() {
-        assertTrue(myApp.searchCategory("newcat1"));
+        assertNotNull(myApp.searchCategory("new cat1"));
     }
 
     @When("the admin delete category")
@@ -51,25 +53,25 @@ public class AdminDashboardSteps {
 
     @When("the admin adds new product")
     public void the_admin_adds_new_product() {
-        myApp.addProduct("item4","Interior","dont buy this",55.5);
+        myApp.addProduct("item4","Interior","don't buy this",55.5);
 
     }
 
     @Then("a new product listing should be created")
     public void a_new_product_listing_should_be_created() {
-        assertTrue(myApp.searchProduct(1));
+        assertNotNull(myApp.searchProduct(1));
     }
 
     @When("the admin updates the product")
     public void the_admin_updates_the_product() {
         Product product=new Product();
-        product.setName("meooo");
+        product.setName("new name");
         myApp.updateProduct(1,product);
     }
 
     @Then("the product should be updated")
     public void the_product_should_be_updated() {
-        // come back
+        assertEquals(myApp.searchProduct(1).getName(),"new name");
     }
     @When("the admin delete product")
     public void the_admin_delete_product() {
@@ -78,7 +80,7 @@ public class AdminDashboardSteps {
 
     @Then("the product should be deleted")
     public void the_product_should_be_deleted() {
-        assertFalse(myApp.searchProduct(1));
+        assertNull(myApp.searchProduct(1));
     }
 
     @When("the admin delete account")
@@ -88,59 +90,62 @@ public class AdminDashboardSteps {
 
     @Then("the account should be deleted")
     public void the_account_should_be_deleted() {
-       assertFalse(myApp.searchAccount("user1@gmail.com"));
+       assertNull(myApp.searchAccount("user1@gmail.com"));
     }
 
     @When("the admin update account")
     public void the_admin_update_account() {
-        myApp.updateAccount("user1@gmail.com","","mode");
+        User user=new User();
+        user.setFullName("new name");
+        user.setPhone("1234567899");
+        myApp.updateAccount("user1@gmail.com",user);
     }
 
     @Then("the account should be updated")
     public void the_account_should_be_updated() {
-// come back
+        assertEquals(myApp.searchAccount("user1@gmail.com").getFullName(),"new name");
+        assertEquals(myApp.searchAccount("user1@gmail.com").getPhone(),"1234567899");
     }
 
     @When("the admin enter manage user accounts")
     public void the_admin_enter_manage_user_accounts() {
-       // assertTrue(myApp.state,State.);
+        myApp.state= State.MANAGE_ACCOUNTS;
     }
 
     @Then("the user accounts should show")
     public void the_user_accounts_should_show() {
-        assertTrue(myApp.isAccountShown);
+        assertEquals(myApp.state,State.MANAGE_ACCOUNTS);
     }
 
     @When("add new installation appointments")
     public void add_new_installation_appointments() {
-        myApp.newAppointment("user1@gmail.com","item1","bmw","10-4-2023");
+        myApp.addAppointment("user1@gmail.com","item1","bmw","10-4-2023");
     }
 
     @Then("the appointments should be added")
     public void the_appointments_should_be_added() {
-        assertTrue(myApp.searchAppointment("1"));
+        assertNotNull(myApp.searchAppointment(1));
     }
 
-    @When("the admin deletes appiontement")
-    public void the_admin_deletes_appiontement() {
-        myApp.deleteAppointment("1");
+    @When("the admin deletes appointment")
+    public void the_admin_deletes_appointment() {
+        myApp.deleteAppointment(1);
     }
 
     @Then("the appointment should be deleted")
     public void the_appointment_should_be_deleted() {
-        assertFalse(myApp.searchAppointment("1"));
+        assertNull(myApp.searchAppointment(1));
     }
 
     @When("admin update appointment")
     public void admin_update_appointment() {
-        //come back
-
+        Appointment appointment=new Appointment();
+        appointment.setDate("2023-10-27");
+        myApp.updateAppointment(1,appointment);
     }
 
     @Then("the appointment should be updated")
     public void the_appointment_should_be_updated() {
-      //come back
+        assertEquals(myApp.searchAppointment(1).getDate(),"2023-10-27");
     }
-
-
 }
