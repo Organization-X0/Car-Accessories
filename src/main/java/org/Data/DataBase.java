@@ -13,6 +13,7 @@ public class DataBase {
         usersList.add(new User("user1","user1@gmail.com","u123","0599123456"));
         usersList.add(new User("user2","user2@gmail.com","u123","0599123456"));
         usersList.add(new User("user3","user3@gmail.com","u123","0599123456"));
+        usersList.add(new User("admin","admin@gmail.com","a123","0123456789"));
 
         categoryList=new ArrayList<Category>();
         categoryList.add(new Category("Interior"));

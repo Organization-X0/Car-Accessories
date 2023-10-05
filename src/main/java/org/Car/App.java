@@ -9,10 +9,10 @@ public class App {
     public State state;
     private final SignUp mySignUp;
     private final Login myLogin;
-    public boolean isAccountShown;
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
+    private boolean exit;
     final DataBase myDatabase;
 
     public App(){
@@ -20,6 +20,7 @@ public class App {
         errorDisplayedSignUp=false;
         errorDisplayedStart=false;
         loggedIn=false;
+        exit=false;
         state = State.START;
 
         myDatabase=new DataBase();
@@ -27,13 +28,13 @@ public class App {
         myLogin=new Login(myDatabase);
     }
     public void render(){
-        while(true) {
+        while(!exit) {
             if (state == State.START) {
                 if(getErrorStart()){
                     System.out.println(Cli.errorText(" Invalid option! "));
                 }
-                String option = Cli.displayStart();
-                setOption(option);
+                int option = Cli.displayStart();
+                handleStartOption(option);
             } else if (state == State.LOGIN) {
                 if(getErrorLogin()){
                     System.out.println(Cli.errorText(" Not registered! "));
@@ -45,18 +46,49 @@ public class App {
                     System.out.println(Cli.errorText(" Invalid data! "));
                 }
                 Map<String, String> signUpData = Cli.displaySignUp();
-                signUp(signUpData.get("fullname"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
+                signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
             } else if (state==State.CUSTOMER_DASHBOARD) {
                 Cli.displayMain();
+            } else if(state==State.ADMIN_DASHBOARD){
+                int option = Cli.displayAdminDashboard();
+                handleAdminDashboard(option);
+
+                System.out.println(option);
             }
         }
+    }
+    public void handleStartOption(int option) {
+        if (option==(1)){
+            state=State.LOGIN;
+        } else if (option==2) {
+            state=State.SIGNUP;
+        }else if(option==3){
+            exit=true;
+        }else{
+            errorDisplayedStart=true;
+        }
+}
+public void handleAdminDashboard(int option){
+//            if (option==1) state = State.MANAGE_PRODUCTS;
+//            else if (option==2) state = State.MANAGE_CATEGORIES;
+//            else if(option==3) state = State.MANAGE_ACCOUNTS;
+//            else if(option==4) state = State.START;
+
+        if(option==4) state = State.START;
+        else errorDisplayedStart = true;
     }
     public State getState() {
         return state;
     }
     public void login(String email, String password) {
         if(myLogin.loginNow(email,password)){
-            state=State.CUSTOMER_DASHBOARD;
+            if(email.equals("admin@gmail.com"))
+                state=State.ADMIN_DASHBOARD;
+            else if(email.equals("installer@gmail.com"))
+                state=State.INSTALLER_DASHBOARD;
+            else
+                state=State.CUSTOMER_DASHBOARD;
+
             errorDisplayedLogin=false;
             return;
         }
@@ -73,15 +105,6 @@ public class App {
         errorDisplayedSignUp=true;
     }
 
-    public void setOption(String option) {
-        if (option.equals("1")){
-            state=State.LOGIN;
-        } else if (option.equals("2")) {
-            state=State.SIGNUP;
-        }else{
-            errorDisplayedStart=true;
-        }
-    }
 
     public boolean getErrorStart() {
         return errorDisplayedStart;

@@ -18,9 +18,9 @@ public class StartSteps {
     public void i_am_on_the_start_page() {
        assertEquals(myApp.getState(), State.START);
     }
-    @When("I enter {string}")
-    public void i_enter(String option) {
-        myApp.setOption(option);
+    @When("I enter {int}")
+    public void i_enter(int option) {
+        myApp.handleStartOption(option);
     }
     @Then("I should be redirected to the login page")
     public void i_should_be_redirected_to_the_login_page() {
