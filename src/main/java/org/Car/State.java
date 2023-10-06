@@ -10,7 +10,12 @@ public enum State {
     INSTALLER_DASHBOARD(5),
     MANAGE_PRODUCTS(6),
     MANAGE_CATEGORIES(7),
-    MANAGE_ACCOUNTS(8);
+    MANAGE_ACCOUNTS(8),
+    ALL_PRODUCTS(9),
+    SEARCH_PRODUCT(10),
+    INTERIOR_PRODUCTS(11),
+    EXTERIOR_PRODUCTS(12),
+    ELECTRONICS_PRODUCTS(13);
 
     private final int value;
     State(int value) {

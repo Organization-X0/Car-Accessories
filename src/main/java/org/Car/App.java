@@ -33,7 +33,7 @@ public class App {
                 if(getErrorStart()){
                     System.out.println(Cli.errorText(" Invalid option! "));
                 }
-                int option = Cli.displayStart();
+                String option = Cli.displayStart();
                 handleStartOption(option);
             } else if (state == State.LOGIN) {
                 if(getErrorLogin()){
@@ -50,32 +50,48 @@ public class App {
             } else if (state==State.CUSTOMER_DASHBOARD) {
                 Cli.displayMain();
             } else if(state==State.ADMIN_DASHBOARD){
-                int option = Cli.displayAdminDashboard();
+                String option = Cli.displayAdminDashboard();
                 handleAdminDashboard(option);
-
                 System.out.println(option);
+            } else if(state==State.MANAGE_PRODUCTS){
+                String option=Cli.displayManageProducts();
+                handleManageProduct(option);
+            } else if(state==State.ALL_PRODUCTS){
+                String option = Cli.displayAllProducts(myDatabase.getAllProducts());
+                handleProductsCRUD(option);
             }
         }
     }
-    public void handleStartOption(int option) {
-        if (option==(1)){
-            state=State.LOGIN;
-        } else if (option==2) {
-            state=State.SIGNUP;
-        }else if(option==3){
-            exit=true;
-        }else{
-            errorDisplayedStart=true;
+    public void handleStartOption(String option) {
+        switch (option) {
+            case "1" -> state = State.LOGIN;
+            case "2" -> state = State.SIGNUP;
+            case "3" -> exit = true;
+            default -> errorDisplayedStart = true;
         }
 }
-public void handleAdminDashboard(int option){
-//            if (option==1) state = State.MANAGE_PRODUCTS;
-//            else if (option==2) state = State.MANAGE_CATEGORIES;
-//            else if(option==3) state = State.MANAGE_ACCOUNTS;
-//            else if(option==4) state = State.START;
-
-        if(option==4) state = State.START;
-        else errorDisplayedStart = true;
+    public void handleAdminDashboard(String option){
+        switch (option) {
+            case "1" -> state = State.MANAGE_PRODUCTS;
+            case "2" -> state = State.MANAGE_CATEGORIES;
+            case "3" -> state = State.MANAGE_ACCOUNTS;
+            case "4" -> state = State.START;
+            default -> errorDisplayedStart = true;
+        }
+    }
+    public void handleManageProduct(String option){
+        switch (option) {
+            case "1" -> state = State.ALL_PRODUCTS;
+            case "2" -> state = State.SEARCH_PRODUCT;
+            case "3" -> state = State.INTERIOR_PRODUCTS;
+            case "4" -> state = State.EXTERIOR_PRODUCTS;
+            case "5" -> state = State.ELECTRONICS_PRODUCTS;
+            case "6" -> state = State.ADMIN_DASHBOARD;
+        }
+    }
+    public void handleProductsCRUD(String option){
+        if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
+        else if(option.equals("p") && Cli.page!=1) Cli.page--;
     }
     public State getState() {
         return state;

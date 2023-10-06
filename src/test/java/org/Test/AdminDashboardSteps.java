@@ -143,7 +143,6 @@ public class AdminDashboardSteps {
         appointment.setDate("2023-10-27");
         myApp.updateAppointment(1,appointment);
     }
-
     @Then("the appointment should be updated")
     public void the_appointment_should_be_updated() {
         assertEquals(myApp.searchAppointment(1).getDate(),"2023-10-27");
