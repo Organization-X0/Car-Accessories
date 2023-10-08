@@ -1,7 +1,5 @@
 package org.Data;
 
-import org.Car.App;
-
 import java.util.ArrayList;
 
 public class DataBase {
@@ -16,6 +14,7 @@ public class DataBase {
         usersList.add(new User("admin","admin@gmail.com","a123","0123456789"));
 
         categoryList=new ArrayList<Category>();
+
         categoryList.add(new Category("Interior"));
         categoryList.add(new Category("Exterior"));
         categoryList.add(new Category("Electronics"));
@@ -41,6 +40,7 @@ public class DataBase {
         appointment=new Appointment("user2@gmail.com","item2","TOYOTA","2023-10-20");
         appointment.setId(1);
         appointmentsList.add(appointment);
+
     }
     public User search(String email){
         return usersList.stream()

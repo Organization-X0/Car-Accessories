@@ -16,7 +16,9 @@ public enum State {
     INTERIOR_PRODUCTS(11),
     EXTERIOR_PRODUCTS(12),
     ELECTRONICS_PRODUCTS(13),
-    ADD_PRODUCT(14);
+    ADD_PRODUCT(14),
+    VIEW_ORDERS(15),
+    VIEW_INSTALLATION_REQ(16);
 
     private final int value;
     State(int value) {
