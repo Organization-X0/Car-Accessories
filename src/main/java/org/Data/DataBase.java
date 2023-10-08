@@ -12,7 +12,7 @@ public class DataBase {
         usersList.add(new User("user3","user3@gmail.com","u123","0599123456"));
 
         categoryList=new ArrayList<Category>();
-        categoryList.add(new Category("Interior"));
+        categoryList.add(new Category("git"));
         categoryList.get(0).addProduct(new Product("1","item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
         categoryList.get(0).addProduct(new Product("2","item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
         categoryList.get(0).addProduct(new Product("3","item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
