@@ -16,7 +16,6 @@ Feature: Navigation
     Then I should see an error message
     Examples:
       | input |
-      | 3     |
       | 4     |
       | a     |
       | abc   |

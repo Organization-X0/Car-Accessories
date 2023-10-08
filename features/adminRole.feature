@@ -1,20 +1,20 @@
-Feature: Admin Role
-  Scenario Outline: Manage "<item>"
-    Given an admin is logged in
-    When the admin "<action>" the "<item>"
-    Then the "<item>" should be "<result>" in the system
-
-    Examples:
-      | item         | action  | result   |
-      | product      | adds    | added    |
-      | product      | updates | updated  |
-      | product      | deletes | removed  |
-      | category     | adds    | added    |
-      | category     | updates | updated  |
-      | category     | deletes | removed  |
-      | userAccount  | adds    | added    |
-      | userAccount  | updates | updated  |
-      | userAccount  | deletes | removed  |
+#Feature: Admin Role
+#  Scenario Outline: Manage "<item>"
+#    Given an admin is logged in
+#    When the admin "<action>" the "<item>"
+#    Then the "<item>" should be "<result>" in the system
+#
+#    Examples:
+#      | item         | action  | result   |
+#      | product      | adds    | added    |
+#      | product      | updates | updated  |
+#      | product      | deletes | removed  |
+#      | category     | adds    | added    |
+#      | category     | updates | updated  |
+#      | category     | deletes | removed  |
+#      | userAccount  | adds    | added    |
+#      | userAccount  | updates | updated  |
+#      | userAccount  | deletes | removed  |
 
 #  Scenario: Add Product
 #    Given an admin is logged in

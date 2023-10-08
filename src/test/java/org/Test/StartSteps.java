@@ -20,7 +20,7 @@ public class StartSteps {
     }
     @When("I enter {string}")
     public void i_enter(String option) {
-        myApp.setOption(option);
+            myApp.handleStartOption(option);
     }
     @Then("I should be redirected to the login page")
     public void i_should_be_redirected_to_the_login_page() {
