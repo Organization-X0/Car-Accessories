@@ -93,7 +93,7 @@ public class Cli {
             i=((page-1)*10)+1;
 
         for (; (i<=productArrayList.size() && i<i+10);i++){
-            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()));
+            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()+productArrayList.get(i-1).getId()));
             if(i%10==0) break;
         }
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
