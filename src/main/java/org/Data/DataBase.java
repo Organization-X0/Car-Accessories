@@ -22,24 +22,17 @@ public class DataBase {
         categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
         categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
         categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
-        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
-        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
-        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
-        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
-        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
-        categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"Don't buy please.",5.3,true));
-        categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"Don't buy please.",2.3,true));
+        categoryList.get(0).addProduct(new Product("item4",categoryList.get(0).getName(),"Don't buy please.",1.3,true));
+
+        categoryList.get(1).addProduct(new Product("item1",categoryList.get(1).getName(),"Don't buy please.",1.3,true));
+        categoryList.get(1).addProduct(new Product("item2",categoryList.get(1).getName(),"Don't buy please.",1.3,true));
+        categoryList.get(1).addProduct(new Product("item3",categoryList.get(1).getName(),"Don't buy please.",2.4,true));
+        categoryList.get(1).addProduct(new Product("item4",categoryList.get(1).getName(),"Don't buy please.",6.6,true));
+
+        categoryList.get(2).addProduct(new Product("item1",categoryList.get(2).getName(),"Don't buy please.",7.3,true));
+        categoryList.get(2).addProduct(new Product("item2",categoryList.get(2).getName(),"Don't buy please.",0.3,true));
+        categoryList.get(2).addProduct(new Product("item3",categoryList.get(2).getName(),"Don't buy please.",2.4,true));
+        categoryList.get(2).addProduct(new Product("item4",categoryList.get(2).getName(),"Don't buy please.",6.6,true));
 
         appointmentsList = new ArrayList<Appointment>();
         Appointment appointment=new Appointment("user1@gmail.com","item1","BMW","2023-10-5");

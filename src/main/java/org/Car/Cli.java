@@ -1,5 +1,6 @@
 package org.Car;
 
+import org.Data.Category;
 import org.Data.Product;
 import org.fusesource.jansi.Ansi;
 
@@ -25,6 +26,9 @@ public class Cli {
     }
     public static Ansi blueText(String text){
         return ansi().eraseScreen().fg(BLUE).a(text).reset();
+    }
+    public static Ansi greenText(String text){
+        return ansi().eraseScreen().fg(GREEN).a(text).reset();
     }
     public static Ansi purpleBoldText(String text){
         return ansi().eraseScreen().fgBright(MAGENTA).a(text).reset();
@@ -84,7 +88,7 @@ public class Cli {
         System.out.println("6. "+Cli.blueText("Back to Dashboard"));
         return scanner.nextLine();
     }
-    public static String displayAllProducts(ArrayList<Product> productArrayList){
+    public static String displayProducts(ArrayList<Product> productArrayList){
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("All Products:"));
         int i=1;
@@ -93,23 +97,58 @@ public class Cli {
             i=((page-1)*10)+1;
 
         for (; (i<=productArrayList.size() && i<i+10);i++){
-            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()+productArrayList.get(i-1).getId()));
+            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()));
             if(i%10==0) break;
         }
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
         System.out.println("page:"+page+"/"+totalPages);
         if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update ]");
+            System.out.println("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | a:add | d<int>:delete | u<int>:update ]");
+            System.out.println("[ n:next page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if(totalPages==1)
-            System.out.println("[ a:add | d<int>:delete | u<int>:update ]");
+            System.out.println("[ a:add | d<int>:delete | u<int>:update | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | a:add | d<int>:delete | u<int>:update ]");
+            System.out.println("[ p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
 
 
         return scanner.nextLine();
     }
+    public static Map<String,String> displayAddProduct(){
+        Scanner scanner=new Scanner(System.in);
+        Map<String,String> data=new HashMap<>();
+        System.out.println(Cli.blueBgText(" ADD PRODUCT "));
+        System.out.println(Cli.blueText("Choose category: "));
+        System.out.println("""
+                1. Interior
+                2. Exterior
+                3. Electronics
+                """);
+        String categoryOption = scanner.nextLine();
+
+        String []categoryArray=new String[]{"Interior","Exterior","Electronics"};
+        data.put("category",categoryArray[Integer.parseInt(categoryOption)-1]);
+        System.out.println(Cli.blueText("Product name: "));
+        data.put("name",scanner.nextLine());
+        System.out.println(Cli.blueText("Description: "));
+        data.put("description",scanner.nextLine());
+        System.out.println(Cli.blueText("Price : "));
+        data.put("price",scanner.nextLine());
+        return data;
+    }
+    public static void displayProductAddedSuccessfully(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.greenText("The product added successfully"));
+        System.out.println("[b:back]");
+        scanner.nextLine();
+    }
+    public static void displayProductNotAdded(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.errorText(" Something went wrong! "));
+        System.out.println("[b:back]");
+        scanner.nextLine();
+    }
+
     public static String displayStart(){
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText(" Program "));

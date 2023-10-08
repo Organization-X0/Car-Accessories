@@ -56,9 +56,22 @@ public class App {
             } else if(state==State.MANAGE_PRODUCTS){
                 String option=Cli.displayManageProducts();
                 handleManageProduct(option);
+                Cli.page=1;
             } else if(state==State.ALL_PRODUCTS){
-                String option = Cli.displayAllProducts(myDatabase.getAllProducts());
+                String option = Cli.displayProducts(myDatabase.getAllProducts());
                 handleProductsCRUD(option);
+            } else if(state==State.INTERIOR_PRODUCTS){
+                String option = Cli.displayProducts(myDatabase.searchCategory("Interior").getProductsList());
+                handleProductsCRUD(option);
+            } else if(state==State.EXTERIOR_PRODUCTS){
+                String option = Cli.displayProducts(myDatabase.searchCategory("Exterior").getProductsList());
+                handleProductsCRUD(option);
+            } else if(state==State.ELECTRONICS_PRODUCTS){
+                String option = Cli.displayProducts(myDatabase.searchCategory("Electronics").getProductsList());
+                handleProductsCRUD(option);
+            } else if(state==State.ADD_PRODUCT){
+               Map<String,String> data = Cli.displayAddProduct();
+               handleAddProduct(data);
             }
         }
     }
@@ -92,6 +105,20 @@ public class App {
     public void handleProductsCRUD(String option){
         if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
         else if(option.equals("p") && Cli.page!=1) Cli.page--;
+        else if(option.equals("b")) state=State.MANAGE_PRODUCTS;
+        else if(option.equals("a")) state=State.ADD_PRODUCT;
+    }
+    public void handleAddProduct(Map<String,String> data){
+        int before=myDatabase.getAllProducts().size();
+        System.out.println(data.get("category"));
+        addProduct(data.get("name"),data.get("category"),data.get("description"),Double.parseDouble(data.get("price")));
+        int after=myDatabase.getAllProducts().size();
+        if(after>before){
+            Cli.displayProductAddedSuccessfully();
+        }else{
+            Cli.displayProductNotAdded();
+        }
+        state=State.MANAGE_PRODUCTS;
     }
     public State getState() {
         return state;
