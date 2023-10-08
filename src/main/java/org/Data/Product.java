@@ -7,6 +7,7 @@ public class Product {
     private String description;
     private double price;
     private boolean availability;
+    private static int lastId;
 
     public Product(String name, String category, String description, double price, boolean availability) {
         this.name = name;
@@ -16,6 +17,15 @@ public class Product {
         this.availability = availability;
     }
     public Product(){
+    }
+    public static int getNextId(){
+        return ++lastId;
+    }
+    public static void setLastId(DataBase myDatabase){
+        for(Category category:myDatabase.getCategoryList()){
+            if(category.productArrayList.get(category.productArrayList.size()-1).getId()>lastId)
+                lastId=category.productArrayList.get(category.productArrayList.size()-1).getId();
+        }
     }
 
     public String getName() {

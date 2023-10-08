@@ -15,6 +15,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
 public class Cli {
     public static int page=1;
     public static int totalPages=1;
+//    public static int manageProductsOptions=1;
     public static Ansi errorText(String text){
         return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();
     }
@@ -27,8 +28,8 @@ public class Cli {
     public static Ansi blueText(String text){
         return ansi().eraseScreen().fg(BLUE).a(text).reset();
     }
-    public static Ansi greenText(String text){
-        return ansi().eraseScreen().fg(GREEN).a(text).reset();
+    public static Ansi greenBgText(String text){
+        return ansi().eraseScreen().bg(GREEN).fgBright(WHITE).a(text).reset();
     }
     public static Ansi purpleBoldText(String text){
         return ansi().eraseScreen().fgBright(MAGENTA).a(text).reset();
@@ -77,15 +78,16 @@ public class Cli {
         System.out.println("4. "+Cli.blueText("Logout"));
         return scanner.nextLine();
     }
-    public static String displayManageProducts(){
+    public static String displayManageProducts(ArrayList<Category> categoryArrayList){
+        int manageProductsOptions=1;
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Manage Products:"));
-        System.out.println("1. "+Cli.blueText("All Products"));
-        System.out.println("2. "+Cli.blueText("Search for a Product"));
-        System.out.println("3. "+Cli.blueText("Interior Category"));
-        System.out.println("4. "+Cli.blueText("Exterior Category"));
-        System.out.println("5. "+Cli.blueText("Electronics Category"));
-        System.out.println("6. "+Cli.blueText("Back to Dashboard"));
+        System.out.println((manageProductsOptions++)+". "+Cli.blueText("All Products"));
+        System.out.println((manageProductsOptions++)+". "+Cli.blueText("Search for a Product"));
+        for(Category category : categoryArrayList){
+            System.out.println((manageProductsOptions++)+". "+Cli.blueText(category.getName()+" category"));
+        }
+        System.out.println(manageProductsOptions+". "+Cli.blueText("Back to Dashboard"));
         return scanner.nextLine();
     }
     public static String displayProducts(ArrayList<Product> productArrayList){
@@ -97,7 +99,7 @@ public class Cli {
             i=((page-1)*10)+1;
 
         for (; (i<=productArrayList.size() && i<i+10);i++){
-            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()));
+            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()+", id:"+productArrayList.get(i-1).getId()));
             if(i%10==0) break;
         }
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
@@ -136,15 +138,13 @@ public class Cli {
         data.put("price",scanner.nextLine());
         return data;
     }
-    public static void displayProductAddedSuccessfully(){
+    public static void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
-        System.out.println(Cli.greenText("The product added successfully"));
-        System.out.println("[b:back]");
-        scanner.nextLine();
-    }
-    public static void displayProductNotAdded(){
-        Scanner scanner=new Scanner(System.in);
-        System.out.println(Cli.errorText(" Something went wrong! "));
+        if(success)
+            System.out.println(Cli.greenBgText(msg));
+        else
+            System.out.println(Cli.errorText(msg));
+
         System.out.println("[b:back]");
         scanner.nextLine();
     }

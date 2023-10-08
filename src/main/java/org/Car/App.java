@@ -2,6 +2,7 @@ package org.Car;
 
 import org.Data.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class App {
@@ -12,6 +13,7 @@ public class App {
     private boolean errorDisplayedLogin;
     private boolean errorDisplayedSignUp;
     private boolean errorDisplayedStart;
+    private int handleManageProductOutput=1;
     private boolean exit;
     final DataBase myDatabase;
 
@@ -26,6 +28,8 @@ public class App {
         myDatabase=new DataBase();
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
+
+        Product.setLastId(myDatabase);
     }
     public void render(){
         while(!exit) {
@@ -54,21 +58,18 @@ public class App {
                 handleAdminDashboard(option);
                 System.out.println(option);
             } else if(state==State.MANAGE_PRODUCTS){
-                String option=Cli.displayManageProducts();
-                handleManageProduct(option);
+                String option=Cli.displayManageProducts(myDatabase.getCategoryList());
+                handleManageProductOutput= handleManageProduct(option);
                 Cli.page=1;
-            } else if(state==State.ALL_PRODUCTS){
-                String option = Cli.displayProducts(myDatabase.getAllProducts());
-                handleProductsCRUD(option);
-            } else if(state==State.INTERIOR_PRODUCTS){
-                String option = Cli.displayProducts(myDatabase.searchCategory("Interior").getProductsList());
-                handleProductsCRUD(option);
-            } else if(state==State.EXTERIOR_PRODUCTS){
-                String option = Cli.displayProducts(myDatabase.searchCategory("Exterior").getProductsList());
-                handleProductsCRUD(option);
-            } else if(state==State.ELECTRONICS_PRODUCTS){
-                String option = Cli.displayProducts(myDatabase.searchCategory("Electronics").getProductsList());
-                handleProductsCRUD(option);
+            } else if(state==State.PRODUCTS_CRUD){
+                if(handleManageProductOutput==1){
+                    String option = Cli.displayProducts(myDatabase.getAllProducts());
+                    handleProductsCRUD(option,myDatabase.getAllProducts());
+                }
+                else{
+                    String optionCrud=Cli.displayProducts(myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
+                    handleProductsCRUD(optionCrud,myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
+                }
             } else if(state==State.ADD_PRODUCT){
                Map<String,String> data = Cli.displayAddProduct();
                handleAddProduct(data);
@@ -92,31 +93,40 @@ public class App {
             default -> errorDisplayedStart = true;
         }
     }
-    public void handleManageProduct(String option){
-        switch (option) {
-            case "1" -> state = State.ALL_PRODUCTS;
-            case "2" -> state = State.SEARCH_PRODUCT;
-            case "3" -> state = State.INTERIOR_PRODUCTS;
-            case "4" -> state = State.EXTERIOR_PRODUCTS;
-            case "5" -> state = State.ELECTRONICS_PRODUCTS;
-            case "6" -> state = State.ADMIN_DASHBOARD;
+    public int handleManageProduct(String option){
+        int intOption=Integer.parseInt(option);
+        if(intOption==1 || intOption<(3+myDatabase.getCategoryList().size())){
+            state=State.PRODUCTS_CRUD;
+        } else if(intOption==2){
+            state=State.SEARCH_PRODUCT;
+        } else if(intOption==3+myDatabase.getCategoryList().size()){
+            state=State.ADMIN_DASHBOARD;
         }
+        return intOption;
     }
-    public void handleProductsCRUD(String option){
+    public void handleProductsCRUD(String option, ArrayList<Product> productArrayList){
         if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
         else if(option.equals("p") && Cli.page!=1) Cli.page--;
         else if(option.equals("b")) state=State.MANAGE_PRODUCTS;
         else if(option.equals("a")) state=State.ADD_PRODUCT;
+        else if(option.charAt(0) == 'd') {
+            try{
+                int num=Integer.parseInt(option.substring(1));
+                //deleteProduct();
+            }catch (NumberFormatException e){
+                //Error
+            }
+
+        }
     }
     public void handleAddProduct(Map<String,String> data){
         int before=myDatabase.getAllProducts().size();
-        System.out.println(data.get("category"));
         addProduct(data.get("name"),data.get("category"),data.get("description"),Double.parseDouble(data.get("price")));
         int after=myDatabase.getAllProducts().size();
         if(after>before){
-            Cli.displayProductAddedSuccessfully();
+            Cli.displayMsg(" Product added successfully! ",true);
         }else{
-            Cli.displayProductNotAdded();
+            Cli.displayMsg(" Failed to add a product! ",false);
         }
         state=State.MANAGE_PRODUCTS;
     }

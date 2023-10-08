@@ -63,6 +63,9 @@ public class DataBase {
                 .findFirst()
                 .orElse(null);
     }
+    public ArrayList<Category> getCategoryList(){
+        return categoryList;
+    }
     public Product searchOneProduct(int id){
         return categoryList.stream()
                 .flatMap(category -> category.productArrayList.stream())
