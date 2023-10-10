@@ -62,6 +62,9 @@ public class App {
                 handleManageProductOutput= handleManageProduct(option);
                 Cli.page=1;
             } else if(state==State.PRODUCTS_CRUD){
+                if(Error.getLocation().equals(State.PRODUCTS_CRUD)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
                 if(handleManageProductOutput==1){
                     String option = Cli.displayProducts(myDatabase.getAllProducts());
                     handleProductsCRUD(option,myDatabase.getAllProducts());
@@ -70,13 +73,21 @@ public class App {
                     handleProductsCRUD(optionCrud,myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
                 }
             } else if(state==State.ADD_PRODUCT){
-               Map<String,String> data = Cli.displayAddProduct();
-               handleAddProduct(data);
+                if(Error.getLocation().equals(State.ADD_PRODUCT)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
+                Map<String,String> data = Cli.displayAddProduct(myDatabase.getCategoryList());
+                handleAddProduct(data);
             } else if(state==State.SEARCH_PRODUCT){
-                //Error
+                if(Error.getLocation().equals(State.SEARCH_PRODUCT)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
                 String productName=Cli.displaySearchProduct();
                 String option = Cli.displayProducts(myDatabase.searchProducts(productName));
                 handleProductsCRUD(option,myDatabase.searchProducts(productName));
+                state=State.MANAGE_PRODUCTS;
+            } else if(state==State.UPDATE_PRODUCT){
+               //display update page
             }
         }
     }
@@ -133,18 +144,22 @@ public class App {
             }catch (Exception e){
                 Error.setError(State.PRODUCTS_CRUD);
             }
+        } else if(option.charAt(0) == 'u') {
+            int num=Integer.parseInt(option.substring(1));
+            int productId=productArrayList.get(num-1).getId();
+
         }
     }
     public void handleAddProduct(Map<String,String> data){
-        int before=myDatabase.getAllProducts().size();
-        addProduct(data.get("name"),data.get("category"),data.get("description"),Double.parseDouble(data.get("price")));
-        int after=myDatabase.getAllProducts().size();
-        if(after>before){
+        try{
+            int categoryNumber= Integer.parseInt(data.get("category"));
+            addProduct(data.get("name"),myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
+            Error.setError(State.NO_ERROR);
             Cli.displayMsg(" Product added successfully! ",true);
-        }else{
-            Cli.displayMsg(" Failed to add a product! ",false);
+            state=State.MANAGE_PRODUCTS;
+        }catch (Exception e){
+            Error.setError(State.ADD_PRODUCT);
         }
-        state=State.MANAGE_PRODUCTS;
     }
     public State getState() {
         return state;
@@ -190,7 +205,7 @@ public class App {
             product.setDescription(updatedProduct.getDescription() !=null ? updatedProduct.getDescription() : product.getDescription());
         }
     }
-    public void deleteProduct(int id) {
+    public void deleteProduct(int id){
         Product product=myDatabase.searchOneProduct(id);
         if(product!=null)
             myDatabase.deleteProduct(product);

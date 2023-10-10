@@ -103,7 +103,9 @@ public class Cli {
         }
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
         System.out.println("page:"+page+"/"+totalPages);
-        if(page<totalPages && page>1)
+        if(totalPages==0){
+            System.out.println("[ a:add | b:back ]");
+        } else if(page<totalPages && page>1)
             System.out.println("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if (page<totalPages && page==1)
             System.out.println("[ n:next page | a:add | d<int>:delete | u<int>:update | b:back ]");
@@ -115,21 +117,21 @@ public class Cli {
 
         return scanner.nextLine();
     }
-    public static Map<String,String> displayAddProduct(){
+    public static Map<String,String> displayAddProduct(ArrayList<Category> categoryArrayList){
         //need to fix....
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD PRODUCT "));
+
         System.out.println(Cli.blueText("Choose category: "));
-        System.out.println("""
-                1. Interior
-                2. Exterior
-                3. Electronics
-                """);
+        int i=1;
+        for(Category category : categoryArrayList){
+            System.out.println((i++)+". "+Cli.blueText(category.getName()+" category"));
+        }
+
         String categoryOption = scanner.nextLine();
 
-        String []categoryArray=new String[]{"Interior","Exterior","Electronics"};
-        data.put("category",categoryArray[Integer.parseInt(categoryOption)-1]);
+        data.put("category",categoryOption);
         System.out.println(Cli.blueText("Product name: "));
         data.put("name",scanner.nextLine());
         System.out.println(Cli.blueText("Description: "));
@@ -151,7 +153,7 @@ public class Cli {
         else
             System.out.println(Cli.errorText(msg));
 
-        System.out.println("[any key:back]");
+        System.out.println("[press any key...]");
         scanner.nextLine();
     }
 

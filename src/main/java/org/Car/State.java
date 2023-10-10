@@ -14,9 +14,10 @@ public enum State {
     PRODUCTS_CRUD(9),
     SEARCH_PRODUCT(10),
     ADD_PRODUCT(11),
-    VIEW_ORDERS(12),
-    VIEW_INSTALLATION_REQ(13),
-    NO_ERROR(14);
+    UPDATE_PRODUCT(12),
+    VIEW_ORDERS(13),
+    VIEW_INSTALLATION_REQ(14),
+    NO_ERROR(15);
 
     private final int value;
     State(int value) {

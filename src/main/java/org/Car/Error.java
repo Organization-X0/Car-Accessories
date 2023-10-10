@@ -10,7 +10,8 @@ public class Error {
             case NO_ERROR -> msg="";
             case START, ADMIN_DASHBOARD,MANAGE_PRODUCTS,PRODUCTS_CRUD -> msg=" Invalid Option! ";
             case LOGIN -> msg=" Not Registered! ";
-            case SIGNUP -> msg=" Invalid Data! ";
+            case SIGNUP, SEARCH_PRODUCT -> msg=" Invalid Data! ";
+            case ADD_PRODUCT -> msg=" Failed to add a product! ";
         }
     }
     public static State getLocation(){
