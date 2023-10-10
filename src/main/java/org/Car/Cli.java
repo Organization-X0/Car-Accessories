@@ -15,7 +15,6 @@ import static org.fusesource.jansi.Ansi.Color.*;
 public class Cli {
     public static int page=1;
     public static int totalPages=1;
-//    public static int manageProductsOptions=1;
     public static Ansi errorText(String text){
         return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();
     }
@@ -117,6 +116,7 @@ public class Cli {
         return scanner.nextLine();
     }
     public static Map<String,String> displayAddProduct(){
+        //need to fix....
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD PRODUCT "));
@@ -138,6 +138,12 @@ public class Cli {
         data.put("price",scanner.nextLine());
         return data;
     }
+    public static String displaySearchProduct(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("SEARCH"));
+        System.out.print(Cli.blueText("Product name:"));
+        return scanner.nextLine();
+    }
     public static void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
         if(success)
@@ -145,7 +151,7 @@ public class Cli {
         else
             System.out.println(Cli.errorText(msg));
 
-        System.out.println("[b:back]");
+        System.out.println("[any key:back]");
         scanner.nextLine();
     }
 
@@ -155,6 +161,10 @@ public class Cli {
         System.out.println("1. "+Cli.blueText("Login"));
         System.out.println("2. "+Cli.blueText("Sign Up"));
         System.out.println("3. "+Cli.blueText("Exit"));
+        System.out.println("TEST:");
+        System.out.println("a: "+Cli.blueText("admin"));
+        System.out.println("i: "+Cli.blueText("installer"));
+        System.out.println("c: "+Cli.blueText("customer"));
 
         return scanner.nextLine();
     }

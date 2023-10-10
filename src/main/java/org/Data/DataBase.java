@@ -1,6 +1,7 @@
 package org.Data;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class DataBase {
     private final ArrayList<User> usersList;
@@ -72,6 +73,12 @@ public class DataBase {
                 .filter(product -> product.getId()==(id))
                 .findFirst()
                 .orElse(null);
+    }
+    public ArrayList<Product> searchProducts(String name){
+        return (ArrayList<Product>) categoryList.stream()
+            .flatMap(category -> category.productArrayList.stream())
+            .filter(product -> product.getName().equals(name))
+            .collect(Collectors.toList());
     }
     public void deleteProduct(Product productDelete){
         categoryList.stream()

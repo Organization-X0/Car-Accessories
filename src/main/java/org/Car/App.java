@@ -10,17 +10,11 @@ public class App {
     public State state;
     private final SignUp mySignUp;
     private final Login myLogin;
-    private boolean errorDisplayedLogin;
-    private boolean errorDisplayedSignUp;
-    private boolean errorDisplayedStart;
     private int handleManageProductOutput=1;
     private boolean exit;
     final DataBase myDatabase;
 
     public App(){
-        errorDisplayedLogin=false;
-        errorDisplayedSignUp=false;
-        errorDisplayedStart=false;
         loggedIn=false;
         exit=false;
         state = State.START;
@@ -34,30 +28,36 @@ public class App {
     public void render(){
         while(!exit) {
             if (state == State.START) {
-                if(getErrorStart()){
-                    System.out.println(Cli.errorText(" Invalid option! "));
+                if(Error.getLocation().equals(State.START)){
+                    Cli.displayMsg(Error.getMsg(),false);
                 }
                 String option = Cli.displayStart();
                 handleStartOption(option);
             } else if (state == State.LOGIN) {
-                if(getErrorLogin()){
-                    System.out.println(Cli.errorText(" Not registered! "));
+                if(Error.getLocation().equals(State.LOGIN)){
+                    Cli.displayMsg(Error.getMsg(),false);
                 }
                 Map<String, String> loginData = Cli.displayLogin();
                 login(loginData.get("email"), loginData.get("password"));
             } else if (state == State.SIGNUP) {
-                if(getErrorSignUp()){
-                    System.out.println(Cli.errorText(" Invalid data! "));
+                if(Error.getLocation().equals(State.SIGNUP)){
+                    Cli.displayMsg(Error.getMsg(),false);
                 }
                 Map<String, String> signUpData = Cli.displaySignUp();
                 signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
             } else if (state==State.CUSTOMER_DASHBOARD) {
                 Cli.displayMain();
             } else if(state==State.ADMIN_DASHBOARD){
+                if(Error.getLocation().equals(State.ADMIN_DASHBOARD)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
                 String option = Cli.displayAdminDashboard();
                 handleAdminDashboard(option);
                 System.out.println(option);
             } else if(state==State.MANAGE_PRODUCTS){
+                if(Error.getLocation().equals(State.MANAGE_PRODUCTS)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
                 String option=Cli.displayManageProducts(myDatabase.getCategoryList());
                 handleManageProductOutput= handleManageProduct(option);
                 Cli.page=1;
@@ -65,14 +65,18 @@ public class App {
                 if(handleManageProductOutput==1){
                     String option = Cli.displayProducts(myDatabase.getAllProducts());
                     handleProductsCRUD(option,myDatabase.getAllProducts());
-                }
-                else{
+                } else{
                     String optionCrud=Cli.displayProducts(myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
                     handleProductsCRUD(optionCrud,myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
                 }
             } else if(state==State.ADD_PRODUCT){
                Map<String,String> data = Cli.displayAddProduct();
                handleAddProduct(data);
+            } else if(state==State.SEARCH_PRODUCT){
+                //Error
+                String productName=Cli.displaySearchProduct();
+                String option = Cli.displayProducts(myDatabase.searchProducts(productName));
+                handleProductsCRUD(option,myDatabase.searchProducts(productName));
             }
         }
     }
@@ -81,7 +85,10 @@ public class App {
             case "1" -> state = State.LOGIN;
             case "2" -> state = State.SIGNUP;
             case "3" -> exit = true;
-            default -> errorDisplayedStart = true;
+            case "a" -> login("admin@gmail.com","a123");
+            case "i" -> login("installer@gmail.com","i123");
+            case "c" -> login("user1@gmail.com","u123");
+            default -> Error.setError(State.START);
         }
 }
     public void handleAdminDashboard(String option){
@@ -90,19 +97,27 @@ public class App {
             case "2" -> state = State.MANAGE_CATEGORIES;
             case "3" -> state = State.MANAGE_ACCOUNTS;
             case "4" -> state = State.START;
-            default -> errorDisplayedStart = true;
+            default -> Error.setError(State.ADMIN_DASHBOARD);
         }
     }
     public int handleManageProduct(String option){
-        int intOption=Integer.parseInt(option);
-        if(intOption==1 || intOption<(3+myDatabase.getCategoryList().size())){
-            state=State.PRODUCTS_CRUD;
-        } else if(intOption==2){
-            state=State.SEARCH_PRODUCT;
-        } else if(intOption==3+myDatabase.getCategoryList().size()){
-            state=State.ADMIN_DASHBOARD;
+        try {
+            int intOption=Integer.parseInt(option);
+            if(intOption==1 || (intOption!=2 && intOption<(3+myDatabase.getCategoryList().size()))){
+                state=State.PRODUCTS_CRUD;
+            } else if(intOption==2){
+                state=State.SEARCH_PRODUCT;
+            } else if(intOption==3+myDatabase.getCategoryList().size()){
+                state=State.ADMIN_DASHBOARD;
+            } else{
+               throw new RuntimeException("invalid input");
+            }
+            Error.setError(State.NO_ERROR);
+            return intOption;
+        }catch (Exception e){
+           Error.setError(State.MANAGE_PRODUCTS);
+           return 0;
         }
-        return intOption;
     }
     public void handleProductsCRUD(String option, ArrayList<Product> productArrayList){
         if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
@@ -112,11 +127,12 @@ public class App {
         else if(option.charAt(0) == 'd') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                //deleteProduct();
-            }catch (NumberFormatException e){
-                //Error
+                int productId=productArrayList.get(num-1).getId();
+                deleteProduct(productId);
+                Error.setError(State.NO_ERROR);
+            }catch (Exception e){
+                Error.setError(State.PRODUCTS_CRUD);
             }
-
         }
     }
     public void handleAddProduct(Map<String,String> data){
@@ -142,31 +158,20 @@ public class App {
             else
                 state=State.CUSTOMER_DASHBOARD;
 
-            errorDisplayedLogin=false;
+            Error.setError(State.NO_ERROR);
             return;
         }
-        errorDisplayedLogin=true;
+        Error.setError(State.LOGIN);
     }
 
     public void signUp(String fullName, String email,String phone ,String password) {
        if(mySignUp.signUpNow(fullName,email,phone,password)){
            state=State.LOGIN;
-           errorDisplayedSignUp=false;
+           Error.setError(State.NO_ERROR);
            return;
 
        }
-        errorDisplayedSignUp=true;
-    }
-
-
-    public boolean getErrorStart() {
-        return errorDisplayedStart;
-    }
-    public boolean getErrorLogin() {
-        return errorDisplayedLogin;
-    }
-    public boolean getErrorSignUp() {
-        return errorDisplayedSignUp;
+        Error.setError(State.SIGNUP);
     }
 
     public void addProduct(String name, String category, String description, double price ) {
@@ -255,11 +260,10 @@ public class App {
             appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
         }
     }
+    public void viewOrders(String Email){
 
-public void viewOrders(String Email){
-
-}
-
+    }
     public void viewInstallationReq(String Email) {
+
     }
 }

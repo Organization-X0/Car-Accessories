@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
+import org.Car.Error;
 import org.Car.State;
 
 import static org.junit.Assert.*;
@@ -32,7 +33,7 @@ public class LoginSteps {
     }
     @Then("an error message should be seen")
     public void an_error_message_should_be_seen() {
-        assertTrue(myApp.getErrorLogin());
+        assertEquals(Error.getLocation(),State.LOGIN);
     }
 
 }
