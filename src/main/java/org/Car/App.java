@@ -11,6 +11,7 @@ public class App {
     private final SignUp mySignUp;
     private final Login myLogin;
     private int handleManageProductOutput=1;
+    private int productIdToUpdate;
     private boolean exit;
     final DataBase myDatabase;
 
@@ -87,7 +88,11 @@ public class App {
                 handleProductsCRUD(option,myDatabase.searchProducts(productName));
                 state=State.MANAGE_PRODUCTS;
             } else if(state==State.UPDATE_PRODUCT){
-               //display update page
+                if(Error.getLocation().equals(State.UPDATE_PRODUCT)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
+                Map<String,String> data = Cli.displayUpdateProduct(myDatabase.getCategoryList());
+                handleUpdateProduct(data);
             }
         }
     }
@@ -145,9 +150,14 @@ public class App {
                 Error.setError(State.PRODUCTS_CRUD);
             }
         } else if(option.charAt(0) == 'u') {
-            int num=Integer.parseInt(option.substring(1));
-            int productId=productArrayList.get(num-1).getId();
-
+            try{
+                int num=Integer.parseInt(option.substring(1));
+                productIdToUpdate=productArrayList.get(num-1).getId();
+                state=State.UPDATE_PRODUCT;
+                Error.setError(State.NO_ERROR);
+            }catch (Exception e){
+                Error.setError(State.PRODUCTS_CRUD);
+            }
         }
     }
     public void handleAddProduct(Map<String,String> data){
@@ -159,6 +169,25 @@ public class App {
             state=State.MANAGE_PRODUCTS;
         }catch (Exception e){
             Error.setError(State.ADD_PRODUCT);
+        }
+    }
+    public void handleUpdateProduct(Map<String,String> data){
+        try{
+            Product product = new Product();
+
+            if (!data.get("price").isEmpty()){
+                double price=Double.parseDouble(data.get("price"));
+                product.setPrice(price);
+            }if (!data.get("name").isEmpty())
+                product.setName(data.get("name"));
+            if (!data.get("description").isEmpty())
+                product.setDescription(data.get("description"));
+
+            updateProduct(productIdToUpdate,product);
+            state=State.MANAGE_PRODUCTS;
+            Error.setError(State.NO_ERROR);
+        }catch (Exception e){
+            Error.setError(State.UPDATE_PRODUCT);
         }
     }
     public State getState() {

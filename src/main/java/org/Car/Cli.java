@@ -118,7 +118,6 @@ public class Cli {
         return scanner.nextLine();
     }
     public static Map<String,String> displayAddProduct(ArrayList<Category> categoryArrayList){
-        //need to fix....
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD PRODUCT "));
@@ -145,6 +144,20 @@ public class Cli {
         System.out.println(Cli.blueBgText("SEARCH"));
         System.out.print(Cli.blueText("Product name:"));
         return scanner.nextLine();
+    }
+    public static Map<String,String> displayUpdateProduct(ArrayList<Category> categoryArrayList){
+        Scanner scanner=new Scanner(System.in);
+        Map<String,String> data=new HashMap<>();
+        System.out.println(Cli.blueBgText(" UPDATE PRODUCT "));
+        System.out.println("If you don't want to update specific field just press enter.");
+
+        System.out.println(Cli.blueText("Product name: "));
+        data.put("name",scanner.nextLine());
+        System.out.println(Cli.blueText("Description: "));
+        data.put("description",scanner.nextLine());
+        System.out.println(Cli.blueText("Price : "));
+        data.put("price",scanner.nextLine());
+        return data;
     }
     public static void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
