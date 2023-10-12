@@ -9,7 +9,7 @@ public class Login {
        this.myDatabase=dataBase;
     }
     public boolean loginNow(String Email,String password){
-        User user=myDatabase.search(Email);
+        User user=myDatabase.searchAccount(Email);
         if(user==null){
             return false;
         }

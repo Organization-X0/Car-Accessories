@@ -14,6 +14,8 @@ public class App {
     private int productIdToUpdate;
     private boolean exit;
     final DataBase myDatabase;
+    private String categoryNameToUpdate;
+    private String userEmailToUpdate;
 
     public App(){
         loggedIn=false;
@@ -91,11 +93,37 @@ public class App {
                 if(Error.getLocation().equals(State.UPDATE_PRODUCT)){
                     Cli.displayMsg(Error.getMsg(),false);
                 }
-                Map<String,String> data = Cli.displayUpdateProduct(myDatabase.getCategoryList());
+                Map<String,String> data = Cli.displayUpdateProduct();
                 handleUpdateProduct(data);
+            } else if(state==State.MANAGE_CATEGORIES){
+                if(Error.getLocation().equals(State.MANAGE_CATEGORIES)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
+                String option=Cli.displayManageCategories(myDatabase.getCategoryList());
+                handleManageCategory(option);
+            } else if(state==State.ADD_CATEGORY){
+                String data=Cli.displayAddCategory();
+                handleAddCategory(data);
+            } else if(state==State.UPDATE_CATEGORY){
+                String data=Cli.displayUpdateCategory();
+                handleUpdateCategory(data);
+            } else if(state==State.MANAGE_ACCOUNTS){
+                if(Error.getLocation().equals(State.MANAGE_ACCOUNTS)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
+                String option=Cli.displayManageAccounts(myDatabase.getCustomerList());
+                handleManageAccount(option);
+            } else if(state==State.UPDATE_ACCOUNT){
+                if(Error.getLocation().equals(State.UPDATE_ACCOUNT)){
+                    Cli.displayMsg(Error.getMsg(),false);
+                }
+                Map<String,String> data=Cli.displayUpdateAccount();
+                handleUpdateAccount(data);
             }
         }
     }
+
+
     public void handleStartOption(String option) {
         switch (option) {
             case "1" -> state = State.LOGIN;
@@ -188,6 +216,95 @@ public class App {
             Error.setError(State.NO_ERROR);
         }catch (Exception e){
             Error.setError(State.UPDATE_PRODUCT);
+        }
+    }
+    public void handleManageCategory(String option){
+        if(option.equals("b")) state=State.ADMIN_DASHBOARD;
+        else if(option.equals("a")) state=State.ADD_CATEGORY;
+        else if(option.charAt(0) == 'd') {
+            try{
+                int num=Integer.parseInt(option.substring(1));
+                String categoryName=myDatabase.getCategoryList().get(num-1).getName();
+                deleteCategory(categoryName);
+                Error.setError(State.NO_ERROR);
+            }catch (Exception e){
+                Error.setError(State.MANAGE_CATEGORIES);
+            }
+        } else if(option.charAt(0) == 'u') {
+            try{
+                int num=Integer.parseInt(option.substring(1));
+                categoryNameToUpdate=myDatabase.getCategoryList().get(num-1).getName();
+                state=State.UPDATE_CATEGORY;
+                Error.setError(State.NO_ERROR);
+            }catch (Exception e){
+                Error.setError(State.MANAGE_CATEGORIES);
+            }
+        }
+    }
+
+    public void handleAddCategory(String name){
+        try{
+            if(!name.isEmpty())
+                addCategory(name);
+            else
+                throw new Exception();
+            Error.setError(State.NO_ERROR);
+            Cli.displayMsg(" Category added successfully! ",true);
+            state=State.MANAGE_CATEGORIES;
+        }catch (Exception e){
+            Error.setError(State.ADD_CATEGORY);
+        }
+    }
+    public void handleUpdateCategory(String newName){
+        if(!newName.isEmpty()){
+            searchCategory(categoryNameToUpdate).getProductsList()
+                    .forEach(product -> product.setCategory(newName));
+            updateCategory(categoryNameToUpdate,newName);
+        }
+        state=State.MANAGE_CATEGORIES;
+    }
+    private void handleManageAccount(String option) {
+        if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
+        else if(option.equals("p") && Cli.page!=1) Cli.page--;
+        else if(option.equals("b")) state=State.ADMIN_DASHBOARD;
+        else if(option.charAt(0) == 'd') {
+            try{
+                int num=Integer.parseInt(option.substring(1));
+                String userEmail=myDatabase.getCustomerList().get(num-1).getEmail();
+                deleteAccount(userEmail);
+                Error.setError(State.NO_ERROR);
+            }catch (Exception e){
+                Error.setError(State.MANAGE_ACCOUNTS);
+            }
+        } else if(option.charAt(0) == 'u') {
+            try{
+                int num=Integer.parseInt(option.substring(1));
+                userEmailToUpdate=myDatabase.getCustomerList().get(num-1).getEmail();
+                state=State.UPDATE_ACCOUNT;
+                Error.setError(State.NO_ERROR);
+            }catch (Exception e){
+                Error.setError(State.MANAGE_ACCOUNTS);
+            }
+        }
+
+    }
+    private void handleUpdateAccount(Map<String, String> data) {
+        try{
+            User user =new User();
+            if (!data.get("fullName").isEmpty()){
+                user.setFullName(data.get("fullName"));
+            }if (!data.get("phone").isEmpty()){
+                user.setPhone(data.get("phone"));
+                //check
+                if(data.get("phone").length()!=10)
+                    throw new Exception();
+                Integer.parseInt(data.get("phone"));
+            }
+            updateAccount(userEmailToUpdate,user);
+            state=State.MANAGE_ACCOUNTS;
+            Error.setError(State.NO_ERROR);
+        }catch (Exception e){
+            Error.setError(State.UPDATE_ACCOUNT);
         }
     }
     public State getState() {

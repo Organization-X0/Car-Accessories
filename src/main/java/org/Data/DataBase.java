@@ -43,14 +43,26 @@ public class DataBase {
         appointmentsList.add(appointment);
 
     }
-    public User search(String email){
+    public void addUser(User user){
+        usersList.add(user);
+    }
+    public void deleteAccount(User user){
+        usersList.remove(user);
+    }
+    public User searchAccount(String email){
         return usersList.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
     }
-    public void addUser(User user){
-        usersList.add(user);
+    public ArrayList<User> getCustomerList(){
+        ArrayList<User> customers=new ArrayList<>();
+        usersList.forEach(user->{
+           if(!user.getEmail().equals("admin@gmail.com") && !user.getEmail().equals("installer@gmail.com")){
+               customers.add(user);
+           }
+        });
+        return customers;
     }
     public void addCategory(Category category){
         categoryList.add(category);
@@ -106,14 +118,5 @@ public class DataBase {
     }
     public void deleteAppointment(Appointment appointmentDelete){
         appointmentsList.remove(appointmentDelete);
-    }
-    public void deleteAccount(User user){
-        usersList.remove(user);
-    }
-    public User searchAccount(String email){
-        return usersList.stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst()
-                .orElse(null);
     }
 }

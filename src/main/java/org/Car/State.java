@@ -17,7 +17,11 @@ public enum State {
     UPDATE_PRODUCT(12),
     VIEW_ORDERS(13),
     VIEW_INSTALLATION_REQ(14),
-    NO_ERROR(15);
+    ADD_CATEGORY(15),
+    UPDATE_CATEGORY(16),
+    UPDATE_ACCOUNT(17),
+
+    NO_ERROR(18);
 
     private final int value;
     State(int value) {

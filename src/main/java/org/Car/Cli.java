@@ -2,12 +2,15 @@ package org.Car;
 
 import org.Data.Category;
 import org.Data.Product;
+import org.Data.User;
 import org.fusesource.jansi.Ansi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
@@ -92,15 +95,19 @@ public class Cli {
     public static String displayProducts(ArrayList<Product> productArrayList){
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("All Products:"));
-        int i=1;
 
-        if(page!=1)
-            i=((page-1)*10)+1;
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, productArrayList.size());
 
-        for (; (i<=productArrayList.size() && i<i+10);i++){
-            System.out.println(i+". "+Cli.blueText(productArrayList.get(i-1).getName()+", id:"+productArrayList.get(i-1).getId()));
-            if(i%10==0) break;
-        }
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i + 1) + ". " + Cli.blueText(
+                    productArrayList.get(i).getName() +
+                            " | Category:" +
+                            productArrayList.get(i).getCategory() + " | Price:" +
+                            productArrayList.get(i).getPrice()
+            ));
+        });
+
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
         System.out.println("page:"+page+"/"+totalPages);
         if(totalPages==0){
@@ -145,7 +152,7 @@ public class Cli {
         System.out.print(Cli.blueText("Product name:"));
         return scanner.nextLine();
     }
-    public static Map<String,String> displayUpdateProduct(ArrayList<Category> categoryArrayList){
+    public static Map<String,String> displayUpdateProduct(){
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(Cli.blueBgText(" UPDATE PRODUCT "));
@@ -159,6 +166,69 @@ public class Cli {
         data.put("price",scanner.nextLine());
         return data;
     }
+    public static String displayManageCategories(ArrayList<Category> categoryArrayList){
+        Scanner scanner=new Scanner(System.in);
+        int i=1;
+        System.out.println(Cli.blueBgText("CATEGORIES"));
+        for(Category category : categoryArrayList){
+            System.out.println((i++)+". "+Cli.blueText(category.getName()+" category"));
+        }
+        System.out.println("[ a:add | d<int>:delete | u<int>:update | b:back ]");
+        return scanner.nextLine();
+    }
+    public static String displayAddCategory() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText(" ADD CATEGORY "));
+
+        System.out.println(Cli.blueText("Category name: "));
+        return scanner.nextLine();
+    }
+    public static String displayManageAccounts(ArrayList<User> userArrayList) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText(" MANAGE ACCOUNTS "));
+
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, userArrayList.size());
+
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i+1)+". "+Cli.blueText(userArrayList.get(i).getFullName()+", "+userArrayList.get(i).getEmail()+", "+userArrayList.get(i).getPhone()));
+        });
+
+        totalPages=(int)Math.ceil(userArrayList.size()/10.0);
+        System.out.println("page:"+page+"/"+totalPages);
+        if(totalPages==0){
+            System.out.println("[ b:back ]");
+        } else if(page<totalPages && page>1)
+            System.out.println("[ n:next page | p:prev page | d<int>:delete | u<int>:update | b:back ]");
+        else if (page<totalPages && page==1)
+            System.out.println("[ n:next page | d<int>:delete | u<int>:update | b:back ]");
+        else if(totalPages==1)
+            System.out.println("[ d<int>:delete | u<int>:update | b:back ]");
+        else if(page==totalPages)
+            System.out.println("[ p:prev page | d<int>:delete | u<int>:update | b:back ]");
+
+        return scanner.nextLine();
+    }
+    public static Map<String, String> displayUpdateAccount() {
+        Scanner scanner=new Scanner(System.in);
+        Map<String,String> data=new HashMap<>();
+        System.out.println(Cli.blueBgText(" UPDATE ACCOUNT "));
+        System.out.println("If you don't want to update specific field just press enter.");
+        System.out.println(Cli.blueText("Full Name: "));
+        data.put("fullName", scanner.nextLine());
+        System.out.println(Cli.blueText("Phone: "));
+        data.put("phone", scanner.nextLine());
+        return data;
+    }
+    public static String displayUpdateCategory() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText(" UPDATE CATEGORY "));
+        System.out.println("If you don't want to update name just press enter.");
+
+        System.out.println(Cli.blueText("Category name: "));
+        return scanner.nextLine();
+    }
+
     public static void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
         if(success)
@@ -166,7 +236,7 @@ public class Cli {
         else
             System.out.println(Cli.errorText(msg));
 
-        System.out.println("[press any key...]");
+        System.out.println("[press enter...]");
         scanner.nextLine();
     }
 
@@ -183,4 +253,5 @@ public class Cli {
 
         return scanner.nextLine();
     }
+
 }
