@@ -1,4 +1,4 @@
-package org.Car;
+package org.Sates;
 
 public interface State {
     public void handle();

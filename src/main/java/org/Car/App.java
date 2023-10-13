@@ -1,6 +1,7 @@
 package org.Car;
 
 import org.Data.*;
+import org.Sates.*;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class App {
     public int handleManageProductOutput=1;
     public int productIdToUpdate;
     public boolean exit;
-    final DataBase myDatabase;
+    public final DataBase myDatabase;
     public String categoryNameToUpdate;
     public String userEmailToUpdate;
 
@@ -21,15 +22,15 @@ public class App {
     public App(){
         loggedIn=false;
         exit=false;
-        stateEnum = StateEnum.START;
 
         myDatabase=new DataBase();
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
 
-        state=new StartState(this);
-
         Product.setLastId(myDatabase);
+
+        //Initial State
+        state=new StartState(this);
     }
     public void setState(State state) {
         this.state = state;

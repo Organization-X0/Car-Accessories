@@ -1,4 +1,9 @@
-package org.Car;
+package org.Sates;
+
+import org.Car.App;
+import org.Car.Cli;
+import org.Car.Error;
+import org.Car.StateEnum;
 
 public class ManageProductsState implements State {
     private final App myApp;
@@ -9,7 +14,7 @@ public class ManageProductsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(StateEnum.MANAGE_PRODUCTS);
-        String option=Cli.displayManageProducts(myApp.myDatabase.getCategoryList());
+        String option= Cli.displayManageProducts(myApp.myDatabase.getCategoryList());
 
         //Manage Products output
         try {

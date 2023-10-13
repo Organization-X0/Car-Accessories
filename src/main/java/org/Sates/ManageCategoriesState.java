@@ -1,4 +1,9 @@
-package org.Car;
+package org.Sates;
+
+import org.Car.App;
+import org.Car.Cli;
+import org.Car.Error;
+import org.Car.StateEnum;
 
 public class ManageCategoriesState implements State {
     private final App myApp;
@@ -9,7 +14,7 @@ public class ManageCategoriesState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(StateEnum.MANAGE_CATEGORIES);
-        String option=Cli.displayManageCategories(myApp.myDatabase.getCategoryList());
+        String option= Cli.displayManageCategories(myApp.myDatabase.getCategoryList());
 
         //Manage Categories output
         if(option.equals("b")) myApp.setState(new AdminDashboardState(myApp));

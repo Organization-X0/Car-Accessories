@@ -1,5 +1,9 @@
-package org.Car;
+package org.Sates;
 
+import org.Car.App;
+import org.Car.Cli;
+import org.Car.Error;
+import org.Car.StateEnum;
 import org.Data.Product;
 
 import java.util.ArrayList;
@@ -12,7 +16,7 @@ public class ProductCrudState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.MANAGE_PRODUCTS);
+        Error.checkAndShow(StateEnum.PRODUCTS_CRUD);
         ArrayList<Product> productArrayList;
 
         String option;

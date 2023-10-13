@@ -1,4 +1,9 @@
-package org.Car;
+package org.Sates;
+
+import org.Car.App;
+import org.Car.Cli;
+import org.Car.Error;
+import org.Car.StateEnum;
 
 public class AddCategoryState implements State {
     private final App myApp;
@@ -9,7 +14,7 @@ public class AddCategoryState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(StateEnum.ADD_CATEGORY);
-        String name=Cli.displayUpdateCategory();
+        String name= Cli.displayUpdateCategory();
 
         //Add category
         try{

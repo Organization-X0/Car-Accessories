@@ -1,5 +1,9 @@
-package org.Car;
+package org.Sates;
 
+import org.Car.App;
+import org.Car.Cli;
+import org.Car.Error;
+import org.Car.StateEnum;
 import org.Data.User;
 
 import java.util.Map;
@@ -13,7 +17,7 @@ public class UpdateAccountState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(StateEnum.UPDATE_ACCOUNT);
-        Map<String,String> data=Cli.displayUpdateAccount();
+        Map<String,String> data= Cli.displayUpdateAccount();
 
         //Update account
         try{

@@ -1,4 +1,9 @@
-package org.Car;
+package org.Sates;
+
+import org.Car.App;
+import org.Car.Cli;
+import org.Car.Error;
+import org.Car.StateEnum;
 
 public class ManageAccountsState implements State {
     private final App myApp;
@@ -9,7 +14,7 @@ public class ManageAccountsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(StateEnum.MANAGE_ACCOUNTS);
-        String option=Cli.displayManageAccounts(myApp.myDatabase.getCustomerList());
+        String option= Cli.displayManageAccounts(myApp.myDatabase.getCustomerList());
 
         //Manage Accounts output
         if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
