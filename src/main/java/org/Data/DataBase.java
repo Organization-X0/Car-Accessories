@@ -41,7 +41,6 @@ public class DataBase {
         appointment=new Appointment("user2@gmail.com","item2","TOYOTA","2023-10-20");
         appointment.setId(1);
         appointmentsList.add(appointment);
-
     }
     public void addUser(User user){
         usersList.add(user);

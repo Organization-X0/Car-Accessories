@@ -56,7 +56,6 @@ public class App {
                 }
                 String option = Cli.displayAdminDashboard();
                 handleAdminDashboard(option);
-                System.out.println(option);
             } else if(state==State.MANAGE_PRODUCTS){
                 if(Error.getLocation().equals(State.MANAGE_PRODUCTS)){
                     Cli.displayMsg(Error.getMsg(),false);
@@ -307,6 +306,9 @@ public class App {
             Error.setError(State.UPDATE_ACCOUNT);
         }
     }
+    public void handleCustomerProfile(String option) {
+
+    }
     public State getState() {
         return state;
     }
@@ -421,10 +423,11 @@ public class App {
             appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
         }
     }
-    public void viewOrders(String Email){
+//    public void viewOrders(String Email){
+//
+//    }
+//    public void viewInstallationReq(String Email) {
+//
+//    }
 
-    }
-    public void viewInstallationReq(String Email) {
-
-    }
 }

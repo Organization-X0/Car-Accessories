@@ -20,8 +20,8 @@ public enum State {
     ADD_CATEGORY(15),
     UPDATE_CATEGORY(16),
     UPDATE_ACCOUNT(17),
-
-    NO_ERROR(18);
+    PROFILE_PAGE(18),
+    NO_ERROR(19);
 
     private final int value;
     State(int value) {

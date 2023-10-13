@@ -1,4 +1,3 @@
-
 Feature: User Profile
 
   Scenario: Customer can edit their profile
