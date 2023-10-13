@@ -307,7 +307,13 @@ public class App {
         }
     }
     public void handleCustomerProfile(String option) {
-
+    switch (option){
+        case "1":state=State.UPDATE_ACCOUNT;
+        break;
+        case "2":state=State.VIEW_ORDERS;
+        break;
+        case "3":state=State.VIEW_INSTALLATION_REQ;
+    }
     }
     public State getState() {
         return state;
