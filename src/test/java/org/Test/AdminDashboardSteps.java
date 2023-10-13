@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
-import org.Car.State;
+import org.Car.StateEnum;
 import org.Data.Appointment;
 import org.Data.Product;
 import org.Data.User;
@@ -113,12 +113,12 @@ public class AdminDashboardSteps {
 
     @When("the admin enter manage user accounts")
     public void the_admin_enter_manage_user_accounts() {
-        myApp.state= State.MANAGE_ACCOUNTS;
+        myApp.stateEnum = StateEnum.MANAGE_ACCOUNTS;
     }
 
     @Then("the user accounts should show")
     public void the_user_accounts_should_show() {
-        assertEquals(myApp.state,State.MANAGE_ACCOUNTS);
+        assertEquals(myApp.stateEnum, StateEnum.MANAGE_ACCOUNTS);
     }
 
     @When("add new installation appointments")

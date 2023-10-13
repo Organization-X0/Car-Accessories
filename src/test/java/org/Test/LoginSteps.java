@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
 import org.Car.Error;
-import org.Car.State;
+import org.Car.StateEnum;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +24,7 @@ public class LoginSteps {
     }
     @Then("redirection to the main page should occur")
     public void redirection_to_the_main_page_should_occur() {
-        assertEquals(State.CUSTOMER_DASHBOARD, myApp.getState());
+        assertEquals(StateEnum.CUSTOMER_DASHBOARD, myApp.getStateEnum());
     }
 
     @When("invalid username or password are entered")
@@ -33,7 +33,7 @@ public class LoginSteps {
     }
     @Then("an error message should be seen")
     public void an_error_message_should_be_seen() {
-        assertEquals(Error.getLocation(),State.LOGIN);
+        assertEquals(Error.getLocation(), StateEnum.LOGIN);
     }
 
 }

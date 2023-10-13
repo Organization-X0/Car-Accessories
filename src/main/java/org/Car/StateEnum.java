@@ -1,0 +1,33 @@
+package org.Car;
+
+public enum StateEnum {
+
+    START(0),
+    LOGIN(1),
+    SIGNUP(2),
+    CUSTOMER_DASHBOARD(3),
+    ADMIN_DASHBOARD(4),
+    INSTALLER_DASHBOARD(5),
+    MANAGE_PRODUCTS(6),
+    MANAGE_CATEGORIES(7),
+    MANAGE_ACCOUNTS(8),
+    PRODUCTS_CRUD(9),
+    SEARCH_PRODUCT(10),
+    ADD_PRODUCT(11),
+    UPDATE_PRODUCT(12),
+    VIEW_ORDERS(13),
+    VIEW_INSTALLATION_REQ(14),
+    ADD_CATEGORY(15),
+    UPDATE_CATEGORY(16),
+    UPDATE_ACCOUNT(17),
+    PROFILE_PAGE(18),
+    NO_ERROR(19);
+
+    private final int value;
+    StateEnum(int value) {
+        this.value = value;
+    }
+    public int getValue() {
+        return value;
+    }
+}

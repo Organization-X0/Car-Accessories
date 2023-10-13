@@ -3,342 +3,92 @@ package org.Car;
 import org.Data.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class App {
+    private State state;
     public boolean loggedIn;
-    public State state;
-    private final SignUp mySignUp;
-    private final Login myLogin;
-    private int handleManageProductOutput=1;
-    private int productIdToUpdate;
-    private boolean exit;
+    public StateEnum stateEnum;
+    public final SignUp mySignUp;
+    public final Login myLogin;
+    public int handleManageProductOutput=1;
+    public int productIdToUpdate;
+    public boolean exit;
     final DataBase myDatabase;
-    private String categoryNameToUpdate;
-    private String userEmailToUpdate;
+    public String categoryNameToUpdate;
+    public String userEmailToUpdate;
+
 
     public App(){
         loggedIn=false;
         exit=false;
-        state = State.START;
+        stateEnum = StateEnum.START;
 
         myDatabase=new DataBase();
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
 
+        state=new StartState(this);
+
         Product.setLastId(myDatabase);
+    }
+    public void setState(State state) {
+        this.state = state;
     }
     public void render(){
         while(!exit) {
-            if (state == State.START) {
-                if(Error.getLocation().equals(State.START)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                String option = Cli.displayStart();
-                handleStartOption(option);
-            } else if (state == State.LOGIN) {
-                if(Error.getLocation().equals(State.LOGIN)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                Map<String, String> loginData = Cli.displayLogin();
-                login(loginData.get("email"), loginData.get("password"));
-            } else if (state == State.SIGNUP) {
-                if(Error.getLocation().equals(State.SIGNUP)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                Map<String, String> signUpData = Cli.displaySignUp();
-                signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
-            } else if (state==State.CUSTOMER_DASHBOARD) {
-                Cli.displayMain();
-            } else if(state==State.ADMIN_DASHBOARD){
-                if(Error.getLocation().equals(State.ADMIN_DASHBOARD)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                String option = Cli.displayAdminDashboard();
-                handleAdminDashboard(option);
-            } else if(state==State.MANAGE_PRODUCTS){
-                if(Error.getLocation().equals(State.MANAGE_PRODUCTS)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                String option=Cli.displayManageProducts(myDatabase.getCategoryList());
-                handleManageProductOutput= handleManageProduct(option);
-                Cli.page=1;
-            } else if(state==State.PRODUCTS_CRUD){
-                if(Error.getLocation().equals(State.PRODUCTS_CRUD)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                if(handleManageProductOutput==1){
-                    String option = Cli.displayProducts(myDatabase.getAllProducts());
-                    handleProductsCRUD(option,myDatabase.getAllProducts());
-                } else{
-                    String optionCrud=Cli.displayProducts(myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
-                    handleProductsCRUD(optionCrud,myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList());
-                }
-            } else if(state==State.ADD_PRODUCT){
-                if(Error.getLocation().equals(State.ADD_PRODUCT)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                Map<String,String> data = Cli.displayAddProduct(myDatabase.getCategoryList());
-                handleAddProduct(data);
-            } else if(state==State.SEARCH_PRODUCT){
-                if(Error.getLocation().equals(State.SEARCH_PRODUCT)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                String productName=Cli.displaySearchProduct();
-                String option = Cli.displayProducts(myDatabase.searchProducts(productName));
-                handleProductsCRUD(option,myDatabase.searchProducts(productName));
-                state=State.MANAGE_PRODUCTS;
-            } else if(state==State.UPDATE_PRODUCT){
-                if(Error.getLocation().equals(State.UPDATE_PRODUCT)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                Map<String,String> data = Cli.displayUpdateProduct();
-                handleUpdateProduct(data);
-            } else if(state==State.MANAGE_CATEGORIES){
-                if(Error.getLocation().equals(State.MANAGE_CATEGORIES)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                String option=Cli.displayManageCategories(myDatabase.getCategoryList());
-                handleManageCategory(option);
-            } else if(state==State.ADD_CATEGORY){
-                String data=Cli.displayAddCategory();
-                handleAddCategory(data);
-            } else if(state==State.UPDATE_CATEGORY){
-                String data=Cli.displayUpdateCategory();
-                handleUpdateCategory(data);
-            } else if(state==State.MANAGE_ACCOUNTS){
-                if(Error.getLocation().equals(State.MANAGE_ACCOUNTS)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                String option=Cli.displayManageAccounts(myDatabase.getCustomerList());
-                handleManageAccount(option);
-            } else if(state==State.UPDATE_ACCOUNT){
-                if(Error.getLocation().equals(State.UPDATE_ACCOUNT)){
-                    Cli.displayMsg(Error.getMsg(),false);
-                }
-                Map<String,String> data=Cli.displayUpdateAccount();
-                handleUpdateAccount(data);
-            }
+            state.handle();
         }
+    }
+    public StateEnum getStateEnum() {
+        return stateEnum;
     }
 
-
-    public void handleStartOption(String option) {
-        switch (option) {
-            case "1" -> state = State.LOGIN;
-            case "2" -> state = State.SIGNUP;
-            case "3" -> exit = true;
-            case "a" -> login("admin@gmail.com","a123");
-            case "i" -> login("installer@gmail.com","i123");
-            case "c" -> login("user1@gmail.com","u123");
-            default -> Error.setError(State.START);
-        }
-}
-    public void handleAdminDashboard(String option){
-        switch (option) {
-            case "1" -> state = State.MANAGE_PRODUCTS;
-            case "2" -> state = State.MANAGE_CATEGORIES;
-            case "3" -> state = State.MANAGE_ACCOUNTS;
-            case "4" -> state = State.START;
-            default -> Error.setError(State.ADMIN_DASHBOARD);
-        }
-    }
-    public int handleManageProduct(String option){
-        try {
-            int intOption=Integer.parseInt(option);
-            if(intOption==1 || (intOption!=2 && intOption<(3+myDatabase.getCategoryList().size()))){
-                state=State.PRODUCTS_CRUD;
-            } else if(intOption==2){
-                state=State.SEARCH_PRODUCT;
-            } else if(intOption==3+myDatabase.getCategoryList().size()){
-                state=State.ADMIN_DASHBOARD;
-            } else{
-               throw new RuntimeException("invalid input");
-            }
-            Error.setError(State.NO_ERROR);
-            return intOption;
-        }catch (Exception e){
-           Error.setError(State.MANAGE_PRODUCTS);
-           return 0;
-        }
-    }
-    public void handleProductsCRUD(String option, ArrayList<Product> productArrayList){
-        if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
-        else if(option.equals("p") && Cli.page!=1) Cli.page--;
-        else if(option.equals("b")) state=State.MANAGE_PRODUCTS;
-        else if(option.equals("a")) state=State.ADD_PRODUCT;
-        else if(option.charAt(0) == 'd') {
-            try{
-                int num=Integer.parseInt(option.substring(1));
-                int productId=productArrayList.get(num-1).getId();
-                deleteProduct(productId);
-                Error.setError(State.NO_ERROR);
-            }catch (Exception e){
-                Error.setError(State.PRODUCTS_CRUD);
-            }
-        } else if(option.charAt(0) == 'u') {
-            try{
-                int num=Integer.parseInt(option.substring(1));
-                productIdToUpdate=productArrayList.get(num-1).getId();
-                state=State.UPDATE_PRODUCT;
-                Error.setError(State.NO_ERROR);
-            }catch (Exception e){
-                Error.setError(State.PRODUCTS_CRUD);
-            }
-        }
-    }
-    public void handleAddProduct(Map<String,String> data){
-        try{
-            int categoryNumber= Integer.parseInt(data.get("category"));
-            addProduct(data.get("name"),myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
-            Error.setError(State.NO_ERROR);
-            Cli.displayMsg(" Product added successfully! ",true);
-            state=State.MANAGE_PRODUCTS;
-        }catch (Exception e){
-            Error.setError(State.ADD_PRODUCT);
-        }
-    }
-    public void handleUpdateProduct(Map<String,String> data){
-        try{
-            Product product = new Product();
-
-            if (!data.get("price").isEmpty()){
-                double price=Double.parseDouble(data.get("price"));
-                product.setPrice(price);
-            }if (!data.get("name").isEmpty())
-                product.setName(data.get("name"));
-            if (!data.get("description").isEmpty())
-                product.setDescription(data.get("description"));
-
-            updateProduct(productIdToUpdate,product);
-            state=State.MANAGE_PRODUCTS;
-            Error.setError(State.NO_ERROR);
-        }catch (Exception e){
-            Error.setError(State.UPDATE_PRODUCT);
-        }
-    }
-    public void handleManageCategory(String option){
-        if(option.equals("b")) state=State.ADMIN_DASHBOARD;
-        else if(option.equals("a")) state=State.ADD_CATEGORY;
-        else if(option.charAt(0) == 'd') {
-            try{
-                int num=Integer.parseInt(option.substring(1));
-                String categoryName=myDatabase.getCategoryList().get(num-1).getName();
-                deleteCategory(categoryName);
-                Error.setError(State.NO_ERROR);
-            }catch (Exception e){
-                Error.setError(State.MANAGE_CATEGORIES);
-            }
-        } else if(option.charAt(0) == 'u') {
-            try{
-                int num=Integer.parseInt(option.substring(1));
-                categoryNameToUpdate=myDatabase.getCategoryList().get(num-1).getName();
-                state=State.UPDATE_CATEGORY;
-                Error.setError(State.NO_ERROR);
-            }catch (Exception e){
-                Error.setError(State.MANAGE_CATEGORIES);
-            }
-        }
-    }
-
-    public void handleAddCategory(String name){
-        try{
-            if(!name.isEmpty())
-                addCategory(name);
-            else
-                throw new Exception();
-            Error.setError(State.NO_ERROR);
-            Cli.displayMsg(" Category added successfully! ",true);
-            state=State.MANAGE_CATEGORIES;
-        }catch (Exception e){
-            Error.setError(State.ADD_CATEGORY);
-        }
-    }
-    public void handleUpdateCategory(String newName){
-        if(!newName.isEmpty()){
-            searchCategory(categoryNameToUpdate).getProductsList()
-                    .forEach(product -> product.setCategory(newName));
-            updateCategory(categoryNameToUpdate,newName);
-        }
-        state=State.MANAGE_CATEGORIES;
-    }
-    private void handleManageAccount(String option) {
-        if(option.equals("n")&& Cli.page!=Cli.totalPages) Cli.page++;
-        else if(option.equals("p") && Cli.page!=1) Cli.page--;
-        else if(option.equals("b")) state=State.ADMIN_DASHBOARD;
-        else if(option.charAt(0) == 'd') {
-            try{
-                int num=Integer.parseInt(option.substring(1));
-                String userEmail=myDatabase.getCustomerList().get(num-1).getEmail();
-                deleteAccount(userEmail);
-                Error.setError(State.NO_ERROR);
-            }catch (Exception e){
-                Error.setError(State.MANAGE_ACCOUNTS);
-            }
-        } else if(option.charAt(0) == 'u') {
-            try{
-                int num=Integer.parseInt(option.substring(1));
-                userEmailToUpdate=myDatabase.getCustomerList().get(num-1).getEmail();
-                state=State.UPDATE_ACCOUNT;
-                Error.setError(State.NO_ERROR);
-            }catch (Exception e){
-                Error.setError(State.MANAGE_ACCOUNTS);
-            }
-        }
-
-    }
-    private void handleUpdateAccount(Map<String, String> data) {
-        try{
-            User user =new User();
-            if (!data.get("fullName").isEmpty()){
-                user.setFullName(data.get("fullName"));
-            }if (!data.get("phone").isEmpty()){
-                user.setPhone(data.get("phone"));
-                //check
-                if(data.get("phone").length()!=10)
-                    throw new Exception();
-                Integer.parseInt(data.get("phone"));
-            }
-            updateAccount(userEmailToUpdate,user);
-            state=State.MANAGE_ACCOUNTS;
-            Error.setError(State.NO_ERROR);
-        }catch (Exception e){
-            Error.setError(State.UPDATE_ACCOUNT);
-        }
-    }
-    public void handleCustomerProfile(String option) {
-        switch (option){
-            case "1" -> state=State.UPDATE_ACCOUNT;
-            case "2" -> state=State.VIEW_ORDERS;
-            case "3" -> state=State.VIEW_INSTALLATION_REQ;
-        }
-    }
-    public State getState() {
-        return state;
-    }
-    public void login(String email, String password) {
+    public void login(String email,String password){
         if(myLogin.loginNow(email,password)){
             if(email.equals("admin@gmail.com"))
-                state=State.ADMIN_DASHBOARD;
-            else if(email.equals("installer@gmail.com"))
-                state=State.INSTALLER_DASHBOARD;
-            else
-                state=State.CUSTOMER_DASHBOARD;
+                setState(new AdminDashboardState(this));
+            //Add more else if for installer state and for customer state
+            //code here...
 
-            Error.setError(State.NO_ERROR);
+            Error.setError(StateEnum.NO_ERROR);
             return;
         }
-        Error.setError(State.LOGIN);
-    }
+        Error.setError(StateEnum.LOGIN);
 
+    }
     public void signUp(String fullName, String email,String phone ,String password) {
        if(mySignUp.signUpNow(fullName,email,phone,password)){
-           state=State.LOGIN;
-           Error.setError(State.NO_ERROR);
+           setState(new LoginState(this));
+           Error.setError(StateEnum.NO_ERROR);
            return;
 
        }
-        Error.setError(State.SIGNUP);
+        Error.setError(StateEnum.SIGNUP);
+    }
+    public void handleProductCRUD(String option, ArrayList<Product> productArrayList) {
+        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
+        else if (option.equals("p") && Cli.page != 1) Cli.page--;
+        else if (option.equals("b")) setState(new ManageProductsState(this));
+        else if (option.equals("a")) setState(new AddProductState(this));
+        else if (option.charAt(0) == 'd') {
+            try {
+                int num = Integer.parseInt(option.substring(1));
+                int productId = productArrayList.get(num - 1).getId();
+                deleteProduct(productId);
+                Error.setError(StateEnum.NO_ERROR);
+            } catch (Exception e) {
+                Error.setError(StateEnum.PRODUCTS_CRUD);
+            }
+        } else if (option.charAt(0) == 'u') {
+            try {
+                int num = Integer.parseInt(option.substring(1));
+                productIdToUpdate = productArrayList.get(num - 1).getId();
+                setState(new UpdateProductState(this));
+                Error.setError(StateEnum.NO_ERROR);
+            } catch (Exception e) {
+                Error.setError(StateEnum.PRODUCTS_CRUD);
+            }
+        }
     }
 
     public void addProduct(String name, String category, String description, double price ) {

@@ -5,8 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
 import org.Car.Error;
-import org.Car.SignUp;
-import org.Car.State;
+import org.Car.StateEnum;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,8 +17,8 @@ public class SignUpSteps {
     }
     @Given("on the sign up page")
     public void on_the_sign_up_page() {
-        myApp.state= State.SIGNUP;
-        assertEquals(State.SIGNUP,myApp.getState());
+        myApp.stateEnum = StateEnum.SIGNUP;
+        assertEquals(StateEnum.SIGNUP,myApp.getStateEnum());
     }
     @When("valid details are entered")
     public void valid_details_are_entered() {
@@ -27,7 +26,7 @@ public class SignUpSteps {
     }
     @Then("go to the login page")
     public void go_to_the_login_page() {
-        assertEquals(State.LOGIN,myApp.getState());
+        assertEquals(StateEnum.LOGIN,myApp.getStateEnum());
     }
 
     @When("invalid details or missing information are entered")
@@ -36,6 +35,6 @@ public class SignUpSteps {
     }
     @Then("Show error message indicates what went wrong")
     public void show_error_message_indicates_what_went_wrong() {
-       assertEquals(Error.getLocation(),State.SIGNUP);
+       assertEquals(Error.getLocation(), StateEnum.SIGNUP);
     }
 }
