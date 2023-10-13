@@ -423,11 +423,5 @@ public class App {
             appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
         }
     }
-//    public void viewOrders(String Email){
-//
-//    }
-//    public void viewInstallationReq(String Email) {
-//
-//    }
 
 }
