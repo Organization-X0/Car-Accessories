@@ -13,15 +13,24 @@ public class UpdateCategoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.UPDATE_CATEGORY);
+        Error.checkAndShow(getStateString());
         String newName= Cli.displayUpdateCategory();
+        handleInput(newName);
+        myApp.setState(new ManageCategoriesState(myApp));
+    }
 
-        //Update category
+    @Override
+    public void handleInput(Object input) {
+        String newName = (String) input;
+
         if(!newName.isEmpty()){
             myApp.searchCategory(myApp.categoryNameToUpdate).getProductsList()
                     .forEach(product -> product.setCategory(newName));
             myApp.updateCategory(myApp.categoryNameToUpdate,newName);
         }
-        myApp.setState(new ManageCategoriesState(myApp));
+    }
+    @Override
+    public String getStateString() {
+        return "UpdateCategory";
     }
 }

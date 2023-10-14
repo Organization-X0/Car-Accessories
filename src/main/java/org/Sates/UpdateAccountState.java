@@ -16,11 +16,21 @@ public class UpdateAccountState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.UPDATE_ACCOUNT);
+        Error.checkAndShow(getStateString());
         Map<String,String> data= Cli.displayUpdateAccount();
+        handleInput(data);
+    }
 
-        //Update account
+    @Override
+    @SuppressWarnings("unchecked")
+    public void handleInput(Object input) {
         try{
+            Map<String,String> data;
+            if(input instanceof Map)
+                data=(Map<String, String>) input;
+            else
+                throw new Exception();
+
             User user =new User();
             if (!data.get("fullName").isEmpty()){
                 user.setFullName(data.get("fullName"));
@@ -33,10 +43,13 @@ public class UpdateAccountState implements State {
             }
             myApp.updateAccount(myApp.userEmailToUpdate,user);
             myApp.setState(new ManageAccountsState(myApp));
-            Error.setError(StateEnum.NO_ERROR);
+            Error.setError(null);
         }catch (Exception e){
-            Error.setError(StateEnum.UPDATE_ACCOUNT);
+            Error.setError(getStateString());
         }
-
+    }
+    @Override
+    public String getStateString() {
+        return "UpdateAccount";
     }
 }

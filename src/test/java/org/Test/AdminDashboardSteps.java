@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class AdminDashboardSteps {
     App myApp;
+    int id=1;
     public AdminDashboardSteps(App myApp){
         this.myApp=myApp;
     }
@@ -48,18 +49,17 @@ public class AdminDashboardSteps {
 
     @Then("the category should be deleted")
     public void the_category_should_be_deleted() {
-        myApp.searchCategory("Interior");
+        assertNull(myApp.searchCategory("Interior"));
     }
 
     @When("the admin adds new product")
     public void the_admin_adds_new_product() {
-        myApp.addProduct("item4","Interior","don't buy this",55.5);
-
+        id=myApp.addProduct("item4","Interior","don't buy this",55.5);
     }
 
     @Then("a new product listing should be created")
     public void a_new_product_listing_should_be_created() {
-        assertNotNull(myApp.searchProduct(1));
+        assertNotNull(myApp.searchProduct(id));
     }
 
     @When("the admin updates the product")

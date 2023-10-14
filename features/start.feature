@@ -17,6 +17,6 @@ Feature: Navigation
     Examples:
       | input |
       | 4     |
-      | a     |
+      | g     |
       | abc   |
       | -1    |

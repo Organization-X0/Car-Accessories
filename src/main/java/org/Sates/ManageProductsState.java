@@ -13,10 +13,16 @@ public class ManageProductsState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.MANAGE_PRODUCTS);
+        Error.checkAndShow(getStateString());
         String option= Cli.displayManageProducts(myApp.myDatabase.getCategoryList());
+        handleInput(option);
+        Cli.page=1;
+    }
 
-        //Manage Products output
+    @Override
+    public void handleInput(Object input) {
+        String option = (String) input;
+
         try {
             int intOption=Integer.parseInt(option);
             if(intOption==1 || (intOption!=2 && intOption<(3+myApp.myDatabase.getCategoryList().size()))){
@@ -28,12 +34,15 @@ public class ManageProductsState implements State {
             } else{
                 throw new Exception("invalid input");
             }
-            Error.setError(StateEnum.NO_ERROR);
+            Error.setError(null);
             myApp.handleManageProductOutput= intOption;
         }catch (Exception e){
-            Error.setError(StateEnum.MANAGE_PRODUCTS);
+            Error.setError(getStateString());
             myApp.handleManageProductOutput= 0;
         }
-        Cli.page=1;
+    }
+    @Override
+    public String getStateString() {
+        return "ManageProducts";
     }
 }

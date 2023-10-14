@@ -13,10 +13,15 @@ public class ManageCategoriesState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.MANAGE_CATEGORIES);
+        Error.checkAndShow(getStateString());
         String option= Cli.displayManageCategories(myApp.myDatabase.getCategoryList());
+        handleInput(option);
+    }
 
-        //Manage Categories output
+    @Override
+    public void handleInput(Object input) {
+        String option = (String) input;
+
         if(option.equals("b")) myApp.setState(new AdminDashboardState(myApp));
         else if(option.equals("a")) myApp.setState(new AddCategoryState(myApp));
         else if(option.charAt(0) == 'd') {
@@ -24,19 +29,23 @@ public class ManageCategoriesState implements State {
                 int num=Integer.parseInt(option.substring(1));
                 String categoryName=myApp.myDatabase.getCategoryList().get(num-1).getName();
                 myApp.deleteCategory(categoryName);
-                Error.setError(StateEnum.NO_ERROR);
+                Error.setError(null);
             }catch (Exception e){
-                Error.setError(StateEnum.MANAGE_CATEGORIES);
+                Error.setError(getStateString());
             }
         } else if(option.charAt(0) == 'u') {
             try{
                 int num=Integer.parseInt(option.substring(1));
                 myApp.categoryNameToUpdate=myApp.myDatabase.getCategoryList().get(num-1).getName();
                 myApp.setState(new UpdateCategoryState(myApp));
-                Error.setError(StateEnum.NO_ERROR);
+                Error.setError(null);
             }catch (Exception e){
-                Error.setError(StateEnum.MANAGE_CATEGORIES);
+                Error.setError(getStateString());
             }
         }
+    }
+    @Override
+    public String getStateString() {
+        return "ManageCategories";
     }
 }

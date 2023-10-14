@@ -1,26 +1,28 @@
 package org.Car;
 
+import java.util.Objects;
+
 public class Error {
-    private static StateEnum location= StateEnum.NO_ERROR;
+    private static String location= null;
     private static String msg;
 
-    public static void setError(StateEnum locationPara){
-        location=locationPara;
+    public static void setError(String locationPara){
+        location = Objects.requireNonNullElse(locationPara, "null");
         switch (location){
-            case NO_ERROR -> msg="";
-            case START, ADMIN_DASHBOARD,MANAGE_PRODUCTS,PRODUCTS_CRUD -> msg=" Invalid Option! ";
-            case LOGIN -> msg=" Not Registered! ";
-            case SIGNUP, SEARCH_PRODUCT, UPDATE_PRODUCT, MANAGE_CATEGORIES, MANAGE_ACCOUNTS-> msg=" Invalid Data! ";
-            case ADD_PRODUCT -> msg=" Failed to add a product! ";
-            case UPDATE_ACCOUNT -> msg=" Invalid Data! (make sure the phone number is 10 digits) ";
+            case "Start", "AdminDashboard","ManageProducts","ProductCRUD" -> msg=" Invalid Option! ";
+            case "Login" -> msg=" Not Registered! ";
+            case "SignUp","SearchProduct","UpdateProduct","ManageCategories","ManageAccounts" -> msg=" Invalid Data! ";
+            case "AddProduct" -> msg=" Failed to add a product! ";
+            case "UpdateAccount" -> msg=" Invalid Data! (make sure the phone number is 10 digits) ";
+            case "null" -> msg="";
         }
     }
-    public static void checkAndShow(StateEnum location){
-        if(Error.getLocation().equals(location)){
+    public static void checkAndShow(String location){
+        if(Error.getLocation()!=null && Error.getLocation().equals(location)){
             Cli.displayMsg(Error.getMsg(),false);
         }
     }
-    public static StateEnum getLocation(){
+    public static String getLocation(){
         return location;
     }
     public static String getMsg(){

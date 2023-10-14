@@ -35,6 +35,9 @@ public class App {
     public void setState(State state) {
         this.state = state;
     }
+    public State getCurrentState(){
+        return state;
+    }
     public void render(){
         while(!exit) {
             state.handle();
@@ -51,20 +54,19 @@ public class App {
             //Add more else if for installer state and for customer state
             //code here...
 
-            Error.setError(StateEnum.NO_ERROR);
+            Error.setError(null);
             return;
         }
-        Error.setError(StateEnum.LOGIN);
+        Error.setError(getCurrentState().getStateString());
 
     }
     public void signUp(String fullName, String email,String phone ,String password) {
        if(mySignUp.signUpNow(fullName,email,phone,password)){
            setState(new LoginState(this));
-           Error.setError(StateEnum.NO_ERROR);
+           Error.setError(null);
            return;
-
        }
-        Error.setError(StateEnum.SIGNUP);
+        Error.setError(getCurrentState().getStateString());
     }
     public void handleProductCRUD(String option, ArrayList<Product> productArrayList) {
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
@@ -76,25 +78,25 @@ public class App {
                 int num = Integer.parseInt(option.substring(1));
                 int productId = productArrayList.get(num - 1).getId();
                 deleteProduct(productId);
-                Error.setError(StateEnum.NO_ERROR);
+                Error.setError(null);
             } catch (Exception e) {
-                Error.setError(StateEnum.PRODUCTS_CRUD);
+                Error.setError(getCurrentState().getStateString());
             }
         } else if (option.charAt(0) == 'u') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 productIdToUpdate = productArrayList.get(num - 1).getId();
                 setState(new UpdateProductState(this));
-                Error.setError(StateEnum.NO_ERROR);
+                Error.setError(null);
             } catch (Exception e) {
-                Error.setError(StateEnum.PRODUCTS_CRUD);
+                Error.setError(getCurrentState().getStateString());
             }
         }
     }
 
-    public void addProduct(String name, String category, String description, double price ) {
+    public int addProduct(String name, String category, String description, double price ) {
         Category categoryObj=myDatabase.searchCategory(category);
-        categoryObj.addProduct(new Product(name,category,description,price,true));
+        return categoryObj.addProduct(new Product(name,category,description,price,true));
     }
 
     public void updateProduct(int id,Product updatedProduct) {

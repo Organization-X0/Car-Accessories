@@ -16,13 +16,22 @@ public class UpdateProductState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.UPDATE_PRODUCT);
+        Error.checkAndShow(getStateString());
         Map<String,String> data = Cli.displayUpdateProduct();
+        handleInput(data);
+    }
 
-        //Update product
+    @Override
+    @SuppressWarnings("unchecked")
+    public void handleInput(Object input) {
         try{
-            Product product = new Product();
+            Map<String, String> data;
+            if (input instanceof Map)
+                data = (Map<String, String>) input;
+            else
+                throw new Exception();
 
+            Product product = new Product();
             if (!data.get("price").isEmpty()){
                 double price=Double.parseDouble(data.get("price"));
                 product.setPrice(price);
@@ -33,9 +42,13 @@ public class UpdateProductState implements State {
 
             myApp.updateProduct(myApp.productIdToUpdate,product);
             myApp.setState(new ManageProductsState(myApp));
-            Error.setError(StateEnum.NO_ERROR);
+            Error.setError(null);
         }catch (Exception e){
-            Error.setError(StateEnum.UPDATE_PRODUCT);
+            Error.setError(getStateString());
         }
+    }
+    @Override
+    public String getStateString() {
+        return "UpdateProduct";
     }
 }

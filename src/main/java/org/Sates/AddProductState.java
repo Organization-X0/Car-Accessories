@@ -16,19 +16,34 @@ public class AddProductState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.ADD_PRODUCT);
+        Error.checkAndShow(getStateString());
         Map<String,String> data = Cli.displayAddProduct(myApp.myDatabase.getCategoryList());
+        handleInput(data);
+    }
 
-        //Add product
+    @Override
+    @SuppressWarnings("unchecked")
+    public void handleInput(Object input) {
         try{
+            Map<String,String> data;
+            if(input instanceof Map)
+                data=(Map<String, String>) input;
+            else
+                throw new Exception();
+
             int categoryNumber= Integer.parseInt(data.get("category"));
             myApp.addProduct(data.get("name"),myApp.myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
-            Error.setError(StateEnum.NO_ERROR);
+            Error.setError(null);
             Cli.displayMsg(" Product added successfully! ",true);
             myApp.setState(new ManageProductsState(myApp));
         }catch (Exception e){
-            Error.setError(StateEnum.ADD_PRODUCT);
+            Error.setError(getStateString());
         }
 
+    }
+
+    @Override
+    public String getStateString() {
+        return "AddProduct";
     }
 }

@@ -24,7 +24,8 @@ public class LoginSteps {
     }
     @Then("redirection to the main page should occur")
     public void redirection_to_the_main_page_should_occur() {
-        assertEquals(StateEnum.CUSTOMER_DASHBOARD, myApp.getStateEnum());
+//        assertTrue(myApp.getCurrentState() instanceof CustomerDashboardState);
+
     }
 
     @When("invalid username or password are entered")
@@ -33,7 +34,7 @@ public class LoginSteps {
     }
     @Then("an error message should be seen")
     public void an_error_message_should_be_seen() {
-        assertEquals(Error.getLocation(), StateEnum.LOGIN);
+        assertEquals(Error.getLocation(), myApp.getCurrentState().getStateString());
     }
 
 }

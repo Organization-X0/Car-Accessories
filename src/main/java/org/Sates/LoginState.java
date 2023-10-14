@@ -14,10 +14,28 @@ public class LoginState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.LOGIN);
+        Error.checkAndShow(getStateString());
         Map<String, String> loginData = Cli.displayLogin();
+        handleInput(loginData);
+    }
 
-        //Login
-        myApp.login(loginData.get("email"),loginData.get("password"));
+    @Override
+    @SuppressWarnings("unchecked")
+    public void handleInput(Object input) {
+        try {
+            Map<String, String> loginData;
+            if (input instanceof Map)
+                loginData = (Map<String, String>) input;
+            else
+                throw new Exception();
+
+            myApp.login(loginData.get("email"),loginData.get("password"));
+        }catch (Exception e){
+            //Error
+        }
+    }
+    @Override
+    public String getStateString() {
+        return "Login";
     }
 }

@@ -8,12 +8,14 @@ public class DataBase {
     private final ArrayList<Category> categoryList;
     private final ArrayList<Appointment> appointmentsList;
     public DataBase(){
+
         usersList=new ArrayList<User>();
         usersList.add(new User("user1","user1@gmail.com","u123","0599123456"));
         usersList.add(new User("user2","user2@gmail.com","u123","0599123456"));
         usersList.add(new User("user3","user3@gmail.com","u123","0599123456"));
         usersList.add(new User("admin","admin@gmail.com","a123","0123456789"));
 
+        Product.resetLastId();
         categoryList=new ArrayList<Category>();
 
         categoryList.add(new Category("Interior"));
@@ -80,14 +82,14 @@ public class DataBase {
     }
     public Product searchOneProduct(int id){
         return categoryList.stream()
-                .flatMap(category -> category.productArrayList.stream())
+                .flatMap(category -> category.getProductsList().stream())
                 .filter(product -> product.getId()==(id))
                 .findFirst()
                 .orElse(null);
     }
     public ArrayList<Product> searchProducts(String name){
         return (ArrayList<Product>) categoryList.stream()
-            .flatMap(category -> category.productArrayList.stream())
+            .flatMap(category -> category.getProductsList().stream())
             .filter(product -> product.getName().equals(name))
             .collect(Collectors.toList());
     }
@@ -98,9 +100,7 @@ public class DataBase {
     }
     public ArrayList<Product> getAllProducts(){
         ArrayList<Product> allProducts=new ArrayList<Product>();
-        allProducts.addAll(categoryList.get(0).productArrayList);
-        allProducts.addAll(categoryList.get(1).productArrayList);
-        allProducts.addAll(categoryList.get(2).productArrayList);
+        categoryList.forEach(category -> allProducts.addAll(category.getProductsList()));
         return allProducts;
     }
     public void addAppointment(Appointment appointment){

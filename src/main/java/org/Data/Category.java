@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class Category {
     String name;
-    ArrayList<Product> productArrayList;
+    private final ArrayList<Product> productArrayList;
     public Category(String name){
         this.name=name;
         productArrayList=new ArrayList<Product>();
     }
-    public void addProduct(Product product) {
+    public int addProduct(Product product) {
         product.setId(Product.getNextId());
         productArrayList.add(product);
+        return product.getId();
 //            product.setId((productArrayList.get(productArrayList.size()-1).getId())+1);
     }
     public Product searchOneProduct(int id){

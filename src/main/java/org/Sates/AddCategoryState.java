@@ -13,21 +13,29 @@ public class AddCategoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.ADD_CATEGORY);
+        Error.checkAndShow(getStateString());
         String name= Cli.displayUpdateCategory();
+        handleInput(name);
+    }
 
-        //Add category
+    @Override
+    public void handleInput(Object input) {
+        String name = (String)input;
         try{
             if(!name.isEmpty())
                 myApp.addCategory(name);
             else
                 throw new Exception();
-            Error.setError(StateEnum.NO_ERROR);
+            Error.setError(null);
             Cli.displayMsg(" Category added successfully! ",true);
             myApp.setState(new ManageCategoriesState(myApp));
         }catch (Exception e){
-            Error.setError(StateEnum.ADD_CATEGORY);
+            Error.setError(getStateString());
         }
+    }
 
+    @Override
+    public String getStateString() {
+        return "AddCategory";
     }
 }

@@ -15,10 +15,29 @@ public class SignUpState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(StateEnum.SIGNUP);
+        Error.checkAndShow(getStateString());
         Map<String, String> signUpData = Cli.displaySignUp();
+        handleInput(signUpData);
 
-        //SignUp
-        myApp.signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void handleInput(Object input) {
+        try {
+            Map<String, String> signUpData;
+            if (input instanceof Map)
+                signUpData = (Map<String, String>) input;
+            else
+                throw new Exception();
+
+            myApp.signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
+        }catch (Exception e){
+            //Error
+        }
+    }
+    @Override
+    public String getStateString() {
+        return "SignUp";
     }
 }

@@ -23,9 +23,12 @@ public class Product {
     }
     public static void setLastId(DataBase myDatabase){
         for(Category category:myDatabase.getCategoryList()){
-            if(category.productArrayList.get(category.productArrayList.size()-1).getId()>lastId)
-                lastId=category.productArrayList.get(category.productArrayList.size()-1).getId();
+            if(category.getProductsList().get(category.getProductsList().size()-1).getId()>lastId)
+                lastId=category.getProductsList().get(category.getProductsList().size()-1).getId();
         }
+    }
+    public static void resetLastId(){
+        lastId=0;
     }
 
     public String getName() {
