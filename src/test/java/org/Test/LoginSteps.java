@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
 import org.Car.Error;
-import org.Car.StateEnum;
 
 import static org.junit.Assert.*;
 

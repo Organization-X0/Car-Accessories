@@ -103,6 +103,9 @@ public class DataBase {
         categoryList.forEach(category -> allProducts.addAll(category.getProductsList()));
         return allProducts;
     }
+    public ArrayList<Appointment> getAppointmentsList(){
+        return appointmentsList;
+    }
     public void addAppointment(Appointment appointment){
         if(!appointmentsList.isEmpty()){
             appointment.setId((appointmentsList.get(appointmentsList.size()-1).getId())+1);

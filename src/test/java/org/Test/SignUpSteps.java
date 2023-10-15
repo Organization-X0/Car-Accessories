@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
 import org.Car.Error;
-import org.Car.StateEnum;
 import org.Sates.LoginState;
 
 import static org.junit.Assert.assertEquals;
@@ -18,8 +17,7 @@ public class SignUpSteps {
     }
     @Given("on the sign up page")
     public void on_the_sign_up_page() {
-        myApp.stateEnum = StateEnum.SIGNUP;
-        assertEquals(StateEnum.SIGNUP,myApp.getStateEnum());
+        myApp.getCurrentState().handleInput("2");
     }
     @When("valid details are entered")
     public void valid_details_are_entered() {

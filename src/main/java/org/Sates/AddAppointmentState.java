@@ -3,20 +3,19 @@ package org.Sates;
 import org.Car.App;
 import org.Car.Cli;
 import org.Car.Error;
-import org.Data.User;
 
 import java.util.Map;
 
-public class UpdateAccountState implements State {
+public class AddAppointmentState implements State {
     private final App myApp;
-    public UpdateAccountState(App myApp) {
+    public AddAppointmentState(App myApp) {
         this.myApp=myApp;
     }
 
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Map<String,String> data= Cli.displayUpdateAccount();
+        Map<String,String> data = Cli.displayAddAppointment(myApp.myDatabase.getAppointmentsList());
         handleInput(data);
     }
 
@@ -30,25 +29,23 @@ public class UpdateAccountState implements State {
             else
                 throw new Exception();
 
-            User user =new User();
-            if (!data.get("fullName").isEmpty()){
-                user.setFullName(data.get("fullName"));
-            }if (!data.get("phone").isEmpty()){
-                user.setPhone(data.get("phone"));
-                //check
-                if(data.get("phone").length()!=10)
-                    throw new Exception();
-                Integer.parseInt(data.get("phone"));
-            }
-            myApp.updateAccount(myApp.userEmailToUpdate,user);
-            myApp.setState(new ManageAccountsState(myApp));
+            //check data
+            if(!App.isValidDate(data.get("date")))
+                throw new Exception();
+            if(myApp.myDatabase.searchAccount(data.get("email"))==null)
+                throw new Exception();
+
+            myApp.addAppointment(data.get("email"),data.get("productName"),data.get("carMake"),data.get("date"));
             Error.setError(null);
+            Cli.displayMsg(" Appointment added successfully! ",true);
+            myApp.setState(new ManageInstallationAppointmentState(myApp));
         }catch (Exception e){
             Error.setError(getStateString());
         }
     }
+
     @Override
     public String getStateString() {
-        return "UpdateAccount";
+        return "AddAppointment";
     }
 }

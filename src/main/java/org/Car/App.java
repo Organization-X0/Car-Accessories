@@ -4,15 +4,17 @@ import org.Data.*;
 import org.Sates.*;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class App {
     private State state;
     public boolean loggedIn;
-    public StateEnum stateEnum;
     public final SignUp mySignUp;
     public final Login myLogin;
     public int handleManageProductOutput=1;
     public int productIdToUpdate;
+    public int appointmentIdToUpdate;
     public boolean exit;
     public final DataBase myDatabase;
     public String categoryNameToUpdate;
@@ -43,10 +45,6 @@ public class App {
             state.handle();
         }
     }
-    public StateEnum getStateEnum() {
-        return stateEnum;
-    }
-
     public void login(String email,String password){
         if(myLogin.loginNow(email,password)){
             if(email.equals("admin@gmail.com"))
@@ -179,6 +177,12 @@ public class App {
             appointment.setDate(updatedAppointment.getDate()!= null ? updatedAppointment.getDate(): appointment.getDate());
             appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
         }
+    }
+    public static boolean isValidDate(String date) {
+        String regex = "^\\d{4}-\\d{2}-\\d{1,2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(date);
+        return matcher.matches();
     }
 
 }

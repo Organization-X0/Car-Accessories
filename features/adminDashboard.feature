@@ -1,5 +1,12 @@
 Feature: Admin Dashboard
 
+  Scenario: Admin Dashboard page
+    Given an admin is logged in
+    When the admin enter "1"
+    Then should be redirected to the Manage Products
+
+  ##TODO: Add more Scenarios.
+
   Scenario: Add a new category
     Given an admin is logged in
     When the admin adds new category

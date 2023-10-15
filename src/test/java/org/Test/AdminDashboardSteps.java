@@ -4,10 +4,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
-import org.Car.StateEnum;
 import org.Data.Appointment;
 import org.Data.Product;
 import org.Data.User;
+import org.Sates.ManageAccountsState;
+import org.Sates.ManageProductsState;
 
 import static org.junit.Assert.*;
 
@@ -20,6 +21,16 @@ public class AdminDashboardSteps {
     @Given("an admin is logged in")
     public void an_admin_is_logged_in() {
         myApp.login("admin@gmail.com","a123");
+    }
+
+    @When("the admin enter {string}")
+    public void the_admin_enter(String input) {
+       myApp.getCurrentState().handleInput(input);
+    }
+
+    @Then("should be redirected to the Manage Products")
+    public void should_be_redirected_to_the_manage_products() {
+        assertTrue(myApp.getCurrentState() instanceof ManageProductsState);
     }
 
     @When("the admin adds new category")
@@ -113,12 +124,12 @@ public class AdminDashboardSteps {
 
     @When("the admin enter manage user accounts")
     public void the_admin_enter_manage_user_accounts() {
-        myApp.stateEnum = StateEnum.MANAGE_ACCOUNTS;
+        myApp.setState(new ManageAccountsState(myApp));
     }
 
     @Then("the user accounts should show")
     public void the_user_accounts_should_show() {
-        assertEquals(myApp.stateEnum, StateEnum.MANAGE_ACCOUNTS);
+        assertTrue(myApp.getCurrentState() instanceof ManageAccountsState);
     }
 
     @When("add new installation appointments")

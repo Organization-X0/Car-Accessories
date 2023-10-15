@@ -1,15 +1,11 @@
 package org.Sates;
 
-import io.cucumber.java.it.Ma;
 import org.Car.App;
 import org.Car.Cli;
 import org.Car.Error;
-import org.Car.StateEnum;
 import org.Data.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProductCrudState implements State {
     private final App myApp;
