@@ -1,9 +1,16 @@
 Feature: Admin Dashboard
 
-  Scenario: Admin Dashboard page
+  Scenario: Admin Dashboard page to Manage Products
     Given an admin is logged in
     When the admin enter "1"
     Then should be redirected to the Manage Products
+
+  Scenario: Admin Dashboard page to Manage Categories
+    Given an admin is logged in
+    When the admin enter "2"
+    Then should be redirected to the Manage Categories
+
+
 
   ##TODO: Add more Scenarios.
 
