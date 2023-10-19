@@ -19,6 +19,7 @@ public class App {
     public final DataBase myDatabase;
     public String categoryNameToUpdate;
     public String userEmailToUpdate;
+    public ArrayList<Product> productArrayListBetweenState;
 
     public String email;
 
@@ -79,36 +80,6 @@ public class App {
     }
 
     public void handleProductCustomer(String option) {
-        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
-        else if (option.equals("p") && Cli.page != 1) Cli.page--;
-        else if (option.equals("b")) setState(new ProductCatalogState(this));
-        else Error.setError(getCurrentState().getStateString());
-
-    }
-    public void handleProductCRUD(String option, ArrayList<Product> productArrayList) {
-        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
-        else if (option.equals("p") && Cli.page != 1) Cli.page--;
-        else if (option.equals("b")) setState(new ManageProductsState(this));
-        else if (option.equals("a")) setState(new AddProductState(this));
-        else if (option.charAt(0) == 'd') {
-            try {
-                int num = Integer.parseInt(option.substring(1));
-                int productId = productArrayList.get(num - 1).getId();
-                deleteProduct(productId);
-            } catch (Exception e) {
-                Error.setError(getCurrentState().getStateString());
-            }
-        } else if (option.charAt(0) == 'u') {
-            try {
-                int num = Integer.parseInt(option.substring(1));
-                productIdToUpdate = productArrayList.get(num - 1).getId();
-                setState(new UpdateProductState(this));
-            } catch (Exception e) {
-                Error.setError(getCurrentState().getStateString());
-            }
-        } else {
-            Error.setError(getCurrentState().getStateString());
-        }
     }
 
     public int addProduct(String name, String category, String description, double price ) {
