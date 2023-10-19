@@ -79,9 +79,6 @@ public class App {
             return "customer";
     }
 
-    public void handleProductCustomer(String option) {
-    }
-
     public int addProduct(String name, String category, String description, double price ) {
         Category categoryObj=myDatabase.searchCategory(category);
         return categoryObj.addProduct(new Product(name,category,description,price,true));
