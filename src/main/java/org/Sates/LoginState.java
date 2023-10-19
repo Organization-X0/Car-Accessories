@@ -14,6 +14,7 @@ public class LoginState implements State{
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         Map<String, String> loginData = Cli.displayLogin();
         handleInput(loginData);
     }

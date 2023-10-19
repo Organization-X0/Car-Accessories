@@ -16,6 +16,7 @@ public class UpdateProductState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         Map<String,String> data = Cli.displayUpdateProduct();
         handleInput(data);
     }
@@ -41,7 +42,6 @@ public class UpdateProductState implements State {
 
             myApp.updateProduct(myApp.productIdToUpdate,product);
             myApp.setState(new ManageProductsState(myApp));
-            Error.setError(null);
         }catch (Exception e){
             Error.setError(getStateString());
         }

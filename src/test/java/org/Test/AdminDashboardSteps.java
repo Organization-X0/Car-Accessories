@@ -57,9 +57,6 @@ public class AdminDashboardSteps {
         assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
     }
 
-
-
-
     @When("the admin adds new category")
     public void the_admin_adds_new_category() {
         myApp.addCategory("cat1");

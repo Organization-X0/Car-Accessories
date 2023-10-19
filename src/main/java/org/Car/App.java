@@ -20,6 +20,8 @@ public class App {
     public String categoryNameToUpdate;
     public String userEmailToUpdate;
 
+    public String email;
+
 
     public App(){
         loggedIn=false;
@@ -47,12 +49,14 @@ public class App {
     }
     public void login(String email,String password){
         if(myLogin.loginNow(email,password)){
+            this.email=email;
             if(email.equals("admin@gmail.com"))
                 setState(new AdminDashboardState(this));
+            else
+                setState(new CustomerDashboardState(this));
+
             //Add more else if for installer state and for customer state
             //code here...
-
-            Error.setError(null);
             return;
         }
         Error.setError(getCurrentState().getStateString());
@@ -61,10 +65,25 @@ public class App {
     public void signUp(String fullName, String email,String phone ,String password) {
        if(mySignUp.signUpNow(fullName,email,phone,password)){
            setState(new LoginState(this));
-           Error.setError(null);
            return;
        }
         Error.setError(getCurrentState().getStateString());
+    }
+    public String whoLoggedIn(){
+        if(email.equals("admin@gmail.com"))
+            return "admin";
+        else if(email.equals("installer@gmail.com"))
+            return "installer";
+        else
+            return "customer";
+    }
+
+    public void handleProductCustomer(String option) {
+        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
+        else if (option.equals("p") && Cli.page != 1) Cli.page--;
+        else if (option.equals("b")) setState(new ProductCatalogState(this));
+        else Error.setError(getCurrentState().getStateString());
+
     }
     public void handleProductCRUD(String option, ArrayList<Product> productArrayList) {
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
@@ -76,7 +95,6 @@ public class App {
                 int num = Integer.parseInt(option.substring(1));
                 int productId = productArrayList.get(num - 1).getId();
                 deleteProduct(productId);
-                Error.setError(null);
             } catch (Exception e) {
                 Error.setError(getCurrentState().getStateString());
             }
@@ -85,10 +103,11 @@ public class App {
                 int num = Integer.parseInt(option.substring(1));
                 productIdToUpdate = productArrayList.get(num - 1).getId();
                 setState(new UpdateProductState(this));
-                Error.setError(null);
             } catch (Exception e) {
                 Error.setError(getCurrentState().getStateString());
             }
+        } else {
+            Error.setError(getCurrentState().getStateString());
         }
     }
 

@@ -17,6 +17,7 @@ public class ManageInstallationAppointmentState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         String option= Cli.displayInstallationAppointments(myApp.myDatabase.getAppointmentsList());
         appointmentArrayList=myApp.myDatabase.getAppointmentsList();
         handleInput(option);
@@ -35,7 +36,6 @@ public class ManageInstallationAppointmentState implements State {
                 int num = Integer.parseInt(option.substring(1));
                 int appointmentId = appointmentArrayList.get(num - 1).getId();
                 myApp.deleteAppointment(appointmentId);
-                Error.setError(null);
             } catch (Exception e) {
                 Error.setError(getStateString());
             }
@@ -44,11 +44,10 @@ public class ManageInstallationAppointmentState implements State {
                 int num = Integer.parseInt(option.substring(1));
                 myApp.appointmentIdToUpdate = appointmentArrayList.get(num - 1).getId();
                 myApp.setState(new UpdateAppointmentState(myApp));
-                Error.setError(null);
             } catch (Exception e) {
                 Error.setError(getStateString());
             }
-        }
+        }else Error.setError(getStateString());
     }
 
     @Override

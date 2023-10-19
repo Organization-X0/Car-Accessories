@@ -13,6 +13,7 @@ public class ManageCategoriesState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         String option= Cli.displayManageCategories(myApp.myDatabase.getCategoryList());
         handleInput(option);
     }
@@ -28,7 +29,6 @@ public class ManageCategoriesState implements State {
                 int num=Integer.parseInt(option.substring(1));
                 String categoryName=myApp.myDatabase.getCategoryList().get(num-1).getName();
                 myApp.deleteCategory(categoryName);
-                Error.setError(null);
             }catch (Exception e){
                 Error.setError(getStateString());
             }
@@ -37,11 +37,10 @@ public class ManageCategoriesState implements State {
                 int num=Integer.parseInt(option.substring(1));
                 myApp.categoryNameToUpdate=myApp.myDatabase.getCategoryList().get(num-1).getName();
                 myApp.setState(new UpdateCategoryState(myApp));
-                Error.setError(null);
             }catch (Exception e){
                 Error.setError(getStateString());
             }
-        }
+        }else Error.setError(getStateString());
     }
     @Override
     public String getStateString() {

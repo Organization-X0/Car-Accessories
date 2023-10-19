@@ -12,7 +12,6 @@ public class UpdateCategoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
         String newName= Cli.displayUpdateCategory();
         handleInput(newName);
         myApp.setState(new ManageCategoriesState(myApp));

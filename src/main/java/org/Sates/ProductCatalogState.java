@@ -4,11 +4,13 @@ import org.Car.App;
 import org.Car.Cli;
 import org.Car.Error;
 
-public class ManageProductsState implements State {
+public class ProductCatalogState implements State {
+
     private final App myApp;
-    public ManageProductsState(App myApp) {
-        this.myApp=myApp;
+    public ProductCatalogState(App myApp) {
+        this.myApp = myApp;
     }
+
 
     @Override
     public void handle() {
@@ -26,11 +28,11 @@ public class ManageProductsState implements State {
         try {
             int intOption=Integer.parseInt(option);
             if(intOption==1 || (intOption!=2 && intOption<(3+myApp.myDatabase.getCategoryList().size()))){
-                myApp.setState(new ProductCrudState(myApp));
+                myApp.setState(new ProductListingState(myApp));
             } else if(intOption==2){
                 myApp.setState(new SearchProductState(myApp));
             } else if(intOption==3+myApp.myDatabase.getCategoryList().size()){
-                myApp.setState(new AdminDashboardState(myApp));
+                myApp.setState(new CustomerDashboardState(myApp));
             } else{
                 throw new Exception("invalid input");
             }
@@ -39,9 +41,11 @@ public class ManageProductsState implements State {
             Error.setError(getStateString());
             myApp.handleManageProductOutput= 0;
         }
+
     }
+
     @Override
     public String getStateString() {
-        return "ManageProducts";
+        return "ProductCatalog";
     }
 }

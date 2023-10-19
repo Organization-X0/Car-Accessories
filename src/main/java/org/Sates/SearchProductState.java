@@ -17,17 +17,31 @@ public class SearchProductState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
+
+        if(Error.getLocation().equals(getStateString()) && myApp.whoLoggedIn().equals("admin"))
+            myApp.setState(new ManageProductsState(myApp));
+        else
+            myApp.setState(new ProductCatalogState(myApp));
+
         String productName= Cli.displaySearchProduct();
-        String option = Cli.displayProducts(myApp.myDatabase.searchProducts(productName));
+
+        String option;
+        if(myApp.whoLoggedIn().equals("customer"))
+            option = Cli.displayCustomerProducts(myApp.myDatabase.searchProducts(productName));
+        else
+            option = Cli.displayProducts(myApp.myDatabase.searchProducts(productName));
+
         productArrayList=myApp.myDatabase.searchProducts(productName);
         handleInput(option);
-        myApp.setState(new ManageProductsState(myApp));
     }
 
     @Override
     public void handleInput(Object input) {
         String option = (String) input;
-        myApp.handleProductCRUD(option,productArrayList);
+
+        if (myApp.whoLoggedIn().equals("admin")) myApp.handleProductCRUD(option,productArrayList);
+        else myApp.handleProductCustomer(option);
     }
     @Override
     public String getStateString() {

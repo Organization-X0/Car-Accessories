@@ -16,6 +16,7 @@ public class AddProductState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         Map<String,String> data = Cli.displayAddProduct(myApp.myDatabase.getCategoryList());
         handleInput(data);
     }
@@ -32,7 +33,6 @@ public class AddProductState implements State {
 
             int categoryNumber= Integer.parseInt(data.get("category"));
             myApp.addProduct(data.get("name"),myApp.myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
-            Error.setError(null);
             Cli.displayMsg(" Product added successfully! ",true);
             myApp.setState(new ManageProductsState(myApp));
         }catch (Exception e){

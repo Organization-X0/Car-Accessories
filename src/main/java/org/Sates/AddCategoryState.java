@@ -13,6 +13,7 @@ public class AddCategoryState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         String name= Cli.displayAddCategory();
         handleInput(name);
     }
@@ -25,7 +26,6 @@ public class AddCategoryState implements State {
                 myApp.addCategory(name);
             else
                 throw new Exception();
-            Error.setError(null);
             Cli.displayMsg(" Category added successfully! ",true);
             myApp.setState(new ManageCategoriesState(myApp));
         }catch (Exception e){

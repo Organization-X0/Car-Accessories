@@ -7,11 +7,11 @@ import org.Data.Product;
 
 import java.util.ArrayList;
 
-public class ProductCrudState implements State {
+public class ProductListingState implements State {
     private final App myApp;
-    private ArrayList<Product> productArrayList;
-    public ProductCrudState(App myApp) {
-            this.myApp=myApp;
+
+    public ProductListingState(App myApp) {
+        this.myApp=myApp;
     }
 
     @Override
@@ -19,22 +19,25 @@ public class ProductCrudState implements State {
         Error.checkAndShow(getStateString());
         Error.setError(null);
         String option;
+        ArrayList<Product> productArrayList;
         if(myApp.handleManageProductOutput==1){
-            productArrayList=myApp.myDatabase.getAllProducts();
+            productArrayList =myApp.myDatabase.getAllProducts();
         } else{
-            productArrayList=myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
+            productArrayList =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
         }
-        option = Cli.displayProducts(productArrayList);
+        option = Cli.displayCustomerProducts(productArrayList);
         handleInput(option);
+
     }
 
     @Override
     public void handleInput(Object input) {
         String option = (String) input;
-        myApp.handleProductCRUD(option,productArrayList);
+        myApp.handleProductCustomer(option);
     }
+
     @Override
     public String getStateString() {
-        return "ProductCRUD";
+        return "ProductListing";
     }
 }

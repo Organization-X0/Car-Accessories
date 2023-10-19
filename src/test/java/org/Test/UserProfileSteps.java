@@ -4,11 +4,9 @@
 //import io.cucumber.java.en.Then;
 //import io.cucumber.java.en.When;
 //import org.Car.App;
-//import org.Car.StateEnum;
 //import org.Data.User;
 //
 //import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
 //
 //public class UserProfileSteps {
 //    App myApp;

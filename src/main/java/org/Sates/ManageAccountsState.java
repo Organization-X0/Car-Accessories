@@ -13,6 +13,7 @@ public class ManageAccountsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         String option= Cli.displayManageAccounts(myApp.myDatabase.getCustomerList());
         handleInput(option);
     }
@@ -29,7 +30,6 @@ public class ManageAccountsState implements State {
                 int num=Integer.parseInt(option.substring(1));
                 String userEmail=myApp.myDatabase.getCustomerList().get(num-1).getEmail();
                 myApp.deleteAccount(userEmail);
-                Error.setError(null);
             }catch (Exception e){
                 Error.setError(getStateString());
             }
@@ -38,11 +38,10 @@ public class ManageAccountsState implements State {
                 int num=Integer.parseInt(option.substring(1));
                 myApp.userEmailToUpdate=myApp.myDatabase.getCustomerList().get(num-1).getEmail();
                 myApp.setState(new UpdateAccountState(myApp));
-                Error.setError(null);
             }catch (Exception e){
                 Error.setError(getStateString());
             }
-        }
+        }else Error.setError(getStateString());
     }
     @Override
     public String getStateString() {

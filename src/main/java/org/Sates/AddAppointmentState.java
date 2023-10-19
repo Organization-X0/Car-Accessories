@@ -15,6 +15,7 @@ public class AddAppointmentState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         Map<String,String> data = Cli.displayAddAppointment(myApp.myDatabase.getAppointmentsList());
         handleInput(data);
     }
@@ -36,7 +37,6 @@ public class AddAppointmentState implements State {
                 throw new Exception();
 
             myApp.addAppointment(data.get("email"),data.get("productName"),data.get("carMake"),data.get("date"));
-            Error.setError(null);
             Cli.displayMsg(" Appointment added successfully! ",true);
             myApp.setState(new ManageInstallationAppointmentState(myApp));
         }catch (Exception e){

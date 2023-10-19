@@ -36,13 +36,6 @@ Feature: Admin Dashboard
       | abc   |
       | -1    |
 
-
-
-
-
-  ##TODO: Add more Scenarios.
-
-
   Scenario: Add a new category
     Given an admin is logged in
     When the admin adds new category
@@ -63,7 +56,7 @@ Feature: Admin Dashboard
     When the admin adds new product
     Then a new product listing should be created
 
-  Scenario: Update an existing productgi
+  Scenario: Update an existing product
     Given an admin is logged in
     When the admin updates the product
     Then the product should be updated

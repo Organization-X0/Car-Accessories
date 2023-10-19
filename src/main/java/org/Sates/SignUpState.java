@@ -15,6 +15,7 @@ public class SignUpState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
+        Error.setError(null);
         Map<String, String> signUpData = Cli.displaySignUp();
         handleInput(signUpData);
 
