@@ -3,13 +3,9 @@ package org.Sates;
 import org.Car.App;
 import org.Car.Cli;
 import org.Car.Error;
-import org.Data.Product;
-
-import java.util.ArrayList;
 
 public class ProductCrudState implements State {
     private final App myApp;
-    private ArrayList<Product> productArrayList;
     public ProductCrudState(App myApp) {
             this.myApp=myApp;
     }
@@ -20,18 +16,41 @@ public class ProductCrudState implements State {
         Error.setError(null);
         String option;
         if(myApp.handleManageProductOutput==1){
-            productArrayList=myApp.myDatabase.getAllProducts();
-        } else{
-            productArrayList=myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
+            myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
+        } else if(myApp.handleManageProductOutput!=2){
+            myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
         }
-        option = Cli.displayProducts(productArrayList);
+        option = Cli.displayProducts(myApp.productArrayListBetweenState);
         handleInput(option);
     }
 
     @Override
     public void handleInput(Object input) {
         String option = (String) input;
-        myApp.handleProductCRUD(option,productArrayList);
+
+        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
+        else if (option.equals("p") && Cli.page != 1) Cli.page--;
+        else if (option.equals("b")) myApp.setState(new ManageProductsState(myApp));
+        else if (option.equals("a")) myApp.setState(new AddProductState(myApp));
+        else if (option.charAt(0) == 'd') {
+            try {
+                int num = Integer.parseInt(option.substring(1));
+                int productId = myApp.productArrayListBetweenState.get(num - 1).getId();
+                myApp.deleteProduct(productId);
+            } catch (Exception e) {
+                Error.setError(myApp.getCurrentState().getStateString());
+            }
+        } else if (option.charAt(0) == 'u') {
+            try {
+                int num = Integer.parseInt(option.substring(1));
+                myApp.productIdToUpdate = myApp.productArrayListBetweenState.get(num - 1).getId();
+                myApp.setState(new UpdateProductState(myApp));
+            } catch (Exception e) {
+                Error.setError(myApp.getCurrentState().getStateString());
+            }
+        } else {
+            Error.setError(myApp.getCurrentState().getStateString());
+        }
     }
     @Override
     public String getStateString() {

@@ -52,7 +52,7 @@ public class ProductCatalogSteps {
 
     @When("searches for a product with product name")
     public void searches_for_a_product_with_product_name() {
-
+    myApp.getCurrentState().handleInput("item1");
     }
 
     @Then("the user should see filtered product listings")
