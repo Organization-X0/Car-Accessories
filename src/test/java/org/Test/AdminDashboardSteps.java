@@ -4,11 +4,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
+import org.Car.Error;
 import org.Data.Appointment;
 import org.Data.Product;
 import org.Data.User;
-import org.Sates.ManageAccountsState;
-import org.Sates.ManageProductsState;
+import org.Sates.*;
 
 import static org.junit.Assert.*;
 
@@ -32,6 +32,33 @@ public class AdminDashboardSteps {
     public void should_be_redirected_to_the_manage_products() {
         assertTrue(myApp.getCurrentState() instanceof ManageProductsState);
     }
+
+    @Then("should be redirected to the Manage Categories")
+    public void should_be_redirected_to_the_manage_categories() {
+        assertTrue(myApp.getCurrentState() instanceof ManageCategoriesState);
+    }
+    @Then("should be redirected to the Manage User Accounts")
+    public void should_be_redirected_to_the_manage_user_accounts() {
+
+        assertTrue(myApp.getCurrentState() instanceof ManageAccountsState);
+    }
+    @Then("should be redirected to the Manage Installation Appointments")
+    public void should_be_redirected_to_the_manage_installation_appointments() {
+
+        assertTrue(myApp.getCurrentState() instanceof ManageInstallationAppointmentState);
+    }
+    @Then("should be redirected to the Log out")
+    public void should_be_redirected_to_the_log_out() {
+        assertTrue(myApp.getCurrentState() instanceof StartState);
+
+    }
+    @Then("should see an error message on Admin Dashboard")
+    public void should_see_an_error_message_on_admin_dashboard() {
+        assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
+    }
+
+
+
 
     @When("the admin adds new category")
     public void the_admin_adds_new_category() {

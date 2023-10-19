@@ -10,6 +10,34 @@ Feature: Admin Dashboard
     When the admin enter "2"
     Then should be redirected to the Manage Categories
 
+  Scenario: Admin Dashboard page to Manage User Accounts
+    Given an admin is logged in
+    When the admin enter "3"
+    Then should be redirected to the Manage User Accounts
+
+  Scenario: Admin Dashboard page to Manage Installation Appointments
+    Given an admin is logged in
+    When the admin enter "4"
+    Then should be redirected to the Manage Installation Appointments
+
+  Scenario: Admin Dashboard page to Log out
+    Given an admin is logged in
+    When the admin enter "5"
+    Then should be redirected to the Log out
+
+  Scenario Outline: Invalid input admin dashboard
+    Given an admin is logged in
+    When the admin enter "<input>"
+    Then  should see an error message on Admin Dashboard
+    Examples:
+      | input |
+      | 7     |
+      | g     |
+      | abc   |
+      | -1    |
+
+
+
 
 
   ##TODO: Add more Scenarios.
