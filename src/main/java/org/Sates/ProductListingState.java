@@ -6,6 +6,7 @@ import org.Car.Error;
 
 public class ProductListingState implements State {
     private final App myApp;
+    private String productName;
 
     public ProductListingState(App myApp) {
         this.myApp=myApp;
@@ -24,6 +25,10 @@ public class ProductListingState implements State {
         option = Cli.displayCustomerProducts(myApp.productArrayListBetweenState);
         handleInput(option);
 
+        if(option.charAt(0) == 'f' && !Error.getLocation().equals(getStateString())){
+            Cli.displayAfterPurchase(productName);
+        }
+
     }
 
     @Override
@@ -32,6 +37,16 @@ public class ProductListingState implements State {
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
         else if (option.equals("p") && Cli.page != 1) Cli.page--;
         else if (option.equals("b")) myApp.setState(new ProductCatalogState(myApp));
+        else if (option.charAt(0) == 'f') {
+            try {
+                int num = Integer.parseInt(option.substring(1));
+                productName = myApp.productArrayListBetweenState.get(num - 1).getName();
+                //TODO: Add order to order history array list in user class
+                //Code here...
+            } catch (Exception e) {
+                Error.setError(myApp.getCurrentState().getStateString());
+            }
+        }
         else Error.setError(myApp.getCurrentState().getStateString());
     }
     @Override

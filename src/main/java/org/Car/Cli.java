@@ -110,14 +110,16 @@ public class Cli {
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
         System.out.println("page:"+page+"/"+totalPages);
-        if(totalPages==0 || totalPages==1){
+        if(totalPages==0){
             System.out.println("[ b:back ]");
+        } else if(totalPages==1){
+            System.out.println("[ f<int>:buy product |b:back ]");
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | b:back ]");
+            System.out.println("[ n:next page | p:prev page | f<int>:buy product | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | b:back ]");
+            System.out.println("[ n:next page | f<int>:buy product | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | b:back ]");
+            System.out.println("[ p:prev page | f<int>:buy product | b:back ]");
 
         return scanner.nextLine();
     }
@@ -328,6 +330,7 @@ public class Cli {
         System.out.println(Cli.blueBgText("Customer Dashboard:"));
         System.out.println("1. "+Cli.blueText("Product Catalog"));
         System.out.println("2. "+Cli.blueText("Make Purchases"));
+        System.out.println("2. "+Cli.blueText("X--------"));
         System.out.println("3. "+Cli.blueText("Profile"));
         System.out.println("4. "+Cli.blueText("Log out"));
         return scanner.nextLine();
@@ -343,7 +346,16 @@ public class Cli {
         System.out.println("[press enter...]");
         scanner.nextLine();
     }
-
+    public static void displayAfterPurchase(String productName){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("=====================================================");
+        System.out.println("Thank You for purchasing \""+Cli.blueText(productName)+"\".");
+        System.out.println("We’ll call within 20 minutes for confirmation.");
+        System.out.println("We value your choice.");
+        System.out.println("=====================================================");
+        System.out.println("[press enter...]");
+        scanner.nextLine();
+    }
     public static String displayStart(){
         Scanner scanner=new Scanner(System.in);
 
