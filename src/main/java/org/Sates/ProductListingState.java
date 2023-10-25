@@ -26,7 +26,8 @@ public class ProductListingState implements State {
         handleInput(option);
 
         if(option.charAt(0) == 'f' && !Error.getLocation().equals(getStateString())){
-            Cli.displayAfterPurchase(productName);
+            String phoneNumber=myApp.searchAccount(myApp.email).getPhone();
+            Cli.displayAfterPurchase(productName,phoneNumber);
         }
 
     }

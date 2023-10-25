@@ -334,6 +334,15 @@ public class Cli {
         System.out.println("4. "+Cli.blueText("Log out"));
         return scanner.nextLine();
     }
+    public static String displayProfile() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("Profile:"));
+        System.out.println("1. "+Cli.blueText("Edit Profile"));
+        System.out.println("2. "+Cli.blueText("View Order History"));
+        System.out.println("3. "+Cli.blueText("View Installation Requests History"));
+        System.out.println("4. "+Cli.blueText("Log Out"));
+        return scanner.nextLine();
+    }
 
     public static void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
@@ -345,11 +354,11 @@ public class Cli {
         System.out.println("[press enter...]");
         scanner.nextLine();
     }
-    public static void displayAfterPurchase(String productName){
+    public static void displayAfterPurchase(String productName,String phoneNumber){
         Scanner scanner=new Scanner(System.in);
         System.out.println("=====================================================");
         System.out.println("Thank You for purchasing \""+Cli.blueText(productName)+"\".");
-        System.out.println("We’ll call within 20 minutes for confirmation.");
+        System.out.println("We’ll call on \""+Cli.blueText(phoneNumber)+"\" within 20 minutes for confirmation.");
         System.out.println("We value your choice.");
         System.out.println("=====================================================");
         System.out.println("[press enter...]");
