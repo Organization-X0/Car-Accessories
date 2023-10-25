@@ -43,9 +43,7 @@ public class ProductListingState implements State {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 productName = myApp.productArrayListBetweenState.get(num - 1).getName();
-                //TODO: Add order to order history array list in user class
-                myApp.searchAccount(myApp.email).addOrder(num);
-
+                myApp.searchAccount(myApp.email).addOrder(myApp.searchProduct(num));
             } catch (Exception e) {
                 Error.setError(myApp.getCurrentState().getStateString());
             }

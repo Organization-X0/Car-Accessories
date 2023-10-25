@@ -7,14 +7,14 @@ public class User {
     private final String  email;
     private String password;
     private String phone;
-    private  ArrayList<Integer> order;
+    private  ArrayList<Product> orders;
 
     public User(String fullName,String email, String password,String phone){
         this.fullName=fullName;
         this.email=email;
         this.password=password;
         this.phone=phone;
-        order=new ArrayList<Integer>();
+        orders=new ArrayList<Product>();
     }
     public User(){
         this.email=null;
@@ -34,9 +34,6 @@ public class User {
     public boolean checkPassword(String password){
         return this.password.equals(password);
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getPhone() {
         return phone;
@@ -45,10 +42,10 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public void addOrder(int id) {
-        order.add(id);
+    public void addOrder(Product product) {
+        orders.add(product);
     }
-    public ArrayList<Integer> getOrders() {
-        return order;
+    public ArrayList<Product> getOrders() {
+        return orders;
     }
 }

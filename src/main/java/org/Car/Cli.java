@@ -334,14 +334,49 @@ public class Cli {
         System.out.println("4. "+Cli.blueText("Log out"));
         return scanner.nextLine();
     }
-    public static String displayProfile() {
+    public static String displayProfile(String name, String email, String phone) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Profile:"));
+        System.out.println(Cli.blueText("Name: ")+name);
+        System.out.println(Cli.blueText("email: ")+email);
+        System.out.println(Cli.blueText("phone: ")+phone);
+        System.out.println("=================================");
         System.out.println("1. "+Cli.blueText("Edit Profile"));
         System.out.println("2. "+Cli.blueText("View Order History"));
         System.out.println("3. "+Cli.blueText("View Installation Requests History"));
-        System.out.println("4. "+Cli.blueText("Log Out"));
+        System.out.println("4. "+Cli.blueText("Back to Customer Dashboard"));
         return scanner.nextLine();
+    }
+
+    public static String displayOrderHistory(ArrayList<Product> ordersArrayList) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("Order History:"));
+
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, ordersArrayList.size());
+
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i + 1) + ". " + Cli.blueText(
+                    ordersArrayList.get(i).getName() +
+                            " | Category:" +
+                            ordersArrayList.get(i).getCategory() + " | Price:" +
+                            ordersArrayList.get(i).getPrice()
+            ));
+        });
+
+        totalPages=(int)Math.ceil(ordersArrayList.size()/10.0);
+        System.out.println("page:"+page+"/"+totalPages);
+        if(totalPages==0 || totalPages==1){
+            System.out.println("[ b:back ]");
+        }else if(page<totalPages && page>1)
+            System.out.println("[ n:next page | p:prev page | b:back ]");
+        else if (page<totalPages && page==1)
+            System.out.println("[ n:next page | b:back ]");
+        else if(page==totalPages)
+            System.out.println("[ p:prev page | b:back ]");
+
+        return scanner.nextLine();
+
     }
 
     public static void displayMsg(String msg,boolean success){
@@ -358,7 +393,7 @@ public class Cli {
         Scanner scanner=new Scanner(System.in);
         System.out.println("=====================================================");
         System.out.println("Thank You for purchasing \""+Cli.blueText(productName)+"\".");
-        System.out.println("We’ll call on \""+Cli.blueText(phoneNumber)+"\" within 20 minutes for confirmation.");
+        System.out.println("We’ll call you on \""+Cli.blueText(phoneNumber)+"\" within 20 minutes for confirmation.");
         System.out.println("We value your choice.");
         System.out.println("=====================================================");
         System.out.println("[press enter...]");

@@ -41,8 +41,14 @@ public class UpdateAccountState implements State {
                     throw new Exception();
                 Integer.parseInt(data.get("phone"));
             }
-            myApp.updateAccount(myApp.userEmailToUpdate,user);
-            myApp.setState(new ManageAccountsState(myApp));
+            if (myApp.whoLoggedIn().equals("admin")){
+                myApp.updateAccount(myApp.userEmailToUpdate,user);
+                myApp.setState(new ManageAccountsState(myApp));
+            }
+            else{
+                myApp.updateAccount(myApp.email,user);
+                myApp.setState(new ProfileState(myApp));
+            }
         }catch (Exception e){
             Error.setError(getStateString());
         }
