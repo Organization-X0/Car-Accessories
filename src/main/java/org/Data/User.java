@@ -1,16 +1,20 @@
 package org.Data;
 
+import java.util.ArrayList;
+
 public class User {
     private String fullName;
     private final String  email;
     private String password;
     private String phone;
+    private  ArrayList<Integer> order;
 
     public User(String fullName,String email, String password,String phone){
         this.fullName=fullName;
         this.email=email;
         this.password=password;
         this.phone=phone;
+        order=new ArrayList<Integer>();
     }
     public User(){
         this.email=null;
@@ -40,5 +44,11 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public void addOrder(int id) {
+        order.add(id);
+    }
+    public ArrayList<Integer> getOrders() {
+        return order;
     }
 }
