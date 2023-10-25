@@ -329,7 +329,6 @@ public class Cli {
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Customer Dashboard:"));
         System.out.println("1. "+Cli.blueText("Product Catalog"));
-        System.out.println("2. "+Cli.blueText("Make Purchases"));
         System.out.println("2. "+Cli.blueText("X--------"));
         System.out.println("3. "+Cli.blueText("Profile"));
         System.out.println("4. "+Cli.blueText("Log out"));
