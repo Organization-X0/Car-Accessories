@@ -3,6 +3,7 @@ package org.Sates;
 import org.Car.App;
 import org.Car.Cli;
 import org.Car.Error;
+import org.Data.User;
 
 public class ProductListingState implements State {
     private final App myApp;
@@ -43,7 +44,8 @@ public class ProductListingState implements State {
                 int num = Integer.parseInt(option.substring(1));
                 productName = myApp.productArrayListBetweenState.get(num - 1).getName();
                 //TODO: Add order to order history array list in user class
-                //Code here...
+                myApp.searchAccount(myApp.email).addOrder(num);
+
             } catch (Exception e) {
                 Error.setError(myApp.getCurrentState().getStateString());
             }
