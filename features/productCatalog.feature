@@ -14,6 +14,6 @@ Feature: Product Catalog
   Scenario: Search and Filter Products
     Given the user is logged in
     When the user enter product catalog
-    And the user enter searche page
+    And the user enter search page
     And  searches for a product with product name
     Then the user should see filtered product listings

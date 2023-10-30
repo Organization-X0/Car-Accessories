@@ -4,11 +4,9 @@ import org.Car.App;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.Sates.CustomerDashboardState;
 import org.Sates.ProductCatalogState;
 import org.Sates.ProductListingState;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProductCatalogSteps {
@@ -45,8 +43,8 @@ public class ProductCatalogSteps {
         assertTrue(myApp.getCurrentState() instanceof ProductListingState);
     }
 
-    @When("the user enter searche page")
-    public void the_user_enter_searche_page() {
+    @When("the user enter search page")
+    public void the_user_enter_search_page() {
         myApp.getCurrentState().handleInput("2");
     }
 

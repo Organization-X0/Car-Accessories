@@ -38,31 +38,37 @@ Feature: Admin Dashboard
 
   Scenario: Add a new category
     Given an admin is logged in
+    And admin enters manage categories page
     When the admin adds new category
     Then a new category should be created
 
   Scenario: Update an existing category
     Given an admin is logged in
+    And admin enters manage categories page
     When the admin updates the category
     Then the category should be updated
 
   Scenario: Delete a category
     Given an admin is logged in
+    And admin enters manage categories page
     When the admin delete category
     Then the category should be deleted
 
   Scenario: Add a new product
     Given an admin is logged in
+    And admin enters manage product page
     When the admin adds new product
     Then a new product listing should be created
 
   Scenario: Update an existing product
     Given an admin is logged in
+    And admin enters manage product page
     When the admin updates the product
     Then the product should be updated
 
   Scenario: Delete an existing product
     Given an admin is logged in
+    And admin enters manage product page
     When the admin delete product
     Then the product should be deleted
 

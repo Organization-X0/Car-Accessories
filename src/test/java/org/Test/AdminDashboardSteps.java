@@ -4,11 +4,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
+import org.Car.Cli;
 import org.Car.Error;
 import org.Data.Appointment;
 import org.Data.Product;
 import org.Data.User;
 import org.Sates.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -56,45 +60,61 @@ public class AdminDashboardSteps {
     public void should_see_an_error_message_on_admin_dashboard() {
         assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
     }
-
+    @Given("admin enters manage categories page")
+    public void admin_enters_manage_categories_page() {
+        myApp.getCurrentState().handleInput("2");
+    }
     @When("the admin adds new category")
     public void the_admin_adds_new_category() {
-        myApp.addCategory("cat1");
+        myApp.getCurrentState().handleInput("a");
+        myApp.getCurrentState().handleInput("new category");
     }
 
     @Then("a new category should be created")
     public void a_new_category_should_be_created() {
-        assertNotNull(myApp.searchCategory("cat1"));
+        assertNotNull(myApp.searchCategory("new category"));
     }
 
     @When("the admin updates the category")
     public void the_admin_updates_the_category() {
-        myApp.updateCategory("Interior","new cat1");
+        myApp.getCurrentState().handleInput("u1");
+        myApp.getCurrentState().handleInput("new category");
     }
 
     @Then("the category should be updated")
     public void the_category_should_be_updated() {
-        assertNotNull(myApp.searchCategory("new cat1"));
+        assertNotNull(myApp.searchCategory("new category"));
     }
 
     @When("the admin delete category")
     public void the_admin_delete_category() {
-        myApp.deleteCategory("Interior");
+        myApp.getCurrentState().handleInput("d1");
     }
-
     @Then("the category should be deleted")
     public void the_category_should_be_deleted() {
         assertNull(myApp.searchCategory("Interior"));
     }
 
+    @Given("admin enters manage product page")
+    public void admin_enters_manage_product_page() {
+        myApp.getCurrentState().handleInput("1");
+    }
     @When("the admin adds new product")
     public void the_admin_adds_new_product() {
-        id=myApp.addProduct("item4","Interior","don't buy this",55.5);
+        id=Product.getLastId();
+        myApp.getCurrentState().handleInput("1");
+        myApp.getCurrentState().handleInput("a");
+        Map<String,String> data=new HashMap<>();
+        data.put("category","1");
+        data.put("name","itemX");
+        data.put("description","about this item..");
+        data.put("price","4.5");
+        myApp.getCurrentState().handleInput(data);
     }
 
     @Then("a new product listing should be created")
     public void a_new_product_listing_should_be_created() {
-        assertNotNull(myApp.searchProduct(id));
+        assertNotNull(myApp.searchProduct(id+1));
     }
 
     @When("the admin updates the product")

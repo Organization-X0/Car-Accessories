@@ -27,6 +27,9 @@ public class Product {
                 lastId=category.getProductsList().get(category.getProductsList().size()-1).getId();
         }
     }
+    public static int getLastId(){
+        return lastId;
+    }
     public static void resetLastId(){
         lastId=0;
     }
