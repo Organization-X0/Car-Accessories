@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class App {
     private State state;
-    public boolean loggedIn;
+
     public final SignUp mySignUp;
     public final Login myLogin;
     public int handleManageProductOutput=1;
@@ -25,7 +25,7 @@ public class App {
 
 
     public App(){
-        loggedIn=false;
+
         exit=false;
 
         myDatabase=new DataBase();
