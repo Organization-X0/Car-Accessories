@@ -119,22 +119,24 @@ public class AdminDashboardSteps {
 
     @When("the admin updates the product")
     public void the_admin_updates_the_product() {
-        Product product=new Product();
-        product.setName("new name");
-        myApp.updateProduct(1,product);
+        myApp.getCurrentState().handleInput("1");
+        myApp.getCurrentState().handleInput("u1");
+
+        Map<String,String> data=new HashMap<>();
+        data.put("name","item y");
+        data.put("description","about this y");
+        data.put("price","11");
+        myApp.getCurrentState().handleInput(data);
     }
 
     @Then("the product should be updated")
     public void the_product_should_be_updated() {
-        assertEquals(myApp.searchProduct(1).getName(),"new name");
+        assertEquals(myApp.searchProduct(1).getName(),"item y");
     }
     @When("the admin delete product")
     public void the_admin_delete_product() {
-        try {
-            myApp.deleteProduct(1);
-        }catch (Exception e){
-            //ERROR
-        }
+        myApp.getCurrentState().handleInput("1");
+        myApp.getCurrentState().handleInput("d1");
     }
 
     @Then("the product should be deleted")
@@ -142,9 +144,13 @@ public class AdminDashboardSteps {
         assertNull(myApp.searchProduct(1));
     }
 
+    @Given("admin enters manage accounts page")
+    public void admin_enters_manage_accounts_page() {
+        myApp.getCurrentState().handleInput("3");
+    }
     @When("the admin delete account")
     public void the_admin_delete_account() {
-        myApp.deleteAccount("user1@gmail.com");
+        myApp.getCurrentState().handleInput("d1");
     }
 
     @Then("the account should be deleted")
@@ -154,10 +160,11 @@ public class AdminDashboardSteps {
 
     @When("the admin update account")
     public void the_admin_update_account() {
-        User user=new User();
-        user.setFullName("new name");
-        user.setPhone("1234567899");
-        myApp.updateAccount("user1@gmail.com",user);
+        myApp.getCurrentState().handleInput("u1");
+        Map<String,String> data=new HashMap<>();
+        data.put("fullName", "new name");
+        data.put("phone", "1234567899");
+        myApp.getCurrentState().handleInput(data);
     }
 
     @Then("the account should be updated")
@@ -176,9 +183,20 @@ public class AdminDashboardSteps {
         assertTrue(myApp.getCurrentState() instanceof ManageAccountsState);
     }
 
+    @Given("admin enters manage installation page")
+    public void admin_enters_manage_installation_page() {
+        myApp.getCurrentState().handleInput("4");
+    }
+
     @When("add new installation appointments")
     public void add_new_installation_appointments() {
-        myApp.addAppointment("user1@gmail.com","item1","bmw","10-4-2023");
+        myApp.getCurrentState().handleInput("a");
+        Map<String,String> data=new HashMap<>();
+        data.put("email","user1gmail.com");
+        data.put("productName","item1");
+        data.put("carMake","bmw");
+        data.put("date","10-4-2023");
+        myApp.getCurrentState().handleInput(data);
     }
 
     @Then("the appointments should be added")

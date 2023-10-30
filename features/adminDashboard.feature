@@ -74,30 +74,37 @@ Feature: Admin Dashboard
 
   Scenario: Delete an existing account
     Given an admin is logged in
+    And admin enters manage accounts page
     When the admin delete account
     Then the account should be deleted
 
   Scenario: Update the name or the phone to account
     Given an admin is logged in
+    And admin enters manage accounts page
     When the admin update account
     Then the account should be updated
 
   Scenario: View customer accounts
     Given an admin is logged in
+    And admin enters manage accounts page
     When the admin enter manage user accounts
     Then the user accounts should show
 
   Scenario: Schedule installation appointments
     Given an admin is logged in
+    And admin enters manage installation page
     When add new installation appointments
     Then the appointments should be added
 
   Scenario: Delete installation appointments
     Given an admin is logged in
+    And admin enters manage installation page
+    And admin enters manage accounts page
     When the admin deletes appointment
     Then the appointment should be deleted
 
   Scenario: Update date in appointment
     Given an admin is logged in
+    And admin enters manage installation page
     When admin update appointment
     Then the appointment should be updated

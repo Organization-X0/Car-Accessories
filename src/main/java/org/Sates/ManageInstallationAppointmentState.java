@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ManageInstallationAppointmentState implements State {
     private final App myApp;
-    private ArrayList<Appointment> appointmentArrayList;
+
     public ManageInstallationAppointmentState(App myApp) {
             this.myApp=myApp;
     }
@@ -19,12 +19,12 @@ public class ManageInstallationAppointmentState implements State {
         Error.checkAndShow(getStateString());
         Error.setError(null);
         String option= Cli.displayInstallationAppointments(myApp.myDatabase.getAppointmentsList());
-        appointmentArrayList=myApp.myDatabase.getAppointmentsList();
         handleInput(option);
     }
 
     @Override
     public void handleInput(Object input) {
+        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getAppointmentsList();
         String option=(String) input;
 
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
