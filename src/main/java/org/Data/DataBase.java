@@ -36,13 +36,12 @@ public class DataBase {
         categoryList.get(2).addProduct(new Product("item3",categoryList.get(2).getName(),"Don't buy please.",2.4,true));
         categoryList.get(2).addProduct(new Product("item4",categoryList.get(2).getName(),"Don't buy please.",6.6,true));
 
+        Appointment.resetLastId();
         appointmentsList = new ArrayList<Appointment>();
         Appointment appointment=new Appointment("user1@gmail.com","item1","BMW","2023-10-5");
-        appointment.setId(0);
-        appointmentsList.add(appointment);
+        addAppointment(appointment);
         appointment=new Appointment("user2@gmail.com","item2","TOYOTA","2023-10-20");
-        appointment.setId(1);
-        appointmentsList.add(appointment);
+        addAppointment(appointment);
     }
     public void addUser(User user){
         usersList.add(user);
@@ -107,9 +106,7 @@ public class DataBase {
         return appointmentsList;
     }
     public void addAppointment(Appointment appointment){
-        if(!appointmentsList.isEmpty()){
-            appointment.setId((appointmentsList.get(appointmentsList.size()-1).getId())+1);
-        }
+        appointment.setId(Appointment.getNextId());
         appointmentsList.add(appointment);
     }
     public Appointment searchAppointment(int id){

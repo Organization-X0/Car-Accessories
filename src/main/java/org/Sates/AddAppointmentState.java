@@ -14,10 +14,17 @@ public class AddAppointmentState implements State {
 
     @Override
     public void handle() {
+        Map<String,String> data;
         Error.checkAndShow(getStateString());
         Error.setError(null);
-        Map<String,String> data = Cli.displayAddAppointment(myApp.myDatabase.getAppointmentsList());
+        if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getAppointmentsList());
+        else data = Cli.displayAddAppointmentCustomer(myApp,myApp.myDatabase.getAppointmentsList());
         handleInput(data);
+        if(!Error.getLocation().equals(getStateString())){
+            Cli.displayMsg(" Appointment added successfully! ",true);
+            if(myApp.whoLoggedIn().equals("admin")) myApp.setState(new ManageInstallationAppointmentState(myApp));
+            else myApp.setState(new CustomerDashboardState(myApp));
+        }
     }
 
     @Override
@@ -37,8 +44,6 @@ public class AddAppointmentState implements State {
                 throw new Exception();
 
             myApp.addAppointment(data.get("email"),data.get("productName"),data.get("carMake"),data.get("date"));
-            Cli.displayMsg(" Appointment added successfully! ",true);
-            myApp.setState(new ManageInstallationAppointmentState(myApp));
         }catch (Exception e){
             Error.setError(getStateString());
         }

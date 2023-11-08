@@ -33,6 +33,7 @@ public class App {
         myLogin=new Login(myDatabase);
 
         Product.setLastId(myDatabase);
+        Appointment.setLastId(myDatabase);
 
         //Initial State
         state=new StartState(this);
@@ -79,9 +80,9 @@ public class App {
             return "customer";
     }
 
-    public int addProduct(String name, String category, String description, double price ) {
+    public void addProduct(String name, String category, String description, double price ) {
         Category categoryObj=myDatabase.searchCategory(category);
-        return categoryObj.addProduct(new Product(name,category,description,price,true));
+        categoryObj.addProduct(new Product(name,category,description,price,true));
     }
 
     public void updateProduct(int id,Product updatedProduct) {

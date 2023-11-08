@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Appointment {
     private int id;
+    private static int lastId;
     private String email;
     private String productName;
     private String carMake;
@@ -17,12 +18,26 @@ public class Appointment {
     }
     public Appointment(){};
 
-    public int getId(){
-        return this.id;
+    public static int getNextId(){
+        return ++lastId;
+    }
+    public static void setLastId(DataBase myDatabase){
+        if(myDatabase.getAppointmentsList().get(myDatabase.getAppointmentsList().size()-1).getId()>lastId)
+            lastId=myDatabase.getAppointmentsList().get(myDatabase.getAppointmentsList().size()-1).getId();
+    }
+    public static int getLastId(){
+        return lastId;
+    }
+    public static void resetLastId(){
+        lastId=0;
+    }
+
+    public int getId() {
+        return id;
     }
     public void setId(int id){
         this.id=id;
-    }
+    };
 
     public String getEmail() {
         return email;

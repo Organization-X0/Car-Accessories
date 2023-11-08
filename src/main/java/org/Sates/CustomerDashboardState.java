@@ -22,7 +22,7 @@ public class CustomerDashboardState implements State {
         String option=(String) input;
         switch (option){
             case "1"->myApp.setState(new ProductCatalogState(myApp));
-//            case "2"->myApp.setState();
+            case "2"->myApp.setState(new AddAppointmentState(myApp));
             case "3"->myApp.setState(new ProfileState(myApp));
             case "4"->myApp.setState(new StartState(myApp));
             default -> Error.setError(getStateString());

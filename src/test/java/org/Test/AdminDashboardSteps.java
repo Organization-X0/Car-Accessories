@@ -190,18 +190,20 @@ public class AdminDashboardSteps {
 
     @When("add new installation appointments")
     public void add_new_installation_appointments() {
+        id= Appointment.getLastId();
         myApp.getCurrentState().handleInput("a");
         Map<String,String> data=new HashMap<>();
-        data.put("email","user1gmail.com");
+
+        data.put("email","user1@gmail.com");
         data.put("productName","item1");
         data.put("carMake","bmw");
-        data.put("date","10-4-2023");
+        data.put("date","2023-11-8");
         myApp.getCurrentState().handleInput(data);
     }
 
     @Then("the appointments should be added")
     public void the_appointments_should_be_added() {
-        assertNotNull(myApp.searchAppointment(1));
+        assertNotNull(myApp.searchAppointment(id+1));
     }
 
     @When("the admin deletes appointment")

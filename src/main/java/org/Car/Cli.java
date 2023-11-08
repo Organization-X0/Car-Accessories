@@ -304,7 +304,22 @@ public class Cli {
         System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
         data.put("date",scanner.nextLine());
         return data;
+    }
 
+    public static Map<String, String> displayAddAppointmentCustomer(App myApp,ArrayList<Appointment> appointmentsList) {
+        Scanner scanner=new Scanner(System.in);
+        Map<String,String> data=new HashMap<>();
+        System.out.println(Cli.blueBgText(" ADD APPOINTMENT "));
+
+        data.put("email",myApp.email);
+        System.out.println(Cli.blueText("Product name: "));
+        data.put("productName",scanner.nextLine());
+        System.out.println(Cli.blueText("Car Make: "));
+        data.put("carMake",scanner.nextLine());
+        System.out.println(Cli.blueText("Date"));
+        System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
+        data.put("date",scanner.nextLine());
+        return data;
     }
     public static Map<String, String> displayUpdateAppointment() {
         Scanner scanner=new Scanner(System.in);
@@ -329,7 +344,7 @@ public class Cli {
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Customer Dashboard:"));
         System.out.println("1. "+Cli.blueText("Product Catalog"));
-        System.out.println("2. "+Cli.blueText("X--------"));
+        System.out.println("2. "+Cli.blueText("Request services"));
         System.out.println("3. "+Cli.blueText("Profile"));
         System.out.println("4. "+Cli.blueText("Log out"));
         return scanner.nextLine();
@@ -406,10 +421,6 @@ public class Cli {
         System.out.println("1. "+Cli.blueText("Login"));
         System.out.println("2. "+Cli.blueText("Sign Up"));
         System.out.println("3. "+Cli.blueText("Exit"));
-        System.out.println("TEST:");
-        System.out.println("a: "+Cli.blueText("admin"));
-        System.out.println("i: "+Cli.blueText("installer"));
-        System.out.println("c: "+Cli.blueText("customer"));
 
         return scanner.nextLine();
     }
