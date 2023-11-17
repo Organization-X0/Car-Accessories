@@ -19,7 +19,7 @@ public class StartState implements State{
     @Override
     public void handleInput(Object input) {
         String option = (String) input;
-
+        System.out.println(option);
         switch (option) {
             case "1" -> myApp.setState(new LoginState(myApp));
             case "2" -> myApp.setState(new SignUpState(myApp));

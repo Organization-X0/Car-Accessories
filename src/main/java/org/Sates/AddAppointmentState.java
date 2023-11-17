@@ -17,7 +17,7 @@ public class AddAppointmentState implements State {
         Map<String,String> data;
         Error.checkAndShow(getStateString());
         Error.setError(null);
-        if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getAppointmentsList());
+        if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getAppointmentsList(),myApp);
         else data = Cli.displayAddAppointmentCustomer(myApp,myApp.myDatabase.getAppointmentsList());
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
@@ -42,8 +42,10 @@ public class AddAppointmentState implements State {
                 throw new Exception();
             if(myApp.myDatabase.searchAccount(data.get("email"))==null)
                 throw new Exception();
+            int timeSlot= Integer.parseInt(data.get("time"));
+            if(timeSlot<=0) throw new Exception();
 
-            myApp.addAppointment(data.get("email"),data.get("productName"),data.get("carMake"),data.get("date"));
+            myApp.addAppointment(data.get("email"),data.get("productName"),data.get("carMake"),data.get("date"),timeSlot);
         }catch (Exception e){
             Error.setError(getStateString());
         }

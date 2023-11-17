@@ -9,12 +9,14 @@ public class Appointment {
     private String productName;
     private String carMake;
     private String date;
+    private Time time;
 
-    public Appointment(String email,String productName, String carMake, String date){
+    public Appointment(String email,String productName, String carMake, String date,Time time){
         this.email=email;
         this.productName=productName;
         this.carMake=carMake;
         this.date=date;
+        this.time=time;
     }
     public Appointment(){};
 
@@ -69,5 +71,14 @@ public class Appointment {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    public Time getTime(){
+        return time;
+    }
+    public String getStringTime(){
+        return Time.timeToPrint(this.time);
+    }
+    public void setTime(Time time){
+        this.time=time;
     }
 }

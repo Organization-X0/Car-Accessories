@@ -1,9 +1,6 @@
 package org.Car;
 
-import org.Data.Appointment;
-import org.Data.Category;
-import org.Data.Product;
-import org.Data.User;
+import org.Data.*;
 import org.fusesource.jansi.Ansi;
 
 import java.util.*;
@@ -269,7 +266,8 @@ public class Cli {
             System.out.println((i + 1) + ". " + Cli.blueText(appointmentArrayList.get(i).getEmail()+" | "+
                     appointmentArrayList.get(i).getDate()+" | "+
                     appointmentArrayList.get(i).getProductName()+" | "+
-                    appointmentArrayList.get(i).getCarMake()
+                    appointmentArrayList.get(i).getCarMake()+" | "+
+                    appointmentArrayList.get(i).getStringTime()
             ));
         });
 
@@ -289,7 +287,23 @@ public class Cli {
         return scanner.nextLine();
     }
 
-    public static Map<String, String> displayAddAppointment(ArrayList<Appointment> appointmentsList) {
+    private static void printAvailableTimes(App myApp,String date){
+        ArrayList<Appointment> appointmentsWithThisDate = myApp.myDatabase.searchAppointmentsByDate(date);
+        boolean flag=false;
+        int i=0;
+        for (Time time : Time.values()){
+            i++;
+            flag=false;
+            for (Appointment appointment : appointmentsWithThisDate) {
+                if (time == appointment.getTime()) {
+                    flag = true;
+                    break;
+                }
+            }
+            if(!flag) System.out.println(Cli.blueText(i+". ")+Time.timeToPrint(time));
+        }
+    }
+    public static Map<String, String> displayAddAppointment(ArrayList<Appointment> appointmentsList, App myApp) {
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD APPOINTMENT "));
@@ -303,22 +317,29 @@ public class Cli {
         System.out.println(Cli.blueText("Date"));
         System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
         data.put("date",scanner.nextLine());
+
+        printAvailableTimes(myApp,data.get("date"));
+        data.put("time",scanner.nextLine());
         return data;
     }
 
     public static Map<String, String> displayAddAppointmentCustomer(App myApp,ArrayList<Appointment> appointmentsList) {
-        Scanner scanner=new Scanner(System.in);
-        Map<String,String> data=new HashMap<>();
+        Scanner scanner = new Scanner(System.in);
+        Map<String, String> data = new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD APPOINTMENT "));
 
-        data.put("email",myApp.email);
+        data.put("email", myApp.email);
         System.out.println(Cli.blueText("Product name: "));
-        data.put("productName",scanner.nextLine());
+        data.put("productName", scanner.nextLine());
         System.out.println(Cli.blueText("Car Make: "));
-        data.put("carMake",scanner.nextLine());
+        data.put("carMake", scanner.nextLine());
         System.out.println(Cli.blueText("Date"));
         System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
-        data.put("date",scanner.nextLine());
+        data.put("date", scanner.nextLine());
+
+
+        printAvailableTimes(myApp,data.get("date"));
+        data.put("time",scanner.nextLine());
         return data;
     }
     public static Map<String, String> displayUpdateAppointment() {
@@ -337,7 +358,6 @@ public class Cli {
         System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
         data.put("date",scanner.nextLine());
         return data;
-
     }
 
     public static String displayCustomerDashboard() {
@@ -392,6 +412,77 @@ public class Cli {
 
         return scanner.nextLine();
 
+    }
+
+    public static String displayInstallerDashboard() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("Installer Dashboard:"));
+        System.out.println("1. "+Cli.blueText("Schedule of Appointments"));
+        System.out.println("2. "+Cli.blueText("Installation Requests"));
+        System.out.println("3. "+Cli.blueText("Log out"));
+        return scanner.nextLine();
+    }
+    public static String displayInstallationRequests(ArrayList<Appointment> appointmentArrayList) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("Installation Requests:"));
+
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, appointmentArrayList.size());
+
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i + 1) + ". " + Cli.blueText(appointmentArrayList.get(i).getEmail()+" | "+
+                    appointmentArrayList.get(i).getDate()+" | "+
+                    appointmentArrayList.get(i).getProductName()+" | "+
+                    appointmentArrayList.get(i).getCarMake()+" | "+
+                    appointmentArrayList.get(i).getStringTime()
+            ));
+        });
+
+        totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
+        System.out.println("page:"+page+"/"+totalPages);
+        if(totalPages==0){
+            System.out.println("[ b:back ]");
+        } else if(page<totalPages && page>1)
+            System.out.println("[ n:next page | p:prev page | c<int>:confirm | b:back ]");
+        else if (page<totalPages && page==1)
+            System.out.println("[ n:next page | c<int>:confirm | b:back ]");
+        else if(totalPages==1)
+            System.out.println("[ c<int>:confirm | b:back ]");
+        else if(page==totalPages)
+            System.out.println("[ p:prev page | c<int>:confirm | b:back ]");
+
+        return scanner.nextLine();
+    }
+    public static String displayScheduleOfAppointments(ArrayList<Appointment> approvedAppointmentArrayList) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("Installation Requests:"));
+
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, approvedAppointmentArrayList.size());
+
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i + 1) + ". " + Cli.blueText(approvedAppointmentArrayList.get(i).getEmail()+" | "+
+                    approvedAppointmentArrayList.get(i).getDate()+" | "+
+                    approvedAppointmentArrayList.get(i).getProductName()+" | "+
+                    approvedAppointmentArrayList.get(i).getCarMake()+" | "+
+                    approvedAppointmentArrayList.get(i).getStringTime()
+            ));
+        });
+
+        totalPages=(int)Math.ceil(approvedAppointmentArrayList.size()/10.0);
+        System.out.println("page:"+page+"/"+totalPages);
+        if(totalPages==0){
+            System.out.println("[ b:back ]");
+        } else if(page<totalPages && page>1)
+            System.out.println("[ n:next page | p:prev page | d<int>:done | b:back ]");
+        else if (page<totalPages && page==1)
+            System.out.println("[ n:next page | d<int>:done | b:back ]");
+        else if(totalPages==1)
+            System.out.println("[ d<int>:done | b:back ]");
+        else if(page==totalPages)
+            System.out.println("[ p:prev page | d<int>:done | b:back ]");
+
+        return scanner.nextLine();
     }
 
     public static void displayMsg(String msg,boolean success){

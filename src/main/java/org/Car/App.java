@@ -3,6 +3,7 @@ package org.Car;
 import org.Data.*;
 import org.Sates.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,6 +55,8 @@ public class App {
             this.email=email;
             if(email.equals("admin@gmail.com"))
                 setState(new AdminDashboardState(this));
+            else if(email.equals("installer@gmail.com"))
+                setState(new InstallerDashboardState(this));
             else
                 setState(new CustomerDashboardState(this));
 
@@ -144,8 +147,8 @@ public class App {
         }
     }
 
-    public void addAppointment(String email, String productName, String carMake, String date) {
-        myDatabase.addAppointment(new Appointment(email,productName,carMake,date));
+    public void addAppointment(String email, String productName, String carMake, String date,int time) {
+        myDatabase.addAppointment(new Appointment(email,productName,carMake,date,Time.fromInteger(time-1)));
     }
 
     public Appointment searchAppointment(int id) {
@@ -154,8 +157,7 @@ public class App {
 
     public void deleteAppointment(int id) {
         Appointment appointment=myDatabase.searchAppointment(id);
-        if(appointment!=null)
-            myDatabase.deleteAppointment(appointment);
+        if(appointment!=null) myDatabase.deleteAppointment(appointment);
     }
     public void updateAppointment(int id,Appointment updatedAppointment){
         Appointment appointment=myDatabase.searchAppointment(id);
@@ -165,6 +167,10 @@ public class App {
             appointment.setDate(updatedAppointment.getDate()!= null ? updatedAppointment.getDate(): appointment.getDate());
             appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
         }
+    }
+    public void confirmRequest(int id) {
+        Appointment appointment=myDatabase.searchAppointment(id);
+        if(appointment!=null) myDatabase.addApprovedAppointment(appointment);
     }
     public static boolean isValidDate(String date) {
         String regex = "^\\d{4}-\\d{2}-\\d{1,2}$";
