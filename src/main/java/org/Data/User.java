@@ -8,6 +8,7 @@ public class User {
     private String password;
     private String phone;
     private  ArrayList<Product> orders;
+    private ArrayList<Appointment> installations;
 
     public User(String fullName,String email, String password,String phone){
         this.fullName=fullName;
@@ -15,6 +16,7 @@ public class User {
         this.password=password;
         this.phone=phone;
         orders=new ArrayList<Product>();
+        installations=new ArrayList<Appointment>();
     }
     public User(){
         this.email=null;
@@ -47,5 +49,11 @@ public class User {
     }
     public ArrayList<Product> getOrders() {
         return orders;
+    }
+    public void addInstallations(Appointment appointment) {
+        installations.add(appointment);
+    }
+    public ArrayList<Appointment> getInstallations() {
+        return installations;
     }
 }

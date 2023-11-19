@@ -17,13 +17,13 @@ public class InstallationRequestsState implements State {
     public void handle() {
         Error.checkAndShow(getStateString());
         Error.setError(null);
-        String option= Cli.displayInstallationRequests(myApp.myDatabase.getRequestedAppointmentArrayList());
+        String option= Cli.displayInstallationRequests(myApp.myDatabase.getRequestedAppointmentsList());
         handleInput(option);
     }
 
     @Override
     public void handleInput(Object input) {
-        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getAppointmentsList();
+        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();
         String option=(String) input;
 
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;

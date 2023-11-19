@@ -1,7 +1,5 @@
 package org.Data;
 
-import java.util.Date;
-
 public class Appointment {
     private int id;
     private static int lastId;
@@ -24,8 +22,8 @@ public class Appointment {
         return ++lastId;
     }
     public static void setLastId(DataBase myDatabase){
-        if(myDatabase.getAppointmentsList().get(myDatabase.getAppointmentsList().size()-1).getId()>lastId)
-            lastId=myDatabase.getAppointmentsList().get(myDatabase.getAppointmentsList().size()-1).getId();
+        if(myDatabase.getRequestedAppointmentsList().get(myDatabase.getRequestedAppointmentsList().size()-1).getId()>lastId)
+            lastId=myDatabase.getRequestedAppointmentsList().get(myDatabase.getRequestedAppointmentsList().size()-1).getId();
     }
     public static int getLastId(){
         return lastId;

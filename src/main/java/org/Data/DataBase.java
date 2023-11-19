@@ -1,14 +1,12 @@
 package org.Data;
 
-import org.Car.App;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class DataBase {
     private final ArrayList<User> usersList;
     private final ArrayList<Category> categoryList;
-    private final ArrayList<Appointment> appointmentsList;
+    private final ArrayList<Appointment> requestedAppointmentsList;
     private final ArrayList<Appointment> approvedAppointmentArrayList;
     public DataBase(){
 
@@ -42,14 +40,15 @@ public class DataBase {
         categoryList.get(2).addProduct(new Product("item4",categoryList.get(2).getName(),"Don't buy please.",6.6,true));
 
         Appointment.resetLastId();
-        appointmentsList = new ArrayList<Appointment>();
+        requestedAppointmentsList = new ArrayList<Appointment>();
         Appointment appointment=new Appointment("user1@gmail.com","item1","BMW","2023-10-5",Time.T8_9);
-        addAppointment(appointment);
-        appointment=new Appointment("user2@gmail.com","item2","TOYOTA","2023-10-20",Time.T10_11);
         addAppointment(appointment);
 
         approvedAppointmentArrayList=new ArrayList<Appointment>();
+        appointment=new Appointment("user2@gmail.com","item2","TOYOTA","2023-10-20",Time.T10_11);
         approvedAppointmentArrayList.add(appointment);
+
+
     }
     public void addUser(User user){
         usersList.add(user);
@@ -111,15 +110,15 @@ public class DataBase {
         return allProducts;
     }
     public ArrayList<Appointment> searchAppointmentsByDate(String date){
-        return (ArrayList<Appointment>) appointmentsList.stream().filter(appointment -> appointment.getDate().equals(date))
+        return (ArrayList<Appointment>) requestedAppointmentsList.stream().filter(appointment -> appointment.getDate().equals(date))
                 .collect(Collectors.toList());
     }
-    public ArrayList<Appointment> getAppointmentsList(){
-        return appointmentsList;
+    public ArrayList<Appointment> getRequestedAppointmentsList(){
+        return requestedAppointmentsList;
     }
     public void addAppointment(Appointment appointment){
         appointment.setId(Appointment.getNextId());
-        appointmentsList.add(appointment);
+        requestedAppointmentsList.add(appointment);
     }
     public void addApprovedAppointment(Appointment appointment) {
         approvedAppointmentArrayList.add(appointment);
@@ -127,19 +126,23 @@ public class DataBase {
     public ArrayList<Appointment> getApprovedAppointmentArrayList(){
         return approvedAppointmentArrayList;
     }
-    public ArrayList<Appointment> getRequestedAppointmentArrayList(){
-        ArrayList<Appointment> requestsArrayList=new ArrayList<>(appointmentsList);
-        requestsArrayList.removeAll(approvedAppointmentArrayList);
-        return requestsArrayList;
-    }
     public Appointment searchAppointment(int id){
-        return appointmentsList.stream()
+        return requestedAppointmentsList.stream()
                 .filter(appointment -> appointment.getId()==id)
                 .findFirst()
                 .orElse(null);
     }
+    public Appointment searchApprovedAppointment(int id){
+        return approvedAppointmentArrayList.stream()
+                .filter(appointment -> appointment.getId()==(id))
+                .findFirst()
+                .orElse(null);
+    }
     public void deleteAppointment(Appointment appointmentDelete){
-        appointmentsList.remove(appointmentDelete);
+        requestedAppointmentsList.remove(appointmentDelete);
+    }
+    public void deleteApprovedAppointment(Appointment appointmentDelete){
+        approvedAppointmentArrayList.remove(appointmentDelete);
     }
 
 }

@@ -1,7 +1,5 @@
 package org.Data;
 
-import java.util.ArrayList;
-
 public enum Time {
     T8_9,
     T9_10,
@@ -11,20 +9,6 @@ public enum Time {
     T13_14,
     T14_15,
     T15_16;
-    public static Time fromInteger(int x) {
-        Time time=null;
-        switch(x) {
-            case 0 -> time=T8_9;
-            case 1 -> time=T9_10;
-            case 2 -> time=T10_11;
-            case 3 -> time=T11_12;
-            case 4 -> time=T12_13;
-            case 5 -> time=T13_14;
-            case 6 -> time=T14_15;
-            case 7 -> time=T15_16;
-        }
-        return time;
-    }
     public static String timeToPrint(Time time){
         String str="";
         switch (time){

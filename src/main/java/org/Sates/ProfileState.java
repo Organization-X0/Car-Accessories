@@ -25,7 +25,7 @@ public class ProfileState implements State {
         switch (option){
             case "1"->myApp.setState(new UpdateAccountState(myApp));//edit profile
             case "2"->myApp.setState(new ViewOrderHistoryState(myApp));//view order history
-//            case "3"->myApp.setState();//view requests history
+            case "3"->myApp.setState(new ViewInstallationHistoryState(myApp));
             case "4"->myApp.setState(new CustomerDashboardState(myApp));//Back
             default -> Error.setError(getStateString());
         }

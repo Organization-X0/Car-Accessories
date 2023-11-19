@@ -3,7 +3,6 @@ package org.Car;
 import org.Data.*;
 import org.Sates.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +20,7 @@ public class App {
     public String categoryNameToUpdate;
     public String userEmailToUpdate;
     public ArrayList<Product> productArrayListBetweenState;
+    public ArrayList<Time> availableTimes;
 
     public String email;
 
@@ -148,7 +148,7 @@ public class App {
     }
 
     public void addAppointment(String email, String productName, String carMake, String date,int time) {
-        myDatabase.addAppointment(new Appointment(email,productName,carMake,date,Time.fromInteger(time-1)));
+        myDatabase.addAppointment(new Appointment(email,productName,carMake,date,availableTimes.get(time-1)));
     }
 
     public Appointment searchAppointment(int id) {
@@ -158,6 +158,10 @@ public class App {
     public void deleteAppointment(int id) {
         Appointment appointment=myDatabase.searchAppointment(id);
         if(appointment!=null) myDatabase.deleteAppointment(appointment);
+    }
+    public void deleteApprovedAppointment(int id) {
+        Appointment appointment=myDatabase.searchApprovedAppointment(id);
+        if(appointment!=null) myDatabase.deleteApprovedAppointment(appointment);
     }
     public void updateAppointment(int id,Appointment updatedAppointment){
         Appointment appointment=myDatabase.searchAppointment(id);
@@ -170,7 +174,11 @@ public class App {
     }
     public void confirmRequest(int id) {
         Appointment appointment=myDatabase.searchAppointment(id);
-        if(appointment!=null) myDatabase.addApprovedAppointment(appointment);
+        if(appointment!=null){
+            myDatabase.addApprovedAppointment(appointment);
+            myDatabase.deleteAppointment(appointment);
+            searchAccount(appointment.getEmail()).addInstallations(appointment);
+        }
     }
     public static boolean isValidDate(String date) {
         String regex = "^\\d{4}-\\d{2}-\\d{1,2}$";

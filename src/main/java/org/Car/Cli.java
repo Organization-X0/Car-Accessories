@@ -287,12 +287,11 @@ public class Cli {
         return scanner.nextLine();
     }
 
-    private static void printAvailableTimes(App myApp,String date){
+    private static ArrayList<Time> getAvailableTimes(App myApp,String date){
+        ArrayList<Time> availableTimes=new ArrayList<>();
         ArrayList<Appointment> appointmentsWithThisDate = myApp.myDatabase.searchAppointmentsByDate(date);
         boolean flag=false;
-        int i=0;
         for (Time time : Time.values()){
-            i++;
             flag=false;
             for (Appointment appointment : appointmentsWithThisDate) {
                 if (time == appointment.getTime()) {
@@ -300,8 +299,9 @@ public class Cli {
                     break;
                 }
             }
-            if(!flag) System.out.println(Cli.blueText(i+". ")+Time.timeToPrint(time));
+            if(!flag) availableTimes.add(time);
         }
+        return availableTimes;
     }
     public static Map<String, String> displayAddAppointment(ArrayList<Appointment> appointmentsList, App myApp) {
         Scanner scanner=new Scanner(System.in);
@@ -318,7 +318,12 @@ public class Cli {
         System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
         data.put("date",scanner.nextLine());
 
-        printAvailableTimes(myApp,data.get("date"));
+        int i=0;
+        myApp.availableTimes=getAvailableTimes(myApp,data.get("date"));
+        for(Time time:myApp.availableTimes){
+            i++;
+            System.out.println(Cli.blueText(i+". ")+Time.timeToPrint(time));
+        }
         data.put("time",scanner.nextLine());
         return data;
     }
@@ -337,8 +342,12 @@ public class Cli {
         System.out.println(Cli.blueText("YYYY-MM-DD/D: "));
         data.put("date", scanner.nextLine());
 
-
-        printAvailableTimes(myApp,data.get("date"));
+        int i=0;
+        myApp.availableTimes=getAvailableTimes(myApp,data.get("date"));
+        for(Time time:myApp.availableTimes){
+            i++;
+            System.out.println(Cli.blueText(i+". ")+Time.timeToPrint(time));
+        }
         data.put("time",scanner.nextLine());
         return data;
     }
@@ -411,7 +420,35 @@ public class Cli {
             System.out.println("[ p:prev page | b:back ]");
 
         return scanner.nextLine();
+    }
+    public static String displayInstallationHistory(ArrayList<Appointment> installationsArrayList ) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText("Order History:"));
 
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, installationsArrayList.size());
+
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i + 1) + ". " + Cli.blueText(
+                    installationsArrayList.get(i).getDate()+" | "+
+                            installationsArrayList.get(i).getProductName()+" | "+
+                            installationsArrayList.get(i).getCarMake()+" | "+
+                            installationsArrayList.get(i).getStringTime()
+            ));
+        });
+
+        totalPages=(int)Math.ceil(installationsArrayList.size()/10.0);
+        System.out.println("page:"+page+"/"+totalPages);
+        if(totalPages==0 || totalPages==1){
+            System.out.println("[ b:back ]");
+        }else if(page<totalPages && page>1)
+            System.out.println("[ n:next page | p:prev page | b:back ]");
+        else if (page<totalPages && page==1)
+            System.out.println("[ n:next page | b:back ]");
+        else if(page==totalPages)
+            System.out.println("[ p:prev page | b:back ]");
+
+        return scanner.nextLine();
     }
 
     public static String displayInstallerDashboard() {
@@ -424,7 +461,7 @@ public class Cli {
     }
     public static String displayInstallationRequests(ArrayList<Appointment> appointmentArrayList) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(Cli.blueBgText("Installation Requests:"));
+        System.out.println(Cli.blueBgText(" Installation Requests "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, appointmentArrayList.size());
@@ -455,7 +492,7 @@ public class Cli {
     }
     public static String displayScheduleOfAppointments(ArrayList<Appointment> approvedAppointmentArrayList) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(Cli.blueBgText("Installation Requests:"));
+        System.out.println(Cli.blueBgText(" Schedule Of Appointments "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, approvedAppointmentArrayList.size());

@@ -23,7 +23,7 @@ public class ScheduleOfAppointmentsState implements State {
 
     @Override
     public void handleInput(Object input) {
-        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getAppointmentsList();
+        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getApprovedAppointmentArrayList();
         String option=(String) input;
 
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
@@ -34,8 +34,7 @@ public class ScheduleOfAppointmentsState implements State {
                 int num = Integer.parseInt(option.substring(1));
                 int appointmentId = appointmentArrayList.get(num - 1).getId();
 
-                //Code here...
-                //myApp.confirmRequest(appointmentId);
+                myApp.deleteApprovedAppointment(appointmentId);
             } catch (Exception e) {
                 Error.setError(getStateString());
             }
