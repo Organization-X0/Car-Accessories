@@ -60,8 +60,6 @@ public class App {
             else
                 setState(new CustomerDashboardState(this));
 
-            //Add more else if for installer state and for customer state
-            //code here...
             return;
         }
         Error.setError(getCurrentState().getStateString());
