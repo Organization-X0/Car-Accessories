@@ -22,6 +22,7 @@ public class AddAppointmentState implements State {
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
             Cli.displayMsg(" Appointment added successfully! ",true);
+            myApp.availableTimesShown=false;
             if(myApp.whoLoggedIn().equals("admin")) myApp.setState(new ManageInstallationAppointmentState(myApp));
             else myApp.setState(new CustomerDashboardState(myApp));
         }
@@ -31,6 +32,7 @@ public class AddAppointmentState implements State {
     @SuppressWarnings("unchecked")
     public void handleInput(Object input) {
         try{
+            myApp.availableTimesShown=true;
             Map<String,String> data;
             if(input instanceof Map)
                 data=(Map<String, String>) input;

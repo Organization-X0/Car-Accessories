@@ -198,12 +198,13 @@ public class AdminDashboardSteps {
         data.put("productName","item1");
         data.put("carMake","bmw");
         data.put("date","2023-11-8");
+        data.put("time","3");
         myApp.getCurrentState().handleInput(data);
     }
 
     @Then("the appointments should be added")
     public void the_appointments_should_be_added() {
-        assertNotNull(myApp.searchAppointment(id+1));
+        assertNotNull(myApp.searchAppointment(id));
     }
 
     @When("the admin deletes appointment")

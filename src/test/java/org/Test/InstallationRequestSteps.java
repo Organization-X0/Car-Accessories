@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class InstallationRequestSteps {
     App myApp;
@@ -39,9 +40,13 @@ public class InstallationRequestSteps {
         data.put("productName","item1");
         data.put("carMake","bmw");
         data.put("date","2023-11-8");
+        data.put("time","1");
         myApp.getCurrentState().handleInput(data);
     }
-
+    @Then("customer should see when the installer is available for service")
+    public void customer_should_see_when_the_installer_is_available_for_service() {
+        assertTrue(myApp.availableTimesShown);
+    }
     @Then("customer installation request should be submitted")
     public void customer_installation_request_should_be_submitted() {
         assertNotNull(myApp.searchAppointment(id));

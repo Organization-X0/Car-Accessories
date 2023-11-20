@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class App {
+    public boolean availableTimesShown;
     private State state;
 
     public final SignUp mySignUp;
@@ -28,7 +29,7 @@ public class App {
     public App(){
 
         exit=false;
-
+        availableTimesShown=false;
         myDatabase=new DataBase();
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
