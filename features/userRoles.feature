@@ -5,7 +5,7 @@ Feature: User Roles
     Then the admin should be able to manage products, categories, and user accounts
 
   Scenario: Customer role
-    Given a customer is logged in
+    Given an customer is logged in
     Then the customer should be able to browse products, make purchases, and view orders.
 
   Scenario: Installer role

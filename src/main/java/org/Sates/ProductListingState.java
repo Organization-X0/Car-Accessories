@@ -7,6 +7,7 @@ import org.Data.User;
 
 public class ProductListingState implements State {
     private final App myApp;
+    private boolean flag=false;
     private String productName;
 
     public ProductListingState(App myApp) {
@@ -15,6 +16,7 @@ public class ProductListingState implements State {
 
     @Override
     public void handle() {
+        flag=true;
         Error.checkAndShow(getStateString());
         Error.setError(null);
         String option;
@@ -35,6 +37,13 @@ public class ProductListingState implements State {
 
     @Override
     public void handleInput(Object input) {
+        if(!flag){
+            if(myApp.handleManageProductOutput==1){
+                myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
+            } else if(myApp.handleManageProductOutput!=2){
+                myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
+            }
+        }
         String option = (String) input;
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
         else if (option.equals("p") && Cli.page != 1) Cli.page--;

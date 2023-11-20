@@ -27,11 +27,6 @@ public class CustomerDashboardSteps {
         myApp.login("user1@gmail.com","u123");
     }
 
-    @When("the admin enter {string}")
-    public void the_admin_enter(String input) {
-        myApp.getCurrentState().handleInput(input);
-    }
-
     @Then("should be redirected to the Product Catalog")
     public void should_be_redirected_to_the_product_catalog() {
         assertTrue(myApp.getCurrentState() instanceof ProductCatalogState);

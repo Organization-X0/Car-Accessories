@@ -288,6 +288,7 @@ public class Cli {
     }
 
     private static ArrayList<Time> getAvailableTimes(App myApp,String date){
+
         ArrayList<Time> availableTimes=new ArrayList<>();
         ArrayList<Appointment> appointmentsWithThisDate = myApp.myDatabase.searchAppointmentsByDate(date);
         boolean flag=false;
