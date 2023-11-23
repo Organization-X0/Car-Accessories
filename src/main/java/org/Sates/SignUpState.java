@@ -18,7 +18,6 @@ public class SignUpState implements State {
         Error.setError(null);
         Map<String, String> signUpData = Cli.displaySignUp();
         handleInput(signUpData);
-
     }
 
     @Override

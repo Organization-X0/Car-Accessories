@@ -370,13 +370,14 @@ public class Cli {
         return data;
     }
 
-    public static String displayCustomerDashboard() {
+    public static String displayCustomerDashboard(User account) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Customer Dashboard:"));
         System.out.println("1. "+Cli.blueText("Product Catalog"));
         System.out.println("2. "+Cli.blueText("Request services"));
         System.out.println("3. "+Cli.blueText("Profile"));
-        System.out.println("4. "+Cli.blueText("Log out"));
+        System.out.println("4. "+Cli.blueText("Notifications:")+Cli.blueBgText(" "+account.getNotificationCount()+" "));
+        System.out.println("5. "+Cli.blueText("Log out"));
         return scanner.nextLine();
     }
     public static String displayProfile(String name, String email, String phone) {
@@ -452,12 +453,13 @@ public class Cli {
         return scanner.nextLine();
     }
 
-    public static String displayInstallerDashboard() {
+    public static String displayInstallerDashboard(User account) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Installer Dashboard:"));
         System.out.println("1. "+Cli.blueText("Schedule of Appointments"));
         System.out.println("2. "+Cli.blueText("Installation Requests"));
-        System.out.println("3. "+Cli.blueText("Log out"));
+        System.out.println("3. "+Cli.blueText("Notifications:")+Cli.blueBgText(" "+account.getNotificationCount()+" "));
+        System.out.println("4. "+Cli.blueText("Log out"));
         return scanner.nextLine();
     }
     public static String displayInstallationRequests(ArrayList<Appointment> appointmentArrayList) {
@@ -522,7 +524,32 @@ public class Cli {
 
         return scanner.nextLine();
     }
+    public static String displayNotificationCenter(ArrayList<String> notifications) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println(Cli.blueBgText(" Notification Center "));
 
+        int start = (page - 1) * 10;
+        int end = Math.min(start + 10, notifications.size());
+
+        IntStream.range(start, end).forEach(i -> {
+            System.out.println((i + 1) + ". " +notifications.get(i));
+        });
+
+        totalPages=(int)Math.ceil(notifications.size()/10.0);
+        System.out.println("page:"+page+"/"+totalPages);
+        if(totalPages==0){
+            System.out.println("[ b:back ]");
+        } else if(page<totalPages && page>1)
+            System.out.println("[ n:next page | p:prev page | d<int>:done | b:back ]");
+        else if (page<totalPages && page==1)
+            System.out.println("[ n:next page | d<int>:done | b:back ]");
+        else if(totalPages==1)
+            System.out.println("[ d<int>:done | b:back ]");
+        else if(page==totalPages)
+            System.out.println("[ p:prev page | d<int>:done | b:back ]");
+
+        return scanner.nextLine();
+    }
     public static void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
         if(success)

@@ -52,7 +52,10 @@ public class ProductListingState implements State {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 productName = myApp.productArrayListBetweenState.get(num - 1).getName();
-                myApp.searchAccount(myApp.email).addOrder(myApp.searchProduct(num));
+                User account=myApp.searchAccount(myApp.email);
+                account.addOrder(myApp.searchProduct(num));
+                account.pushNotification("You bought this product \""+Cli.blueText(productName)+"\" successfully.");
+                account.increaseNotificationCount();
             } catch (Exception e) {
                 Error.setError(myApp.getCurrentState().getStateString());
             }

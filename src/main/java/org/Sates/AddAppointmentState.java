@@ -3,6 +3,7 @@ package org.Sates;
 import org.Car.App;
 import org.Car.Cli;
 import org.Car.Error;
+import org.Data.User;
 
 import java.util.Map;
 
@@ -48,6 +49,10 @@ public class AddAppointmentState implements State {
             if(timeSlot<=0) throw new Exception();
 
             myApp.addAppointment(data.get("email"),data.get("productName"),data.get("carMake"),data.get("date"),timeSlot);
+            User installer=myApp.searchAccount("installer@gmail.com");
+            installer.pushNotification("New installation request added.");
+            installer.increaseNotificationCount();
+
         }catch (Exception e){
             Error.setError(getStateString());
         }
