@@ -41,7 +41,7 @@ public class ProductCrudState implements State {
         else if (option.equals("p") && Cli.page != 1) Cli.page--;
         else if (option.equals("b")) myApp.setState(new ManageProductsState(myApp));
         else if (option.equals("a")) myApp.setState(new AddProductState(myApp));
-        else if (option.charAt(0) == 'd') {
+        else if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 int productId = myApp.productArrayListBetweenState.get(num - 1).getId();
@@ -49,7 +49,7 @@ public class ProductCrudState implements State {
             } catch (Exception e) {
                 Error.setError(myApp.getCurrentState().getStateString());
             }
-        } else if (option.charAt(0) == 'u') {
+        } else if (!option.isEmpty() && option.charAt(0) == 'u') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 myApp.productIdToUpdate = myApp.productArrayListBetweenState.get(num - 1).getId();

@@ -15,9 +15,14 @@ Feature: Customer Dashboard
     When the customer enter "3"
     Then should be redirected to Profile Page
 
-  Scenario: Customer Dashboard page to Log out
+  Scenario: Customer Dashboard page to Notification Center
     Given an customer is logged in
     When the customer enter "4"
+    Then should be redirected to the Notification Center
+
+  Scenario: Customer Dashboard page to Log out
+    Given an customer is logged in
+    When the customer enter "5"
     Then should be redirected to the Log out
 
   Scenario Outline: Invalid input customer dashboard

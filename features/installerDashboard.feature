@@ -10,9 +10,14 @@ Feature: Installation Dashboard
     When the installer enter "2"
     Then should be redirected to the Installation requests page
 
-  Scenario: Installation Dashboard page to Log out
+  Scenario: Installation Dashboard page to Notification Center
     Given an installer is logged in
     When the installer enter "3"
+    Then should be redirected to the Notification Center page
+
+  Scenario: Installation Dashboard page to Log out
+    Given an installer is logged in
+    When the installer enter "4"
     Then should be redirected to the Log out page
 
   Scenario Outline: Invalid input Installation dashboard

@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import org.Car.App;
 import org.Car.Error;
 import org.Sates.InstallationRequestsState;
+import org.Sates.NotificationCenterState;
 import org.Sates.ScheduleOfAppointmentsState;
 import org.Sates.StartState;
 
@@ -18,7 +19,6 @@ public class InstallerDashboardSteps {
     }
     @When("the installer enter {string}")
     public void the_installer_enter(String string) {
-        // Write code here that turns the phrase above into concrete actions
         myApp.getCurrentState().handleInput(string);
     }
     @Given("installer enters Schedule of Appointments page")
@@ -37,6 +37,10 @@ public class InstallerDashboardSteps {
     @Then("should be redirected to the Schedule of Appointments page")
     public void should_be_redirected_to_the_schedule_of_appointments_page() {
         assertTrue(myApp.getCurrentState() instanceof ScheduleOfAppointmentsState);
+    }
+    @Then("should be redirected to the Notification Center page")
+    public void should_be_redirected_to_the_notification_center_page() {
+        assertTrue(myApp.getCurrentState() instanceof NotificationCenterState);
     }
 
     @Then("should be redirected to the Installation requests page")

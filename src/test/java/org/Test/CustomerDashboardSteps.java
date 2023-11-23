@@ -6,10 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.Error;
-import org.Sates.AddAppointmentState;
-import org.Sates.ProductCatalogState;
-import org.Sates.ProfileState;
-import org.Sates.ViewOrderHistoryState;
+import org.Sates.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,6 +42,10 @@ public class CustomerDashboardSteps {
     @Then("should see an error message on customer Dashboard")
     public void should_see_an_error_message_on_customer_dashboard() {
         assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
+    }
+    @Then("should be redirected to the Notification Center")
+    public void should_be_redirected_to_the_notification_center() {
+        assertTrue(myApp.getCurrentState() instanceof NotificationCenterState);
     }
 
     @Given("customer enter product catalog page and choose category")

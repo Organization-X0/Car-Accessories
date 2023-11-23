@@ -29,7 +29,7 @@ public class NotificationCenterState implements State{
             if(myApp.whoLoggedIn().equals("customer")) myApp.setState(new CustomerDashboardState(myApp));
             else myApp.setState(new InstallerDashboardState(myApp));
         }
-        else if (option.charAt(0) == 'd') {
+        else if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 myApp.searchAccount(myApp.email).deleteNotification(num-1);
