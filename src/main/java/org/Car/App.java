@@ -162,6 +162,9 @@ public class App {
         Appointment appointment=myDatabase.searchApprovedAppointment(id);
         if(appointment!=null) myDatabase.deleteApprovedAppointment(appointment);
     }
+    public Appointment searchApprovedAppointment(int id) {
+        return myDatabase.searchApprovedAppointment(id);
+    }
     public void updateAppointment(int id,Appointment updatedAppointment){
         Appointment appointment=myDatabase.searchAppointment(id);
         if (appointment!= null) {
