@@ -9,7 +9,7 @@ public class Error {
     public static void setError(String locationPara){
         location = Objects.requireNonNullElse(locationPara, "null");
         switch (location){
-            case "Start", "AdminDashboard","CustomerDashboard","ProductListing","ManageProducts","ProductCRUD","ViewOrderHistory" -> msg=" Invalid Option! ";
+            case "Start", "AdminDashboard","CustomerDashboard","ProductListing","ManageProducts","ProductCRUD","ViewOrderHistory","ScheduleOfAppointments","InstallationRequests","NotificationCenter","Profile","ViewInstallationHistory","ProductCatalog" -> msg=" Invalid Option! ";
             case "Login" -> msg=" Not Registered! ";
             case "SignUp","SearchProduct","UpdateProduct","ManageCategories","ManageAccounts","AddAppointment" -> msg=" Invalid Data! ";
             case "AddProduct" -> msg=" Failed to add a product! ";
