@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class AddAppointmentState implements State {
     private final App myApp;
+    private boolean dataIsEmpty;
     public AddAppointmentState(App myApp) {
         this.myApp=myApp;
     }
@@ -20,9 +21,15 @@ public class AddAppointmentState implements State {
         Error.setError(null);
         if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);
         else data = Cli.displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());
+        dataIsEmpty=true;
+        for (var entry : data.entrySet()) {
+            if (!entry.getKey().equals("email") && !entry.getValue().isEmpty()) {
+               dataIsEmpty=false;
+            }
+        }
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
-            Cli.displayMsg(" Appointment added successfully! ",true);
+            if(!dataIsEmpty) Cli.displayMsg(" Appointment added successfully! ",true);
             myApp.availableTimesShown=false;
             if(myApp.whoLoggedIn().equals("admin")) myApp.setState(new ManageInstallationAppointmentState(myApp));
             else myApp.setState(new CustomerDashboardState(myApp));
@@ -41,6 +48,7 @@ public class AddAppointmentState implements State {
                 throw new Exception();
 
             //check data
+            if(dataIsEmpty) return;
             if(!App.isValidDate(data.get("date")))
                 throw new Exception();
             if(myApp.myDatabase.searchAccount(data.get("email"))==null)

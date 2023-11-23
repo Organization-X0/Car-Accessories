@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class AddProductState implements State {
     private final App myApp;
+    private boolean dataIsEmpty;
 
     public AddProductState(App myApp) {
         this.myApp=myApp;
@@ -18,9 +19,10 @@ public class AddProductState implements State {
         Error.checkAndShow(getStateString());
         Error.setError(null);
         Map<String,String> data = Cli.displayAddProduct(myApp.myDatabase.getCategoryList());
+        dataIsEmpty=data.values().stream().allMatch(String::isEmpty);
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
-            Cli.displayMsg(" Product added successfully! ",true);
+            if(!dataIsEmpty) Cli.displayMsg(" Product added successfully! ",true);
             myApp.setState(new ManageProductsState(myApp));
         }
     }
@@ -34,6 +36,7 @@ public class AddProductState implements State {
                 data=(Map<String, String>) input;
             else
                 throw new Exception();
+            if(dataIsEmpty) return;
             int categoryNumber= Integer.parseInt(data.get("category"));
             myApp.addProduct(data.get("name"),myApp.myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
         }catch (Exception e){
