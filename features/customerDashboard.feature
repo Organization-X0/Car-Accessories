@@ -42,6 +42,7 @@ Feature: Customer Dashboard
     When customer buys product from product catalog
     Then the purchase should be completed
 
+
   Scenario: View orders history
     Given an customer is logged in
     And customer enter profile page
