@@ -28,7 +28,7 @@ public class ProductListingState implements State {
         option = Cli.displayCustomerProducts(myApp.productArrayListBetweenState);
         handleInput(option);
 
-        if(option.charAt(0) == 'f' && !Error.getLocation().equals(getStateString())){
+        if(!option.isEmpty() && option.charAt(0) == 'f' && !Error.getLocation().equals(getStateString())){
             String phoneNumber=myApp.searchAccount(myApp.email).getPhone();
             Cli.displayAfterPurchase(productName,phoneNumber);
         }
@@ -48,7 +48,7 @@ public class ProductListingState implements State {
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
         else if (option.equals("p") && Cli.page != 1) Cli.page--;
         else if (option.equals("b")) myApp.setState(new ProductCatalogState(myApp));
-        else if (option.charAt(0) == 'f') {
+        else if (!option.isEmpty() && option.charAt(0) == 'f') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 productName = myApp.productArrayListBetweenState.get(num - 1).getName();

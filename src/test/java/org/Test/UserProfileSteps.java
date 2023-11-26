@@ -5,10 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.Car.App;
 import org.Data.User;
-import org.Sates.CustomerDashboardState;
-import org.Sates.ProfileState;
-import org.Sates.UpdateAccountState;
-import org.Sates.ViewOrderHistoryState;
+import org.Sates.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +23,6 @@ public class UserProfileSteps {
         myApp.login("user1@gmail.com","u123");
         myApp.getCurrentState().handleInput("3");
     }
-
-
-
     @When("the customer enter {string}")
     public void the_customer_enter(String option) {
         myApp.getCurrentState().handleInput(option);
@@ -81,7 +75,13 @@ public class UserProfileSteps {
     @Then("the customer should be able to view all past orders")
     public void the_customer_should_be_able_to_view_all_past_orders() {
         assertTrue(myApp.getCurrentState() instanceof ViewOrderHistoryState);
-
     }
-
+    @When("the customer navigates to their installation requests")
+    public void the_customer_navigates_to_their_installation_requests() {
+        myApp.getCurrentState().handleInput("3");
+    }
+    @Then("the customer should be able to view all installation requests")
+    public void the_customer_should_be_able_to_view_all_installation_requests() {
+        assertTrue(myApp.getCurrentState() instanceof ViewInstallationHistoryState);
+    }
 }

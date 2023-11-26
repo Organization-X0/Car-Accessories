@@ -29,7 +29,7 @@ public class ScheduleOfAppointmentsState implements State {
         if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
         else if (option.equals("p") && Cli.page != 1) Cli.page--;
         else if (option.equals("b")) myApp.setState(new InstallerDashboardState(myApp));
-        else if (option.charAt(0) == 'd') {
+        else if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 int appointmentId = appointmentArrayList.get(num - 1).getId();

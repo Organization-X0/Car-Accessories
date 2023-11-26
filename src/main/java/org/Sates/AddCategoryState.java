@@ -16,7 +16,7 @@ public class AddCategoryState implements State {
         Error.setError(null);
         String name= Cli.displayAddCategory();
         handleInput(name);
-        if(!Error.getLocation().equals(getStateString())){
+        if(!Error.getLocation().equals(getStateString()) && !name.isEmpty()){
             Cli.displayMsg(" Category added successfully! ",true);
         }
     }
@@ -27,9 +27,6 @@ public class AddCategoryState implements State {
         try{
             if(!name.isEmpty())
                 myApp.addCategory(name);
-            else
-                throw new Exception();
-//            Cli.displayMsg(" Category added successfully! ",true);
             myApp.setState(new ManageCategoriesState(myApp));
         }catch (Exception e){
             Error.setError(getStateString());

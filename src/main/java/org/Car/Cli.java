@@ -79,7 +79,7 @@ public class Cli {
     public static String displayManageProducts(ArrayList<Category> categoryArrayList){
         int manageProductsOptions=1;
         Scanner scanner=new Scanner(System.in);
-        System.out.println(Cli.blueBgText("Manage Products:"));
+        System.out.println(Cli.blueBgText(" Product Menu "));
         System.out.println((manageProductsOptions++)+". "+Cli.blueText("All Products"));
         System.out.println((manageProductsOptions++)+". "+Cli.blueText("Search for a Product"));
         for(Category category : categoryArrayList){
@@ -425,7 +425,7 @@ public class Cli {
     }
     public static String displayInstallationHistory(ArrayList<Appointment> installationsArrayList ) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(Cli.blueBgText("Order History:"));
+        System.out.println(Cli.blueBgText("Installation Requests History:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, installationsArrayList.size());

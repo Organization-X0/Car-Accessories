@@ -15,9 +15,14 @@ Feature: Customer Dashboard
     When the customer enter "3"
     Then should be redirected to Profile Page
 
-  Scenario: Customer Dashboard page to Log out
+  Scenario: Customer Dashboard page to Notification Center
     Given an customer is logged in
     When the customer enter "4"
+    Then should be redirected to the Notification Center
+
+  Scenario: Customer Dashboard page to Log out
+    Given an customer is logged in
+    When the customer enter "5"
     Then should be redirected to the Log out
 
   Scenario Outline: Invalid input customer dashboard
@@ -31,14 +36,23 @@ Feature: Customer Dashboard
       | abc   |
       | -1    |
 
-  Scenario: Make purchases
-    Given an customer is logged in
-    And customer enter product catalog page and choose category
-    When customer buys product from product catalog
+Feature: Make purchases
+
+  Scenario Outline: Make purchases
+    Given a customer is logged in
+    And the customer enters the product catalog page and chooses the "<categoryNum>"
+    When the customer buys "<product>" from the product catalog
     Then the purchase should be completed
+
+    Examples:
+      | categoryNum | product |
+      | 1            | 5       |
+      | 3            | 2       |
+      | 4            | 3       |
+
 
   Scenario: View orders history
     Given an customer is logged in
-    And customer enter profile page
-    When enter show orders history
+    And customer enter profile page "3"
+    When enter show orders history "2"
     Then the orders history should be shown

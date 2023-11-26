@@ -29,7 +29,7 @@ Feature: User Profile
     When the customer navigates to their order history
    Then the customer should be able to view all past orders
 
-#  Scenario: Customers can view installation requests
-#    Given a customer is logged into their profile
-#    When the customer navigates to their installation requests
-#   Then the customer should be able to view all installation requests
+  Scenario: Customers can view installation requests
+    Given an customer is logged in and in profile page
+    When the customer navigates to their installation requests
+   Then the customer should be able to view all installation requests

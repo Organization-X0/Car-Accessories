@@ -31,7 +31,7 @@ public class ManageInstallationAppointmentState implements State {
         else if (option.equals("p") && Cli.page != 1) Cli.page--;
         else if (option.equals("b")) myApp.setState(new AdminDashboardState(myApp));
         else if (option.equals("a")) myApp.setState(new AddAppointmentState(myApp));
-        else if (option.charAt(0) == 'd') {
+        else if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 int appointmentId = appointmentArrayList.get(num - 1).getId();
@@ -39,7 +39,7 @@ public class ManageInstallationAppointmentState implements State {
             } catch (Exception e) {
                 Error.setError(getStateString());
             }
-        } else if (option.charAt(0) == 'u') {
+        } else if (!option.isEmpty() && option.charAt(0) == 'u') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 myApp.appointmentIdToUpdate = appointmentArrayList.get(num - 1).getId();
