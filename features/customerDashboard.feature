@@ -36,10 +36,8 @@ Feature: Customer Dashboard
       | abc   |
       | -1    |
 
-Feature: Make purchases
-
   Scenario Outline: Make purchases
-    Given a customer is logged in
+    Given an customer is logged in
     And the customer enters the product catalog page and chooses the "<categoryNum>"
     When the customer buys "<product>" from the product catalog
     Then the purchase should be completed
