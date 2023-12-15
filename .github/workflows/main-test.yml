@@ -1,11 +1,10 @@
 # This is a basic workflow to help you get started with Actions
+
 name: GitHub Actions Maven Build Example
-
 on:
-  push:
-    branches: [main]
+   push:
+    branches: [ main ]
 jobs:
-
   build-on-ubuntu:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -13,7 +12,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Step 1 - Checkout main branch from GitHub
+      - name: Step 1 - Checkout main branch from GitHub 
         uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
@@ -21,9 +20,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
-      
+    
       - name: Step 3 - Build Maven Project
-        run: mvn --batch-mode -DskipTests package
-
+        run: mvn  --batch-mode clean install package -DskipTests  
+        
+      
+     
+         
       - name: Step 4 - run test cases
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+        
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
