@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,7 +16,7 @@
     <groupId>org.Car</groupId>
     <artifactId>Car-Accessories</artifactId>
     <version>1.0-SNAPSHOT</version>
-	 <build>
+<build>
 		<plugins>
 			<!-- The Surefire Plugin is needed to run JUnit 5 tests with Maven -->
 			<plugin>
