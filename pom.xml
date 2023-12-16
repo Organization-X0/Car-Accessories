@@ -1,31 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-<!-- <properties>
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
-         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  	<sonar.organization>organization-x0</sonar.organization>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-	<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    </properties> 
-	-->
     <groupId>org.Car</groupId>
     <artifactId>Car-Accessories</artifactId>
     <version>1.0-SNAPSHOT</version>
 <build>
-		<plugins>
-			<!-- The Surefire Plugin is needed to run JUnit 5 tests with Maven -->
-			<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
-    <version>2.22.0</version>
-</plugin>
-<plugin>
+	<plugins>
+		<!-- The Surefire Plugin is needed to run JUnit 5 tests with Maven -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
+			<version>2.22.0</version>
+		</plugin>
+		<plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     
@@ -48,10 +38,8 @@
                         </execution>
                     </executions>
                 </plugin>
-			
-			
-		</plugins>
-	</build>
+	</plugins>
+</build>
         
 <dependencies>
 <dependency>
