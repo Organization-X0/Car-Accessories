@@ -1,4 +1,4 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,16 +6,29 @@
     <groupId>org.Car</groupId>
     <artifactId>Car-Accessories</artifactId>
     <version>1.0-SNAPSHOT</version>
+	<properties>
+		<!--  Set the Java version used by the compiler. -->
+		<!--  Setting to Java 8 or 11 will work in most cases, --> 
+		<!--  for all installed Java versions -->
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				
+		<sonar.organization>organization-x0</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+	</properties>
 <build>
-	<plugins>
-		<!-- The Surefire Plugin is needed to run JUnit 5 tests with Maven -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-surefire-plugin</artifactId>
-			<!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
-			<version>2.22.0</version>
-		</plugin>
-		<plugin>
+		<plugins>
+			<!-- The Surefire Plugin is needed to run JUnit 5 tests with Maven -->
+			<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
+    <version>2.22.0</version>
+</plugin>
+<plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     
@@ -38,12 +51,13 @@
                         </execution>
                     </executions>
                 </plugin>
-	</plugins>
-</build>
+			
+			
+		</plugins>
+	</build>
         
 <dependencies>
-<dependency>
-    <groupId>org.jacoco</groupId> 
+	 <groupId>org.jacoco</groupId> 
     <artifactId>jacoco-maven-plugin</artifactId>
     <version>0.8.6</version>
 </dependency>
@@ -78,16 +92,5 @@
         <artifactId>cucumber-picocontainer</artifactId>
         <version>7.11.2</version>
     </dependency>
-<dependency>
-	<groupId>org.jacoco</groupId>
-	<artifactId>jacoco-maven-plugin</artifactId>
-	<version>0.8.8</version>
-</dependency>
 </dependencies>
-    <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
-	<sonar.organization>organization-x0</sonar.organization>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    </properties>
 </project>
