@@ -11,6 +11,12 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
 public class Cli {
 
+    public static final String EMAIL = "email";
+    public static final String LOG_OUT = "Log out";
+    public static final String CATEGORY = "category";
+    public static final String CATEGORY_TO_PRINT = " | Category:";
+    public static final String PRICE_TO_PRINT = " | Price:";
+    public static final String PAGE_TO_PRINT = "page:";
     public static int page=1;
     public static int totalPages=1;
     public static Ansi errorText(String text){
@@ -40,7 +46,7 @@ public class Cli {
         String Email=scanner.nextLine();
         System.out.print(Cli.blueText("Password:"));
         String pass=scanner.nextLine();
-        data.put("email",Email);
+        data.put(EMAIL,Email);
         data.put("password",pass);
         return data;
     }
@@ -52,7 +58,7 @@ public class Cli {
         scanner.nextLine();
         data.put("fullName",scanner.nextLine());
         System.out.print(Cli.blueText("Email: "));
-        data.put("email",scanner.nextLine());
+        data.put(EMAIL,scanner.nextLine());
         System.out.print(Cli.blueText("Phone: "));
         data.put("phone",scanner.nextLine());
         System.out.print(Cli.blueText("Password: "));
@@ -73,7 +79,7 @@ public class Cli {
         System.out.println("2. "+Cli.blueText("Manage Categories"));
         System.out.println("3. "+Cli.blueText("Manage User Accounts"));
         System.out.println("4. "+Cli.blueText("Manage Installation Appointments."));
-        System.out.println("5. "+Cli.blueText("Log out"));
+        System.out.println("5. "+Cli.blueText(LOG_OUT));
         return scanner.nextLine();
     }
     public static String displayManageProducts(ArrayList<Category> categoryArrayList){
@@ -83,7 +89,7 @@ public class Cli {
         System.out.println((manageProductsOptions++)+". "+Cli.blueText("All Products"));
         System.out.println((manageProductsOptions++)+". "+Cli.blueText("Search for a Product"));
         for(Category category : categoryArrayList){
-            System.out.println((manageProductsOptions++)+". "+Cli.blueText(category.getName()+" category"));
+            System.out.println((manageProductsOptions++)+". "+Cli.blueText(category.getName()+ " " + CATEGORY));
         }
         System.out.println(manageProductsOptions+". "+Cli.blueText("Back to Dashboard"));
         return scanner.nextLine();
@@ -99,14 +105,14 @@ public class Cli {
         IntStream.range(start, end).forEach(i -> {
             System.out.println((i + 1) + ". " + Cli.blueText(
                     productArrayList.get(i).getName() +
-                            " | Category:" +
-                            productArrayList.get(i).getCategory() + " | Price:" +
+                            CATEGORY_TO_PRINT +
+                            productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
                             productArrayList.get(i).getPrice()
             ));
         });
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ b:back ]");
         } else if(totalPages==1){
@@ -130,14 +136,14 @@ public class Cli {
         IntStream.range(start, end).forEach(i -> {
             System.out.println((i + 1) + ". " + Cli.blueText(
                     productArrayList.get(i).getName() +
-                            " | Category:" +
-                            productArrayList.get(i).getCategory() + " | Price:" +
+                            CATEGORY_TO_PRINT +
+                            productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
                             productArrayList.get(i).getPrice()
             ));
         });
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ a:add | b:back ]");
         } else if(page<totalPages && page>1)
@@ -156,15 +162,15 @@ public class Cli {
         Map<String,String> data=new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD PRODUCT "));
 
-        System.out.println(Cli.blueText("Choose category: "));
+        System.out.println(Cli.blueText("Choose " + CATEGORY + ": "));
         int i=1;
         for(Category category : categoryArrayList){
-            System.out.println((i++)+". "+Cli.blueText(category.getName()+" category"));
+            System.out.println((i++)+". "+Cli.blueText(category.getName()+ " " + CATEGORY));
         }
 
         String categoryOption = scanner.nextLine();
 
-        data.put("category",categoryOption);
+        data.put(CATEGORY,categoryOption);
         System.out.println(Cli.blueText("Product name: "));
         data.put("name",scanner.nextLine());
         System.out.println(Cli.blueText("Description: "));
@@ -198,7 +204,7 @@ public class Cli {
         int i=1;
         System.out.println(Cli.blueBgText("CATEGORIES"));
         for(Category category : categoryArrayList){
-            System.out.println((i++)+". "+Cli.blueText(category.getName()+" category"));
+            System.out.println((i++)+". "+Cli.blueText(category.getName()+ " " + CATEGORY));
         }
         System.out.println("[ a:add | d<int>:delete | u<int>:update | b:back ]");
         return scanner.nextLine();
@@ -222,7 +228,7 @@ public class Cli {
         });
 
         totalPages=(int)Math.ceil(userArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ b:back ]");
         } else if(page<totalPages && page>1)
@@ -272,7 +278,7 @@ public class Cli {
         });
 
         totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ a:add | b:back ]");
         } else if(page<totalPages && page>1)
@@ -310,7 +316,7 @@ public class Cli {
         System.out.println(Cli.blueBgText(" ADD APPOINTMENT "));
 
         System.out.println(Cli.blueText("Email of user: "));
-        data.put("email",scanner.nextLine());
+        data.put(EMAIL,scanner.nextLine());
         System.out.println(Cli.blueText("Product name: "));
         data.put("productName",scanner.nextLine());
         System.out.println(Cli.blueText("Car Make: "));
@@ -334,7 +340,7 @@ public class Cli {
         Map<String, String> data = new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD APPOINTMENT "));
 
-        data.put("email", myApp.email);
+        data.put(EMAIL, myApp.email);
         System.out.println(Cli.blueText("Product name: "));
         data.put("productName", scanner.nextLine());
         System.out.println(Cli.blueText("Car Make: "));
@@ -359,7 +365,7 @@ public class Cli {
         System.out.println("If you don't want to update specific field just press enter.");
 
         System.out.println(Cli.blueText("Email of user: "));
-        data.put("email",scanner.nextLine());
+        data.put(EMAIL,scanner.nextLine());
         System.out.println(Cli.blueText("Product name: "));
         data.put("productName",scanner.nextLine());
         System.out.println(Cli.blueText("Car Make: "));
@@ -377,7 +383,7 @@ public class Cli {
         System.out.println("2. "+Cli.blueText("Request services"));
         System.out.println("3. "+Cli.blueText("Profile"));
         System.out.println("4. "+Cli.blueText("Notifications:")+Cli.blueBgText(" "+account.getNotificationCount()+" "));
-        System.out.println("5. "+Cli.blueText("Log out"));
+        System.out.println("5. "+Cli.blueText(LOG_OUT));
         return scanner.nextLine();
     }
     public static String displayProfile(String name, String email, String phone) {
@@ -404,14 +410,14 @@ public class Cli {
         IntStream.range(start, end).forEach(i -> {
             System.out.println((i + 1) + ". " + Cli.blueText(
                     ordersArrayList.get(i).getName() +
-                            " | Category:" +
-                            ordersArrayList.get(i).getCategory() + " | Price:" +
+                            CATEGORY_TO_PRINT +
+                            ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +
                             ordersArrayList.get(i).getPrice()
             ));
         });
 
         totalPages=(int)Math.ceil(ordersArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0 || totalPages==1){
             System.out.println("[ b:back ]");
         }else if(page<totalPages && page>1)
@@ -440,7 +446,7 @@ public class Cli {
         });
 
         totalPages=(int)Math.ceil(installationsArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0 || totalPages==1){
             System.out.println("[ b:back ]");
         }else if(page<totalPages && page>1)
@@ -459,7 +465,7 @@ public class Cli {
         System.out.println("1. "+Cli.blueText("Schedule of Appointments"));
         System.out.println("2. "+Cli.blueText("Installation Requests"));
         System.out.println("3. "+Cli.blueText("Notifications:")+Cli.blueBgText(" "+account.getNotificationCount()+" "));
-        System.out.println("4. "+Cli.blueText("Log out"));
+        System.out.println("4. "+Cli.blueText(LOG_OUT));
         return scanner.nextLine();
     }
     public static String displayInstallationRequests(ArrayList<Appointment> appointmentArrayList) {
@@ -479,7 +485,7 @@ public class Cli {
         });
 
         totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ b:back ]");
         } else if(page<totalPages && page>1)
@@ -510,7 +516,7 @@ public class Cli {
         });
 
         totalPages=(int)Math.ceil(approvedAppointmentArrayList.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ b:back ]");
         } else if(page<totalPages && page>1)
@@ -536,7 +542,7 @@ public class Cli {
         });
 
         totalPages=(int)Math.ceil(notifications.size()/10.0);
-        System.out.println("page:"+page+"/"+totalPages);
+        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
             System.out.println("[ b:back ]");
         } else if(page<totalPages && page>1)
