@@ -57,8 +57,6 @@
 	</build>
         
 <dependencies>
-<dependency>
-</dependency>
     <dependency>
         <groupId>io.cucumber</groupId>
         <artifactId>cucumber-core</artifactId>
