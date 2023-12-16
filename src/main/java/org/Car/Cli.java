@@ -157,6 +157,7 @@ public class Cli {
 
         return scanner.nextLine();
     }
+
     public static Map<String,String> displayAddProduct(ArrayList<Category> categoryArrayList){
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
