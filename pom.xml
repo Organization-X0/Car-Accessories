@@ -10,8 +10,8 @@
 		<!--  Set the Java version used by the compiler. -->
 		<!--  Setting to Java 8 or 11 will work in most cases, --> 
 		<!--  for all installed Java versions -->
-		<maven.compiler.source>20</maven.compiler.source>
-		<maven.compiler.target>20</maven.compiler.target>
+		<maven.compiler.source>15</maven.compiler.source>
+		<maven.compiler.target>15</maven.compiler.target>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 				
