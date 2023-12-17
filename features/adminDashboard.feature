@@ -146,6 +146,7 @@ Feature: Admin Dashboard
   Scenario Outline: Update an appointment
     Given an admin is logged in
     And admin enters manage installation page "4"
+    And admin enters "<AppointmentNum>" to update
     When admin update appointment "<AppointmentNum>" to "<UserEmail>", "<ProductName>","<CarMake>","<Date>"
     Then the appointment should be updated "<AppointmentNum>" , "<UserEmail>", "<ProductName>","<CarMake>","<Date>"
     Examples:

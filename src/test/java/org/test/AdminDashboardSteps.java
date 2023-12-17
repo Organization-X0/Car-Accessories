@@ -197,13 +197,18 @@ public class AdminDashboardSteps {
         int num=Integer.parseInt(appointmentNum);
         assertNull(myApp.searchAppointment(num));
     }
+    @Given("admin enters {string} to update")
+    public void admin_enters_to_update(String appointmentToUpdate) {
+        myApp.getCurrentState().handleInput("u"+appointmentToUpdate);
+    }
     @When("admin update appointment {string} to {string}, {string},{string},{string}")
     public void admin_update_appointment_to(String appointmentNum, String userEmail, String productName, String carMake, String date) {
-        Appointment appointment=new Appointment();
-        appointment.setDate(date);
-        appointment.setCarMake(carMake);
-        int num=Integer.parseInt(appointmentNum);
-        myApp.updateAppointment(num,appointment);
+        Map<String,String> data=new HashMap<>();
+        data.put("email", userEmail);
+        data.put("productName", productName);
+        data.put("carMake", carMake);
+        data.put("date", date);
+        myApp.getCurrentState().handleInput(data);
     }
     @Then("the appointment should be updated {string} , {string}, {string},{string},{string}")
     public void the_appointment_should_be_updated(String appointmentNum, String userEmail, String productName, String carMake, String date) {

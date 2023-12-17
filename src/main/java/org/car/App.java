@@ -4,6 +4,7 @@ import org.data.*;
 import org.sates.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -206,6 +207,83 @@ public class App {
         else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
         else if (option.equals("b")) setState(new ProfileState(this));
         else Error.setError(getCurrentState().getStateString());
+    }
+    public void navigateProductsMenu(String option, State first, State second, State third, String error) {
+        try {
+            int intOption = Integer.parseInt(option);
+            if (intOption == 1 || (intOption != 2 && intOption < (3 + myDatabase.getCategoryList().size()))) {
+                setState(first);
+            } else if (intOption == 2) {
+                setState(second);
+            } else if (intOption == 3 + myDatabase.getCategoryList().size()) {
+                setState(third);
+            } else {
+                throw new Exception("invalid input");
+            }
+            handleManageProductOutput = intOption;
+        } catch (Exception e) {
+            Error.setError(error);
+            handleManageProductOutput = 0;
+        }
+    }
+    public void updateProductOrAppointmentOrAccount(Object input,String type){
+        try{
+            Map<String, String> data;
+            if (input instanceof Map)
+                data = (Map<String, String>) input;
+            else
+                throw new Exception();
+            State stateToUpdate;
+            if(type.equals("UpdateAppointment")){
+                Appointment appointment= new Appointment();
+                stateToUpdate=new ManageInstallationAppointmentState(this);
+                if (!data.get("email").isEmpty()){
+                    appointment.setEmail(data.get("email"));
+                }if (!data.get("productName").isEmpty())
+                    appointment.setProductName(data.get("productName"));
+                if (!data.get("carMake").isEmpty())
+                    appointment.setCarMake(data.get("carMake"));
+                if (!data.get("date").isEmpty()) {
+                    if (!App.isValidDate(data.get("date")))
+                        throw new Exception();
+                    appointment.setDate(data.get("date"));
+                }
+                updateAppointment(appointmentIdToUpdate,appointment);
+            }else if(type.equals("UpdateProduct")){
+                Product product=new Product();
+                stateToUpdate=new ManageProductsState(this);
+                if (!data.get("price").isEmpty()){
+                    double price=Double.parseDouble(data.get("price"));
+                    product.setPrice(price);
+                }if (!data.get("name").isEmpty())
+                    product.setName(data.get("name"));
+                if (!data.get("description").isEmpty())
+                    product.setDescription(data.get("description"));
+                updateProduct(productIdToUpdate,product);
+            }else{
+                User user =new User();
+                if (!data.get("fullName").isEmpty()){
+                    user.setFullName(data.get("fullName"));
+                }if (!data.get("phone").isEmpty()){
+                    user.setPhone(data.get("phone"));
+                    //check
+                    if(data.get("phone").length()!=10)
+                        throw new Exception();
+                    Integer.parseInt(data.get("phone"));
+                }
+                if (whoLoggedIn().equals("admin")){
+                    updateAccount(userEmailToUpdate,user);
+                    stateToUpdate=new ManageAccountsState(this);
+                }
+                else{
+                    updateAccount(email,user);
+                    stateToUpdate=new ProfileState(this);
+                }
+            }
+            setState(stateToUpdate);
+        }catch (Exception e){
+            Error.setError(type);
+        }
     }
     public static boolean isValidDate(String date) {
         String regex = "^\\d{4}-\\d{2}-\\d{1,2}$";
