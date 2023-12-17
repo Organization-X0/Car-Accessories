@@ -45,8 +45,8 @@ public class ProductListingState implements State {
             }
         }
         String option = (String) input;
-        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
-        else if (option.equals("p") && Cli.page != 1) Cli.page--;
+        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
+        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
         else if (option.equals("b")) myApp.setState(new ProductCatalogState(myApp));
         else if (!option.isEmpty() && option.charAt(0) == 'f') {
             try {

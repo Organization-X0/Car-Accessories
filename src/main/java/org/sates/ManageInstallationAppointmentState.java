@@ -27,8 +27,8 @@ public class ManageInstallationAppointmentState implements State {
         ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();
         String option=(String) input;
 
-        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
-        else if (option.equals("p") && Cli.page != 1) Cli.page--;
+        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
+        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
         else if (option.equals("b")) myApp.setState(new AdminDashboardState(myApp));
         else if (option.equals("a")) myApp.setState(new AddAppointmentState(myApp));
         else if (!option.isEmpty() && option.charAt(0) == 'd') {

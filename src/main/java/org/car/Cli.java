@@ -6,10 +6,8 @@ import org.fusesource.jansi.Ansi;
 import java.util.*;
 import java.util.stream.IntStream;
 
-//import static io.cucumber.core.plugin.Formats.ansi;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
-
 
 public class Cli {
 
@@ -27,7 +25,7 @@ public class Cli {
     public static final String YYYY_MM_DD_D = "YYYY-MM-DD/D: ";
     public static final String PRODUCT_NAME_DATA = "productName";
     public static final String CAR_MAKE_DATA = "carMake";
-    public static int page=1;
+    private static int page=1;
     public static int totalPages=1;
     public static Ansi errorText(String text){
         return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();
@@ -44,10 +42,19 @@ public class Cli {
     public static Ansi greenBgText(String text){
         return ansi().eraseScreen().bg(GREEN).fgBright(WHITE).a(text).reset();
     }
-    public static Ansi purpleBoldText(String text){
-        return ansi().eraseScreen().fgBright(MAGENTA).a(text).reset();
-    }
 
+    public static void nextPage(){
+        page++;
+    }
+    public static void prevPage(){
+        page--;
+    }
+    public static int getCurrentPage(){
+        return page;
+    }
+    public static void resetPage(){
+        page=1;
+    }
     public static Map<String,String> displayLogin(){
         Scanner scanner=new Scanner(System.in);
         Map<String,String>data=new HashMap<>();
