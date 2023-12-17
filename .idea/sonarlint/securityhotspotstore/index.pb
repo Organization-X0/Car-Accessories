@@ -59,3 +59,7 @@ W
 'src/main/java/org/sates/LoginState.java,6\3\63fa33885502634bbb363b1fe9fe15c15641daa1
 \
 ,src/main/java/org/sates/AddProductState.java,3\b\3bc19e0ccea2b153b1c432d5b604d203a6f1df90
+_
+/src/test/java/org/test/ProductCatalogSteps.java,5\9\594f0faa8676fa0ed7e281d49505358a07dcbd8f
+V
+&src/test/java/org/test/StartSteps.java,8\d\8db739e07d81bc78b40802e48d4c9e20cd9b68ee
