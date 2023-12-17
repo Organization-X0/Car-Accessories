@@ -26,11 +26,8 @@ public class ManageInstallationAppointmentState implements State {
         ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();
         String option=(String) input;
 
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
-        else if (option.equals("b")) myApp.setState(new AdminDashboardState(myApp));
-        else if (option.equals("a")) myApp.setState(new AddAppointmentState(myApp));
-        else if (!option.isEmpty() && option.charAt(0) == 'd') {
+        myApp.nextPrevBackAdd(option,new AdminDashboardState(myApp),new AddAppointmentState(myApp));
+        if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 int appointmentId = appointmentArrayList.get(num - 1).getId();
@@ -48,6 +45,8 @@ public class ManageInstallationAppointmentState implements State {
             }
         }else Error.setError(getStateString());
     }
+
+
 
     @Override
     public String getStateString() {

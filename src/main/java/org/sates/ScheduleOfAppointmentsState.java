@@ -24,11 +24,8 @@ public class ScheduleOfAppointmentsState implements State {
     public void handleInput(Object input) {
         ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getApprovedAppointmentArrayList();
         String option=(String) input;
-
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
-        else if (option.equals("b")) myApp.setState(new InstallerDashboardState(myApp));
-        else if (!option.isEmpty() && option.charAt(0) == 'd') {
+        myApp.nextPrevBack(option,new InstallerDashboardState(myApp));
+        if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 int appointmentId = appointmentArrayList.get(num - 1).getId();

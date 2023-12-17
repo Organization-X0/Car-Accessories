@@ -129,3 +129,9 @@ c
 3src/test/java/org/test/NotificationCenterSteps.java,3\6\367ed3fa8cfaccf6c22d22719b8578371d3d20f1
 V
 &src/test/java/org/test/LoginSteps.java,7\4\74c22d0cea1bde81f10482b1acb7d3c07bdc5867
+Z
+*src/test/java/org/test/UserRolesSteps.java,a\a\aad276439946010e96c4f7d0e269db909c172518
+\
+,src/test/java/org/test/UserProfileSteps.java,c\3\c31dc59db06c3c5a964c51e98ea740ee081344cf
+b
+2src/test/java/org/test/CustomerDashboardSteps.java,f\3\f3fd95887791ab41c268b680d298084a44d0a8b4

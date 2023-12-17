@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.car.App;
+import org.car.Cli;
 import org.car.Error;
 import org.data.Appointment;
 import org.data.Product;
@@ -18,6 +19,7 @@ public class AdminDashboardSteps {
     App myApp;
     int id=1;
     String email="";
+    int appointmentNum=0;
     public AdminDashboardSteps(App myApp){
         this.myApp=myApp;
     }
@@ -230,5 +232,23 @@ public class AdminDashboardSteps {
     @Given("admin enters manage installation page")
     public void admin_enters_manage_installation_page() {
         myApp.getCurrentState().handleInput("4");
+    }
+    @Given("inside manage appointment")
+    public void inside_manage_appointment() {
+        myApp.setState(new ManageInstallationAppointmentState(myApp));
+    }
+
+    @Then("the system should navigate to admin dashboard")
+    public void the_system_should_navigate_to_admin_dashboard() {
+        assertTrue(myApp.getCurrentState() instanceof AdminDashboardState);
+    }
+    @Given("has appointments")
+    public void has_appointments() {
+        appointmentNum= myApp.myDatabase.getRequestedAppointmentsList().size();
+    }
+
+    @Then("the system should delete the appropriate appointment")
+    public void the_system_should_delete_the_appropriate_appointment() {
+        assertEquals(appointmentNum-1,myApp.myDatabase.getRequestedAppointmentsList().size());
     }
 }
