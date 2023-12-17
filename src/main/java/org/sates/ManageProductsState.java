@@ -14,7 +14,6 @@ public class ManageProductsState implements State {
     public void handle() {
         myApp.handelProductCatalogAndManageProducts(getStateString());
     }
-
     @Override
     public void handleInput(Object input) {
         String option = (String) input;
