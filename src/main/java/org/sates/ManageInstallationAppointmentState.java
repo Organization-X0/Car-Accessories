@@ -17,7 +17,6 @@ public class ManageInstallationAppointmentState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayInstallationAppointments(myApp.myDatabase.getRequestedAppointmentsList());
         handleInput(option);
     }

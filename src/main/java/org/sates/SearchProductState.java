@@ -13,7 +13,6 @@ public class SearchProductState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
 
         if(Error.getLocation().equals(getStateString()) && myApp.whoLoggedIn().equals("admin"))
             myApp.setState(new ManageProductsState(myApp));

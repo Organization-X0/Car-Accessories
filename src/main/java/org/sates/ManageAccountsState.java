@@ -13,7 +13,6 @@ public class ManageAccountsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayManageAccounts(myApp.myDatabase.getCustomerList());
         handleInput(option);
     }

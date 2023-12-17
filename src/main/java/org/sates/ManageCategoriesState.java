@@ -13,7 +13,6 @@ public class ManageCategoriesState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayManageCategories(myApp.myDatabase.getCategoryList());
         handleInput(option);
     }

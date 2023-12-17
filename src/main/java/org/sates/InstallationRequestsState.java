@@ -16,7 +16,6 @@ public class InstallationRequestsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayInstallationRequests(myApp.myDatabase.getRequestedAppointmentsList());
         handleInput(option);
     }

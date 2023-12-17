@@ -16,7 +16,6 @@ public class ScheduleOfAppointmentsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayScheduleOfAppointments(myApp.myDatabase.getApprovedAppointmentArrayList());
         handleInput(option);
     }
