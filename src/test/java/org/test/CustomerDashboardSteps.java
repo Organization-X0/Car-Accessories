@@ -6,14 +6,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.car.Error;
+import org.data.Appointment;
 import org.sates.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 
 public class CustomerDashboardSteps {
     App myApp;
     int size;
+    int id;
     public CustomerDashboardSteps(App myApp){
         this.myApp=myApp;
         size=0;
@@ -86,7 +90,37 @@ public class CustomerDashboardSteps {
         myApp.getCurrentState().handleInput(option);
     }
 
+    @Given("customer requesting installation services page {string}")
+    public void customer_requesting_installation_services_page(String input) {
+        myApp.getCurrentState().handleInput(input);
+    }
+    @When("the customer fills in the installation request form for service with {string}, {string}, and {string}")
+    public void the_customer_fills_in_the_installation_request_form_for_service_with_and(String product_name, String car_make, String date) {
 
+    }
+    @When("the customer fills in the installation request form for service with {string}, {string},{string} and {string}")
+    public void the_customer_fills_in_the_installation_request_form_for_service_with_and(String product_name, String car_make, String date, String time_slot) {
+        id= Appointment.getLastId();
+        Map<String,String> data=new HashMap<>();
+        data.put("email",myApp.email);
+        data.put("productName",product_name);
+        data.put("carMake",car_make);
+        data.put("date",date);
+        data.put("time",time_slot);
+        myApp.getCurrentState().handleInput(data);
+    }
+    @Then("the customer should see the available time slots for service")
+    public void the_customer_should_see_the_available_time_slots_for_service() {
+        assertTrue(myApp.availableTimesShown);
+    }
+    @Then("the customer chooses the {string} for the service")
+    public void the_customer_chooses_the_for_the_service(String time_slot) {
+        myApp.getCurrentState().handleInput(time_slot);
+    }
+    @Then("the customer's installation request for  should be submitted")
+    public void the_customer_s_installation_request_for_should_be_submitted() {
+        assertNotNull(myApp.searchAppointment(id));
+    }
 
     @Then("the orders history should be shown")
     public void the_orders_history_should_be_shown() {

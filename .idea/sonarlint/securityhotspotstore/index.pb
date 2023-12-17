@@ -135,3 +135,5 @@ Z
 ,src/test/java/org/test/UserProfileSteps.java,c\3\c31dc59db06c3c5a964c51e98ea740ee081344cf
 b
 2src/test/java/org/test/CustomerDashboardSteps.java,f\3\f3fd95887791ab41c268b680d298084a44d0a8b4
+U
+%features/InstallationRequests.feature,b\f\bf3230e944a9e3e58c2757faa21a8ff380bd1d6b

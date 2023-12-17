@@ -23,27 +23,7 @@ public class UpdateProductState implements State {
     @Override
     @SuppressWarnings("unchecked")
     public void handleInput(Object input) {
-        try{
-            Map<String, String> data;
-            if (input instanceof Map)
-                data = (Map<String, String>) input;
-            else
-                throw new Exception();
-
-            Product product = new Product();
-            if (!data.get("price").isEmpty()){
-                double price=Double.parseDouble(data.get("price"));
-                product.setPrice(price);
-            }if (!data.get("name").isEmpty())
-                product.setName(data.get("name"));
-            if (!data.get("description").isEmpty())
-                product.setDescription(data.get("description"));
-
-            myApp.updateProduct(myApp.productIdToUpdate,product);
-            myApp.setState(new ManageProductsState(myApp));
-        }catch (Exception e){
-            Error.setError(getStateString());
-        }
+        myApp.updateProductOrAppointmentOrAccount(input,getStateString());
     }
     @Override
     public String getStateString() {
