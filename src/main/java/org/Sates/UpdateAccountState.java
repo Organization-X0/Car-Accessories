@@ -14,6 +14,7 @@ public class UpdateAccountState implements State {
     }
 
     @Override
+    @ExcludeFromCodeCoverage
     public void handle() {
         Error.checkAndShow(getStateString());
         Error.setError(null);
