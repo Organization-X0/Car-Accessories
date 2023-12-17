@@ -182,6 +182,24 @@ public class App {
             searchAccount(appointment.getEmail()).addInstallations(appointment);
         }
     }
+    public void nextPrevBackAdd(String option, State backState, State addState) {
+        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
+        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        else if (option.equals("b")) setState(backState);
+        else if (option.equals("a")) setState(addState);
+    }
+    public void nextPrevBack(String option, State backState) {
+        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
+        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        else if (option.equals("b")) setState(backState);
+    }
+    public void setProductArrayListBetweenState() {
+        if(handleManageProductOutput==1){
+            productArrayListBetweenState =myDatabase.getAllProducts();
+        } else if(handleManageProductOutput!=2){
+            productArrayListBetweenState =myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();
+        }
+    }
     public void handleView(String input) {
         String option = input;
         if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();

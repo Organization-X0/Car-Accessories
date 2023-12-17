@@ -11,20 +11,12 @@ public class ProductCrudState implements State {
             this.myApp=myApp;
     }
 
-
-    private void setProductArrayListBetweenState() {
-        if(myApp.handleManageProductOutput==1){
-            myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
-        } else if(myApp.handleManageProductOutput!=2){
-            myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
-        }
-    }
     @Override
     public void handle() {
         flag=true;
         Error.checkAndShow(getStateString());
         String option;
-        setProductArrayListBetweenState();
+        myApp.setProductArrayListBetweenState();
         option = Cli.displayProducts(myApp.productArrayListBetweenState);
         handleInput(option);
     }
@@ -32,15 +24,12 @@ public class ProductCrudState implements State {
     @Override
     public void handleInput(Object input) {
         if(!flag){
-            setProductArrayListBetweenState();
+            myApp.setProductArrayListBetweenState();
         }
         String option = (String) input;
 
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
-        else if (option.equals("b")) myApp.setState(new ManageProductsState(myApp));
-        else if (option.equals("a")) myApp.setState(new AddProductState(myApp));
-        else if (!option.isEmpty() && option.charAt(0) == 'd') {
+        myApp.nextPrevBackAdd(option,new ManageProductsState(myApp),new AddProductState(myApp));
+        if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 int productId = myApp.productArrayListBetweenState.get(num - 1).getId();

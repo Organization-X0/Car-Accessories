@@ -19,11 +19,7 @@ public class ProductListingState implements State {
         flag=true;
         Error.checkAndShow(getStateString());
         String option;
-        if(myApp.handleManageProductOutput==1){
-            myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
-        } else if(myApp.handleManageProductOutput!=2){
-            myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
-        }
+        myApp.setProductArrayListBetweenState();
         option = Cli.displayCustomerProducts(myApp.productArrayListBetweenState);
         handleInput(option);
 
@@ -34,14 +30,11 @@ public class ProductListingState implements State {
 
     }
 
+
     @Override
     public void handleInput(Object input) {
         if(!flag){
-            if(myApp.handleManageProductOutput==1){
-                myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
-            } else if(myApp.handleManageProductOutput!=2){
-                myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
-            }
+            myApp.setProductArrayListBetweenState();
         }
         String option = (String) input;
         if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();

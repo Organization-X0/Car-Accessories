@@ -7,10 +7,7 @@ import org.car.App;
 import org.car.Cli;
 import org.car.Error;
 import org.data.User;
-import org.sates.CustomerDashboardState;
-import org.sates.InstallerDashboardState;
-import org.sates.LoginState;
-import org.sates.NotificationCenterState;
+import org.sates.*;
 
 import java.util.HashMap;
 import java.util.Map;
