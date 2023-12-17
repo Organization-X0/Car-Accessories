@@ -175,6 +175,12 @@ public class App {
             appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());
         }
     }
+    public void handelProductCatalogAndManageProducts(String type) {
+        Error.checkAndShow(type);
+        String option= Cli.displayManageProducts(myDatabase.getCategoryList());
+        getCurrentState().handleInput(option);
+        Cli.resetPage();
+    }
     public void confirmRequest(int id) {
         Appointment appointment=myDatabase.searchAppointment(id);
         if(appointment!=null){
