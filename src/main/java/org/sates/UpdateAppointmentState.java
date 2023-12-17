@@ -17,7 +17,6 @@ public class UpdateAppointmentState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         Map<String,String> data = Cli.displayUpdateAppointment();
         handleInput(data);
     }

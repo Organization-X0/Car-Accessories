@@ -13,7 +13,6 @@ public class ManageProductsState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayManageProducts(myApp.myDatabase.getCategoryList());
         handleInput(option);
         Cli.resetPage();

@@ -16,7 +16,6 @@ public class UpdateAccountState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         Map<String,String> data= Cli.displayUpdateAccount();
         handleInput(data);
     }

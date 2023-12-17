@@ -17,7 +17,6 @@ public class AddProductState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         Map<String,String> data = Cli.displayAddProduct(myApp.myDatabase.getCategoryList());
         dataIsEmpty=data.values().stream().allMatch(String::isEmpty);
         handleInput(data);

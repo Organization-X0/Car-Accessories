@@ -12,7 +12,6 @@ public class NotificationCenterState implements State{
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String data = Cli.displayNotificationCenter(myApp.searchAccount(myApp.email).getNotifications());
         handleInput(data);
     }

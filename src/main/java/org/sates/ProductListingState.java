@@ -18,7 +18,6 @@ public class ProductListingState implements State {
     public void handle() {
         flag=true;
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option;
         if(myApp.handleManageProductOutput==1){
             myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();

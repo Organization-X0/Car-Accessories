@@ -21,6 +21,7 @@ public class Error {
         if(Error.getLocation()!=null && Error.getLocation().equals(location)){
             Cli.displayMsg(Error.getMsg(),false);
         }
+        setError(null);
     }
     public static String getLocation(){
         return location;

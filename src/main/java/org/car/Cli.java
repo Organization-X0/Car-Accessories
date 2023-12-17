@@ -55,6 +55,12 @@ public class Cli {
     public static void resetPage(){
         page=1;
     }
+    public static void setTotalPages(int n){
+        totalPages=n;
+    }
+    public static void setPage(int n){
+        page=n;
+    }
     public static Map<String,String> displayLogin(){
         Scanner scanner=new Scanner(System.in);
         Map<String,String>data=new HashMap<>();

@@ -13,7 +13,6 @@ public class AddCategoryState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String name= Cli.displayAddCategory();
         handleInput(name);
         if(!Error.getLocation().equals(getStateString()) && !name.isEmpty()){

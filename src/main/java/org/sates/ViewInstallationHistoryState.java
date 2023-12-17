@@ -13,7 +13,6 @@ public class ViewInstallationHistoryState implements State {
     @Override
     public void handle() {
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         String option= Cli.displayInstallationHistory(myApp.searchAccount(myApp.email).getInstallations());
         handleInput(option);
     }

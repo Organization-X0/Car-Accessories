@@ -11,17 +11,20 @@ public class ProductCrudState implements State {
             this.myApp=myApp;
     }
 
-    @Override
-    public void handle() {
-        flag=true;
-        Error.checkAndShow(getStateString());
-        Error.setError(null);
-        String option;
+
+    private void setProductArrayListBetweenState() {
         if(myApp.handleManageProductOutput==1){
             myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
         } else if(myApp.handleManageProductOutput!=2){
             myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
         }
+    }
+    @Override
+    public void handle() {
+        flag=true;
+        Error.checkAndShow(getStateString());
+        String option;
+        setProductArrayListBetweenState();
         option = Cli.displayProducts(myApp.productArrayListBetweenState);
         handleInput(option);
     }
@@ -29,11 +32,7 @@ public class ProductCrudState implements State {
     @Override
     public void handleInput(Object input) {
         if(!flag){
-            if(myApp.handleManageProductOutput==1){
-                myApp.productArrayListBetweenState =myApp.myDatabase.getAllProducts();
-            } else if(myApp.handleManageProductOutput!=2){
-                myApp.productArrayListBetweenState =myApp.myDatabase.getCategoryList().get(myApp.handleManageProductOutput-3).getProductsList();
-            }
+            setProductArrayListBetweenState();
         }
         String option = (String) input;
 

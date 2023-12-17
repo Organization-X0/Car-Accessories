@@ -18,7 +18,6 @@ public class AddAppointmentState implements State {
     public void handle() {
         Map<String,String> data;
         Error.checkAndShow(getStateString());
-        Error.setError(null);
         if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);
         else data = Cli.displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());
         dataIsEmpty=true;
