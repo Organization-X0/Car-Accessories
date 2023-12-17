@@ -1,0 +1,8 @@
+
+Z	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe
+Z	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe
+a
+java:S1192%"FDefine a constant instead of duplicating this literal "phone" 4 times.(óƒİ¢ùÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‡øÿÿÿÿ
+R
+java:S3972%"7Move this "if" to a new line or add the missing "else".(óƒİ¢ùÿÿÿÿ
