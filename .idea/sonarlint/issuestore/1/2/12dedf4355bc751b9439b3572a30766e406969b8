@@ -1,0 +1,25 @@
+
+—
+java:S1319"|The type of "productArrayListBetweenState" should be an interface such as "List" rather than the implementation "ArrayList".(£êšãúÿÿÿÿ
+‰
+java:S1319"nThe type of "availableTimes" should be an interface such as "List" rather than the implementation "ArrayList".(‚ÓŠªşÿÿÿÿ
+u
+java:S1104"_Make availableTimesShown a static final constant or non-public and provide accessors if needed.(ç¸îß
+€
+java:S1104"eMake handleManageProductOutput a static final constant or non-public and provide accessors if needed.(‰¼Ïêùÿÿÿÿ
+x
+java:S1104"]Make productIdToUpdate a static final constant or non-public and provide accessors if needed.(ù’’îùÿÿÿÿ
+|
+java:S1104"aMake appointmentIdToUpdate a static final constant or non-public and provide accessors if needed.(è†„úÿÿÿÿ
+f
+java:S1104"PMake exit a static final constant or non-public and provide accessors if needed.(…ã÷
+v
+java:S1104"`Make categoryNameToUpdate a static final constant or non-public and provide accessors if needed.(Ë×ù
+r
+java:S1104"]Make userEmailToUpdate a static final constant or non-public and provide accessors if needed.(Ü¨C
+ƒ
+java:S1104"hMake productArrayListBetweenState a static final constant or non-public and provide accessors if needed.(£êšãúÿÿÿÿ
+u
+java:S1104"ZMake availableTimes a static final constant or non-public and provide accessors if needed.(‚ÓŠªşÿÿÿÿ
+l
+java:S1104"QMake email a static final constant or non-public and provide accessors if needed.(¾Æ†Ëıÿÿÿÿ
