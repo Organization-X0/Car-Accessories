@@ -182,6 +182,13 @@ public class App {
             searchAccount(appointment.getEmail()).addInstallations(appointment);
         }
     }
+    public void handleView(String input) {
+        String option = input;
+        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
+        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        else if (option.equals("b")) setState(new ProfileState(this));
+        else Error.setError(getCurrentState().getStateString());
+    }
     public static boolean isValidDate(String date) {
         String regex = "^\\d{4}-\\d{2}-\\d{1,2}$";
         Pattern pattern = Pattern.compile(regex);

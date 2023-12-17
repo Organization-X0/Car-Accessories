@@ -20,11 +20,7 @@ public class ViewOrderHistoryState implements State {
 
     @Override
     public void handleInput(Object input) {
-        String option = (String) input;
-        if (option.equals("n") && Cli.page != Cli.totalPages) Cli.page++;
-        else if (option.equals("p") && Cli.page != 1) Cli.page--;
-        else if (option.equals("b")) myApp.setState(new ProfileState(myApp));
-        else Error.setError(myApp.getCurrentState().getStateString());
+        myApp.handleView((String) input);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class ManageProductsState implements State {
         Error.setError(null);
         String option= Cli.displayManageProducts(myApp.myDatabase.getCategoryList());
         handleInput(option);
-        Cli.page=1;
+        Cli.resetPage();
     }
 
     @Override
