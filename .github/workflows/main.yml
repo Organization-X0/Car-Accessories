@@ -18,7 +18,7 @@ jobs:
       - name: Step 3 - Build Maven Project
         run: mvn --batch-mode clean install package -DskipTests  
       - name: Step 4 - run test cases and generate JaCoCo report
-        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test -Dtest=RunCucumber jacoco:report
+        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test jacoco:report
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
