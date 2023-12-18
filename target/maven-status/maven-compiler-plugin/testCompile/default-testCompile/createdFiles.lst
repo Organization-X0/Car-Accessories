@@ -1,0 +1,13 @@
+org\test\RunCucumberTest.class
+org\test\InstallerDashboardSteps.class
+org\test\UserRolesSteps.class
+org\test\AdminDashboardSteps.class
+org\test\CustomerDashboardSteps.class
+org\test\SignUpSteps.class
+org\test\StartTest.class
+org\test\InstallationRequestSteps.class
+org\test\ProductCatalogSteps.class
+org\test\StartSteps.class
+org\test\NotificationCenterSteps.class
+org\test\LoginSteps.class
+org\test\UserProfileSteps.class

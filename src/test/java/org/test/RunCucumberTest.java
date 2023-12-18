@@ -7,9 +7,9 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "features", glue = {"org.test"}, plugin = {"html:target/cucumber-reports.html"})
 
-public class RunCucumber {
+public class RunCucumberTest {
     App myApp;
-    public RunCucumber(App myApp){
+    public RunCucumberTest(App myApp){
        this.myApp=myApp;
     }
 }

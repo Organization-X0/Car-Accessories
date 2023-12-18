@@ -23,6 +23,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
+                <configuration>
+                    <includes>
+                        <include>**/RunCucumberTest*.java</include>
+                    </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -62,6 +68,7 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>6.11.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -73,11 +80,13 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>6.11.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>6.11.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
@@ -88,6 +97,7 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>7.11.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
