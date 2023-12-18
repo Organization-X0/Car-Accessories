@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class ProductCrudState implements State {
@@ -14,10 +13,10 @@ public class ProductCrudState implements State {
     @Override
     public void handle() {
         flag=true;
-        Error.checkAndShow(getStateString());
+        Error.checkAndShow(getStateString(),myApp);
         String option;
         myApp.setProductArrayListBetweenState();
-        option = Cli.displayProducts(myApp.productArrayListBetweenState);
+        option = myApp.getCli().displayProducts(myApp.productArrayListBetweenState);
         handleInput(option);
     }
 

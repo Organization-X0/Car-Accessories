@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 import org.data.User;
 
@@ -17,13 +16,13 @@ public class AddAppointmentState implements State {
     @Override
     public void handle() {
         Map<String,String> data;
-        Error.checkAndShow(getStateString());
-        if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);
-        else data = Cli.displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());
+        Error.checkAndShow(getStateString(),myApp);
+        if(myApp.whoLoggedIn().equals("admin")) data = myApp.getCli().displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);
+        else data = myApp.getCli().displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());
         dataIsEmpty=setDataIsEmpty(data);
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
-            if(!dataIsEmpty) Cli.displayMsg(" Appointment added successfully! ",true);
+            if(!dataIsEmpty) myApp.getCli().displayMsg(" Appointment added successfully! ",true);
             myApp.availableTimesShown=false;
             if(myApp.whoLoggedIn().equals("admin")) myApp.setState(new ManageInstallationAppointmentState(myApp));
             else myApp.setState(new CustomerDashboardState(myApp));

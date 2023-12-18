@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class StartState implements State{
@@ -11,8 +10,8 @@ public class StartState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option = Cli.displayStart();
+        Error.checkAndShow(getStateString(),myApp);
+        String option = myApp.getCli().displayStart();
         handleInput(option);
     }
 

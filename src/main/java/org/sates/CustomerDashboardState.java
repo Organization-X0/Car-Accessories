@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 import org.data.User;
 
@@ -15,8 +14,8 @@ public class CustomerDashboardState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option= Cli.displayCustomerDashboard(account);
+        Error.checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayCustomerDashboard(account);
         handleInput(option);
     }
 

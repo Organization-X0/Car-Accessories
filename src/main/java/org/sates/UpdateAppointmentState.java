@@ -1,12 +1,8 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
-import org.data.Appointment;
-import org.data.Product;
 
-import java.sql.Array;
 import java.util.Map;
 
 public class UpdateAppointmentState implements State {
@@ -17,8 +13,8 @@ public class UpdateAppointmentState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        Map<String,String> data = Cli.displayUpdateAppointment();
+        Error.checkAndShow(getStateString(),myApp);
+        Map<String,String> data = myApp.getCli().displayUpdateAppointment();
         handleInput(data);
     }
     @Override

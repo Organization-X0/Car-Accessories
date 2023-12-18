@@ -19,6 +19,7 @@ public class App {
     public int appointmentIdToUpdate;
     public boolean exit;
     public final DataBase myDatabase;
+    public final Cli cli;
     public String categoryNameToUpdate;
     public String userEmailToUpdate;
     public ArrayList<Product> productArrayListBetweenState;
@@ -34,6 +35,7 @@ public class App {
         myDatabase=new DataBase();
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
+        cli=new Cli();
 
         Product.setLastId(myDatabase);
         Appointment.setLastId(myDatabase);
@@ -43,6 +45,9 @@ public class App {
     }
     public void setState(State state) {
         this.state = state;
+    }
+    public Cli getCli(){
+        return this.cli;
     }
     public State getCurrentState(){
         return state;
@@ -176,7 +181,7 @@ public class App {
         }
     }
     public void handelProductCatalogAndManageProducts(String type) {
-        Error.checkAndShow(type);
+        Error.checkAndShow(type,this);
         String option= Cli.displayManageProducts(myDatabase.getCategoryList());
         getCurrentState().handleInput(option);
         Cli.resetPage();

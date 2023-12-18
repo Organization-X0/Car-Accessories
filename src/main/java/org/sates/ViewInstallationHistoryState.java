@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class ViewInstallationHistoryState implements State {
@@ -12,8 +11,8 @@ public class ViewInstallationHistoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option= Cli.displayInstallationHistory(myApp.searchAccount(myApp.email).getInstallations());
+        Error.checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayInstallationHistory(myApp.searchAccount(myApp.email).getInstallations());
         handleInput(option);
     }
 

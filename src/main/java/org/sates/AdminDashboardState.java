@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class AdminDashboardState implements State {
@@ -12,8 +11,8 @@ public class AdminDashboardState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option = Cli.displayAdminDashboard();
+        Error.checkAndShow(getStateString(),myApp);
+        String option = myApp.getCli().displayAdminDashboard();
         handleInput(option);
     }
 

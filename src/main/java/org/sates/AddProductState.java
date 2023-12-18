@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 import java.util.Map;
@@ -16,12 +15,12 @@ public class AddProductState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        Map<String,String> data = Cli.displayAddProduct(myApp.myDatabase.getCategoryList());
+        Error.checkAndShow(getStateString(),myApp);
+        Map<String,String> data = myApp.getCli().displayAddProduct(myApp.myDatabase.getCategoryList());
         dataIsEmpty=data.values().stream().allMatch(String::isEmpty);
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
-            if(!dataIsEmpty) Cli.displayMsg(" Product added successfully! ",true);
+            if(!dataIsEmpty) myApp.getCli().displayMsg(" Product added successfully! ",true);
             myApp.setState(new ManageProductsState(myApp));
         }
     }

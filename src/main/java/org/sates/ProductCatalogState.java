@@ -1,8 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
-import org.car.Error;
 
 public class ProductCatalogState implements State {
 

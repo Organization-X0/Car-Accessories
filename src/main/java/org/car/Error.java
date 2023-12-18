@@ -17,9 +17,9 @@ public class Error {
             case "null" -> msg="";
         }
     }
-    public static void checkAndShow(String location){
+    public static void checkAndShow(String location,App myApp){
         if(Error.getLocation()!=null && Error.getLocation().equals(location)){
-            Cli.displayMsg(Error.getMsg(),false);
+            myApp.cli.displayMsg(Error.getMsg(),false);
         }
         setError(null);
     }

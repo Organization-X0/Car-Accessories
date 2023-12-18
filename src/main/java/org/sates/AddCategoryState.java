@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class AddCategoryState implements State {
@@ -12,14 +11,15 @@ public class AddCategoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String name= Cli.displayAddCategory();
+        Error.checkAndShow(getStateString(),myApp);
+        String name= myApp.getCli().displayAddCategory();
         handleInput(name);
         if(!Error.getLocation().equals(getStateString()) && !name.isEmpty()){
-            Cli.displayMsg(" Category added successfully! ",true);
+            myApp.getCli().displayMsg(" Category added successfully! ",true);
         }
     }
 
+    
     @Override
     public void handleInput(Object input) {
         String name = (String)input;

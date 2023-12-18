@@ -1,9 +1,7 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
-import org.data.User;
 
 import java.util.Map;
 
@@ -15,8 +13,8 @@ public class UpdateAccountState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        Map<String,String> data= Cli.displayUpdateAccount();
+        Error.checkAndShow(getStateString(),myApp);
+        Map<String,String> data= myApp.getCli().displayUpdateAccount();
         handleInput(data);
     }
 

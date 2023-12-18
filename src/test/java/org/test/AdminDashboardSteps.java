@@ -4,7 +4,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 import org.data.Appointment;
 import org.data.Product;

@@ -1,9 +1,7 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
-import org.data.Product;
 
 import java.util.Map;
 
@@ -15,8 +13,8 @@ public class UpdateProductState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        Map<String,String> data = Cli.displayUpdateProduct();
+        Error.checkAndShow(getStateString(),myApp);
+        Map<String,String> data = myApp.getCli().displayUpdateProduct();
         handleInput(data);
     }
 
