@@ -2,6 +2,7 @@ package org.test;
 
 import org.car.App;
 import org.car.Cli;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -11,6 +12,7 @@ import org.sates.StartState;
 
 import static org.mockito.Mockito.*;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class StartTest {
 
@@ -18,9 +20,6 @@ public class StartTest {
     private App myApp;
     @Mock
     private Cli cli;
-
-    @Mock
-    private Error error;
 
     @Test
     public void testHandle() {
@@ -35,7 +34,6 @@ public class StartTest {
 
         // Then
         verify(cli).displayStart();
-//        verify(error).checkAndShow(anyString());
         verify(myApp).setState(any(LoginState.class));
     }
 }

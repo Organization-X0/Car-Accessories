@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.car</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package org.car;
+
+import org.data.*;
+import org.sates.*;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class App {
+    public boolean availableTimesShown;
+    private State state;
+
+    public final SignUp mySignUp;
+    public final Login myLogin;
+<span class="fc" id="L17">    public int handleManageProductOutput=1;</span>
+    public int productIdToUpdate;
+    public int appointmentIdToUpdate;
+    public boolean exit;
+    public final DataBase myDatabase;
+    public final Cli cli;
+    public String categoryNameToUpdate;
+    public String userEmailToUpdate;
+    public ArrayList&lt;Product&gt; productArrayListBetweenState;
+    public ArrayList&lt;Time&gt; availableTimes;
+
+    public String email;
+
+
+<span class="fc" id="L31">    public App(){</span>
+
+<span class="fc" id="L33">        exit=false;</span>
+<span class="fc" id="L34">        availableTimesShown=false;</span>
+<span class="fc" id="L35">        myDatabase=new DataBase();</span>
+<span class="fc" id="L36">        mySignUp=new SignUp(myDatabase);</span>
+<span class="fc" id="L37">        myLogin=new Login(myDatabase);</span>
+<span class="fc" id="L38">        cli=new Cli();</span>
+
+<span class="fc" id="L40">        Product.setLastId(myDatabase);</span>
+<span class="fc" id="L41">        Appointment.setLastId(myDatabase);</span>
+
+        //Initial State
+<span class="fc" id="L44">        state=new StartState(this);</span>
+<span class="fc" id="L45">    }</span>
+    public void setState(State state) {
+<span class="fc" id="L47">        this.state = state;</span>
+<span class="fc" id="L48">    }</span>
+    public Cli getCli(){
+<span class="fc" id="L50">        return this.cli;</span>
+    }
+    public State getCurrentState(){
+<span class="fc" id="L53">        return state;</span>
+    }
+    public void render(){
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        while(!exit) {</span>
+<span class="nc" id="L57">            state.handle();</span>
+        }
+<span class="nc" id="L59">    }</span>
+    public void login(String email,String password){
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if(myLogin.loginNow(email,password)){</span>
+<span class="fc" id="L62">            this.email=email;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            if(email.equals(&quot;admin@gmail.com&quot;))</span>
+<span class="fc" id="L64">                setState(new AdminDashboardState(this));</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            else if(email.equals(&quot;installer@gmail.com&quot;))</span>
+<span class="fc" id="L66">                setState(new InstallerDashboardState(this));</span>
+            else
+<span class="fc" id="L68">                setState(new CustomerDashboardState(this));</span>
+
+<span class="fc" id="L70">            return;</span>
+        }
+<span class="fc" id="L72">        Error.setError(getCurrentState().getStateString());</span>
+
+<span class="fc" id="L74">    }</span>
+    public void signUp(String fullName, String email,String phone ,String password) {
+<span class="fc bfc" id="L76" title="All 2 branches covered.">       if(mySignUp.signUpNow(fullName,email,phone,password)){</span>
+<span class="fc" id="L77">           setState(new LoginState(this));</span>
+<span class="fc" id="L78">           return;</span>
+       }
+<span class="fc" id="L80">        Error.setError(getCurrentState().getStateString());</span>
+<span class="fc" id="L81">    }</span>
+    public String whoLoggedIn(){
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if(email.equals(&quot;admin@gmail.com&quot;))</span>
+<span class="fc" id="L84">            return &quot;admin&quot;;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        else if(email.equals(&quot;installer@gmail.com&quot;))</span>
+<span class="fc" id="L86">            return &quot;installer&quot;;</span>
+        else
+<span class="fc" id="L88">            return &quot;customer&quot;;</span>
+    }
+
+    public void addProduct(String name, String category, String description, double price ) {
+<span class="fc" id="L92">        Category categoryObj=myDatabase.searchCategory(category);</span>
+<span class="fc" id="L93">        categoryObj.addProduct(new Product(name,category,description,price,true));</span>
+<span class="fc" id="L94">    }</span>
+
+    public void updateProduct(int id,Product updatedProduct) {
+
+<span class="fc" id="L98">        Product product=myDatabase.searchOneProduct(id);</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (product != null) {</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">            product.setName(updatedProduct.getName() != null ? updatedProduct.getName() : product.getName());</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">            product.setPrice(updatedProduct.getPrice() != null ? updatedProduct.getPrice() : product.getPrice());</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">            product.setCategory(updatedProduct.getCategory() != null ? updatedProduct.getCategory() : product.getCategory());</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">            product.setAvailability(updatedProduct.isAvailability() != product.isAvailability() ? updatedProduct.isAvailability():product.isAvailability());</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            product.setDescription(updatedProduct.getDescription() !=null ? updatedProduct.getDescription() : product.getDescription());</span>
+        }
+<span class="fc" id="L106">    }</span>
+    public void deleteProduct(int id){
+<span class="fc" id="L108">        Product product=myDatabase.searchOneProduct(id);</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if(product!=null)</span>
+<span class="fc" id="L110">            myDatabase.deleteProduct(product);</span>
+<span class="fc" id="L111">    }</span>
+
+    public Product searchProduct(int id) {
+<span class="fc" id="L114">        return myDatabase.searchOneProduct(id);</span>
+    }
+
+    public void addCategory(String name) {
+<span class="fc" id="L118">        myDatabase.addCategory(new Category(name));</span>
+<span class="fc" id="L119">    }</span>
+
+    public Category searchCategory(String category) {
+<span class="fc" id="L122">        return myDatabase.searchCategory(category);</span>
+    }
+
+    public void updateCategory(String name, String newName) {
+<span class="fc" id="L126">        Category category=myDatabase.searchCategory(name);</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if(category!=null){</span>
+<span class="fc" id="L128">            category.setName(newName);</span>
+        }
+<span class="fc" id="L130">    }</span>
+
+    public void deleteCategory(String name) {
+<span class="fc" id="L133">       Category category=myDatabase.searchCategory(name);</span>
+<span class="fc" id="L134">       myDatabase.deleteCategory(category);</span>
+<span class="fc" id="L135">    }</span>
+
+    public void deleteAccount(String email) {
+<span class="fc" id="L138">        User user=myDatabase.searchAccount(email);</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if(user!=null)</span>
+<span class="fc" id="L140">            myDatabase.deleteAccount(user);</span>
+<span class="fc" id="L141">    }</span>
+
+    public User searchAccount(String email) {
+<span class="fc" id="L144">        return myDatabase.searchAccount(email);</span>
+    }
+
+    public void updateAccount(String email,User updatedUser) {
+<span class="fc" id="L148">        User user=myDatabase.searchAccount(email);</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">            user.setFullName(updatedUser.getFullName() != null ? updatedUser.getFullName() : user.getFullName());</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">            user.setPhone(updatedUser.getPhone() != null ? updatedUser.getPhone() : user.getPhone());</span>
+        }
+<span class="fc" id="L153">    }</span>
+
+    public void addAppointment(String email, String productName, String carMake, String date,int time) {
+<span class="nc" id="L156">        myDatabase.addAppointment(new Appointment(email,productName,carMake,date,availableTimes.get(time-1)));</span>
+<span class="nc" id="L157">    }</span>
+
+    public Appointment searchAppointment(int id) {
+<span class="fc" id="L160">        return myDatabase.searchAppointment(id);</span>
+    }
+
+    public void deleteAppointment(int id) {
+<span class="fc" id="L164">        Appointment appointment=myDatabase.searchAppointment(id);</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        if(appointment!=null) myDatabase.deleteAppointment(appointment);</span>
+<span class="fc" id="L166">    }</span>
+    public void deleteApprovedAppointment(int id) {
+<span class="fc" id="L168">        Appointment appointment=myDatabase.searchApprovedAppointment(id);</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        if(appointment!=null) myDatabase.deleteApprovedAppointment(appointment);</span>
+<span class="fc" id="L170">    }</span>
+    public Appointment searchApprovedAppointment(int id) {
+<span class="fc" id="L172">        return myDatabase.searchApprovedAppointment(id);</span>
+    }
+    public void updateAppointment(int id,Appointment updatedAppointment){
+<span class="fc" id="L175">        Appointment appointment=myDatabase.searchAppointment(id);</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">        if (appointment!= null) {</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">            appointment.setEmail(updatedAppointment.getEmail() != null ? updatedAppointment.getEmail() : appointment.getEmail());</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">            appointment.setCarMake(updatedAppointment.getCarMake() != null ? updatedAppointment.getCarMake(): appointment.getCarMake());</span>
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">            appointment.setDate(updatedAppointment.getDate()!= null ? updatedAppointment.getDate(): appointment.getDate());</span>
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">            appointment.setProductName(updatedAppointment.getProductName() != null ? updatedAppointment.getProductName() : appointment.getProductName());</span>
+        }
+<span class="fc" id="L182">    }</span>
+    public void handelProductCatalogAndManageProducts(String type) {
+<span class="nc" id="L184">        Error.checkAndShow(type,this);</span>
+<span class="nc" id="L185">        String option= Cli.displayManageProducts(myDatabase.getCategoryList());</span>
+<span class="nc" id="L186">        getCurrentState().handleInput(option);</span>
+<span class="nc" id="L187">        Cli.resetPage();</span>
+<span class="nc" id="L188">    }</span>
+    public void confirmRequest(int id) {
+<span class="fc" id="L190">        Appointment appointment=myDatabase.searchAppointment(id);</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        if(appointment!=null){</span>
+<span class="fc" id="L192">            myDatabase.addApprovedAppointment(appointment);</span>
+<span class="fc" id="L193">            myDatabase.deleteAppointment(appointment);</span>
+<span class="fc" id="L194">            searchAccount(appointment.getEmail()).addInstallations(appointment);</span>
+        }
+<span class="fc" id="L196">    }</span>
+    public void nextPrevBackAdd(String option, State backState, State addState) {
+<span class="pc bpc" id="L198" title="1 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();</span>
+<span class="pc bpc" id="L199" title="1 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; Cli.getCurrentPage() != 1) Cli.prevPage();</span>
+<span class="fc bfc" id="L200" title="All 2 branches covered.">        else if (option.equals(&quot;b&quot;)) setState(backState);</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        else if (option.equals(&quot;a&quot;)) setState(addState);</span>
+<span class="fc" id="L202">    }</span>
+    public void nextPrevBack(String option, State backState) {
+<span class="pc bpc" id="L204" title="3 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();</span>
+<span class="pc bpc" id="L205" title="3 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; Cli.getCurrentPage() != 1) Cli.prevPage();</span>
+<span class="pc bpc" id="L206" title="1 of 2 branches missed.">        else if (option.equals(&quot;b&quot;)) setState(backState);</span>
+<span class="fc" id="L207">    }</span>
+    public void setProductArrayListBetweenState() {
+<span class="fc bfc" id="L209" title="All 2 branches covered.">        if(handleManageProductOutput==1){</span>
+<span class="fc" id="L210">            productArrayListBetweenState =myDatabase.getAllProducts();</span>
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        } else if(handleManageProductOutput!=2){</span>
+<span class="fc" id="L212">            productArrayListBetweenState =myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();</span>
+        }
+<span class="fc" id="L214">    }</span>
+    public void handleView(String input) {
+<span class="fc" id="L216">        String option = input;</span>
+<span class="pc bpc" id="L217" title="1 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();</span>
+<span class="pc bpc" id="L218" title="1 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; Cli.getCurrentPage() != 1) Cli.prevPage();</span>
+<span class="pc bpc" id="L219" title="1 of 2 branches missed.">        else if (option.equals(&quot;b&quot;)) setState(new ProfileState(this));</span>
+<span class="nc" id="L220">        else Error.setError(getCurrentState().getStateString());</span>
+<span class="fc" id="L221">    }</span>
+    public void navigateProductsMenu(String option, State first, State second, State third, String error) {
+        try {
+<span class="fc" id="L224">            int intOption = Integer.parseInt(option);</span>
+<span class="pc bpc" id="L225" title="1 of 6 branches missed.">            if (intOption == 1 || (intOption != 2 &amp;&amp; intOption &lt; (3 + myDatabase.getCategoryList().size()))) {</span>
+<span class="fc" id="L226">                setState(first);</span>
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">            } else if (intOption == 2) {</span>
+<span class="fc" id="L228">                setState(second);</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">            } else if (intOption == 3 + myDatabase.getCategoryList().size()) {</span>
+<span class="nc" id="L230">                setState(third);</span>
+            } else {
+<span class="nc" id="L232">                throw new Exception(&quot;invalid input&quot;);</span>
+            }
+<span class="fc" id="L234">            handleManageProductOutput = intOption;</span>
+<span class="nc" id="L235">        } catch (Exception e) {</span>
+<span class="nc" id="L236">            Error.setError(error);</span>
+<span class="nc" id="L237">            handleManageProductOutput = 0;</span>
+<span class="fc" id="L238">        }</span>
+<span class="fc" id="L239">    }</span>
+    public void updateProductOrAppointmentOrAccount(Object input,String type){
+        try{
+            Map&lt;String, String&gt; data;
+<span class="pc bpc" id="L243" title="1 of 2 branches missed.">            if (input instanceof Map)</span>
+<span class="fc" id="L244">                data = (Map&lt;String, String&gt;) input;</span>
+            else
+<span class="nc" id="L246">                throw new Exception();</span>
+            State stateToUpdate;
+<span class="fc bfc" id="L248" title="All 2 branches covered.">            if(type.equals(&quot;UpdateAppointment&quot;)){</span>
+<span class="fc" id="L249">                Appointment appointment= new Appointment();</span>
+<span class="fc" id="L250">                stateToUpdate=new ManageInstallationAppointmentState(this);</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">                if (!data.get(&quot;email&quot;).isEmpty()){</span>
+<span class="fc" id="L252">                    appointment.setEmail(data.get(&quot;email&quot;));</span>
+<span class="pc bpc" id="L253" title="1 of 2 branches missed.">                }if (!data.get(&quot;productName&quot;).isEmpty())</span>
+<span class="fc" id="L254">                    appointment.setProductName(data.get(&quot;productName&quot;));</span>
+<span class="pc bpc" id="L255" title="1 of 2 branches missed.">                if (!data.get(&quot;carMake&quot;).isEmpty())</span>
+<span class="fc" id="L256">                    appointment.setCarMake(data.get(&quot;carMake&quot;));</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">                if (!data.get(&quot;date&quot;).isEmpty()) {</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">                    if (!App.isValidDate(data.get(&quot;date&quot;)))</span>
+<span class="nc" id="L259">                        throw new Exception();</span>
+<span class="fc" id="L260">                    appointment.setDate(data.get(&quot;date&quot;));</span>
+                }
+<span class="fc" id="L262">                updateAppointment(appointmentIdToUpdate,appointment);</span>
+<span class="fc bfc" id="L263" title="All 2 branches covered.">            }else if(type.equals(&quot;UpdateProduct&quot;)){</span>
+<span class="fc" id="L264">                Product product=new Product();</span>
+<span class="fc" id="L265">                stateToUpdate=new ManageProductsState(this);</span>
+<span class="pc bpc" id="L266" title="1 of 2 branches missed.">                if (!data.get(&quot;price&quot;).isEmpty()){</span>
+<span class="fc" id="L267">                    double price=Double.parseDouble(data.get(&quot;price&quot;));</span>
+<span class="fc" id="L268">                    product.setPrice(price);</span>
+<span class="pc bpc" id="L269" title="1 of 2 branches missed.">                }if (!data.get(&quot;name&quot;).isEmpty())</span>
+<span class="fc" id="L270">                    product.setName(data.get(&quot;name&quot;));</span>
+<span class="pc bpc" id="L271" title="1 of 2 branches missed.">                if (!data.get(&quot;description&quot;).isEmpty())</span>
+<span class="fc" id="L272">                    product.setDescription(data.get(&quot;description&quot;));</span>
+<span class="fc" id="L273">                updateProduct(productIdToUpdate,product);</span>
+<span class="fc" id="L274">            }else{</span>
+<span class="fc" id="L275">                User user =new User();</span>
+<span class="pc bpc" id="L276" title="1 of 2 branches missed.">                if (!data.get(&quot;fullName&quot;).isEmpty()){</span>
+<span class="fc" id="L277">                    user.setFullName(data.get(&quot;fullName&quot;));</span>
+<span class="pc bpc" id="L278" title="1 of 2 branches missed.">                }if (!data.get(&quot;phone&quot;).isEmpty()){</span>
+<span class="fc" id="L279">                    user.setPhone(data.get(&quot;phone&quot;));</span>
+                    //check
+<span class="pc bpc" id="L281" title="1 of 2 branches missed.">                    if(data.get(&quot;phone&quot;).length()!=10)</span>
+<span class="nc" id="L282">                        throw new Exception();</span>
+<span class="fc" id="L283">                    Integer.parseInt(data.get(&quot;phone&quot;));</span>
+                }
+<span class="fc bfc" id="L285" title="All 2 branches covered.">                if (whoLoggedIn().equals(&quot;admin&quot;)){</span>
+<span class="fc" id="L286">                    updateAccount(userEmailToUpdate,user);</span>
+<span class="fc" id="L287">                    stateToUpdate=new ManageAccountsState(this);</span>
+                }
+                else{
+<span class="fc" id="L290">                    updateAccount(email,user);</span>
+<span class="fc" id="L291">                    stateToUpdate=new ProfileState(this);</span>
+                }
+            }
+<span class="fc" id="L294">            setState(stateToUpdate);</span>
+<span class="nc" id="L295">        }catch (Exception e){</span>
+<span class="nc" id="L296">            Error.setError(type);</span>
+<span class="fc" id="L297">        }</span>
+<span class="fc" id="L298">    }</span>
+    public static boolean isValidDate(String date) {
+<span class="fc" id="L300">        String regex = &quot;^\\d{4}-\\d{2}-\\d{1,2}$&quot;;</span>
+<span class="fc" id="L301">        Pattern pattern = Pattern.compile(regex);</span>
+<span class="fc" id="L302">        Matcher matcher = pattern.matcher(date);</span>
+<span class="fc" id="L303">        return matcher.matches();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

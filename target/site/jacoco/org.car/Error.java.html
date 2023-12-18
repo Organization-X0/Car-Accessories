@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Error.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.car</a> &gt; <span class="el_source">Error.java</span></div><h1>Error.java</h1><pre class="source lang-java linenums">package org.car;
+
+import java.util.Objects;
+
+<span class="nc" id="L5">public class Error {</span>
+<span class="fc" id="L6">    private static String location= null;</span>
+    private static String msg;
+
+    public static void setError(String locationPara){
+<span class="fc" id="L10">        location = Objects.requireNonNullElse(locationPara, &quot;null&quot;);</span>
+<span class="pc bpc" id="L11" title="1 of 7 branches missed.">        switch (location){</span>
+<span class="fc" id="L12">            case &quot;Start&quot;, &quot;AdminDashboard&quot;,&quot;CustomerDashboard&quot;,&quot;ProductListing&quot;,&quot;ManageProducts&quot;,&quot;ProductCRUD&quot;,&quot;ViewOrderHistory&quot;,&quot;ScheduleOfAppointments&quot;,&quot;InstallationRequests&quot;,&quot;NotificationCenter&quot;,&quot;Profile&quot;,&quot;ViewInstallationHistory&quot;,&quot;ProductCatalog&quot; -&gt; msg=&quot; Invalid Option! &quot;;</span>
+<span class="fc" id="L13">            case &quot;Login&quot; -&gt; msg=&quot; Not Registered! &quot;;</span>
+<span class="fc" id="L14">            case &quot;SignUp&quot;,&quot;SearchProduct&quot;,&quot;UpdateProduct&quot;,&quot;ManageCategories&quot;,&quot;ManageAccounts&quot;,&quot;AddAppointment&quot; -&gt; msg=&quot; Invalid Data! &quot;;</span>
+<span class="fc" id="L15">            case &quot;AddProduct&quot; -&gt; msg=&quot; Failed to add a product! &quot;;</span>
+<span class="nc" id="L16">            case &quot;UpdateAccount&quot; -&gt; msg=&quot; Invalid Data! (make sure the phone number is 10 digits) &quot;;</span>
+<span class="fc" id="L17">            case &quot;null&quot; -&gt; msg=&quot;&quot;;</span>
+        }
+<span class="fc" id="L19">    }</span>
+    public static void checkAndShow(String location,App myApp){
+<span class="pc bpc" id="L21" title="1 of 4 branches missed.">        if(Error.getLocation()!=null &amp;&amp; Error.getLocation().equals(location)){</span>
+<span class="nc" id="L22">            myApp.cli.displayMsg(Error.getMsg(),false);</span>
+        }
+<span class="fc" id="L24">        setError(null);</span>
+<span class="fc" id="L25">    }</span>
+    public static String getLocation(){
+<span class="fc" id="L27">        return location;</span>
+    }
+    public static String getMsg(){
+<span class="fc" id="L30">        return msg;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

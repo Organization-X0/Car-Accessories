@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.data</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package org.data;
+
+import java.util.ArrayList;
+
+public class User {
+    private String fullName;
+    private final String  email;
+    private String password;
+    private String phone;
+    private  ArrayList&lt;Product&gt; orders;
+    private ArrayList&lt;Appointment&gt; installations;
+    private ArrayList&lt;String&gt; notifications;
+    private int notificationCount;
+
+<span class="fc" id="L15">    public User(String fullName,String email, String password,String phone){</span>
+<span class="fc" id="L16">        this.fullName=fullName;</span>
+<span class="fc" id="L17">        this.email=email;</span>
+<span class="fc" id="L18">        this.password=password;</span>
+<span class="fc" id="L19">        this.phone=phone;</span>
+<span class="fc" id="L20">        orders=new ArrayList&lt;Product&gt;();</span>
+<span class="fc" id="L21">        installations=new ArrayList&lt;Appointment&gt;();</span>
+<span class="fc" id="L22">        notifications=new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L23">        notificationCount=0;</span>
+<span class="fc" id="L24">    }</span>
+<span class="fc" id="L25">    public User(){</span>
+<span class="fc" id="L26">        this.email=null;</span>
+<span class="fc" id="L27">    };</span>
+
+    public void setFullName(String fullName){
+<span class="fc" id="L30">        this.fullName=fullName;</span>
+<span class="fc" id="L31">    }</span>
+    public String getFullName() {
+<span class="fc" id="L33">        return fullName;</span>
+    }
+
+    public String getEmail() {
+<span class="fc" id="L37">        return email;</span>
+    }
+
+    public boolean checkPassword(String password){
+<span class="fc" id="L41">        return this.password.equals(password);</span>
+    }
+
+    public String getPhone() {
+<span class="fc" id="L45">        return phone;</span>
+    }
+
+    public void setPhone(String phone) {
+<span class="fc" id="L49">        this.phone = phone;</span>
+<span class="fc" id="L50">    }</span>
+    public void addOrder(Product product) {
+<span class="fc" id="L52">        orders.add(product);</span>
+<span class="fc" id="L53">    }</span>
+    public ArrayList&lt;Product&gt; getOrders() {
+<span class="fc" id="L55">        return orders;</span>
+    }
+    public void addInstallations(Appointment appointment) {
+<span class="fc" id="L58">        installations.add(appointment);</span>
+<span class="fc" id="L59">    }</span>
+    public ArrayList&lt;Appointment&gt; getInstallations() {
+<span class="nc" id="L61">        return installations;</span>
+    }
+
+    public ArrayList&lt;String&gt; getNotifications() {
+<span class="nc" id="L65">        return notifications;</span>
+    }
+    public void pushNotification(String notification){
+<span class="fc" id="L68">        notifications.add(notification);</span>
+<span class="fc" id="L69">    }</span>
+    public void deleteNotification(int i){
+<span class="fc" id="L71">        notifications.remove(i);</span>
+<span class="fc" id="L72">    }</span>
+    public int getNotificationCount(){
+<span class="fc" id="L74">        return notificationCount;</span>
+    }
+    public void resetNotificationCount(){
+<span class="fc" id="L77">        notificationCount=0;</span>
+<span class="fc" id="L78">    }</span>
+    public void increaseNotificationCount(){
+<span class="fc" id="L80">        notificationCount++;</span>
+<span class="fc" id="L81">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

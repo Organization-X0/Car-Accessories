@@ -302,5 +302,4 @@ public class App {
         Matcher matcher = pattern.matcher(date);
         return matcher.matches();
     }
-
 }

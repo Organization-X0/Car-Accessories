@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductCrudState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.sates</a> &gt; <span class="el_source">ProductCrudState.java</span></div><h1>ProductCrudState.java</h1><pre class="source lang-java linenums">package org.sates;
+
+import org.car.App;
+import org.car.Error;
+
+public class ProductCrudState implements State {
+    private final App myApp;
+<span class="fc" id="L8">    private boolean flag=false;</span>
+<span class="fc" id="L9">    public ProductCrudState(App myApp) {</span>
+<span class="fc" id="L10">            this.myApp=myApp;</span>
+<span class="fc" id="L11">    }</span>
+
+    @Override
+    public void handle() {
+<span class="nc" id="L15">        flag=true;</span>
+<span class="nc" id="L16">        Error.checkAndShow(getStateString(),myApp);</span>
+        String option;
+<span class="nc" id="L18">        myApp.setProductArrayListBetweenState();</span>
+<span class="nc" id="L19">        option = myApp.getCli().displayProducts(myApp.productArrayListBetweenState);</span>
+<span class="nc" id="L20">        handleInput(option);</span>
+<span class="nc" id="L21">    }</span>
+
+    @Override
+    public void handleInput(Object input) {
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(!flag){</span>
+<span class="fc" id="L26">            myApp.setProductArrayListBetweenState();</span>
+        }
+<span class="fc" id="L28">        String option = (String) input;</span>
+
+<span class="fc" id="L30">        myApp.nextPrevBackAdd(option,new ManageProductsState(myApp),new AddProductState(myApp));</span>
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">        if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'd') {</span>
+            try {
+<span class="fc" id="L33">                int num = Integer.parseInt(option.substring(1));</span>
+<span class="fc" id="L34">                int productId = myApp.productArrayListBetweenState.get(num - 1).getId();</span>
+<span class="fc" id="L35">                myApp.deleteProduct(productId);</span>
+<span class="nc" id="L36">            } catch (Exception e) {</span>
+<span class="nc" id="L37">                Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="pc" id="L38">            }</span>
+<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        } else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
+            try {
+<span class="fc" id="L41">                int num = Integer.parseInt(option.substring(1));</span>
+<span class="fc" id="L42">                myApp.productIdToUpdate = myApp.productArrayListBetweenState.get(num - 1).getId();</span>
+<span class="fc" id="L43">                myApp.setState(new UpdateProductState(myApp));</span>
+<span class="nc" id="L44">            } catch (Exception e) {</span>
+<span class="nc" id="L45">                Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="pc" id="L46">            }</span>
+        } else {
+<span class="fc" id="L48">            Error.setError(myApp.getCurrentState().getStateString());</span>
+        }
+<span class="fc" id="L50">    }</span>
+    @Override
+    public String getStateString() {
+<span class="nc" id="L53">        return &quot;ProductCRUD&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
