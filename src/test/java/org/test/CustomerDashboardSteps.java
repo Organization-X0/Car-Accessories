@@ -9,6 +9,7 @@ import org.car.Error;
 import org.data.Appointment;
 import org.sates.*;
 
+import javax.swing.text.View;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -125,5 +126,17 @@ public class CustomerDashboardSteps {
     @Then("the orders history should be shown")
     public void the_orders_history_should_be_shown() {
         assertTrue(myApp.getCurrentState() instanceof ViewOrderHistoryState);
+    }
+    @Given("inside view installation history")
+    public void inside_view_installation_history() {
+        myApp.setState(new ViewInstallationHistoryState(myApp));
+    }
+    @Then("the system should navigate to Profile")
+    public void the_system_should_navigate_to_profile() {
+        assertTrue(myApp.getCurrentState() instanceof ProfileState);
+    }
+    @Given("inside view order history")
+    public void inside_view_order_history() {
+        myApp.setState(new ViewOrderHistoryState(myApp));
     }
 }

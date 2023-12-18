@@ -20,12 +20,7 @@ public class AddAppointmentState implements State {
         Error.checkAndShow(getStateString());
         if(myApp.whoLoggedIn().equals("admin")) data = Cli.displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);
         else data = Cli.displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());
-        dataIsEmpty=true;
-        for (var entry : data.entrySet()) {
-            if (!entry.getKey().equals("email") && !entry.getValue().isEmpty()) {
-               dataIsEmpty=false;
-            }
-        }
+        dataIsEmpty=setDataIsEmpty(data);
         handleInput(data);
         if(!Error.getLocation().equals(getStateString())){
             if(!dataIsEmpty) Cli.displayMsg(" Appointment added successfully! ",true);
@@ -33,6 +28,16 @@ public class AddAppointmentState implements State {
             if(myApp.whoLoggedIn().equals("admin")) myApp.setState(new ManageInstallationAppointmentState(myApp));
             else myApp.setState(new CustomerDashboardState(myApp));
         }
+    }
+
+    private boolean setDataIsEmpty(Map<String, String> data) {
+        boolean dataIsEmptyL=true;
+        for (var entry : data.entrySet()) {
+            if (!entry.getKey().equals("email") && !entry.getValue().isEmpty()) {
+               dataIsEmptyL=false;
+            }
+        }
+        return dataIsEmptyL;
     }
 
     @Override
@@ -46,6 +51,7 @@ public class AddAppointmentState implements State {
             else
                 throw new Exception();
 
+            dataIsEmpty=setDataIsEmpty(data);
             //check data
             if(dataIsEmpty) return;
             if(!App.isValidDate(data.get("date")))
