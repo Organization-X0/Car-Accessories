@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Category.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.data</a> &gt; <span class="el_source">Category.java</span></div><h1>Category.java</h1><pre class="source lang-java linenums">package org.data;
+
+import java.util.ArrayList;
+
+public class Category {
+    String name;
+    private final ArrayList&lt;Product&gt; productArrayList;
+<span class="fc" id="L8">    public Category(String name){</span>
+<span class="fc" id="L9">        this.name=name;</span>
+<span class="fc" id="L10">        productArrayList=new ArrayList&lt;Product&gt;();</span>
+<span class="fc" id="L11">    }</span>
+    public void addProduct(Product product) {
+<span class="fc" id="L13">        product.setId(Product.getNextId());</span>
+<span class="fc" id="L14">        productArrayList.add(product);</span>
+<span class="fc" id="L15">    }</span>
+    public Product searchOneProduct(int id){
+<span class="nc" id="L17">        return productArrayList.stream()</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">                .filter(product -&gt; product.getId()==(id))</span>
+<span class="nc" id="L19">                .findFirst()</span>
+<span class="nc" id="L20">                .orElse(null);</span>
+    }
+    public ArrayList&lt;Product&gt; getProductsList() {
+<span class="fc" id="L23">        return productArrayList;</span>
+    }
+    public void deleteProduct(Product productDelete){
+<span class="fc" id="L26">        productArrayList.remove(productDelete);</span>
+<span class="fc" id="L27">    }</span>
+    public String getName(){
+<span class="fc" id="L29">        return this.name;</span>
+    }
+    public void setName(String name){
+<span class="fc" id="L32">         this.name=name;</span>
+<span class="fc" id="L33">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

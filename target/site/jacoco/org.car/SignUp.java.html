@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignUp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.car</a> &gt; <span class="el_source">SignUp.java</span></div><h1>SignUp.java</h1><pre class="source lang-java linenums">package org.car;
+
+import org.data.DataBase;
+import org.data.User;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class SignUp {
+<span class="fc" id="L10">    String regexPattern = &quot;^(.+)@(\\S+)$&quot;;</span>
+    DataBase myDataBase;
+<span class="fc" id="L12">    public SignUp(DataBase dataBase){</span>
+<span class="fc" id="L13">       this.myDataBase=dataBase;</span>
+<span class="fc" id="L14">    }</span>
+
+    public boolean signUpNow(String fullName,String email,String phone,String password){
+<span class="fc" id="L17">        Pattern pattern = Pattern.compile(regexPattern);</span>
+<span class="fc" id="L18">        Matcher matcher = pattern.matcher(email);</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if(matcher.matches())</span>
+<span class="pc bpc" id="L20" title="2 of 4 branches missed.">            if(fullName.length()&gt;=3 &amp;&amp; fullName.length()&lt;=50)</span>
+<span class="pc bpc" id="L21" title="2 of 4 branches missed.">                if(password.length()&gt;=3 &amp;&amp; password.length()&lt;=20)</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">                    if(phone.length()==10){</span>
+<span class="fc" id="L23">                        User user =new User(fullName,email,password,phone);</span>
+<span class="fc" id="L24">                        myDataBase.addUser(user);</span>
+<span class="fc" id="L25">                        return true;</span>
+                    }
+<span class="fc" id="L27">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

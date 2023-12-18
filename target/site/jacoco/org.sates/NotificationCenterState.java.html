@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationCenterState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.sates</a> &gt; <span class="el_source">NotificationCenterState.java</span></div><h1>NotificationCenterState.java</h1><pre class="source lang-java linenums">package org.sates;
+
+import org.car.App;
+import org.car.Error;
+
+public class NotificationCenterState implements State{
+    private final App myApp;
+<span class="fc" id="L8">    public NotificationCenterState(App myApp){</span>
+<span class="fc" id="L9">        this.myApp=myApp;</span>
+<span class="fc" id="L10">    }</span>
+    @Override
+    public void handle() {
+<span class="nc" id="L13">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L14">        String data = myApp.getCli().displayNotificationCenter(myApp.searchAccount(myApp.email).getNotifications());</span>
+<span class="nc" id="L15">        handleInput(data);</span>
+<span class="nc" id="L16">    }</span>
+
+    @Override
+    public void handleInput(Object input) {
+<span class="fc" id="L20">        String option=(String) input;</span>
+
+<span class="pc bpc" id="L22" title="1 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();</span>
+<span class="pc bpc" id="L23" title="1 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        else if (option.equals(&quot;b&quot;)){</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">            if(myApp.whoLoggedIn().equals(&quot;customer&quot;)) myApp.setState(new CustomerDashboardState(myApp));</span>
+<span class="fc" id="L26">            else myApp.setState(new InstallerDashboardState(myApp));</span>
+        }
+<span class="pc bpc" id="L28" title="1 of 4 branches missed.">        else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'd') {</span>
+            try {
+<span class="fc" id="L30">                int num = Integer.parseInt(option.substring(1));</span>
+<span class="fc" id="L31">                myApp.searchAccount(myApp.email).deleteNotification(num-1);</span>
+<span class="fc" id="L32">            } catch (Exception e) {</span>
+<span class="fc" id="L33">                Error.setError(getStateString());</span>
+<span class="fc" id="L34">            }</span>
+<span class="fc" id="L35">        }else Error.setError(getStateString());</span>
+<span class="fc" id="L36">    }</span>
+
+    @Override
+    public String getStateString() {
+<span class="fc" id="L40">        return &quot;NotificationCenter&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

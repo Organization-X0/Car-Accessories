@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductListingState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.sates</a> &gt; <span class="el_source">ProductListingState.java</span></div><h1>ProductListingState.java</h1><pre class="source lang-java linenums">package org.sates;
+
+import org.car.App;
+import org.car.Error;
+import org.data.User;
+
+public class ProductListingState implements State {
+    private final App myApp;
+<span class="fc" id="L9">    private boolean flag=false;</span>
+    private String productName;
+
+<span class="fc" id="L12">    public ProductListingState(App myApp) {</span>
+<span class="fc" id="L13">        this.myApp=myApp;</span>
+<span class="fc" id="L14">    }</span>
+
+    @Override
+    public void handle() {
+<span class="nc" id="L18">        flag=true;</span>
+<span class="nc" id="L19">        Error.checkAndShow(getStateString(),myApp);</span>
+        String option;
+<span class="nc" id="L21">        myApp.setProductArrayListBetweenState();</span>
+<span class="nc" id="L22">        option = myApp.getCli().displayCustomerProducts(myApp.productArrayListBetweenState);</span>
+<span class="nc" id="L23">        handleInput(option);</span>
+
+<span class="nc bnc" id="L25" title="All 6 branches missed.">        if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !Error.getLocation().equals(getStateString())){</span>
+<span class="nc" id="L26">            String phoneNumber=myApp.searchAccount(myApp.email).getPhone();</span>
+<span class="nc" id="L27">            myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
+        }
+
+<span class="nc" id="L30">    }</span>
+
+
+    @Override
+    public void handleInput(Object input) {
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if(!flag){</span>
+<span class="fc" id="L36">            myApp.setProductArrayListBetweenState();</span>
+        }
+<span class="fc" id="L38">        String option = (String) input;</span>
+<span class="pc bpc" id="L39" title="3 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();</span>
+<span class="pc bpc" id="L40" title="3 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        else if (option.equals(&quot;b&quot;)) myApp.setState(new ProductCatalogState(myApp));</span>
+<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'f') {</span>
+            try {
+<span class="fc" id="L44">                int num = Integer.parseInt(option.substring(1));</span>
+<span class="fc" id="L45">                productName = myApp.productArrayListBetweenState.get(num - 1).getName();</span>
+<span class="fc" id="L46">                User account=myApp.searchAccount(myApp.email);</span>
+<span class="fc" id="L47">                account.addOrder(myApp.searchProduct(num));</span>
+<span class="fc" id="L48">                account.pushNotification(&quot;You bought this product \&quot;&quot;+ myApp.getCli().blueText(productName)+&quot;\&quot; successfully.&quot;);</span>
+<span class="fc" id="L49">                account.increaseNotificationCount();</span>
+<span class="nc" id="L50">            } catch (Exception e) {</span>
+<span class="nc" id="L51">                Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="pc" id="L52">            }</span>
+        }
+<span class="nc" id="L54">        else Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="fc" id="L55">    }</span>
+    @Override
+    public String getStateString() {
+<span class="nc" id="L58">        return &quot;ProductListing&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
