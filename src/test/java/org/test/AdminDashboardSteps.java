@@ -256,4 +256,26 @@ public class AdminDashboardSteps {
     public void the_system_should_delete_the_appropriate_appointment() {
         assertEquals(appointmentNum-1,myApp.myDatabase.getRequestedAppointmentsList().size());
     }
+    @When("the user adds an empty appointment")
+    public void the_user_adds_an_empty_appointment() {
+        id= Appointment.getLastId();
+        myApp.getCurrentState().handleInput("a");
+        Map<String,String> data=new HashMap<>();
+
+        data.put("email","");
+        data.put("productName","");
+        data.put("carMake","");
+        data.put("date","");
+        data.put("time","");
+        myApp.getCurrentState().handleInput(data);
+    }
+
+    @Then("the application should return without adding an appointment")
+    public void the_application_should_return_without_adding_an_appointment() {
+        assertNull(myApp.searchAppointment(id+1));
+    }
+    @Then("the application should throw an Error")
+    public void the_application_should_throw_an_error() {
+        assertNotNull(Error.getLocation());
+    }
 }

@@ -133,6 +133,22 @@ Feature: Admin Dashboard
       |user1@gmail.com|item1      |bmw    |2023-11-8|3   |
       |user2@gmail.com|item2      |toyota |2023-11-9|1   |
 
+  Scenario: Schedule installation appointments Empty Data
+    Given an admin is logged in
+    And admin enters manage installation page "4"
+    When the user adds an empty appointment
+    Then the application should return without adding an appointment
+
+  Scenario Outline: Schedule installation appointments Invalid Date or Non-existent Account
+    Given an admin is logged in
+    And admin enters manage installation page "4"
+    When add new installation appointments "<UserEmail>", "<ProductName>","<CarMake>","<Date>","<Time>"
+    Then the application should throw an Error
+
+    Examples:
+      |UserEmail      |ProductName|CarMake|Date     |Time|
+      | user1@gmail.com   | product1    | car1    | invalid    | 1    |
+      | nonexistent@example.com| product2    | car2    | 2023-12-19 | 2    |
 
   Scenario Outline: Delete installation appointments
     Given an admin is logged in

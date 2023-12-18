@@ -66,3 +66,38 @@ Feature: Customer Dashboard
       | Air Conditioner | Toyota | 2023-12-01 | 1 |
       | Sink           | Honda  | 2023-12-02  | 2 |
       | Lights          | Ford   |2023-12-03  | 3 |
+
+
+  Scenario: Handle View installation history
+    Given inside view installation history
+    And the current page is not the total pages
+    When the input is "n"
+    Then the system should navigate to the next page
+
+  Scenario: Handle View installation history
+    Given inside view installation history
+    And the current page is not the first page
+    When the input is "p"
+    Then the system should navigate to the previous page
+
+  Scenario: Handle View installation history
+    Given inside view installation history
+    When the input is "b"
+    Then the system should navigate to Profile
+
+  Scenario: Handle View order history
+    Given inside view order history
+    And the current page is not the total pages
+    When the input is "n"
+    Then the system should navigate to the next page
+
+  Scenario: Handle View order history
+    Given inside view order history
+    And the current page is not the first page
+    When the input is "p"
+    Then the system should navigate to the previous page
+
+  Scenario: Handle View order history
+    Given inside view order history
+    When the input is "b"
+    Then the system should navigate to Profile
