@@ -145,3 +145,5 @@ U
 %src/test/java/org/test/StartTest.java,d\6\d613df015105d3a85abcca5beaa9172ae9925864
 N
 src/main/java/org/car/cli.java,c\a\ca22c4047fa8c15915e3c20d224fbe47b4cddb10
+[
++src/test/java/org/test/RunCucumberTest.java,5\7\579de602b3532124ea77b166951c08376d3aca15
