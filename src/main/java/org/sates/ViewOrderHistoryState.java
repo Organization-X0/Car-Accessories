@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class ViewOrderHistoryState implements State {
@@ -12,8 +11,8 @@ public class ViewOrderHistoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option=Cli.displayOrderHistory(myApp.searchAccount(myApp.email).getOrders());
+        Error.checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayOrderHistory(myApp.searchAccount(myApp.email).getOrders());
         handleInput(option);
     }
 

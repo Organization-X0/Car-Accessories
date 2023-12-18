@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 
 public class UpdateCategoryState implements State {
     private final App myApp;
@@ -11,7 +10,7 @@ public class UpdateCategoryState implements State {
 
     @Override
     public void handle() {
-        String newName= Cli.displayUpdateCategory();
+        String newName= myApp.getCli().displayUpdateCategory();
         handleInput(newName);
         myApp.setState(new ManageCategoriesState(myApp));
     }

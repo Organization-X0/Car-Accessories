@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class ProfileState implements State {
@@ -12,10 +11,10 @@ public class ProfileState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
+        Error.checkAndShow(getStateString(),myApp);
         String name=myApp.searchAccount(myApp.email).getFullName();
         String phone=myApp.searchAccount(myApp.email).getPhone();
-        String option= Cli.displayProfile(name,myApp.email,phone);
+        String option= myApp.getCli().displayProfile(name,myApp.email,phone);
         handleInput(option);
     }
 

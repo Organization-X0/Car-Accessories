@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class SearchProductState implements State {
@@ -12,14 +11,14 @@ public class SearchProductState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
+        Error.checkAndShow(getStateString(),myApp);
 
         if(Error.getLocation().equals(getStateString()) && myApp.whoLoggedIn().equals("admin"))
             myApp.setState(new ManageProductsState(myApp));
         else
             myApp.setState(new ProductCatalogState(myApp));
 
-        String productName= Cli.displaySearchProduct();
+        String productName= myApp.getCli().displaySearchProduct();
         handleInput(productName);
     }
 

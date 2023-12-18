@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 import org.data.User;
 
@@ -17,15 +16,15 @@ public class ProductListingState implements State {
     @Override
     public void handle() {
         flag=true;
-        Error.checkAndShow(getStateString());
+        Error.checkAndShow(getStateString(),myApp);
         String option;
         myApp.setProductArrayListBetweenState();
-        option = Cli.displayCustomerProducts(myApp.productArrayListBetweenState);
+        option = myApp.getCli().displayCustomerProducts(myApp.productArrayListBetweenState);
         handleInput(option);
 
         if(!option.isEmpty() && option.charAt(0) == 'f' && !Error.getLocation().equals(getStateString())){
             String phoneNumber=myApp.searchAccount(myApp.email).getPhone();
-            Cli.displayAfterPurchase(productName,phoneNumber);
+            myApp.getCli().displayAfterPurchase(productName,phoneNumber);
         }
 
     }
@@ -37,8 +36,8 @@ public class ProductListingState implements State {
             myApp.setProductArrayListBetweenState();
         }
         String option = (String) input;
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        if (option.equals("n") && myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();
+        else if (option.equals("p") && myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();
         else if (option.equals("b")) myApp.setState(new ProductCatalogState(myApp));
         else if (!option.isEmpty() && option.charAt(0) == 'f') {
             try {
@@ -46,7 +45,7 @@ public class ProductListingState implements State {
                 productName = myApp.productArrayListBetweenState.get(num - 1).getName();
                 User account=myApp.searchAccount(myApp.email);
                 account.addOrder(myApp.searchProduct(num));
-                account.pushNotification("You bought this product \""+Cli.blueText(productName)+"\" successfully.");
+                account.pushNotification("You bought this product \""+ myApp.getCli().blueText(productName)+"\" successfully.");
                 account.increaseNotificationCount();
             } catch (Exception e) {
                 Error.setError(myApp.getCurrentState().getStateString());

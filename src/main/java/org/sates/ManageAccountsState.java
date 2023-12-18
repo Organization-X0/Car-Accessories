@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class ManageAccountsState implements State {
@@ -12,8 +11,8 @@ public class ManageAccountsState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option= Cli.displayManageAccounts(myApp.myDatabase.getCustomerList());
+        Error.checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayManageAccounts(myApp.myDatabase.getCustomerList());
         handleInput(option);
     }
 

@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 import java.util.Map;
@@ -13,8 +12,8 @@ public class LoginState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        Map<String, String> loginData = Cli.displayLogin();
+        Error.checkAndShow(getStateString(),myApp);
+        Map<String, String> loginData = myApp.getCli().displayLogin();
         handleInput(loginData);
     }
 

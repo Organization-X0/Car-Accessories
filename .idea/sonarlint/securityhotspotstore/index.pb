@@ -137,3 +137,11 @@ b
 2src/test/java/org/test/CustomerDashboardSteps.java,f\3\f3fd95887791ab41c268b680d298084a44d0a8b4
 U
 %features/InstallationRequests.feature,b\f\bf3230e944a9e3e58c2757faa21a8ff380bd1d6b
+F
+features/start.feature,f\4\f47a34e5da7f3eda1b77e298387d60a2baded51e
+R
+"src/main/java/org/sates/State.java,0\e\0ebef65f96e22d25a874fd529faeb14e93f1dfc6
+U
+%src/test/java/org/test/StartTest.java,d\6\d613df015105d3a85abcca5beaa9172ae9925864
+N
+src/main/java/org/car/cli.java,c\a\ca22c4047fa8c15915e3c20d224fbe47b4cddb10

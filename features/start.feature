@@ -10,6 +10,11 @@ Feature: Navigation
     When I enter "2"
     Then I should be redirected to the signup page
 
+  Scenario: exit from the app
+    Given I am on the start page
+    When I enter "3"
+    Then the App should exit
+
   Scenario Outline: Invalid input
     Given I am on the start page
     When I enter "<input>"

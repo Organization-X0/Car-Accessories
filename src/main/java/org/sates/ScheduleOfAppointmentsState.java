@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 import org.data.Appointment;
 
@@ -15,8 +14,8 @@ public class ScheduleOfAppointmentsState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option= Cli.displayScheduleOfAppointments(myApp.myDatabase.getApprovedAppointmentArrayList());
+        Error.checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayScheduleOfAppointments(myApp.myDatabase.getApprovedAppointmentArrayList());
         handleInput(option);
     }
 

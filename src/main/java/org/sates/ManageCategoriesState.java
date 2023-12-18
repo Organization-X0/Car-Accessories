@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class ManageCategoriesState implements State {
@@ -12,8 +11,8 @@ public class ManageCategoriesState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String option= Cli.displayManageCategories(myApp.myDatabase.getCategoryList());
+        Error.checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayManageCategories(myApp.myDatabase.getCategoryList());
         handleInput(option);
     }
 

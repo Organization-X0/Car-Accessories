@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Cli;
 import org.car.Error;
 
 public class NotificationCenterState implements State{
@@ -11,8 +10,8 @@ public class NotificationCenterState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString());
-        String data = Cli.displayNotificationCenter(myApp.searchAccount(myApp.email).getNotifications());
+        Error.checkAndShow(getStateString(),myApp);
+        String data = myApp.getCli().displayNotificationCenter(myApp.searchAccount(myApp.email).getNotifications());
         handleInput(data);
     }
 
@@ -20,8 +19,8 @@ public class NotificationCenterState implements State{
     public void handleInput(Object input) {
         String option=(String) input;
 
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        if (option.equals("n") && myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();
+        else if (option.equals("p") && myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();
         else if (option.equals("b")){
             if(myApp.whoLoggedIn().equals("customer")) myApp.setState(new CustomerDashboardState(myApp));
             else myApp.setState(new InstallerDashboardState(myApp));
