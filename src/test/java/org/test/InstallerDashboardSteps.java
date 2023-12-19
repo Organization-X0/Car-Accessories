@@ -55,7 +55,7 @@ public class InstallerDashboardSteps {
 
     @Then("should see an error message on installer Dashboard")
     public void should_see_an_error_message_on_installer_dashboard() {
-        assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
+        assertEquals(myApp.getCurrentState().getStateString(), myApp.getError().getLocation());
     }
 
 }

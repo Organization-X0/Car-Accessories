@@ -16,14 +16,14 @@ public class ProductListingState implements State {
     @Override
     public void handle() {
         flag=true;
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         String option;
         myApp.setProductArrayListBetweenState();
         option = myApp.getCli().displayCustomerProducts(myApp.productArrayListBetweenState);
         handleInput(option);
 
-        if(!option.isEmpty() && option.charAt(0) == 'f' && !Error.getLocation().equals(getStateString())){
-            String phoneNumber=myApp.searchAccount(myApp.email).getPhone();
+        if(!option.isEmpty() && option.charAt(0) == 'f' && !myApp.getError().getLocation().equals(getStateString())){
+            String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();
             myApp.getCli().displayAfterPurchase(productName,phoneNumber);
         }
 
@@ -43,15 +43,15 @@ public class ProductListingState implements State {
             try {
                 int num = Integer.parseInt(option.substring(1));
                 productName = myApp.productArrayListBetweenState.get(num - 1).getName();
-                User account=myApp.searchAccount(myApp.email);
+                User account=myApp.searchAccount(myApp.getEmail());
                 account.addOrder(myApp.searchProduct(num));
                 account.pushNotification("You bought this product \""+ myApp.getCli().blueText(productName)+"\" successfully.");
                 account.increaseNotificationCount();
             } catch (Exception e) {
-                Error.setError(myApp.getCurrentState().getStateString());
+                myApp.getError().setError(myApp.getCurrentState().getStateString());
             }
         }
-        else Error.setError(myApp.getCurrentState().getStateString());
+        else myApp.getError().setError(myApp.getCurrentState().getStateString());
     }
     @Override
     public String getStateString() {

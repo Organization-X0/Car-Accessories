@@ -53,7 +53,7 @@ if (myApp.whoLoggedIn().equals("admin")){
     }
     @Then("an error message should be seen")
     public void an_error_message_should_be_seen() {
-        assertEquals(Error.getLocation(), myApp.getCurrentState().getStateString());
+        assertEquals(myApp.getError().getLocation(), myApp.getCurrentState().getStateString());
     }
 
 }

@@ -16,12 +16,12 @@ public class AddAppointmentState implements State {
     @Override
     public void handle() {
         Map<String,String> data;
-        Error.checkAndShow(getStateString(),myApp);
-        if(myApp.whoLoggedIn().equals("admin")) data = myApp.getCli().displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);
-        else data = myApp.getCli().displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        if(myApp.whoLoggedIn().equals("admin")) data = myApp.getCli().displayAddAppointment(myApp.getDatabase().getRequestedAppointmentsList(),myApp);
+        else data = myApp.getCli().displayAddAppointmentCustomer(myApp,myApp.getDatabase().getRequestedAppointmentsList());
         dataIsEmpty=setDataIsEmpty(data);
         handleInput(data);
-        if(!Error.getLocation().equals(getStateString())){
+        if(!myApp.getError().getLocation().equals(getStateString())){
             if(!dataIsEmpty) myApp.getCli().displayMsg(" Appointment added successfully! ",true);
             myApp.availableTimesShown=false;
             if(myApp.whoLoggedIn().equals("admin")) myApp.setState(new ManageInstallationAppointmentState(myApp));
@@ -55,7 +55,7 @@ public class AddAppointmentState implements State {
             if(dataIsEmpty) return;
             if(!App.isValidDate(data.get("date")))
                 throw new Exception();
-            if(myApp.myDatabase.searchAccount(data.get("email"))==null)
+            if(myApp.getDatabase().searchAccount(data.get("email"))==null)
                 throw new Exception();
             int timeSlot= Integer.parseInt(data.get("time"));
             if(timeSlot<=0) throw new Exception();
@@ -66,7 +66,7 @@ public class AddAppointmentState implements State {
             installer.increaseNotificationCount();
 
         }catch (Exception e){
-            Error.setError(getStateString());
+            myApp.getError().setError(getStateString());
         }
     }
 

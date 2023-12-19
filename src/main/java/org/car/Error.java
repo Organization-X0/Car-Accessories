@@ -3,10 +3,10 @@ package org.car;
 import java.util.Objects;
 
 public class Error {
-    private static String location= null;
-    private static String msg;
+    private String location= null;
+    private String msg;
 
-    public static void setError(String locationPara){
+    public void setError(String locationPara){
         location = Objects.requireNonNullElse(locationPara, "null");
         switch (location){
             case "Start", "AdminDashboard","CustomerDashboard","ProductListing","ManageProducts","ProductCRUD","ViewOrderHistory","ScheduleOfAppointments","InstallationRequests","NotificationCenter","Profile","ViewInstallationHistory","ProductCatalog" -> msg=" Invalid Option! ";
@@ -14,19 +14,19 @@ public class Error {
             case "SignUp","SearchProduct","UpdateProduct","ManageCategories","ManageAccounts","AddAppointment" -> msg=" Invalid Data! ";
             case "AddProduct" -> msg=" Failed to add a product! ";
             case "UpdateAccount" -> msg=" Invalid Data! (make sure the phone number is 10 digits) ";
-            case "null" -> msg="";
+            default -> msg="";
         }
     }
-    public static void checkAndShow(String location,App myApp){
-        if(Error.getLocation()!=null && Error.getLocation().equals(location)){
-            myApp.cli.displayMsg(Error.getMsg(),false);
+    public void checkAndShow(String location,App myApp){
+        if(getLocation()!=null && getLocation().equals(location)){
+            myApp.cli.displayMsg(getMsg(),false);
         }
         setError(null);
     }
-    public static String getLocation(){
+    public String getLocation(){
         return location;
     }
-    public static String getMsg(){
+    public String getMsg(){
         return msg;
     }
 }

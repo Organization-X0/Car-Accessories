@@ -20,12 +20,12 @@ public class App {
     public boolean exit;
     public final DataBase myDatabase;
     public final Cli cli;
+    public final Error error;
     public String categoryNameToUpdate;
     public String userEmailToUpdate;
     public ArrayList<Product> productArrayListBetweenState;
     public ArrayList<Time> availableTimes;
-
-    public String email;
+    private String email;
 
 
     public App(){
@@ -36,6 +36,7 @@ public class App {
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
         cli=new Cli();
+        error=new Error();
 
         Product.setLastId(myDatabase);
         Appointment.setLastId(myDatabase);
@@ -48,6 +49,15 @@ public class App {
     }
     public Cli getCli(){
         return this.cli;
+    }
+    public Error getError(){
+        return this.error;
+    }
+    public String getEmail() {
+        return this.email;
+    }
+    public DataBase getDatabase() {
+        return this.myDatabase;
     }
     public State getCurrentState(){
         return state;
@@ -69,7 +79,7 @@ public class App {
 
             return;
         }
-        Error.setError(getCurrentState().getStateString());
+        error.setError(getCurrentState().getStateString());
 
     }
     public void signUp(String fullName, String email,String phone ,String password) {
@@ -77,7 +87,7 @@ public class App {
            setState(new LoginState(this));
            return;
        }
-        Error.setError(getCurrentState().getStateString());
+        error.setError(getCurrentState().getStateString());
     }
     public String whoLoggedIn(){
         if(email.equals("admin@gmail.com"))
@@ -181,7 +191,7 @@ public class App {
         }
     }
     public void handelProductCatalogAndManageProducts(String type) {
-        Error.checkAndShow(type,this);
+        error.checkAndShow(type,this);
         String option= Cli.displayManageProducts(myDatabase.getCategoryList());
         getCurrentState().handleInput(option);
         Cli.resetPage();
@@ -213,13 +223,12 @@ public class App {
         }
     }
     public void handleView(String input) {
-        String option = input;
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
-        else if (option.equals("b")) setState(new ProfileState(this));
-        else Error.setError(getCurrentState().getStateString());
+        if (input.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
+        else if (input.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        else if (input.equals("b")) setState(new ProfileState(this));
+        else error.setError(getCurrentState().getStateString());
     }
-    public void navigateProductsMenu(String option, State first, State second, State third, String error) {
+    public void navigateProductsMenu(String option, State first, State second, State third, String errorType) {
         try {
             int intOption = Integer.parseInt(option);
             if (intOption == 1 || (intOption != 2 && intOption < (3 + myDatabase.getCategoryList().size()))) {
@@ -233,7 +242,7 @@ public class App {
             }
             handleManageProductOutput = intOption;
         } catch (Exception e) {
-            Error.setError(error);
+            error.setError(errorType);
             handleManageProductOutput = 0;
         }
     }
@@ -250,7 +259,8 @@ public class App {
                 stateToUpdate=new ManageInstallationAppointmentState(this);
                 if (!data.get("email").isEmpty()){
                     appointment.setEmail(data.get("email"));
-                }if (!data.get("productName").isEmpty())
+                }
+                if (!data.get("productName").isEmpty())
                     appointment.setProductName(data.get("productName"));
                 if (!data.get("carMake").isEmpty())
                     appointment.setCarMake(data.get("carMake"));
@@ -266,7 +276,8 @@ public class App {
                 if (!data.get("price").isEmpty()){
                     double price=Double.parseDouble(data.get("price"));
                     product.setPrice(price);
-                }if (!data.get("name").isEmpty())
+                }
+                if (!data.get("name").isEmpty())
                     product.setName(data.get("name"));
                 if (!data.get("description").isEmpty())
                     product.setDescription(data.get("description"));
@@ -275,7 +286,8 @@ public class App {
                 User user =new User();
                 if (!data.get("fullName").isEmpty()){
                     user.setFullName(data.get("fullName"));
-                }if (!data.get("phone").isEmpty()){
+                }
+                if (!data.get("phone").isEmpty()){
                     user.setPhone(data.get("phone"));
                     //check
                     if(data.get("phone").length()!=10)
@@ -293,7 +305,7 @@ public class App {
             }
             setState(stateToUpdate);
         }catch (Exception e){
-            Error.setError(type);
+            error.setError(type);
         }
     }
     public static boolean isValidDate(String date) {
@@ -302,4 +314,5 @@ public class App {
         Matcher matcher = pattern.matcher(date);
         return matcher.matches();
     }
+
 }

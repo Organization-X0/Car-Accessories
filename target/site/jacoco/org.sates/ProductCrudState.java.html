@@ -13,7 +13,7 @@ public class ProductCrudState implements State {
     @Override
     public void handle() {
 <span class="nc" id="L15">        flag=true;</span>
-<span class="nc" id="L16">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L16">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
         String option;
 <span class="nc" id="L18">        myApp.setProductArrayListBetweenState();</span>
 <span class="nc" id="L19">        option = myApp.getCli().displayProducts(myApp.productArrayListBetweenState);</span>
@@ -34,7 +34,7 @@ public class ProductCrudState implements State {
 <span class="fc" id="L34">                int productId = myApp.productArrayListBetweenState.get(num - 1).getId();</span>
 <span class="fc" id="L35">                myApp.deleteProduct(productId);</span>
 <span class="nc" id="L36">            } catch (Exception e) {</span>
-<span class="nc" id="L37">                Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="nc" id="L37">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="pc" id="L38">            }</span>
 <span class="pc bpc" id="L39" title="1 of 4 branches missed.">        } else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
             try {
@@ -42,10 +42,10 @@ public class ProductCrudState implements State {
 <span class="fc" id="L42">                myApp.productIdToUpdate = myApp.productArrayListBetweenState.get(num - 1).getId();</span>
 <span class="fc" id="L43">                myApp.setState(new UpdateProductState(myApp));</span>
 <span class="nc" id="L44">            } catch (Exception e) {</span>
-<span class="nc" id="L45">                Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="nc" id="L45">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="pc" id="L46">            }</span>
         } else {
-<span class="fc" id="L48">            Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="fc" id="L48">            myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
         }
 <span class="fc" id="L50">    }</span>
     @Override

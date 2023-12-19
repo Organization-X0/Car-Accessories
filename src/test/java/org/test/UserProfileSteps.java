@@ -62,8 +62,8 @@ public class UserProfileSteps {
 
     @Then("the profile should be edited")
     public void the_profile_should_be_edited() {
-    assertEquals(myApp.searchAccount(myApp.email).getFullName(),"name1");
-    assertEquals(myApp.searchAccount(myApp.email).getPhone(),"0568243138");
+    assertEquals(myApp.searchAccount(myApp.getEmail()).getFullName(),"name1");
+    assertEquals(myApp.searchAccount(myApp.getEmail()).getPhone(),"0568243138");
     }
 
     @When("the customer navigates to their order history")

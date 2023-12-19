@@ -11,8 +11,8 @@ public class ManageCategoriesState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option= myApp.getCli().displayManageCategories(myApp.myDatabase.getCategoryList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayManageCategories(myApp.getDatabase().getCategoryList());
         handleInput(option);
     }
 
@@ -25,20 +25,20 @@ public class ManageCategoriesState implements State {
         else if(!option.isEmpty() && option.charAt(0) == 'd') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                String categoryName=myApp.myDatabase.getCategoryList().get(num-1).getName();
+                String categoryName=myApp.getDatabase().getCategoryList().get(num-1).getName();
                 myApp.deleteCategory(categoryName);
             }catch (Exception e){
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
         } else if(!option.isEmpty() && option.charAt(0) == 'u') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                myApp.categoryNameToUpdate=myApp.myDatabase.getCategoryList().get(num-1).getName();
+                myApp.categoryNameToUpdate=myApp.getDatabase().getCategoryList().get(num-1).getName();
                 myApp.setState(new UpdateCategoryState(myApp));
             }catch (Exception e){
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
-        }else Error.setError(getStateString());
+        }else myApp.getError().setError(getStateString());
     }
     @Override
     public String getStateString() {

@@ -7,8 +7,6 @@ N
 src/main/java/org/Car/Cli.java,4\5\4519d8872955e73948019507f3f7caf666ad9bf6
 V
 &src/test/java/org/Test/LoginSteps.java,1\a\1a3f793fb0a385cb3c0b0c5c7d6653b22b8458b7
-W
-'src/test/java/org/Test/RunCucumber.java,e\9\e99d27426764d5e17ca479f37dd25f837c387a29
 _
 /src/test/java/org/Test/AdminDashboardSteps.java,f\6\f6941e4c95d4b2b4eeedec74c79d454bffb7761f
 Q
@@ -63,8 +61,6 @@ _
 /src/test/java/org/test/ProductCatalogSteps.java,5\9\594f0faa8676fa0ed7e281d49505358a07dcbd8f
 V
 &src/test/java/org/test/StartSteps.java,8\d\8db739e07d81bc78b40802e48d4c9e20cd9b68ee
-W
-'src/test/java/org/test/RunCucumber.java,b\6\b611f66f3f40a06870b6641885b01e1f6d98ce9d
 d
 4src/test/java/org/test/InstallationRequestSteps.java,f\4\f46d71468285f289cc5e0760c24174d1aff6f08c
 i
@@ -147,3 +143,23 @@ N
 src/main/java/org/car/cli.java,c\a\ca22c4047fa8c15915e3c20d224fbe47b4cddb10
 [
 +src/test/java/org/test/RunCucumberTest.java,5\7\579de602b3532124ea77b166951c08376d3aca15
+^
+.src/test/java/org/test/AdminDashboardTest.java,4\f\4ff66aacf09370553d96eab340f48dd8a3511d2e
+P
+ src/main/java/org/car/Login.java,d\2\d2853e4f3a2516a55b561156059f809b0ef825db
+a
+1src/test/java/org/test/CustomerDashboardTest.java,1\4\1401626427b67ef96d33221178bb24ac9a6fdbc9
+]
+-src/test/java/org/test/SearchProductTest.java,c\e\ce8d77621a739082389a43059b78c5106bbb6ed6
+[
++src/test/java/org/test/AddCategoryTest.java,6\e\6e9010d9f6c111052150eba024e62c3df3f76998
+^
+.src/test/java/org/test/ProductListingTest.java,f\b\fba6efb8028404a32a3bd53ac52c9aacb3bcc008
+g
+7src/test/java/org/test/ViewInstallationHistoryTest.java,2\2\2291068a762c01dd310f4c593cc793ad5e439fff
+`
+0src/test/java/org/test/ViewOrderHistoryTest.java,b\1\b16aa14002b373f3d01eb95b993c0dcf970d394a
+d
+4src/test/java/org/test/InstallationRequestsTest.java,6\a\6ab9f45041a752c365de909ba5e8d6f600197d40
+f
+6src/test/java/org/test/ScheduleOfAppointmentsTest.java,6\c\6c90eef8cd9b18b86b1b45083700c1bcde5ad3fd

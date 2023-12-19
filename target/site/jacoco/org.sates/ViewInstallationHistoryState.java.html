@@ -11,8 +11,8 @@ public class ViewInstallationHistoryState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        Error.checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String option= myApp.getCli().displayInstallationHistory(myApp.searchAccount(myApp.email).getInstallations());</span>
+<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L15">        String option= myApp.getCli().displayInstallationHistory(myApp.searchAccount(myApp.getEmail()).getInstallations());</span>
 <span class="nc" id="L16">        handleInput(option);</span>
 <span class="nc" id="L17">    }</span>
 

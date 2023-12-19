@@ -16,14 +16,14 @@ public class ProductListingState implements State {
     @Override
     public void handle() {
 <span class="nc" id="L18">        flag=true;</span>
-<span class="nc" id="L19">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
         String option;
 <span class="nc" id="L21">        myApp.setProductArrayListBetweenState();</span>
 <span class="nc" id="L22">        option = myApp.getCli().displayCustomerProducts(myApp.productArrayListBetweenState);</span>
 <span class="nc" id="L23">        handleInput(option);</span>
 
-<span class="nc bnc" id="L25" title="All 6 branches missed.">        if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !Error.getLocation().equals(getStateString())){</span>
-<span class="nc" id="L26">            String phoneNumber=myApp.searchAccount(myApp.email).getPhone();</span>
+<span class="nc bnc" id="L25" title="All 6 branches missed.">        if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !myApp.getError().getLocation().equals(getStateString())){</span>
+<span class="nc" id="L26">            String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
 <span class="nc" id="L27">            myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
         }
 
@@ -43,15 +43,15 @@ public class ProductListingState implements State {
             try {
 <span class="fc" id="L44">                int num = Integer.parseInt(option.substring(1));</span>
 <span class="fc" id="L45">                productName = myApp.productArrayListBetweenState.get(num - 1).getName();</span>
-<span class="fc" id="L46">                User account=myApp.searchAccount(myApp.email);</span>
+<span class="fc" id="L46">                User account=myApp.searchAccount(myApp.getEmail());</span>
 <span class="fc" id="L47">                account.addOrder(myApp.searchProduct(num));</span>
 <span class="fc" id="L48">                account.pushNotification(&quot;You bought this product \&quot;&quot;+ myApp.getCli().blueText(productName)+&quot;\&quot; successfully.&quot;);</span>
 <span class="fc" id="L49">                account.increaseNotificationCount();</span>
 <span class="nc" id="L50">            } catch (Exception e) {</span>
-<span class="nc" id="L51">                Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="nc" id="L51">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="pc" id="L52">            }</span>
         }
-<span class="nc" id="L54">        else Error.setError(myApp.getCurrentState().getStateString());</span>
+<span class="nc" id="L54">        else myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="fc" id="L55">    }</span>
     @Override
     public String getStateString() {

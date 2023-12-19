@@ -35,7 +35,7 @@ public class StartSteps {
     }
     @Then("I should see an error message")
     public void i_should_see_an_error_message() {
-        assertEquals(Error.getLocation(),myApp.getCurrentState().getStateString());
+        assertEquals(myApp.getError().getLocation(),myApp.getCurrentState().getStateString());
     }
     @Then("the App should exit")
     public void the_app_should_exit() {

@@ -11,7 +11,7 @@ public class ManageCategoriesState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="nc" id="L15">        String option= myApp.getCli().displayManageCategories(myApp.myDatabase.getCategoryList());</span>
 <span class="nc" id="L16">        handleInput(option);</span>
 <span class="nc" id="L17">    }</span>
@@ -28,7 +28,7 @@ public class ManageCategoriesState implements State {
 <span class="fc" id="L28">                String categoryName=myApp.myDatabase.getCategoryList().get(num-1).getName();</span>
 <span class="fc" id="L29">                myApp.deleteCategory(categoryName);</span>
 <span class="nc" id="L30">            }catch (Exception e){</span>
-<span class="nc" id="L31">                Error.setError(getStateString());</span>
+<span class="nc" id="L31">                myApp.getError().setError(getStateString());</span>
 <span class="pc" id="L32">            }</span>
 <span class="pc bpc" id="L33" title="2 of 4 branches missed.">        } else if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
             try{
@@ -36,9 +36,9 @@ public class ManageCategoriesState implements State {
 <span class="fc" id="L36">                myApp.categoryNameToUpdate=myApp.myDatabase.getCategoryList().get(num-1).getName();</span>
 <span class="fc" id="L37">                myApp.setState(new UpdateCategoryState(myApp));</span>
 <span class="nc" id="L38">            }catch (Exception e){</span>
-<span class="nc" id="L39">                Error.setError(getStateString());</span>
+<span class="nc" id="L39">                myApp.getError().setError(getStateString());</span>
 <span class="pc" id="L40">            }</span>
-<span class="nc" id="L41">        }else Error.setError(getStateString());</span>
+<span class="nc" id="L41">        }else myApp.getError().setError(getStateString());</span>
 <span class="fc" id="L42">    }</span>
     @Override
     public String getStateString() {

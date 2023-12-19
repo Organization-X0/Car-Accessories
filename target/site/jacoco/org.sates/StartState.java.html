@@ -10,7 +10,7 @@ public class StartState implements State{
 <span class="fc" id="L10">    }</span>
     @Override
     public void handle() {
-<span class="fc" id="L13">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L13">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="fc" id="L14">        String option = myApp.getCli().displayStart();</span>
 <span class="fc" id="L15">        handleInput(option);</span>
 <span class="fc" id="L16">    }</span>
@@ -25,7 +25,7 @@ public class StartState implements State{
 <span class="nc" id="L25">            case &quot;a&quot; -&gt; myApp.login(&quot;admin@gmail.com&quot;,&quot;a123&quot;);</span>
 <span class="nc" id="L26">            case &quot;i&quot; -&gt; myApp.login(&quot;installer@gmail.com&quot;,&quot;i123&quot;);</span>
 <span class="nc" id="L27">            case &quot;c&quot; -&gt; myApp.login(&quot;user1@gmail.com&quot;,&quot;u123&quot;);</span>
-<span class="fc" id="L28">            default -&gt; Error.setError(getStateString());</span>
+<span class="fc" id="L28">            default -&gt; myApp.getError().setError(getStateString());</span>
         }
 <span class="fc" id="L30">    }</span>
     @Override

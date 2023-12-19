@@ -9,15 +9,15 @@ public class CustomerDashboardState implements State {
     private final User account;
 <span class="fc" id="L10">    public CustomerDashboardState(App myApp) {</span>
 <span class="fc" id="L11">        this.myApp=myApp;</span>
-<span class="fc" id="L12">        this.account=myApp.searchAccount(myApp.email);</span>
+<span class="fc" id="L12">        this.account=myApp.searchAccount(myApp.getEmail());</span>
 <span class="fc" id="L13">    }</span>
 
     @Override
     public void handle() {
-<span class="nc" id="L17">        Error.checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L18">        String option= myApp.getCli().displayCustomerDashboard(account);</span>
-<span class="nc" id="L19">        handleInput(option);</span>
-<span class="nc" id="L20">    }</span>
+<span class="fc" id="L17">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L18">        String option= myApp.getCli().displayCustomerDashboard(account);</span>
+<span class="fc" id="L19">        handleInput(option);</span>
+<span class="fc" id="L20">    }</span>
 
     @Override
     public void handleInput(Object input) {
@@ -28,7 +28,7 @@ public class CustomerDashboardState implements State {
 <span class="fc" id="L28">            case &quot;3&quot;-&gt;myApp.setState(new ProfileState(myApp));</span>
 <span class="fc" id="L29">            case &quot;4&quot;-&gt;{account.resetNotificationCount();myApp.setState(new NotificationCenterState(myApp));}</span>
 <span class="fc" id="L30">            case &quot;5&quot;-&gt;myApp.setState(new StartState(myApp));</span>
-<span class="fc" id="L31">            default -&gt; Error.setError(getStateString());</span>
+<span class="fc" id="L31">            default -&gt; myApp.getError().setError(getStateString());</span>
         }
 <span class="fc" id="L33">    }</span>
 

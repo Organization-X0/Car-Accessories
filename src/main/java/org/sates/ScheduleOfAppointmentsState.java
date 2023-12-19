@@ -14,14 +14,14 @@ public class ScheduleOfAppointmentsState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option= myApp.getCli().displayScheduleOfAppointments(myApp.myDatabase.getApprovedAppointmentArrayList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayScheduleOfAppointments(myApp.getDatabase().getApprovedAppointmentArrayList());
         handleInput(option);
     }
 
     @Override
     public void handleInput(Object input) {
-        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getApprovedAppointmentArrayList();
+        ArrayList<Appointment> appointmentArrayList = myApp.getDatabase().getApprovedAppointmentArrayList();
         String option=(String) input;
         myApp.nextPrevBack(option,new InstallerDashboardState(myApp));
         if (!option.isEmpty() && option.charAt(0) == 'd') {
@@ -31,9 +31,9 @@ public class ScheduleOfAppointmentsState implements State {
 
                 myApp.deleteApprovedAppointment(appointmentId);
             } catch (Exception e) {
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
-        }else Error.setError(getStateString());
+        }else myApp.getError().setError(getStateString());
     }
 
     @Override

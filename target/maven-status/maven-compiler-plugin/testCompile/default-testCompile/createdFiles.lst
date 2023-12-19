@@ -1,6 +1,7 @@
 org\test\RunCucumberTest.class
 org\test\InstallerDashboardSteps.class
 org\test\UserRolesSteps.class
+org\test\AdminDashboardTest.class
 org\test\AdminDashboardSteps.class
 org\test\CustomerDashboardSteps.class
 org\test\SignUpSteps.class

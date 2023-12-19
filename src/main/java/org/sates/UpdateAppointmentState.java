@@ -13,7 +13,7 @@ public class UpdateAppointmentState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         Map<String,String> data = myApp.getCli().displayUpdateAppointment();
         handleInput(data);
     }

@@ -87,7 +87,7 @@ public class NotificationCenterSteps {
 
     @Given("has notifications")
     public void has_notifications() {
-        account=myApp.searchAccount(myApp.email);
+        account=myApp.searchAccount(myApp.getEmail());
         notiNum= account.getNotificationCount();
         account.pushNotification("You bought this product \""+ Cli.blueText("test-item")+"\" successfully.");
         account.increaseNotificationCount();
@@ -100,6 +100,6 @@ public class NotificationCenterSteps {
 
     @Then("the system should set an error")
     public void the_system_should_set_an_error() {
-        assertNotNull(Error.getLocation());
+        assertNotNull(myApp.getError().getLocation());
     }
 }

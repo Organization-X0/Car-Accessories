@@ -14,7 +14,7 @@ public class InstallationRequestsState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L17">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L17">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="nc" id="L18">        String option= myApp.getCli().displayInstallationRequests(myApp.myDatabase.getRequestedAppointmentsList());</span>
 <span class="nc" id="L19">        handleInput(option);</span>
 <span class="nc" id="L20">    }</span>
@@ -30,9 +30,9 @@ public class InstallationRequestsState implements State {
 <span class="fc" id="L30">                int appointmentId = appointmentArrayList.get(num - 1).getId();</span>
 <span class="fc" id="L31">                myApp.confirmRequest(appointmentId);</span>
 <span class="nc" id="L32">            } catch (Exception e) {</span>
-<span class="nc" id="L33">                Error.setError(getStateString());</span>
+<span class="nc" id="L33">                myApp.getError().setError(getStateString());</span>
 <span class="pc" id="L34">            }</span>
-<span class="nc" id="L35">        }else Error.setError(getStateString());</span>
+<span class="nc" id="L35">        }else myApp.getError().setError(getStateString());</span>
 <span class="fc" id="L36">    }</span>
 
     @Override
