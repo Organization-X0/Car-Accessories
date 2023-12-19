@@ -1,0 +1,84 @@
+package org.test;
+
+import org.car.App;
+import org.car.Cli;
+import org.car.Error;
+import org.data.DataBase;
+import org.data.User;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.sates.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.mockito.Mockito.*;
+
+
+@RunWith(MockitoJUnitRunner.class)
+public class AddAppointmentTest {
+
+    @Mock
+    private App myApp;
+    @Mock
+    private Cli cli;
+
+    @Mock
+    private Error error;
+    @Mock
+    private User user;
+    @Mock
+    private DataBase myDatabase;
+
+    @Test
+    public void testHandleAdmin() {
+        // Given
+        when(myApp.getDatabase()).thenReturn(myDatabase);
+        Map<String, String> data = new HashMap<>();
+        data.put("key1", "value1");
+        when(myApp.getCli()).thenReturn(cli);
+        when(cli.displayAddAppointment(any(), any())).thenReturn(data);
+        when(myApp.getError()).thenReturn(error);
+        when(myApp.whoLoggedIn()).thenReturn("admin");
+        when(error.getLocation()).thenReturn("SomeOtherState");
+        when(myApp.getDatabase().getRequestedAppointmentsList()).thenReturn(new ArrayList<>());
+        // Create an instance of your class under test, passing the mock as a parameter
+        AddAppointmentState state = new AddAppointmentState(myApp); // replace YourStateClass with the actual class name
+
+        // When
+        state.handle();
+
+        // Then
+        verify(cli).displayAddAppointment(any(), any());
+        verify(cli).displayMsg(" Appointment added successfully! ", true);
+        verify(myApp).setState(any(ManageInstallationAppointmentState.class));
+    }
+
+    @Test
+    public void testHandleCustomer() {
+        // Given
+        when(myApp.getDatabase()).thenReturn(myDatabase);
+        Map<String, String> data = new HashMap<>();
+        data.put("key1", "value1");
+        when(myApp.getCli()).thenReturn(cli);
+        when(cli.displayAddAppointmentCustomer(any(), any())).thenReturn(data);
+        when(myApp.getError()).thenReturn(error);
+        when(myApp.whoLoggedIn()).thenReturn("customer");
+        when(error.getLocation()).thenReturn("SomeOtherState");
+        when(myApp.getDatabase().getRequestedAppointmentsList()).thenReturn(new ArrayList<>());
+        // Create an instance of your class under test, passing the mock as a parameter
+        AddAppointmentState state = new AddAppointmentState(myApp); // replace YourStateClass with the actual class name
+
+        // When
+        state.handle();
+
+        // Then
+        verify(cli).displayAddAppointmentCustomer(any(), any());
+        verify(cli).displayMsg(" Appointment added successfully! ", true);
+        verify(myApp).setState(any(CustomerDashboardState.class));
+    }
+
+}
