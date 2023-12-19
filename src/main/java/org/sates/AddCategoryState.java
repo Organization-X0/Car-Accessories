@@ -11,10 +11,10 @@ public class AddCategoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         String name= myApp.getCli().displayAddCategory();
         handleInput(name);
-        if(!Error.getLocation().equals(getStateString()) && !name.isEmpty()){
+        if(!myApp.getError().getLocation().equals(getStateString()) && !name.isEmpty()){
             myApp.getCli().displayMsg(" Category added successfully! ",true);
         }
     }
@@ -28,7 +28,7 @@ public class AddCategoryState implements State {
                 myApp.addCategory(name);
             myApp.setState(new ManageCategoriesState(myApp));
         }catch (Exception e){
-            Error.setError(getStateString());
+            myApp.getError().setError(getStateString());
         }
     }
 

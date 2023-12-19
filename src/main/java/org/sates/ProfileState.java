@@ -11,10 +11,10 @@ public class ProfileState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String name=myApp.searchAccount(myApp.email).getFullName();
-        String phone=myApp.searchAccount(myApp.email).getPhone();
-        String option= myApp.getCli().displayProfile(name,myApp.email,phone);
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String name=myApp.searchAccount(myApp.getEmail()).getFullName();
+        String phone=myApp.searchAccount(myApp.getEmail()).getPhone();
+        String option= myApp.getCli().displayProfile(name,myApp.getEmail(),phone);
         handleInput(option);
     }
 
@@ -26,7 +26,7 @@ public class ProfileState implements State {
             case "2"->myApp.setState(new ViewOrderHistoryState(myApp));//view order history
             case "3"->myApp.setState(new ViewInstallationHistoryState(myApp));
             case "4"->myApp.setState(new CustomerDashboardState(myApp));//Back
-            default -> Error.setError(getStateString());
+            default -> myApp.getError().setError(getStateString());
         }
 
     }

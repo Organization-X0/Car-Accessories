@@ -358,7 +358,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
 <span class="nc" id="L358">        Map&lt;String, String&gt; data = new HashMap&lt;&gt;();</span>
 <span class="nc" id="L359">        System.out.println(Cli.blueBgText(&quot; ADD APPOINTMENT &quot;));</span>
 
-<span class="nc" id="L361">        data.put(EMAIL, myApp.email);</span>
+<span class="nc" id="L361">        data.put(EMAIL, myApp.getEmail());</span>
 <span class="nc" id="L362">        System.out.println(Cli.blueText(PRODUCT_NAME));</span>
 <span class="nc" id="L363">        data.put(PRODUCT_NAME_DATA, scanner.nextLine());</span>
 <span class="nc" id="L364">        System.out.println(Cli.blueText(CAR_MAKE));</span>
@@ -395,208 +395,209 @@ import static org.fusesource.jansi.Ansi.Color.*;
     }
 
     public String displayCustomerDashboard(User account) {
-<span class="nc" id="L398">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L399">        System.out.println(Cli.blueBgText(&quot;Customer Dashboard:&quot;));</span>
-<span class="nc" id="L400">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Product Catalog&quot;));</span>
-<span class="nc" id="L401">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Request services&quot;));</span>
-<span class="nc" id="L402">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Profile&quot;));</span>
-<span class="nc" id="L403">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Notifications:&quot;)+ Cli.blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
-<span class="nc" id="L404">        System.out.println(&quot;5. &quot;+ Cli.blueText(LOG_OUT));</span>
-<span class="nc" id="L405">        return scanner.nextLine();</span>
+<span class="nc" id="L398">        System.out.println( account.getNotificationCount());</span>
+<span class="nc" id="L399">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L400">        System.out.println(Cli.blueBgText(&quot;Customer Dashboard:&quot;));</span>
+<span class="nc" id="L401">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Product Catalog&quot;));</span>
+<span class="nc" id="L402">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Request services&quot;));</span>
+<span class="nc" id="L403">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Profile&quot;));</span>
+<span class="nc" id="L404">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Notifications:&quot;)+ Cli.blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
+<span class="nc" id="L405">        System.out.println(&quot;5. &quot;+ Cli.blueText(LOG_OUT));</span>
+<span class="nc" id="L406">        return scanner.nextLine();</span>
     }
     public String displayProfile(String name, String email, String phone) {
-<span class="nc" id="L408">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L409">        System.out.println(Cli.blueBgText(&quot;Profile:&quot;));</span>
-<span class="nc" id="L410">        System.out.println(Cli.blueText(&quot;Name: &quot;)+name);</span>
-<span class="nc" id="L411">        System.out.println(Cli.blueText(&quot;email: &quot;)+email);</span>
-<span class="nc" id="L412">        System.out.println(Cli.blueText(&quot;phone: &quot;)+phone);</span>
-<span class="nc" id="L413">        System.out.println(&quot;=================================&quot;);</span>
-<span class="nc" id="L414">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Edit Profile&quot;));</span>
-<span class="nc" id="L415">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;View Order History&quot;));</span>
-<span class="nc" id="L416">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;View Installation Requests History&quot;));</span>
-<span class="nc" id="L417">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Back to Customer Dashboard&quot;));</span>
-<span class="nc" id="L418">        return scanner.nextLine();</span>
+<span class="nc" id="L409">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L410">        System.out.println(Cli.blueBgText(&quot;Profile:&quot;));</span>
+<span class="nc" id="L411">        System.out.println(Cli.blueText(&quot;Name: &quot;)+name);</span>
+<span class="nc" id="L412">        System.out.println(Cli.blueText(&quot;email: &quot;)+email);</span>
+<span class="nc" id="L413">        System.out.println(Cli.blueText(&quot;phone: &quot;)+phone);</span>
+<span class="nc" id="L414">        System.out.println(&quot;=================================&quot;);</span>
+<span class="nc" id="L415">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Edit Profile&quot;));</span>
+<span class="nc" id="L416">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;View Order History&quot;));</span>
+<span class="nc" id="L417">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;View Installation Requests History&quot;));</span>
+<span class="nc" id="L418">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Back to Customer Dashboard&quot;));</span>
+<span class="nc" id="L419">        return scanner.nextLine();</span>
     }
 
     public String displayOrderHistory(ArrayList&lt;Product&gt; ordersArrayList) {
-<span class="nc" id="L422">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L423">        System.out.println(Cli.blueBgText(&quot;Order History:&quot;));</span>
+<span class="nc" id="L423">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L424">        System.out.println(Cli.blueBgText(&quot;Order History:&quot;));</span>
 
-<span class="nc" id="L425">        int start = (page - 1) * 10;</span>
-<span class="nc" id="L426">        int end = Math.min(start + 10, ordersArrayList.size());</span>
+<span class="nc" id="L426">        int start = (page - 1) * 10;</span>
+<span class="nc" id="L427">        int end = Math.min(start + 10, ordersArrayList.size());</span>
 
-<span class="nc" id="L428">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L429">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
-<span class="nc" id="L430">                    ordersArrayList.get(i).getName() +</span>
+<span class="nc" id="L429">        IntStream.range(start, end).forEach(i -&gt; {</span>
+<span class="nc" id="L430">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
+<span class="nc" id="L431">                    ordersArrayList.get(i).getName() +</span>
                             CATEGORY_TO_PRINT +
-<span class="nc" id="L432">                            ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +</span>
-<span class="nc" id="L433">                            ordersArrayList.get(i).getPrice()</span>
+<span class="nc" id="L433">                            ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +</span>
+<span class="nc" id="L434">                            ordersArrayList.get(i).getPrice()</span>
             ));
-<span class="nc" id="L435">        });</span>
+<span class="nc" id="L436">        });</span>
 
-<span class="nc" id="L437">        totalPages=(int)Math.ceil(ordersArrayList.size()/10.0);</span>
-<span class="nc" id="L438">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
-<span class="nc bnc" id="L439" title="All 4 branches missed.">        if(totalPages==0 || totalPages==1){</span>
-<span class="nc" id="L440">            System.out.println(B_BACK);</span>
-<span class="nc bnc" id="L441" title="All 4 branches missed.">        }else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
-<span class="nc" id="L442">            System.out.println(&quot;[ n:next page | p:prev page | b:back ]&quot;);</span>
-<span class="nc bnc" id="L443" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
-<span class="nc" id="L444">            System.out.println(&quot;[ n:next page | b:back ]&quot;);</span>
-<span class="nc bnc" id="L445" title="All 2 branches missed.">        else if(page==totalPages)</span>
-<span class="nc" id="L446">            System.out.println(&quot;[ p:prev page | b:back ]&quot;);</span>
+<span class="nc" id="L438">        totalPages=(int)Math.ceil(ordersArrayList.size()/10.0);</span>
+<span class="nc" id="L439">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
+<span class="nc bnc" id="L440" title="All 4 branches missed.">        if(totalPages==0 || totalPages==1){</span>
+<span class="nc" id="L441">            System.out.println(B_BACK);</span>
+<span class="nc bnc" id="L442" title="All 4 branches missed.">        }else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
+<span class="nc" id="L443">            System.out.println(&quot;[ n:next page | p:prev page | b:back ]&quot;);</span>
+<span class="nc bnc" id="L444" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
+<span class="nc" id="L445">            System.out.println(&quot;[ n:next page | b:back ]&quot;);</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">        else if(page==totalPages)</span>
+<span class="nc" id="L447">            System.out.println(&quot;[ p:prev page | b:back ]&quot;);</span>
 
-<span class="nc" id="L448">        return scanner.nextLine();</span>
+<span class="nc" id="L449">        return scanner.nextLine();</span>
     }
     public String displayInstallationHistory(ArrayList&lt;Appointment&gt; installationsArrayList ) {
-<span class="nc" id="L451">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L452">        System.out.println(Cli.blueBgText(&quot;Installation Requests History:&quot;));</span>
+<span class="nc" id="L452">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L453">        System.out.println(Cli.blueBgText(&quot;Installation Requests History:&quot;));</span>
 
-<span class="nc" id="L454">        int start = (page - 1) * 10;</span>
-<span class="nc" id="L455">        int end = Math.min(start + 10, installationsArrayList.size());</span>
+<span class="nc" id="L455">        int start = (page - 1) * 10;</span>
+<span class="nc" id="L456">        int end = Math.min(start + 10, installationsArrayList.size());</span>
 
-<span class="nc" id="L457">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
-<span class="nc" id="L458">                installationsArrayList.get(i).getDate()+&quot; | &quot;+</span>
-<span class="nc" id="L459">                        installationsArrayList.get(i).getProductName()+&quot; | &quot;+</span>
-<span class="nc" id="L460">                        installationsArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
-<span class="nc" id="L461">                        installationsArrayList.get(i).getStringTime()</span>
+<span class="nc" id="L458">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
+<span class="nc" id="L459">                installationsArrayList.get(i).getDate()+&quot; | &quot;+</span>
+<span class="nc" id="L460">                        installationsArrayList.get(i).getProductName()+&quot; | &quot;+</span>
+<span class="nc" id="L461">                        installationsArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
+<span class="nc" id="L462">                        installationsArrayList.get(i).getStringTime()</span>
         )));
 
-<span class="nc" id="L464">        totalPages=(int)Math.ceil(installationsArrayList.size()/10.0);</span>
-<span class="nc" id="L465">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
-<span class="nc bnc" id="L466" title="All 4 branches missed.">        if(totalPages==0 || totalPages==1){</span>
-<span class="nc" id="L467">            System.out.println(B_BACK);</span>
-<span class="nc bnc" id="L468" title="All 4 branches missed.">        }else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
-<span class="nc" id="L469">            System.out.println(&quot;[ n:next page | p:prev page | b:back ]&quot;);</span>
-<span class="nc bnc" id="L470" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
-<span class="nc" id="L471">            System.out.println(&quot;[ n:next page | b:back ]&quot;);</span>
-<span class="nc bnc" id="L472" title="All 2 branches missed.">        else if(page==totalPages)</span>
-<span class="nc" id="L473">            System.out.println(&quot;[ p:prev page | b:back ]&quot;);</span>
+<span class="nc" id="L465">        totalPages=(int)Math.ceil(installationsArrayList.size()/10.0);</span>
+<span class="nc" id="L466">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
+<span class="nc bnc" id="L467" title="All 4 branches missed.">        if(totalPages==0 || totalPages==1){</span>
+<span class="nc" id="L468">            System.out.println(B_BACK);</span>
+<span class="nc bnc" id="L469" title="All 4 branches missed.">        }else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
+<span class="nc" id="L470">            System.out.println(&quot;[ n:next page | p:prev page | b:back ]&quot;);</span>
+<span class="nc bnc" id="L471" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
+<span class="nc" id="L472">            System.out.println(&quot;[ n:next page | b:back ]&quot;);</span>
+<span class="nc bnc" id="L473" title="All 2 branches missed.">        else if(page==totalPages)</span>
+<span class="nc" id="L474">            System.out.println(&quot;[ p:prev page | b:back ]&quot;);</span>
 
-<span class="nc" id="L475">        return scanner.nextLine();</span>
+<span class="nc" id="L476">        return scanner.nextLine();</span>
     }
 
     public String displayInstallerDashboard(User account) {
-<span class="nc" id="L479">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L480">        System.out.println(Cli.blueBgText(&quot;Installer Dashboard:&quot;));</span>
-<span class="nc" id="L481">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Schedule of Appointments&quot;));</span>
-<span class="nc" id="L482">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Installation Requests&quot;));</span>
-<span class="nc" id="L483">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Notifications:&quot;)+ Cli.blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
-<span class="nc" id="L484">        System.out.println(&quot;4. &quot;+ Cli.blueText(LOG_OUT));</span>
-<span class="nc" id="L485">        return scanner.nextLine();</span>
+<span class="nc" id="L480">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L481">        System.out.println(Cli.blueBgText(&quot;Installer Dashboard:&quot;));</span>
+<span class="nc" id="L482">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Schedule of Appointments&quot;));</span>
+<span class="nc" id="L483">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Installation Requests&quot;));</span>
+<span class="nc" id="L484">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Notifications:&quot;)+ Cli.blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
+<span class="nc" id="L485">        System.out.println(&quot;4. &quot;+ Cli.blueText(LOG_OUT));</span>
+<span class="nc" id="L486">        return scanner.nextLine();</span>
     }
     public String displayInstallationRequests(ArrayList&lt;Appointment&gt; appointmentArrayList) {
-<span class="nc" id="L488">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L489">        System.out.println(Cli.blueBgText(&quot; Installation Requests &quot;));</span>
+<span class="nc" id="L489">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L490">        System.out.println(Cli.blueBgText(&quot; Installation Requests &quot;));</span>
 
-<span class="nc" id="L491">        int start = (page - 1) * 10;</span>
-<span class="nc" id="L492">        int end = Math.min(start + 10, appointmentArrayList.size());</span>
+<span class="nc" id="L492">        int start = (page - 1) * 10;</span>
+<span class="nc" id="L493">        int end = Math.min(start + 10, appointmentArrayList.size());</span>
 
-<span class="nc" id="L494">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L495">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(appointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
-<span class="nc" id="L496">                    appointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
-<span class="nc" id="L497">                    appointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
-<span class="nc" id="L498">                    appointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
-<span class="nc" id="L499">                    appointmentArrayList.get(i).getStringTime()</span>
+<span class="nc" id="L495">        IntStream.range(start, end).forEach(i -&gt; {</span>
+<span class="nc" id="L496">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(appointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
+<span class="nc" id="L497">                    appointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
+<span class="nc" id="L498">                    appointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
+<span class="nc" id="L499">                    appointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
+<span class="nc" id="L500">                    appointmentArrayList.get(i).getStringTime()</span>
             ));
-<span class="nc" id="L501">        });</span>
+<span class="nc" id="L502">        });</span>
 
-<span class="nc" id="L503">        totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);</span>
-<span class="nc" id="L504">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
-<span class="nc bnc" id="L505" title="All 2 branches missed.">        if(totalPages==0){</span>
-<span class="nc" id="L506">            System.out.println(B_BACK);</span>
-<span class="nc bnc" id="L507" title="All 4 branches missed.">        } else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
-<span class="nc" id="L508">            System.out.println(&quot;[ n:next page | p:prev page | c&lt;int&gt;:confirm | b:back ]&quot;);</span>
-<span class="nc bnc" id="L509" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
-<span class="nc" id="L510">            System.out.println(&quot;[ n:next page | c&lt;int&gt;:confirm | b:back ]&quot;);</span>
-<span class="nc bnc" id="L511" title="All 2 branches missed.">        else if(totalPages==1)</span>
-<span class="nc" id="L512">            System.out.println(&quot;[ c&lt;int&gt;:confirm | b:back ]&quot;);</span>
-<span class="nc bnc" id="L513" title="All 2 branches missed.">        else if(page==totalPages)</span>
-<span class="nc" id="L514">            System.out.println(&quot;[ p:prev page | c&lt;int&gt;:confirm | b:back ]&quot;);</span>
+<span class="nc" id="L504">        totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);</span>
+<span class="nc" id="L505">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
+<span class="nc bnc" id="L506" title="All 2 branches missed.">        if(totalPages==0){</span>
+<span class="nc" id="L507">            System.out.println(B_BACK);</span>
+<span class="nc bnc" id="L508" title="All 4 branches missed.">        } else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
+<span class="nc" id="L509">            System.out.println(&quot;[ n:next page | p:prev page | c&lt;int&gt;:confirm | b:back ]&quot;);</span>
+<span class="nc bnc" id="L510" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
+<span class="nc" id="L511">            System.out.println(&quot;[ n:next page | c&lt;int&gt;:confirm | b:back ]&quot;);</span>
+<span class="nc bnc" id="L512" title="All 2 branches missed.">        else if(totalPages==1)</span>
+<span class="nc" id="L513">            System.out.println(&quot;[ c&lt;int&gt;:confirm | b:back ]&quot;);</span>
+<span class="nc bnc" id="L514" title="All 2 branches missed.">        else if(page==totalPages)</span>
+<span class="nc" id="L515">            System.out.println(&quot;[ p:prev page | c&lt;int&gt;:confirm | b:back ]&quot;);</span>
 
-<span class="nc" id="L516">        return scanner.nextLine();</span>
+<span class="nc" id="L517">        return scanner.nextLine();</span>
     }
      public String displayScheduleOfAppointments(ArrayList&lt;Appointment&gt; approvedAppointmentArrayList) {
-<span class="nc" id="L519">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L520">        System.out.println(Cli.blueBgText(&quot; Schedule Of Appointments &quot;));</span>
+<span class="nc" id="L520">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L521">        System.out.println(Cli.blueBgText(&quot; Schedule Of Appointments &quot;));</span>
 
-<span class="nc" id="L522">        int start = (page - 1) * 10;</span>
-<span class="nc" id="L523">        int end = Math.min(start + 10, approvedAppointmentArrayList.size());</span>
+<span class="nc" id="L523">        int start = (page - 1) * 10;</span>
+<span class="nc" id="L524">        int end = Math.min(start + 10, approvedAppointmentArrayList.size());</span>
 
-<span class="nc" id="L525">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(approvedAppointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
-<span class="nc" id="L526">                approvedAppointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
-<span class="nc" id="L527">                approvedAppointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
-<span class="nc" id="L528">                approvedAppointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
-<span class="nc" id="L529">                approvedAppointmentArrayList.get(i).getStringTime()</span>
+<span class="nc" id="L526">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(approvedAppointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
+<span class="nc" id="L527">                approvedAppointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
+<span class="nc" id="L528">                approvedAppointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
+<span class="nc" id="L529">                approvedAppointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
+<span class="nc" id="L530">                approvedAppointmentArrayList.get(i).getStringTime()</span>
         )));
 
-<span class="nc" id="L532">        totalPages=(int)Math.ceil(approvedAppointmentArrayList.size()/10.0);</span>
-<span class="nc" id="L533">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
-<span class="nc bnc" id="L534" title="All 2 branches missed.">        if(totalPages==0){</span>
-<span class="nc" id="L535">            System.out.println(B_BACK);</span>
-<span class="nc bnc" id="L536" title="All 4 branches missed.">        } else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
-<span class="nc" id="L537">            System.out.println(&quot;[ n:next page | p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
-<span class="nc bnc" id="L538" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
-<span class="nc" id="L539">            System.out.println(&quot;[ n:next page | d&lt;int&gt;:done | b:back ]&quot;);</span>
-<span class="nc bnc" id="L540" title="All 2 branches missed.">        else if(totalPages==1)</span>
-<span class="nc" id="L541">            System.out.println(&quot;[ d&lt;int&gt;:done | b:back ]&quot;);</span>
-<span class="nc bnc" id="L542" title="All 2 branches missed.">        else if(page==totalPages)</span>
-<span class="nc" id="L543">            System.out.println(&quot;[ p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc" id="L533">        totalPages=(int)Math.ceil(approvedAppointmentArrayList.size()/10.0);</span>
+<span class="nc" id="L534">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
+<span class="nc bnc" id="L535" title="All 2 branches missed.">        if(totalPages==0){</span>
+<span class="nc" id="L536">            System.out.println(B_BACK);</span>
+<span class="nc bnc" id="L537" title="All 4 branches missed.">        } else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
+<span class="nc" id="L538">            System.out.println(&quot;[ n:next page | p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc bnc" id="L539" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
+<span class="nc" id="L540">            System.out.println(&quot;[ n:next page | d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc bnc" id="L541" title="All 2 branches missed.">        else if(totalPages==1)</span>
+<span class="nc" id="L542">            System.out.println(&quot;[ d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc bnc" id="L543" title="All 2 branches missed.">        else if(page==totalPages)</span>
+<span class="nc" id="L544">            System.out.println(&quot;[ p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
 
-<span class="nc" id="L545">        return scanner.nextLine();</span>
+<span class="nc" id="L546">        return scanner.nextLine();</span>
     }
     public String displayNotificationCenter(ArrayList&lt;String&gt; notifications) {
-<span class="nc" id="L548">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L549">        System.out.println(Cli.blueBgText(&quot; Notification Center &quot;));</span>
+<span class="nc" id="L549">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L550">        System.out.println(Cli.blueBgText(&quot; Notification Center &quot;));</span>
 
-<span class="nc" id="L551">        int start = (page - 1) * 10;</span>
-<span class="nc" id="L552">        int end = Math.min(start + 10, notifications.size());</span>
+<span class="nc" id="L552">        int start = (page - 1) * 10;</span>
+<span class="nc" id="L553">        int end = Math.min(start + 10, notifications.size());</span>
 
-<span class="nc" id="L554">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; +notifications.get(i)));</span>
+<span class="nc" id="L555">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; +notifications.get(i)));</span>
 
-<span class="nc" id="L556">        totalPages=(int)Math.ceil(notifications.size()/10.0);</span>
-<span class="nc" id="L557">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
-<span class="nc bnc" id="L558" title="All 2 branches missed.">        if(totalPages==0){</span>
-<span class="nc" id="L559">            System.out.println(B_BACK);</span>
-<span class="nc bnc" id="L560" title="All 4 branches missed.">        } else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
-<span class="nc" id="L561">            System.out.println(&quot;[ n:next page | p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
-<span class="nc bnc" id="L562" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
-<span class="nc" id="L563">            System.out.println(&quot;[ n:next page | d&lt;int&gt;:done | b:back ]&quot;);</span>
-<span class="nc bnc" id="L564" title="All 2 branches missed.">        else if(totalPages==1)</span>
-<span class="nc" id="L565">            System.out.println(&quot;[ d&lt;int&gt;:done | b:back ]&quot;);</span>
-<span class="nc bnc" id="L566" title="All 2 branches missed.">        else if(page==totalPages)</span>
-<span class="nc" id="L567">            System.out.println(&quot;[ p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc" id="L557">        totalPages=(int)Math.ceil(notifications.size()/10.0);</span>
+<span class="nc" id="L558">        System.out.println(PAGE_TO_PRINT +page+&quot;/&quot;+totalPages);</span>
+<span class="nc bnc" id="L559" title="All 2 branches missed.">        if(totalPages==0){</span>
+<span class="nc" id="L560">            System.out.println(B_BACK);</span>
+<span class="nc bnc" id="L561" title="All 4 branches missed.">        } else if(page&lt;totalPages &amp;&amp; page&gt;1)</span>
+<span class="nc" id="L562">            System.out.println(&quot;[ n:next page | p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc bnc" id="L563" title="All 4 branches missed.">        else if (page&lt;totalPages &amp;&amp; page==1)</span>
+<span class="nc" id="L564">            System.out.println(&quot;[ n:next page | d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc bnc" id="L565" title="All 2 branches missed.">        else if(totalPages==1)</span>
+<span class="nc" id="L566">            System.out.println(&quot;[ d&lt;int&gt;:done | b:back ]&quot;);</span>
+<span class="nc bnc" id="L567" title="All 2 branches missed.">        else if(page==totalPages)</span>
+<span class="nc" id="L568">            System.out.println(&quot;[ p:prev page | d&lt;int&gt;:done | b:back ]&quot;);</span>
 
-<span class="nc" id="L569">        return scanner.nextLine();</span>
+<span class="nc" id="L570">        return scanner.nextLine();</span>
     }
     public void displayMsg(String msg,boolean success){
-<span class="nc" id="L572">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc bnc" id="L573" title="All 2 branches missed.">        if(success)</span>
-<span class="nc" id="L574">            System.out.println(Cli.greenBgText(msg));</span>
+<span class="nc" id="L573">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc bnc" id="L574" title="All 2 branches missed.">        if(success)</span>
+<span class="nc" id="L575">            System.out.println(Cli.greenBgText(msg));</span>
         else
-<span class="nc" id="L576">            System.out.println(Cli.errorText(msg));</span>
+<span class="nc" id="L577">            System.out.println(Cli.errorText(msg));</span>
 
-<span class="nc" id="L578">        System.out.println(&quot;[press enter...]&quot;);</span>
-<span class="nc" id="L579">        scanner.nextLine();</span>
-<span class="nc" id="L580">    }</span>
+<span class="nc" id="L579">        System.out.println(&quot;[press enter...]&quot;);</span>
+<span class="nc" id="L580">        scanner.nextLine();</span>
+<span class="nc" id="L581">    }</span>
     public void displayAfterPurchase(String productName,String phoneNumber){
-<span class="nc" id="L582">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L583">        System.out.println(&quot;=====================================================&quot;);</span>
-<span class="nc" id="L584">        System.out.println(&quot;Thank You for purchasing \&quot;&quot;+ Cli.blueText(productName)+&quot;\&quot;.&quot;);</span>
-<span class="nc" id="L585">        System.out.println(&quot;We’ll call you on \&quot;&quot;+ Cli.blueText(phoneNumber)+&quot;\&quot; within 20 minutes for confirmation.&quot;);</span>
-<span class="nc" id="L586">        System.out.println(&quot;We value your choice.&quot;);</span>
-<span class="nc" id="L587">        System.out.println(&quot;=====================================================&quot;);</span>
-<span class="nc" id="L588">        System.out.println(&quot;[press enter...]&quot;);</span>
-<span class="nc" id="L589">        scanner.nextLine();</span>
-<span class="nc" id="L590">    }</span>
+<span class="nc" id="L583">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L584">        System.out.println(&quot;=====================================================&quot;);</span>
+<span class="nc" id="L585">        System.out.println(&quot;Thank You for purchasing \&quot;&quot;+ Cli.blueText(productName)+&quot;\&quot;.&quot;);</span>
+<span class="nc" id="L586">        System.out.println(&quot;We’ll call you on \&quot;&quot;+ Cli.blueText(phoneNumber)+&quot;\&quot; within 20 minutes for confirmation.&quot;);</span>
+<span class="nc" id="L587">        System.out.println(&quot;We value your choice.&quot;);</span>
+<span class="nc" id="L588">        System.out.println(&quot;=====================================================&quot;);</span>
+<span class="nc" id="L589">        System.out.println(&quot;[press enter...]&quot;);</span>
+<span class="nc" id="L590">        scanner.nextLine();</span>
+<span class="nc" id="L591">    }</span>
     public String displayStart(){
-<span class="nc" id="L592">        Scanner scanner=new Scanner(System.in);</span>
+<span class="nc" id="L593">        Scanner scanner=new Scanner(System.in);</span>
 
-<span class="nc" id="L594">        System.out.println(Cli.blueBgText(&quot; Program &quot;));</span>
-<span class="nc" id="L595">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Login&quot;));</span>
-<span class="nc" id="L596">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Sign Up&quot;));</span>
-<span class="nc" id="L597">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Exit&quot;));</span>
+<span class="nc" id="L595">        System.out.println(Cli.blueBgText(&quot; Program &quot;));</span>
+<span class="nc" id="L596">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Login&quot;));</span>
+<span class="nc" id="L597">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Sign Up&quot;));</span>
+<span class="nc" id="L598">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Exit&quot;));</span>
 
-<span class="nc" id="L599">        return scanner.nextLine();</span>
+<span class="nc" id="L600">        return scanner.nextLine();</span>
     }
 
 }

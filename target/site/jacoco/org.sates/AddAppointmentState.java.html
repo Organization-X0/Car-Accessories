@@ -16,12 +16,12 @@ public class AddAppointmentState implements State {
     @Override
     public void handle() {
         Map&lt;String,String&gt; data;
-<span class="nc" id="L19">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="nc bnc" id="L20" title="All 2 branches missed.">        if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) data = myApp.getCli().displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);</span>
 <span class="nc" id="L21">        else data = myApp.getCli().displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());</span>
 <span class="nc" id="L22">        dataIsEmpty=setDataIsEmpty(data);</span>
 <span class="nc" id="L23">        handleInput(data);</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(!Error.getLocation().equals(getStateString())){</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
 <span class="nc bnc" id="L25" title="All 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Appointment added successfully! &quot;,true);</span>
 <span class="nc" id="L26">            myApp.availableTimesShown=false;</span>
 <span class="nc bnc" id="L27" title="All 2 branches missed.">            if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) myApp.setState(new ManageInstallationAppointmentState(myApp));</span>
@@ -66,7 +66,7 @@ public class AddAppointmentState implements State {
 <span class="nc" id="L66">            installer.increaseNotificationCount();</span>
 
 <span class="fc" id="L68">        }catch (Exception e){</span>
-<span class="fc" id="L69">            Error.setError(getStateString());</span>
+<span class="fc" id="L69">            myApp.getError().setError(getStateString());</span>
 <span class="nc" id="L70">        }</span>
 <span class="fc" id="L71">    }</span>
 

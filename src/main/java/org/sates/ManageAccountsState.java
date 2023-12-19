@@ -11,8 +11,8 @@ public class ManageAccountsState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option= myApp.getCli().displayManageAccounts(myApp.myDatabase.getCustomerList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayManageAccounts(myApp.getDatabase().getCustomerList());
         handleInput(option);
     }
 
@@ -24,20 +24,20 @@ public class ManageAccountsState implements State {
         if(!option.isEmpty() && option.charAt(0) == 'd') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                String userEmail=myApp.myDatabase.getCustomerList().get(num-1).getEmail();
+                String userEmail=myApp.getDatabase().getCustomerList().get(num-1).getEmail();
                 myApp.deleteAccount(userEmail);
             }catch (Exception e){
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
         } else if(!option.isEmpty() && option.charAt(0) == 'u') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                myApp.userEmailToUpdate=myApp.myDatabase.getCustomerList().get(num-1).getEmail();
+                myApp.userEmailToUpdate=myApp.getDatabase().getCustomerList().get(num-1).getEmail();
                 myApp.setState(new UpdateAccountState(myApp));
             }catch (Exception e){
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
-        }else Error.setError(getStateString());
+        }else myApp.getError().setError(getStateString());
     }
     @Override
     public String getStateString() {

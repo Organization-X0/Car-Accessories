@@ -50,7 +50,7 @@ public class CustomerDashboardSteps {
 
     @Then("should see an error message on customer Dashboard")
     public void should_see_an_error_message_on_customer_dashboard() {
-        assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
+        assertEquals(myApp.getCurrentState().getStateString(), myApp.getError().getLocation());
     }
     @Then("should be redirected to the Notification Center")
     public void should_be_redirected_to_the_notification_center() {
@@ -69,7 +69,7 @@ public class CustomerDashboardSteps {
     }
     @When("customer buys product from product catalog")
     public void customer_buys_product_from_product_catalog() {
-        size=myApp.searchAccount(myApp.email).getOrders().size();
+        size=myApp.searchAccount(myApp.getEmail()).getOrders().size();
 
     }
     @When("the customer buys {string} from the product catalog")
@@ -78,7 +78,7 @@ public class CustomerDashboardSteps {
     }
     @Then("the purchase should be completed")
     public void the_purchase_should_be_completed() {
-        assertEquals(myApp.searchAccount(myApp.email).getOrders().size(),size+1);
+        assertEquals(myApp.searchAccount(myApp.getEmail()).getOrders().size(),size+1);
     }
     @Given("customer enter profile page {string}")
     public void customer_enter_profile_page(String option) {
@@ -103,7 +103,7 @@ public class CustomerDashboardSteps {
     public void the_customer_fills_in_the_installation_request_form_for_service_with_and(String product_name, String car_make, String date, String time_slot) {
         id= Appointment.getLastId();
         Map<String,String> data=new HashMap<>();
-        data.put("email",myApp.email);
+        data.put("email",myApp.getEmail());
         data.put("productName",product_name);
         data.put("carMake",car_make);
         data.put("date",date);

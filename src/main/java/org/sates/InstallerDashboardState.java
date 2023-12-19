@@ -11,8 +11,8 @@ public class InstallerDashboardState implements State{
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option = myApp.getCli().displayInstallerDashboard(myApp.searchAccount(myApp.email));
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option = myApp.getCli().displayInstallerDashboard(myApp.searchAccount(myApp.getEmail()));
         handleInput(option);
     }
 
@@ -22,9 +22,9 @@ public class InstallerDashboardState implements State{
         switch (option) {
             case "1" -> myApp.setState(new ScheduleOfAppointmentsState(myApp));
             case "2" -> myApp.setState(new InstallationRequestsState(myApp));
-            case "3" -> {myApp.searchAccount(myApp.email).resetNotificationCount();myApp.setState(new NotificationCenterState(myApp));}
+            case "3" -> {myApp.searchAccount(myApp.getEmail()).resetNotificationCount();myApp.setState(new NotificationCenterState(myApp));}
             case "4" -> myApp.setState(new StartState(myApp));
-            default -> Error.setError(getStateString());
+            default -> myApp.getError().setError(getStateString());
         }
     }
 

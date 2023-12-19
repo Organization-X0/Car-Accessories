@@ -15,14 +15,14 @@ public class ManageInstallationAppointmentState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option= myApp.getCli().displayInstallationAppointments(myApp.myDatabase.getRequestedAppointmentsList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayInstallationAppointments(myApp.getDatabase().getRequestedAppointmentsList());
         handleInput(option);
     }
 
     @Override
     public void handleInput(Object input) {
-        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();
+        ArrayList<Appointment> appointmentArrayList = myApp.getDatabase().getRequestedAppointmentsList();
         String option=(String) input;
 
         myApp.nextPrevBackAdd(option,new AdminDashboardState(myApp),new AddAppointmentState(myApp));
@@ -32,7 +32,7 @@ public class ManageInstallationAppointmentState implements State {
                 int appointmentId = appointmentArrayList.get(num - 1).getId();
                 myApp.deleteAppointment(appointmentId);
             } catch (Exception e) {
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
         } else if (!option.isEmpty() && option.charAt(0) == 'u') {
             try {
@@ -40,9 +40,9 @@ public class ManageInstallationAppointmentState implements State {
                 myApp.appointmentIdToUpdate = appointmentArrayList.get(num - 1).getId();
                 myApp.setState(new UpdateAppointmentState(myApp));
             } catch (Exception e) {
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
-        }else Error.setError(getStateString());
+        }else myApp.getError().setError(getStateString());
     }
 
 

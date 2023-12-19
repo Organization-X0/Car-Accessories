@@ -11,10 +11,10 @@ public class AdminDashboardState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        Error.checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String option = myApp.getCli().displayAdminDashboard();</span>
-<span class="nc" id="L16">        handleInput(option);</span>
-<span class="nc" id="L17">    }</span>
+<span class="fc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L15">        String option = myApp.getCli().displayAdminDashboard();</span>
+<span class="fc" id="L16">        handleInput(option);</span>
+<span class="fc" id="L17">    }</span>
 
     @Override
     public void handleInput(Object input) {
@@ -25,7 +25,7 @@ public class AdminDashboardState implements State {
 <span class="fc" id="L25">            case &quot;3&quot; -&gt; myApp.setState(new ManageAccountsState(myApp));</span>
 <span class="fc" id="L26">            case &quot;4&quot; -&gt; myApp.setState(new ManageInstallationAppointmentState(myApp));</span>
 <span class="fc" id="L27">            case &quot;5&quot; -&gt; myApp.setState(new StartState(myApp));</span>
-<span class="fc" id="L28">            default -&gt; Error.setError(getStateString());</span>
+<span class="fc" id="L28">            default -&gt; myApp.getError().setError(getStateString());</span>
         }
 <span class="fc" id="L30">    }</span>
 

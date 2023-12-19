@@ -12,7 +12,7 @@ public class LoginState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         Map<String, String> loginData = myApp.getCli().displayLogin();
         handleInput(loginData);
     }

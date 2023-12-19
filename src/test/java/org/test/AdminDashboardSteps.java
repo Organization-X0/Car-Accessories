@@ -58,7 +58,7 @@ public class AdminDashboardSteps {
     }
     @Then("should see an error message on Admin Dashboard")
     public void should_see_an_error_message_on_admin_dashboard() {
-        assertEquals(myApp.getCurrentState().getStateString(), Error.getLocation());
+        assertEquals(myApp.getCurrentState().getStateString(), myApp.getError().getLocation());
     }
     @When("the admin adds new category {string}")
     public void the_admin_adds_new_category(String categoryName) {
@@ -275,6 +275,6 @@ public class AdminDashboardSteps {
     }
     @Then("the application should throw an Error")
     public void the_application_should_throw_an_error() {
-        assertNotNull(Error.getLocation());
+        assertNotNull(myApp.getError().getLocation());
     }
 }

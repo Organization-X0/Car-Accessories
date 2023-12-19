@@ -15,11 +15,11 @@ public class AddProductState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        Map<String,String> data = myApp.getCli().displayAddProduct(myApp.myDatabase.getCategoryList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        Map<String,String> data = myApp.getCli().displayAddProduct(myApp.getDatabase().getCategoryList());
         dataIsEmpty=data.values().stream().allMatch(String::isEmpty);
         handleInput(data);
-        if(!Error.getLocation().equals(getStateString())){
+        if(!myApp.getError().getLocation().equals(getStateString())){
             if(!dataIsEmpty) myApp.getCli().displayMsg(" Product added successfully! ",true);
             myApp.setState(new ManageProductsState(myApp));
         }
@@ -36,9 +36,9 @@ public class AddProductState implements State {
                 throw new Exception();
             if(dataIsEmpty) return;
             int categoryNumber= Integer.parseInt(data.get("category"));
-            myApp.addProduct(data.get("name"),myApp.myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
+            myApp.addProduct(data.get("name"),myApp.getDatabase().getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));
         }catch (Exception e){
-            Error.setError(getStateString());
+            myApp.getError().setError(getStateString());
         }
     }
 

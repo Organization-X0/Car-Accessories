@@ -15,7 +15,7 @@ public class ManageInstallationAppointmentState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L18">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L18">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="nc" id="L19">        String option= myApp.getCli().displayInstallationAppointments(myApp.myDatabase.getRequestedAppointmentsList());</span>
 <span class="nc" id="L20">        handleInput(option);</span>
 <span class="nc" id="L21">    }</span>
@@ -32,7 +32,7 @@ public class ManageInstallationAppointmentState implements State {
 <span class="fc" id="L32">                int appointmentId = appointmentArrayList.get(num - 1).getId();</span>
 <span class="fc" id="L33">                myApp.deleteAppointment(appointmentId);</span>
 <span class="nc" id="L34">            } catch (Exception e) {</span>
-<span class="nc" id="L35">                Error.setError(getStateString());</span>
+<span class="nc" id="L35">                myApp.getError().setError(getStateString());</span>
 <span class="pc" id="L36">            }</span>
 <span class="pc bpc" id="L37" title="1 of 4 branches missed.">        } else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
             try {
@@ -40,9 +40,9 @@ public class ManageInstallationAppointmentState implements State {
 <span class="fc" id="L40">                myApp.appointmentIdToUpdate = appointmentArrayList.get(num - 1).getId();</span>
 <span class="fc" id="L41">                myApp.setState(new UpdateAppointmentState(myApp));</span>
 <span class="nc" id="L42">            } catch (Exception e) {</span>
-<span class="nc" id="L43">                Error.setError(getStateString());</span>
+<span class="nc" id="L43">                myApp.getError().setError(getStateString());</span>
 <span class="pc" id="L44">            }</span>
-<span class="fc" id="L45">        }else Error.setError(getStateString());</span>
+<span class="fc" id="L45">        }else myApp.getError().setError(getStateString());</span>
 <span class="fc" id="L46">    }</span>
 
 

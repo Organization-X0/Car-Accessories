@@ -11,10 +11,10 @@ public class ProfileState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        Error.checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String name=myApp.searchAccount(myApp.email).getFullName();</span>
-<span class="nc" id="L16">        String phone=myApp.searchAccount(myApp.email).getPhone();</span>
-<span class="nc" id="L17">        String option= myApp.getCli().displayProfile(name,myApp.email,phone);</span>
+<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L15">        String name=myApp.searchAccount(myApp.getEmail()).getFullName();</span>
+<span class="nc" id="L16">        String phone=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
+<span class="nc" id="L17">        String option= myApp.getCli().displayProfile(name,myApp.getEmail(),phone);</span>
 <span class="nc" id="L18">        handleInput(option);</span>
 <span class="nc" id="L19">    }</span>
 
@@ -26,7 +26,7 @@ public class ProfileState implements State {
 <span class="fc" id="L26">            case &quot;2&quot;-&gt;myApp.setState(new ViewOrderHistoryState(myApp));//view order history</span>
 <span class="fc" id="L27">            case &quot;3&quot;-&gt;myApp.setState(new ViewInstallationHistoryState(myApp));</span>
 <span class="fc" id="L28">            case &quot;4&quot;-&gt;myApp.setState(new CustomerDashboardState(myApp));//Back</span>
-<span class="nc" id="L29">            default -&gt; Error.setError(getStateString());</span>
+<span class="nc" id="L29">            default -&gt; myApp.getError().setError(getStateString());</span>
         }
 
 <span class="fc" id="L32">    }</span>

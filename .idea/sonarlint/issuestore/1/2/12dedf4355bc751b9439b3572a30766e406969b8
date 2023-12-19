@@ -1,39 +1,31 @@
 
-h	java:S112è"FDefine and throw a dedicated exception instead of using a generic one.(éƒÃçıÿÿÿÿ8š¦ñÇ1
-b	java:S112ö"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe8š¦ñÇ1
-b	java:S112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe8š¦ñÇ1
-b	java:S112š"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe8š¦ñÇ1
+h	java:S112ñ"FDefine and throw a dedicated exception instead of using a generic one.(éƒÃçıÿÿÿÿ8—Ê›È1
+b	java:S112ÿ"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe8—Ê›È1
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe8—Ê›È1
+b	java:S112¦"FDefine and throw a dedicated exception instead of using a generic one.(‰Æáe8—Ê›È1
 i
-java:S1192–"FDefine a constant instead of duplicating this literal "phone" 4 times.(óƒİ¢ùÿÿÿÿ8š¦ñÇ1
+java:S1192¢"FDefine a constant instead of duplicating this literal "phone" 4 times.(š¤ÂØüÿÿÿÿ8˜Ê›È1
 
-java:S1319"|The type of "productArrayListBetweenState" should be an interface such as "List" rather than the implementation "ArrayList".(£êšãúÿÿÿÿ8‘š¦ñÇ1
+java:S1319"|The type of "productArrayListBetweenState" should be an interface such as "List" rather than the implementation "ArrayList".(£êšãúÿÿÿÿ8˜Ê›È1
 
-java:S1319"nThe type of "availableTimes" should be an interface such as "List" rather than the implementation "ArrayList".(‚ÓŠªşÿÿÿÿ8‘š¦ñÇ1
+java:S1319"nThe type of "availableTimes" should be an interface such as "List" rather than the implementation "ArrayList".(‚ÓŠªşÿÿÿÿ8˜Ê›È1
 |
-java:S1104"_Make availableTimesShown a static final constant or non-public and provide accessors if needed.(ç¸îß8’š¦ñÇ1
+java:S1104"_Make availableTimesShown a static final constant or non-public and provide accessors if needed.(ç¸îß8™Ê›È1
 ‡
-java:S1104"eMake handleManageProductOutput a static final constant or non-public and provide accessors if needed.(‰¼Ïêùÿÿÿÿ8’š¦ñÇ1
+java:S1104"eMake handleManageProductOutput a static final constant or non-public and provide accessors if needed.(‰¼Ïêùÿÿÿÿ8™Ê›È1
 
-java:S1104"]Make productIdToUpdate a static final constant or non-public and provide accessors if needed.(ù’’îùÿÿÿÿ8’š¦ñÇ1
+java:S1104"]Make productIdToUpdate a static final constant or non-public and provide accessors if needed.(ù’’îùÿÿÿÿ8™Ê›È1
 ƒ
-java:S1104"aMake appointmentIdToUpdate a static final constant or non-public and provide accessors if needed.(è†„úÿÿÿÿ8’š¦ñÇ1
+java:S1104"aMake appointmentIdToUpdate a static final constant or non-public and provide accessors if needed.(è†„úÿÿÿÿ8™Ê›È1
 m
-java:S1104"PMake exit a static final constant or non-public and provide accessors if needed.(…ã÷8’š¦ñÇ1
+java:S1104"PMake exit a static final constant or non-public and provide accessors if needed.(…ã÷8™Ê›È1
 }
-java:S1104"`Make categoryNameToUpdate a static final constant or non-public and provide accessors if needed.(Ë×ù8’š¦ñÇ1
+java:S1104"`Make categoryNameToUpdate a static final constant or non-public and provide accessors if needed.(Ë×ù8™Ê›È1
 y
-java:S1104"]Make userEmailToUpdate a static final constant or non-public and provide accessors if needed.(Ü¨C8’š¦ñÇ1
+java:S1104"]Make userEmailToUpdate a static final constant or non-public and provide accessors if needed.(Ü¨C8™Ê›È1
 Š
-java:S1104"hMake productArrayListBetweenState a static final constant or non-public and provide accessors if needed.(£êšãúÿÿÿÿ8’š¦ñÇ1
+java:S1104"hMake productArrayListBetweenState a static final constant or non-public and provide accessors if needed.(£êšãúÿÿÿÿ8™Ê›È1
 |
-java:S1104"ZMake availableTimes a static final constant or non-public and provide accessors if needed.(‚ÓŠªşÿÿÿÿ8’š¦ñÇ1
-s
-java:S1104"QMake email a static final constant or non-public and provide accessors if needed.(¾Æ†Ëıÿÿÿÿ8’š¦ñÇ1
+java:S1104"ZMake availableTimes a static final constant or non-public and provide accessors if needed.(‚ÓŠªşÿÿÿÿ8™Ê›È1
 p
-java:S3776ğ"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(Ø¸ïÕ8Úš¦ñÇ1
-Z
-java:S3972ı"7Move this "if" to a new line or add the missing "else".(Ú–ÌÀøÿÿÿÿ8Üš¦ñÇ1
-U
-java:S3972"7Move this "if" to a new line or add the missing "else".(øÑ¤×8Şš¦ñÇ1
-Z
-java:S3972–"7Move this "if" to a new line or add the missing "else".(óƒİ¢ùÿÿÿÿ8ßš¦ñÇ1
+java:S3776ù"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(Ø¸ïÕ8íÊ›È1

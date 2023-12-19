@@ -10,7 +10,7 @@ public class StartState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         String option = myApp.getCli().displayStart();
         handleInput(option);
     }
@@ -25,7 +25,7 @@ public class StartState implements State{
             case "a" -> myApp.login("admin@gmail.com","a123");
             case "i" -> myApp.login("installer@gmail.com","i123");
             case "c" -> myApp.login("user1@gmail.com","u123");
-            default -> Error.setError(getStateString());
+            default -> myApp.getError().setError(getStateString());
         }
     }
     @Override

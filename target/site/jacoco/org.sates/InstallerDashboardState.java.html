@@ -11,8 +11,8 @@ public class InstallerDashboardState implements State{
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        Error.checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String option = myApp.getCli().displayInstallerDashboard(myApp.searchAccount(myApp.email));</span>
+<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L15">        String option = myApp.getCli().displayInstallerDashboard(myApp.searchAccount(myApp.getEmail()));</span>
 <span class="nc" id="L16">        handleInput(option);</span>
 <span class="nc" id="L17">    }</span>
 
@@ -22,9 +22,9 @@ public class InstallerDashboardState implements State{
 <span class="fc bfc" id="L22" title="All 5 branches covered.">        switch (option) {</span>
 <span class="fc" id="L23">            case &quot;1&quot; -&gt; myApp.setState(new ScheduleOfAppointmentsState(myApp));</span>
 <span class="fc" id="L24">            case &quot;2&quot; -&gt; myApp.setState(new InstallationRequestsState(myApp));</span>
-<span class="fc" id="L25">            case &quot;3&quot; -&gt; {myApp.searchAccount(myApp.email).resetNotificationCount();myApp.setState(new NotificationCenterState(myApp));}</span>
+<span class="fc" id="L25">            case &quot;3&quot; -&gt; {myApp.searchAccount(myApp.getEmail()).resetNotificationCount();myApp.setState(new NotificationCenterState(myApp));}</span>
 <span class="fc" id="L26">            case &quot;4&quot; -&gt; myApp.setState(new StartState(myApp));</span>
-<span class="fc" id="L27">            default -&gt; Error.setError(getStateString());</span>
+<span class="fc" id="L27">            default -&gt; myApp.getError().setError(getStateString());</span>
         }
 <span class="fc" id="L29">    }</span>
 

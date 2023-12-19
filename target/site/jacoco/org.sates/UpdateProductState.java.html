@@ -13,7 +13,7 @@ public class UpdateProductState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L16">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L16">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="nc" id="L17">        Map&lt;String,String&gt; data = myApp.getCli().displayUpdateProduct();</span>
 <span class="nc" id="L18">        handleInput(data);</span>
 <span class="nc" id="L19">    }</span>

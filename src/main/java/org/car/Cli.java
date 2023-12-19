@@ -358,7 +358,7 @@ public class Cli {
         Map<String, String> data = new HashMap<>();
         System.out.println(Cli.blueBgText(" ADD APPOINTMENT "));
 
-        data.put(EMAIL, myApp.email);
+        data.put(EMAIL, myApp.getEmail());
         System.out.println(Cli.blueText(PRODUCT_NAME));
         data.put(PRODUCT_NAME_DATA, scanner.nextLine());
         System.out.println(Cli.blueText(CAR_MAKE));
@@ -395,6 +395,7 @@ public class Cli {
     }
 
     public String displayCustomerDashboard(User account) {
+        System.out.println( account.getNotificationCount());
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText("Customer Dashboard:"));
         System.out.println("1. "+ Cli.blueText("Product Catalog"));

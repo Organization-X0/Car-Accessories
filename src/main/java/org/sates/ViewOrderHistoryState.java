@@ -11,8 +11,8 @@ public class ViewOrderHistoryState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option= myApp.getCli().displayOrderHistory(myApp.searchAccount(myApp.email).getOrders());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayOrderHistory(myApp.searchAccount(myApp.getEmail()).getOrders());
         handleInput(option);
     }
 

@@ -11,7 +11,7 @@ public class AdminDashboardState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         String option = myApp.getCli().displayAdminDashboard();
         handleInput(option);
     }
@@ -25,7 +25,7 @@ public class AdminDashboardState implements State {
             case "3" -> myApp.setState(new ManageAccountsState(myApp));
             case "4" -> myApp.setState(new ManageInstallationAppointmentState(myApp));
             case "5" -> myApp.setState(new StartState(myApp));
-            default -> Error.setError(getStateString());
+            default -> myApp.getError().setError(getStateString());
         }
     }
 

@@ -13,7 +13,7 @@ public class SignUpState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
+        myApp.getError().checkAndShow(getStateString(),myApp);
         Map<String, String> signUpData = myApp.getCli().displaySignUp();
         handleInput(signUpData);
     }

@@ -14,7 +14,7 @@ public class ScheduleOfAppointmentsState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L17">        Error.checkAndShow(getStateString(),myApp);</span>
+<span class="nc" id="L17">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
 <span class="nc" id="L18">        String option= myApp.getCli().displayScheduleOfAppointments(myApp.myDatabase.getApprovedAppointmentArrayList());</span>
 <span class="nc" id="L19">        handleInput(option);</span>
 <span class="nc" id="L20">    }</span>
@@ -31,9 +31,9 @@ public class ScheduleOfAppointmentsState implements State {
 
 <span class="fc" id="L32">                myApp.deleteApprovedAppointment(appointmentId);</span>
 <span class="nc" id="L33">            } catch (Exception e) {</span>
-<span class="nc" id="L34">                Error.setError(getStateString());</span>
+<span class="nc" id="L34">                myApp.getError().setError(getStateString());</span>
 <span class="pc" id="L35">            }</span>
-<span class="nc" id="L36">        }else Error.setError(getStateString());</span>
+<span class="nc" id="L36">        }else myApp.getError().setError(getStateString());</span>
 <span class="fc" id="L37">    }</span>
 
     @Override

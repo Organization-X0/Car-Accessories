@@ -10,8 +10,8 @@ public class NotificationCenterState implements State{
     }
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String data = myApp.getCli().displayNotificationCenter(myApp.searchAccount(myApp.email).getNotifications());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String data = myApp.getCli().displayNotificationCenter(myApp.searchAccount(myApp.getEmail()).getNotifications());
         handleInput(data);
     }
 
@@ -28,11 +28,11 @@ public class NotificationCenterState implements State{
         else if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                myApp.searchAccount(myApp.email).deleteNotification(num-1);
+                myApp.searchAccount(myApp.getEmail()).deleteNotification(num-1);
             } catch (Exception e) {
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
-        }else Error.setError(getStateString());
+        }else myApp.getError().setError(getStateString());
     }
 
     @Override

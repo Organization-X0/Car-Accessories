@@ -14,14 +14,14 @@ public class InstallationRequestsState implements State {
 
     @Override
     public void handle() {
-        Error.checkAndShow(getStateString(),myApp);
-        String option= myApp.getCli().displayInstallationRequests(myApp.myDatabase.getRequestedAppointmentsList());
+        myApp.getError().checkAndShow(getStateString(),myApp);
+        String option= myApp.getCli().displayInstallationRequests(myApp.getDatabase().getRequestedAppointmentsList());
         handleInput(option);
     }
 
     @Override
     public void handleInput(Object input) {
-        ArrayList<Appointment> appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();
+        ArrayList<Appointment> appointmentArrayList = myApp.getDatabase().getRequestedAppointmentsList();
         String option=(String) input;
         myApp.nextPrevBack(option,new InstallerDashboardState(myApp));
         if (!option.isEmpty() && option.charAt(0) == 'c') {
@@ -30,9 +30,9 @@ public class InstallationRequestsState implements State {
                 int appointmentId = appointmentArrayList.get(num - 1).getId();
                 myApp.confirmRequest(appointmentId);
             } catch (Exception e) {
-                Error.setError(getStateString());
+                myApp.getError().setError(getStateString());
             }
-        }else Error.setError(getStateString());
+        }else myApp.getError().setError(getStateString());
     }
 
     @Override

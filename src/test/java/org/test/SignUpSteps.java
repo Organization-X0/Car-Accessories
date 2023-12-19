@@ -58,6 +58,6 @@ public class SignUpSteps {
     }
     @Then("Show error message indicates what went wrong")
     public void show_error_message_indicates_what_went_wrong() {
-       assertEquals(Error.getLocation(), myApp.getCurrentState().getStateString());
+       assertEquals(myApp.getError().getLocation(), myApp.getCurrentState().getStateString());
     }
 }
