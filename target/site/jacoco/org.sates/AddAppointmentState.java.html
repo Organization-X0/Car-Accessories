@@ -16,18 +16,18 @@ public class AddAppointmentState implements State {
     @Override
     public void handle() {
         Map&lt;String,String&gt; data;
-<span class="nc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) data = myApp.getCli().displayAddAppointment(myApp.myDatabase.getRequestedAppointmentsList(),myApp);</span>
-<span class="nc" id="L21">        else data = myApp.getCli().displayAddAppointmentCustomer(myApp,myApp.myDatabase.getRequestedAppointmentsList());</span>
-<span class="nc" id="L22">        dataIsEmpty=setDataIsEmpty(data);</span>
-<span class="nc" id="L23">        handleInput(data);</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Appointment added successfully! &quot;,true);</span>
-<span class="nc" id="L26">            myApp.availableTimesShown=false;</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">            if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) myApp.setState(new ManageInstallationAppointmentState(myApp));</span>
-<span class="nc" id="L28">            else myApp.setState(new CustomerDashboardState(myApp));</span>
+<span class="fc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) data = myApp.getCli().displayAddAppointment(myApp.getDatabase().getRequestedAppointmentsList(),myApp);</span>
+<span class="fc" id="L21">        else data = myApp.getCli().displayAddAppointmentCustomer(myApp,myApp.getDatabase().getRequestedAppointmentsList());</span>
+<span class="fc" id="L22">        dataIsEmpty=setDataIsEmpty(data);</span>
+<span class="fc" id="L23">        handleInput(data);</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Appointment added successfully! &quot;,true);</span>
+<span class="fc" id="L26">            myApp.availableTimesShown=false;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) myApp.setState(new ManageInstallationAppointmentState(myApp));</span>
+<span class="fc" id="L28">            else myApp.setState(new CustomerDashboardState(myApp));</span>
         }
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L30">    }</span>
 
     private boolean setDataIsEmpty(Map&lt;String, String&gt; data) {
 <span class="fc" id="L33">        boolean dataIsEmptyL=true;</span>
@@ -55,7 +55,7 @@ public class AddAppointmentState implements State {
 <span class="fc bfc" id="L55" title="All 2 branches covered.">            if(dataIsEmpty) return;</span>
 <span class="fc bfc" id="L56" title="All 2 branches covered.">            if(!App.isValidDate(data.get(&quot;date&quot;)))</span>
 <span class="fc" id="L57">                throw new Exception();</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">            if(myApp.myDatabase.searchAccount(data.get(&quot;email&quot;))==null)</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if(myApp.getDatabase().searchAccount(data.get(&quot;email&quot;))==null)</span>
 <span class="fc" id="L59">                throw new Exception();</span>
 <span class="fc" id="L60">            int timeSlot= Integer.parseInt(data.get(&quot;time&quot;));</span>
 <span class="nc bnc" id="L61" title="All 2 branches missed.">            if(timeSlot&lt;=0) throw new Exception();</span>

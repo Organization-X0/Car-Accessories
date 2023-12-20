@@ -35,7 +35,7 @@ public class ScheduleOfAppointmentsTest {
         // Given
         when(myApp.getDatabase()).thenReturn(myDatabase);
         when(myApp.getCli()).thenReturn(cli);
-        when(cli.displayScheduleOfAppointments(any())).thenReturn("n");
+        when(myApp.getCli().displayScheduleOfAppointments(any())).thenReturn("n");
         when(myApp.getError()).thenReturn(error);
         // Create an instance of your class under test, passing the mock as a parameter
         ScheduleOfAppointmentsState state = spy(new ScheduleOfAppointmentsState(myApp));

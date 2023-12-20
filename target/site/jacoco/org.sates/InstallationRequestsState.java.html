@@ -14,14 +14,14 @@ public class InstallationRequestsState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L17">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L18">        String option= myApp.getCli().displayInstallationRequests(myApp.myDatabase.getRequestedAppointmentsList());</span>
-<span class="nc" id="L19">        handleInput(option);</span>
-<span class="nc" id="L20">    }</span>
+<span class="fc" id="L17">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L18">        String option= myApp.getCli().displayInstallationRequests(myApp.getDatabase().getRequestedAppointmentsList());</span>
+<span class="fc" id="L19">        handleInput(option);</span>
+<span class="fc" id="L20">    }</span>
 
     @Override
     public void handleInput(Object input) {
-<span class="fc" id="L24">        ArrayList&lt;Appointment&gt; appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();</span>
+<span class="fc" id="L24">        ArrayList&lt;Appointment&gt; appointmentArrayList = myApp.getDatabase().getRequestedAppointmentsList();</span>
 <span class="fc" id="L25">        String option=(String) input;</span>
 <span class="fc" id="L26">        myApp.nextPrevBack(option,new InstallerDashboardState(myApp));</span>
 <span class="pc bpc" id="L27" title="2 of 4 branches missed.">        if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'c') {</span>
@@ -37,7 +37,7 @@ public class InstallationRequestsState implements State {
 
     @Override
     public String getStateString() {
-<span class="nc" id="L40">        return &quot;InstallationRequests&quot;;</span>
+<span class="fc" id="L40">        return &quot;InstallationRequests&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

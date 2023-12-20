@@ -19,7 +19,7 @@ public class Error {
     }
     public void checkAndShow(String location,App myApp){
         if(getLocation()!=null && getLocation().equals(location)){
-            myApp.cli.displayMsg(getMsg(),false);
+            myApp.getCli().displayMsg(getMsg(),false);
         }
         setError(null);
     }

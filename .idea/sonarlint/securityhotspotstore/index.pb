@@ -193,3 +193,5 @@ b
 .src/test/java/org/test/ManageProductsTest.java,8\3\83c0e90ec00a16d70fdb5c92a1ad57dcf4038512
 ^
 .src/test/java/org/test/ProductCatalogTest.java,c\7\c73a3b97b024a47af3e51be057bafe992d3d8cba
+J
+features/userRoles.feature,6\6\66c16b58263c6c56b414b3d886fedf461437099e

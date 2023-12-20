@@ -25,8 +25,8 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public static final String YYYY_MM_DD_D = &quot;YYYY-MM-DD/D: &quot;;
     public static final String PRODUCT_NAME_DATA = &quot;productName&quot;;
     public static final String CAR_MAKE_DATA = &quot;carMake&quot;;
-<span class="fc" id="L28">    private static int page=1;</span>
-<span class="fc" id="L29">    public static int totalPages=1;</span>
+<span class="fc" id="L28">    private int page=1;</span>
+<span class="fc" id="L29">    public int totalPages=1;</span>
     public static Ansi errorText(String text){
 <span class="nc" id="L31">        return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();</span>
     }
@@ -43,32 +43,32 @@ import static org.fusesource.jansi.Ansi.Color.*;
 <span class="nc" id="L43">        return ansi().eraseScreen().bg(GREEN).fgBright(WHITE).a(text).reset();</span>
     }
 
-    public static void nextPage(){
+    public void nextPage(){
 <span class="fc" id="L47">        page++;</span>
 <span class="fc" id="L48">    }</span>
-    public static void prevPage(){
+    public void prevPage(){
 <span class="fc" id="L50">        page--;</span>
 <span class="fc" id="L51">    }</span>
-    public static int getCurrentPage(){
+    public int getCurrentPage(){
 <span class="fc" id="L53">        return page;</span>
     }
-    public static void resetPage(){
+    public void resetPage(){
 <span class="nc" id="L56">        page=1;</span>
 <span class="nc" id="L57">    }</span>
-    public static void setTotalPages(int n){
+    public void setTotalPages(int n){
 <span class="fc" id="L59">        totalPages=n;</span>
 <span class="fc" id="L60">    }</span>
-    public static void setPage(int n){
+    public void setPage(int n){
 <span class="fc" id="L62">        page=n;</span>
 <span class="fc" id="L63">    }</span>
     public Map&lt;String,String&gt; displayLogin(){
 <span class="nc" id="L65">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L66">        Map&lt;String,String&gt;data=new HashMap&lt;&gt;();</span>
-<span class="nc" id="L67">        System.out.println(Cli.blueBgText(&quot; Login &quot;));</span>
-<span class="nc" id="L68">        System.out.print(Cli.blueText(&quot;Email:&quot;));</span>
+<span class="nc" id="L67">        System.out.println(blueBgText(&quot; Login &quot;));</span>
+<span class="nc" id="L68">        System.out.print(blueText(&quot;Email:&quot;));</span>
 //        scanner.nextLine();
 <span class="nc" id="L70">        String email=scanner.nextLine();</span>
-<span class="nc" id="L71">        System.out.print(Cli.blueText(&quot;Password:&quot;));</span>
+<span class="nc" id="L71">        System.out.print(blueText(&quot;Password:&quot;));</span>
 <span class="nc" id="L72">        String pass=scanner.nextLine();</span>
 <span class="nc" id="L73">        data.put(EMAIL,email);</span>
 <span class="nc" id="L74">        data.put(&quot;password&quot;,pass);</span>
@@ -78,49 +78,49 @@ import static org.fusesource.jansi.Ansi.Color.*;
 <span class="nc" id="L78">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L79">        Map&lt;String,String&gt; data = new HashMap&lt;&gt;();</span>
 
-<span class="nc" id="L81">        System.out.print(Cli.blueBgText(&quot; Sing Up &quot;)+&quot;\n&quot;+ Cli.blueText(&quot;Full Name: &quot;));</span>
+<span class="nc" id="L81">        System.out.print(blueBgText(&quot; Sing Up &quot;)+&quot;\n&quot;+ blueText(&quot;Full Name: &quot;));</span>
 <span class="nc" id="L82">        scanner.nextLine();</span>
 <span class="nc" id="L83">        data.put(&quot;fullName&quot;,scanner.nextLine());</span>
-<span class="nc" id="L84">        System.out.print(Cli.blueText(&quot;Email: &quot;));</span>
+<span class="nc" id="L84">        System.out.print(blueText(&quot;Email: &quot;));</span>
 <span class="nc" id="L85">        data.put(EMAIL,scanner.nextLine());</span>
-<span class="nc" id="L86">        System.out.print(Cli.blueText(&quot;Phone: &quot;));</span>
+<span class="nc" id="L86">        System.out.print(blueText(&quot;Phone: &quot;));</span>
 <span class="nc" id="L87">        data.put(&quot;phone&quot;,scanner.nextLine());</span>
-<span class="nc" id="L88">        System.out.print(Cli.blueText(&quot;Password: &quot;));</span>
+<span class="nc" id="L88">        System.out.print(blueText(&quot;Password: &quot;));</span>
 <span class="nc" id="L89">        data.put(&quot;password&quot;,scanner.nextLine());</span>
 <span class="nc" id="L90">        return data;</span>
     }
     public String displayAdminDashboard(){
 <span class="nc" id="L93">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L94">        System.out.println(Cli.blueBgText(&quot;Admin Dashboard:&quot;));</span>
-<span class="nc" id="L95">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Manage Products&quot;));</span>
-<span class="nc" id="L96">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Manage Categories&quot;));</span>
-<span class="nc" id="L97">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Manage User Accounts&quot;));</span>
-<span class="nc" id="L98">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Manage Installation Appointments.&quot;));</span>
-<span class="nc" id="L99">        System.out.println(&quot;5. &quot;+ Cli.blueText(LOG_OUT));</span>
+<span class="nc" id="L94">        System.out.println(blueBgText(&quot;Admin Dashboard:&quot;));</span>
+<span class="nc" id="L95">        System.out.println(&quot;1. &quot;+ blueText(&quot;Manage Products&quot;));</span>
+<span class="nc" id="L96">        System.out.println(&quot;2. &quot;+ blueText(&quot;Manage Categories&quot;));</span>
+<span class="nc" id="L97">        System.out.println(&quot;3. &quot;+ blueText(&quot;Manage User Accounts&quot;));</span>
+<span class="nc" id="L98">        System.out.println(&quot;4. &quot;+ blueText(&quot;Manage Installation Appointments.&quot;));</span>
+<span class="nc" id="L99">        System.out.println(&quot;5. &quot;+ blueText(LOG_OUT));</span>
 <span class="nc" id="L100">        return scanner.nextLine();</span>
     }
-    public static String displayManageProducts(ArrayList&lt;Category&gt; categoryArrayList){
+    public String displayManageProducts(ArrayList&lt;Category&gt; categoryArrayList){
 <span class="nc" id="L103">        int manageProductsOptions=1;</span>
 <span class="nc" id="L104">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L105">        System.out.println(Cli.blueBgText(&quot; Product Menu &quot;));</span>
-<span class="nc" id="L106">        System.out.println((manageProductsOptions++)+&quot;. &quot;+ Cli.blueText(&quot;All Products&quot;));</span>
-<span class="nc" id="L107">        System.out.println((manageProductsOptions++)+&quot;. &quot;+ Cli.blueText(&quot;Search for a Product&quot;));</span>
+<span class="nc" id="L105">        System.out.println(blueBgText(&quot; Product Menu &quot;));</span>
+<span class="nc" id="L106">        System.out.println((manageProductsOptions++)+&quot;. &quot;+ blueText(&quot;All Products&quot;));</span>
+<span class="nc" id="L107">        System.out.println((manageProductsOptions++)+&quot;. &quot;+ blueText(&quot;Search for a Product&quot;));</span>
 <span class="nc bnc" id="L108" title="All 2 branches missed.">        for(Category category : categoryArrayList){</span>
-<span class="nc" id="L109">            System.out.println((manageProductsOptions++)+&quot;. &quot;+ Cli.blueText(category.getName()+ &quot; &quot; + CATEGORY));</span>
+<span class="nc" id="L109">            System.out.println((manageProductsOptions++)+&quot;. &quot;+ blueText(category.getName()+ &quot; &quot; + CATEGORY));</span>
 <span class="nc" id="L110">        }</span>
-<span class="nc" id="L111">        System.out.println(manageProductsOptions+&quot;. &quot;+ Cli.blueText(&quot;Back to Dashboard&quot;));</span>
+<span class="nc" id="L111">        System.out.println(manageProductsOptions+&quot;. &quot;+ blueText(&quot;Back to Dashboard&quot;));</span>
 <span class="nc" id="L112">        return scanner.nextLine();</span>
     }
 
     public String displayCustomerProducts(ArrayList&lt;Product&gt; productArrayList){
 <span class="nc" id="L116">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L117">        System.out.println(Cli.blueBgText(&quot;All Products:&quot;));</span>
+<span class="nc" id="L117">        System.out.println(blueBgText(&quot;All Products:&quot;));</span>
 
 <span class="nc" id="L119">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L120">        int end = Math.min(start + 10, productArrayList.size());</span>
 
 <span class="nc" id="L122">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L123">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
+<span class="nc" id="L123">            System.out.println((i + 1) + &quot;. &quot; + blueText(</span>
 <span class="nc" id="L124">                    productArrayList.get(i).getName() +</span>
                             CATEGORY_TO_PRINT +
 <span class="nc" id="L126">                            productArrayList.get(i).getCategory() + PRICE_TO_PRINT +</span>
@@ -145,13 +145,13 @@ import static org.fusesource.jansi.Ansi.Color.*;
     }
     public String displayProducts(ArrayList&lt;Product&gt; productArrayList){
 <span class="nc" id="L147">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L148">        System.out.println(Cli.blueBgText(&quot;All Products:&quot;));</span>
+<span class="nc" id="L148">        System.out.println(blueBgText(&quot;All Products:&quot;));</span>
 
 <span class="nc" id="L150">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L151">        int end = Math.min(start + 10, productArrayList.size());</span>
 
 <span class="nc" id="L153">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L154">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
+<span class="nc" id="L154">            System.out.println((i + 1) + &quot;. &quot; + blueText(</span>
 <span class="nc" id="L155">                    productArrayList.get(i).getName() +</span>
                             CATEGORY_TO_PRINT +
 <span class="nc" id="L157">                            productArrayList.get(i).getCategory() + PRICE_TO_PRINT +</span>
@@ -178,71 +178,71 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public Map&lt;String,String&gt; displayAddProduct(ArrayList&lt;Category&gt; categoryArrayList){
 <span class="nc" id="L179">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L180">        Map&lt;String,String&gt; data=new HashMap&lt;&gt;();</span>
-<span class="nc" id="L181">        System.out.println(Cli.blueBgText(&quot; ADD PRODUCT &quot;));</span>
+<span class="nc" id="L181">        System.out.println(blueBgText(&quot; ADD PRODUCT &quot;));</span>
 
-<span class="nc" id="L183">        System.out.println(Cli.blueText(&quot;Choose &quot; + CATEGORY + &quot;: &quot;));</span>
+<span class="nc" id="L183">        System.out.println(blueText(&quot;Choose &quot; + CATEGORY + &quot;: &quot;));</span>
 <span class="nc" id="L184">        int i=1;</span>
 <span class="nc bnc" id="L185" title="All 2 branches missed.">        for(Category category : categoryArrayList){</span>
-<span class="nc" id="L186">            System.out.println((i++)+&quot;. &quot;+ Cli.blueText(category.getName()+ &quot; &quot; + CATEGORY));</span>
+<span class="nc" id="L186">            System.out.println((i++)+&quot;. &quot;+ blueText(category.getName()+ &quot; &quot; + CATEGORY));</span>
 <span class="nc" id="L187">        }</span>
 
 <span class="nc" id="L189">        String categoryOption = scanner.nextLine();</span>
 
 <span class="nc" id="L191">        data.put(CATEGORY,categoryOption);</span>
-<span class="nc" id="L192">        System.out.println(Cli.blueText(PRODUCT_NAME));</span>
+<span class="nc" id="L192">        System.out.println(blueText(PRODUCT_NAME));</span>
 <span class="nc" id="L193">        data.put(&quot;name&quot;,scanner.nextLine());</span>
-<span class="nc" id="L194">        System.out.println(Cli.blueText(&quot;Description: &quot;));</span>
+<span class="nc" id="L194">        System.out.println(blueText(&quot;Description: &quot;));</span>
 <span class="nc" id="L195">        data.put(&quot;description&quot;,scanner.nextLine());</span>
-<span class="nc" id="L196">        System.out.println(Cli.blueText(&quot;Price : &quot;));</span>
+<span class="nc" id="L196">        System.out.println(blueText(&quot;Price : &quot;));</span>
 <span class="nc" id="L197">        data.put(&quot;price&quot;,scanner.nextLine());</span>
 <span class="nc" id="L198">        return data;</span>
     }
     public String displaySearchProduct(){
 <span class="nc" id="L201">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L202">        System.out.println(Cli.blueBgText(&quot;SEARCH&quot;));</span>
-<span class="nc" id="L203">        System.out.print(Cli.blueText(&quot;Product name:&quot;));</span>
+<span class="nc" id="L202">        System.out.println(blueBgText(&quot;SEARCH&quot;));</span>
+<span class="nc" id="L203">        System.out.print(blueText(&quot;Product name:&quot;));</span>
 <span class="nc" id="L204">        return scanner.nextLine();</span>
     }
     public Map&lt;String,String&gt; displayUpdateProduct(){
 <span class="nc" id="L207">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L208">        Map&lt;String,String&gt; data=new HashMap&lt;&gt;();</span>
-<span class="nc" id="L209">        System.out.println(Cli.blueBgText(&quot; UPDATE PRODUCT &quot;));</span>
+<span class="nc" id="L209">        System.out.println(blueBgText(&quot; UPDATE PRODUCT &quot;));</span>
 <span class="nc" id="L210">        System.out.println(IF_U_WANT_UPDATE);</span>
 
-<span class="nc" id="L212">        System.out.println(Cli.blueText(PRODUCT_NAME));</span>
+<span class="nc" id="L212">        System.out.println(blueText(PRODUCT_NAME));</span>
 <span class="nc" id="L213">        data.put(&quot;name&quot;,scanner.nextLine());</span>
-<span class="nc" id="L214">        System.out.println(Cli.blueText(&quot;Description: &quot;));</span>
+<span class="nc" id="L214">        System.out.println(blueText(&quot;Description: &quot;));</span>
 <span class="nc" id="L215">        data.put(&quot;description&quot;,scanner.nextLine());</span>
-<span class="nc" id="L216">        System.out.println(Cli.blueText(&quot;Price : &quot;));</span>
+<span class="nc" id="L216">        System.out.println(blueText(&quot;Price : &quot;));</span>
 <span class="nc" id="L217">        data.put(&quot;price&quot;,scanner.nextLine());</span>
 <span class="nc" id="L218">        return data;</span>
     }
     public String displayManageCategories(ArrayList&lt;Category&gt; categoryArrayList){
 <span class="nc" id="L221">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L222">        int i=1;</span>
-<span class="nc" id="L223">        System.out.println(Cli.blueBgText(&quot;CATEGORIES&quot;));</span>
+<span class="nc" id="L223">        System.out.println(blueBgText(&quot;CATEGORIES&quot;));</span>
 <span class="nc bnc" id="L224" title="All 2 branches missed.">        for(Category category : categoryArrayList){</span>
-<span class="nc" id="L225">            System.out.println((i++)+&quot;. &quot;+ Cli.blueText(category.getName()+ &quot; &quot; + CATEGORY));</span>
+<span class="nc" id="L225">            System.out.println((i++)+&quot;. &quot;+ blueText(category.getName()+ &quot; &quot; + CATEGORY));</span>
 <span class="nc" id="L226">        }</span>
 <span class="nc" id="L227">        System.out.println(FULL_CRUD);</span>
 <span class="nc" id="L228">        return scanner.nextLine();</span>
     }
     public String displayAddCategory() {
 <span class="nc" id="L231">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L232">        System.out.println(Cli.blueBgText(&quot; ADD CATEGORY &quot;));</span>
+<span class="nc" id="L232">        System.out.println(blueBgText(&quot; ADD CATEGORY &quot;));</span>
 
-<span class="nc" id="L234">        System.out.println(Cli.blueText(&quot;Category name: &quot;));</span>
+<span class="nc" id="L234">        System.out.println(blueText(&quot;Category name: &quot;));</span>
 <span class="nc" id="L235">        return scanner.nextLine();</span>
     }
     public String displayManageAccounts(ArrayList&lt;User&gt; userArrayList) {
 <span class="nc" id="L238">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L239">        System.out.println(Cli.blueBgText(&quot; MANAGE ACCOUNTS &quot;));</span>
+<span class="nc" id="L239">        System.out.println(blueBgText(&quot; MANAGE ACCOUNTS &quot;));</span>
 
 <span class="nc" id="L241">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L242">        int end = Math.min(start + 10, userArrayList.size());</span>
 
 <span class="nc" id="L244">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L245">            System.out.println((i+1)+&quot;. &quot;+ Cli.blueText(userArrayList.get(i).getFullName()+&quot;, &quot;+userArrayList.get(i).getEmail()+&quot;, &quot;+userArrayList.get(i).getPhone()));</span>
+<span class="nc" id="L245">            System.out.println((i+1)+&quot;. &quot;+ blueText(userArrayList.get(i).getFullName()+&quot;, &quot;+userArrayList.get(i).getEmail()+&quot;, &quot;+userArrayList.get(i).getPhone()));</span>
 <span class="nc" id="L246">        });</span>
 
 <span class="nc" id="L248">        totalPages=(int)Math.ceil(userArrayList.size()/10.0);</span>
@@ -263,31 +263,31 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public Map&lt;String, String&gt; displayUpdateAccount() {
 <span class="nc" id="L264">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L265">        Map&lt;String,String&gt; data=new HashMap&lt;&gt;();</span>
-<span class="nc" id="L266">        System.out.println(Cli.blueBgText(&quot; UPDATE ACCOUNT &quot;));</span>
+<span class="nc" id="L266">        System.out.println(blueBgText(&quot; UPDATE ACCOUNT &quot;));</span>
 <span class="nc" id="L267">        System.out.println(IF_U_WANT_UPDATE);</span>
-<span class="nc" id="L268">        System.out.println(Cli.blueText(&quot;Full Name: &quot;));</span>
+<span class="nc" id="L268">        System.out.println(blueText(&quot;Full Name: &quot;));</span>
 <span class="nc" id="L269">        data.put(&quot;fullName&quot;, scanner.nextLine());</span>
-<span class="nc" id="L270">        System.out.println(Cli.blueText(&quot;Phone: &quot;));</span>
+<span class="nc" id="L270">        System.out.println(blueText(&quot;Phone: &quot;));</span>
 <span class="nc" id="L271">        data.put(&quot;phone&quot;, scanner.nextLine());</span>
 <span class="nc" id="L272">        return data;</span>
     }
     public String displayUpdateCategory() {
 <span class="nc" id="L275">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L276">        System.out.println(Cli.blueBgText(&quot; UPDATE CATEGORY &quot;));</span>
+<span class="nc" id="L276">        System.out.println(blueBgText(&quot; UPDATE CATEGORY &quot;));</span>
 <span class="nc" id="L277">        System.out.println(&quot;If you don't want to update name just press enter.&quot;);</span>
 
-<span class="nc" id="L279">        System.out.println(Cli.blueText(&quot;Category name: &quot;));</span>
+<span class="nc" id="L279">        System.out.println(blueText(&quot;Category name: &quot;));</span>
 <span class="nc" id="L280">        return scanner.nextLine();</span>
     }
     public String  displayInstallationAppointments(ArrayList&lt;Appointment&gt; appointmentArrayList){
 <span class="nc" id="L283">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L284">        System.out.println(Cli.blueBgText(&quot;Manage Installation Appointments:&quot;));</span>
+<span class="nc" id="L284">        System.out.println(blueBgText(&quot;Manage Installation Appointments:&quot;));</span>
 
 <span class="nc" id="L286">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L287">        int end = Math.min(start + 10, appointmentArrayList.size());</span>
 
 <span class="nc" id="L289">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L290">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(appointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
+<span class="nc" id="L290">            System.out.println((i + 1) + &quot;. &quot; + blueText(appointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
 <span class="nc" id="L291">                    appointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
 <span class="nc" id="L292">                    appointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
 <span class="nc" id="L293">                    appointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
@@ -331,23 +331,23 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public Map&lt;String, String&gt; displayAddAppointment(ArrayList&lt;Appointment&gt; appointmentsList, App myApp) {
 <span class="nc" id="L332">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L333">        Map&lt;String,String&gt; data=new HashMap&lt;&gt;();</span>
-<span class="nc" id="L334">        System.out.println(Cli.blueBgText(&quot; ADD APPOINTMENT &quot;));</span>
+<span class="nc" id="L334">        System.out.println(blueBgText(&quot; ADD APPOINTMENT &quot;));</span>
 
-<span class="nc" id="L336">        System.out.println(Cli.blueText(&quot;Email of user: &quot;));</span>
+<span class="nc" id="L336">        System.out.println(blueText(&quot;Email of user: &quot;));</span>
 <span class="nc" id="L337">        data.put(EMAIL,scanner.nextLine());</span>
-<span class="nc" id="L338">        System.out.println(Cli.blueText(PRODUCT_NAME));</span>
+<span class="nc" id="L338">        System.out.println(blueText(PRODUCT_NAME));</span>
 <span class="nc" id="L339">        data.put(PRODUCT_NAME_DATA,scanner.nextLine());</span>
-<span class="nc" id="L340">        System.out.println(Cli.blueText(CAR_MAKE));</span>
+<span class="nc" id="L340">        System.out.println(blueText(CAR_MAKE));</span>
 <span class="nc" id="L341">        data.put(CAR_MAKE_DATA,scanner.nextLine());</span>
-<span class="nc" id="L342">        System.out.println(Cli.blueText(&quot;Date&quot;));</span>
-<span class="nc" id="L343">        System.out.println(Cli.blueText(YYYY_MM_DD_D));</span>
+<span class="nc" id="L342">        System.out.println(blueText(&quot;Date&quot;));</span>
+<span class="nc" id="L343">        System.out.println(blueText(YYYY_MM_DD_D));</span>
 <span class="nc" id="L344">        data.put(&quot;date&quot;,scanner.nextLine());</span>
 
 <span class="nc" id="L346">        int i=0;</span>
 <span class="nc" id="L347">        myApp.availableTimes=getAvailableTimes(myApp,data.get(&quot;date&quot;));</span>
 <span class="nc bnc" id="L348" title="All 2 branches missed.">        for(Time time:myApp.availableTimes){</span>
 <span class="nc" id="L349">            i++;</span>
-<span class="nc" id="L350">            System.out.println(Cli.blueText(i+&quot;. &quot;)+Time.timeToPrint(time));</span>
+<span class="nc" id="L350">            System.out.println(blueText(i+&quot;. &quot;)+Time.timeToPrint(time));</span>
 <span class="nc" id="L351">        }</span>
 <span class="nc" id="L352">        data.put(&quot;time&quot;,scanner.nextLine());</span>
 <span class="nc" id="L353">        return data;</span>
@@ -356,22 +356,22 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public Map&lt;String, String&gt; displayAddAppointmentCustomer(App myApp,ArrayList&lt;Appointment&gt; appointmentsList) {
 <span class="nc" id="L357">        Scanner scanner = new Scanner(System.in);</span>
 <span class="nc" id="L358">        Map&lt;String, String&gt; data = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L359">        System.out.println(Cli.blueBgText(&quot; ADD APPOINTMENT &quot;));</span>
+<span class="nc" id="L359">        System.out.println(blueBgText(&quot; ADD APPOINTMENT &quot;));</span>
 
 <span class="nc" id="L361">        data.put(EMAIL, myApp.getEmail());</span>
-<span class="nc" id="L362">        System.out.println(Cli.blueText(PRODUCT_NAME));</span>
+<span class="nc" id="L362">        System.out.println(blueText(PRODUCT_NAME));</span>
 <span class="nc" id="L363">        data.put(PRODUCT_NAME_DATA, scanner.nextLine());</span>
-<span class="nc" id="L364">        System.out.println(Cli.blueText(CAR_MAKE));</span>
+<span class="nc" id="L364">        System.out.println(blueText(CAR_MAKE));</span>
 <span class="nc" id="L365">        data.put(CAR_MAKE_DATA, scanner.nextLine());</span>
-<span class="nc" id="L366">        System.out.println(Cli.blueText(&quot;Date&quot;));</span>
-<span class="nc" id="L367">        System.out.println(Cli.blueText(YYYY_MM_DD_D));</span>
+<span class="nc" id="L366">        System.out.println(blueText(&quot;Date&quot;));</span>
+<span class="nc" id="L367">        System.out.println(blueText(YYYY_MM_DD_D));</span>
 <span class="nc" id="L368">        data.put(&quot;date&quot;, scanner.nextLine());</span>
 
 <span class="nc" id="L370">        int i=0;</span>
 <span class="nc" id="L371">        myApp.availableTimes=getAvailableTimes(myApp,data.get(&quot;date&quot;));</span>
 <span class="nc bnc" id="L372" title="All 2 branches missed.">        for(Time time:myApp.availableTimes){</span>
 <span class="nc" id="L373">            i++;</span>
-<span class="nc" id="L374">            System.out.println(Cli.blueText(i+&quot;. &quot;)+Time.timeToPrint(time));</span>
+<span class="nc" id="L374">            System.out.println(blueText(i+&quot;. &quot;)+Time.timeToPrint(time));</span>
 <span class="nc" id="L375">        }</span>
 <span class="nc" id="L376">        data.put(&quot;time&quot;,scanner.nextLine());</span>
 <span class="nc" id="L377">        return data;</span>
@@ -379,17 +379,17 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public Map&lt;String, String&gt; displayUpdateAppointment() {
 <span class="nc" id="L380">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L381">        Map&lt;String,String&gt; data=new HashMap&lt;&gt;();</span>
-<span class="nc" id="L382">        System.out.println(Cli.blueBgText(&quot; APPOINTMENT PRODUCT &quot;));</span>
+<span class="nc" id="L382">        System.out.println(blueBgText(&quot; APPOINTMENT PRODUCT &quot;));</span>
 <span class="nc" id="L383">        System.out.println(IF_U_WANT_UPDATE);</span>
 
-<span class="nc" id="L385">        System.out.println(Cli.blueText(&quot;Email of user: &quot;));</span>
+<span class="nc" id="L385">        System.out.println(blueText(&quot;Email of user: &quot;));</span>
 <span class="nc" id="L386">        data.put(EMAIL,scanner.nextLine());</span>
-<span class="nc" id="L387">        System.out.println(Cli.blueText(PRODUCT_NAME));</span>
+<span class="nc" id="L387">        System.out.println(blueText(PRODUCT_NAME));</span>
 <span class="nc" id="L388">        data.put(PRODUCT_NAME_DATA,scanner.nextLine());</span>
-<span class="nc" id="L389">        System.out.println(Cli.blueText(CAR_MAKE));</span>
+<span class="nc" id="L389">        System.out.println(blueText(CAR_MAKE));</span>
 <span class="nc" id="L390">        data.put(CAR_MAKE_DATA,scanner.nextLine());</span>
-<span class="nc" id="L391">        System.out.println(Cli.blueText(&quot;Date&quot;));</span>
-<span class="nc" id="L392">        System.out.println(Cli.blueText(YYYY_MM_DD_D));</span>
+<span class="nc" id="L391">        System.out.println(blueText(&quot;Date&quot;));</span>
+<span class="nc" id="L392">        System.out.println(blueText(YYYY_MM_DD_D));</span>
 <span class="nc" id="L393">        data.put(&quot;date&quot;,scanner.nextLine());</span>
 <span class="nc" id="L394">        return data;</span>
     }
@@ -397,37 +397,37 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public String displayCustomerDashboard(User account) {
 <span class="nc" id="L398">        System.out.println( account.getNotificationCount());</span>
 <span class="nc" id="L399">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L400">        System.out.println(Cli.blueBgText(&quot;Customer Dashboard:&quot;));</span>
-<span class="nc" id="L401">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Product Catalog&quot;));</span>
-<span class="nc" id="L402">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Request services&quot;));</span>
-<span class="nc" id="L403">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Profile&quot;));</span>
-<span class="nc" id="L404">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Notifications:&quot;)+ Cli.blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
-<span class="nc" id="L405">        System.out.println(&quot;5. &quot;+ Cli.blueText(LOG_OUT));</span>
+<span class="nc" id="L400">        System.out.println(blueBgText(&quot;Customer Dashboard:&quot;));</span>
+<span class="nc" id="L401">        System.out.println(&quot;1. &quot;+ blueText(&quot;Product Catalog&quot;));</span>
+<span class="nc" id="L402">        System.out.println(&quot;2. &quot;+ blueText(&quot;Request services&quot;));</span>
+<span class="nc" id="L403">        System.out.println(&quot;3. &quot;+ blueText(&quot;Profile&quot;));</span>
+<span class="nc" id="L404">        System.out.println(&quot;4. &quot;+ blueText(&quot;Notifications:&quot;)+ blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
+<span class="nc" id="L405">        System.out.println(&quot;5. &quot;+ blueText(LOG_OUT));</span>
 <span class="nc" id="L406">        return scanner.nextLine();</span>
     }
     public String displayProfile(String name, String email, String phone) {
 <span class="nc" id="L409">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L410">        System.out.println(Cli.blueBgText(&quot;Profile:&quot;));</span>
-<span class="nc" id="L411">        System.out.println(Cli.blueText(&quot;Name: &quot;)+name);</span>
-<span class="nc" id="L412">        System.out.println(Cli.blueText(&quot;email: &quot;)+email);</span>
-<span class="nc" id="L413">        System.out.println(Cli.blueText(&quot;phone: &quot;)+phone);</span>
+<span class="nc" id="L410">        System.out.println(blueBgText(&quot;Profile:&quot;));</span>
+<span class="nc" id="L411">        System.out.println(blueText(&quot;Name: &quot;)+name);</span>
+<span class="nc" id="L412">        System.out.println(blueText(&quot;email: &quot;)+email);</span>
+<span class="nc" id="L413">        System.out.println(blueText(&quot;phone: &quot;)+phone);</span>
 <span class="nc" id="L414">        System.out.println(&quot;=================================&quot;);</span>
-<span class="nc" id="L415">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Edit Profile&quot;));</span>
-<span class="nc" id="L416">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;View Order History&quot;));</span>
-<span class="nc" id="L417">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;View Installation Requests History&quot;));</span>
-<span class="nc" id="L418">        System.out.println(&quot;4. &quot;+ Cli.blueText(&quot;Back to Customer Dashboard&quot;));</span>
+<span class="nc" id="L415">        System.out.println(&quot;1. &quot;+ blueText(&quot;Edit Profile&quot;));</span>
+<span class="nc" id="L416">        System.out.println(&quot;2. &quot;+ blueText(&quot;View Order History&quot;));</span>
+<span class="nc" id="L417">        System.out.println(&quot;3. &quot;+ blueText(&quot;View Installation Requests History&quot;));</span>
+<span class="nc" id="L418">        System.out.println(&quot;4. &quot;+ blueText(&quot;Back to Customer Dashboard&quot;));</span>
 <span class="nc" id="L419">        return scanner.nextLine();</span>
     }
 
     public String displayOrderHistory(ArrayList&lt;Product&gt; ordersArrayList) {
 <span class="nc" id="L423">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L424">        System.out.println(Cli.blueBgText(&quot;Order History:&quot;));</span>
+<span class="nc" id="L424">        System.out.println(blueBgText(&quot;Order History:&quot;));</span>
 
 <span class="nc" id="L426">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L427">        int end = Math.min(start + 10, ordersArrayList.size());</span>
 
 <span class="nc" id="L429">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L430">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
+<span class="nc" id="L430">            System.out.println((i + 1) + &quot;. &quot; + blueText(</span>
 <span class="nc" id="L431">                    ordersArrayList.get(i).getName() +</span>
                             CATEGORY_TO_PRINT +
 <span class="nc" id="L433">                            ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +</span>
@@ -450,12 +450,12 @@ import static org.fusesource.jansi.Ansi.Color.*;
     }
     public String displayInstallationHistory(ArrayList&lt;Appointment&gt; installationsArrayList ) {
 <span class="nc" id="L452">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L453">        System.out.println(Cli.blueBgText(&quot;Installation Requests History:&quot;));</span>
+<span class="nc" id="L453">        System.out.println(blueBgText(&quot;Installation Requests History:&quot;));</span>
 
 <span class="nc" id="L455">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L456">        int end = Math.min(start + 10, installationsArrayList.size());</span>
 
-<span class="nc" id="L458">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(</span>
+<span class="nc" id="L458">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + blueText(</span>
 <span class="nc" id="L459">                installationsArrayList.get(i).getDate()+&quot; | &quot;+</span>
 <span class="nc" id="L460">                        installationsArrayList.get(i).getProductName()+&quot; | &quot;+</span>
 <span class="nc" id="L461">                        installationsArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
@@ -478,22 +478,22 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
     public String displayInstallerDashboard(User account) {
 <span class="nc" id="L480">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L481">        System.out.println(Cli.blueBgText(&quot;Installer Dashboard:&quot;));</span>
-<span class="nc" id="L482">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Schedule of Appointments&quot;));</span>
-<span class="nc" id="L483">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Installation Requests&quot;));</span>
-<span class="nc" id="L484">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Notifications:&quot;)+ Cli.blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
-<span class="nc" id="L485">        System.out.println(&quot;4. &quot;+ Cli.blueText(LOG_OUT));</span>
+<span class="nc" id="L481">        System.out.println(blueBgText(&quot;Installer Dashboard:&quot;));</span>
+<span class="nc" id="L482">        System.out.println(&quot;1. &quot;+ blueText(&quot;Schedule of Appointments&quot;));</span>
+<span class="nc" id="L483">        System.out.println(&quot;2. &quot;+ blueText(&quot;Installation Requests&quot;));</span>
+<span class="nc" id="L484">        System.out.println(&quot;3. &quot;+ blueText(&quot;Notifications:&quot;)+ blueBgText(&quot; &quot;+account.getNotificationCount()+&quot; &quot;));</span>
+<span class="nc" id="L485">        System.out.println(&quot;4. &quot;+ blueText(LOG_OUT));</span>
 <span class="nc" id="L486">        return scanner.nextLine();</span>
     }
     public String displayInstallationRequests(ArrayList&lt;Appointment&gt; appointmentArrayList) {
 <span class="nc" id="L489">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L490">        System.out.println(Cli.blueBgText(&quot; Installation Requests &quot;));</span>
+<span class="nc" id="L490">        System.out.println(blueBgText(&quot; Installation Requests &quot;));</span>
 
 <span class="nc" id="L492">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L493">        int end = Math.min(start + 10, appointmentArrayList.size());</span>
 
 <span class="nc" id="L495">        IntStream.range(start, end).forEach(i -&gt; {</span>
-<span class="nc" id="L496">            System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(appointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
+<span class="nc" id="L496">            System.out.println((i + 1) + &quot;. &quot; + blueText(appointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
 <span class="nc" id="L497">                    appointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
 <span class="nc" id="L498">                    appointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
 <span class="nc" id="L499">                    appointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
@@ -518,12 +518,12 @@ import static org.fusesource.jansi.Ansi.Color.*;
     }
      public String displayScheduleOfAppointments(ArrayList&lt;Appointment&gt; approvedAppointmentArrayList) {
 <span class="nc" id="L520">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L521">        System.out.println(Cli.blueBgText(&quot; Schedule Of Appointments &quot;));</span>
+<span class="nc" id="L521">        System.out.println(blueBgText(&quot; Schedule Of Appointments &quot;));</span>
 
 <span class="nc" id="L523">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L524">        int end = Math.min(start + 10, approvedAppointmentArrayList.size());</span>
 
-<span class="nc" id="L526">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + Cli.blueText(approvedAppointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
+<span class="nc" id="L526">        IntStream.range(start, end).forEach(i -&gt; System.out.println((i + 1) + &quot;. &quot; + blueText(approvedAppointmentArrayList.get(i).getEmail()+&quot; | &quot;+</span>
 <span class="nc" id="L527">                approvedAppointmentArrayList.get(i).getDate()+&quot; | &quot;+</span>
 <span class="nc" id="L528">                approvedAppointmentArrayList.get(i).getProductName()+&quot; | &quot;+</span>
 <span class="nc" id="L529">                approvedAppointmentArrayList.get(i).getCarMake()+&quot; | &quot;+</span>
@@ -547,7 +547,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
     }
     public String displayNotificationCenter(ArrayList&lt;String&gt; notifications) {
 <span class="nc" id="L549">        Scanner scanner=new Scanner(System.in);</span>
-<span class="nc" id="L550">        System.out.println(Cli.blueBgText(&quot; Notification Center &quot;));</span>
+<span class="nc" id="L550">        System.out.println(blueBgText(&quot; Notification Center &quot;));</span>
 
 <span class="nc" id="L552">        int start = (page - 1) * 10;</span>
 <span class="nc" id="L553">        int end = Math.min(start + 10, notifications.size());</span>
@@ -572,9 +572,9 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public void displayMsg(String msg,boolean success){
 <span class="nc" id="L573">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc bnc" id="L574" title="All 2 branches missed.">        if(success)</span>
-<span class="nc" id="L575">            System.out.println(Cli.greenBgText(msg));</span>
+<span class="nc" id="L575">            System.out.println(greenBgText(msg));</span>
         else
-<span class="nc" id="L577">            System.out.println(Cli.errorText(msg));</span>
+<span class="nc" id="L577">            System.out.println(errorText(msg));</span>
 
 <span class="nc" id="L579">        System.out.println(&quot;[press enter...]&quot;);</span>
 <span class="nc" id="L580">        scanner.nextLine();</span>
@@ -582,8 +582,8 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public void displayAfterPurchase(String productName,String phoneNumber){
 <span class="nc" id="L583">        Scanner scanner=new Scanner(System.in);</span>
 <span class="nc" id="L584">        System.out.println(&quot;=====================================================&quot;);</span>
-<span class="nc" id="L585">        System.out.println(&quot;Thank You for purchasing \&quot;&quot;+ Cli.blueText(productName)+&quot;\&quot;.&quot;);</span>
-<span class="nc" id="L586">        System.out.println(&quot;We’ll call you on \&quot;&quot;+ Cli.blueText(phoneNumber)+&quot;\&quot; within 20 minutes for confirmation.&quot;);</span>
+<span class="nc" id="L585">        System.out.println(&quot;Thank You for purchasing \&quot;&quot;+ blueText(productName)+&quot;\&quot;.&quot;);</span>
+<span class="nc" id="L586">        System.out.println(&quot;We’ll call you on \&quot;&quot;+ blueText(phoneNumber)+&quot;\&quot; within 20 minutes for confirmation.&quot;);</span>
 <span class="nc" id="L587">        System.out.println(&quot;We value your choice.&quot;);</span>
 <span class="nc" id="L588">        System.out.println(&quot;=====================================================&quot;);</span>
 <span class="nc" id="L589">        System.out.println(&quot;[press enter...]&quot;);</span>
@@ -592,10 +592,10 @@ import static org.fusesource.jansi.Ansi.Color.*;
     public String displayStart(){
 <span class="nc" id="L593">        Scanner scanner=new Scanner(System.in);</span>
 
-<span class="nc" id="L595">        System.out.println(Cli.blueBgText(&quot; Program &quot;));</span>
-<span class="nc" id="L596">        System.out.println(&quot;1. &quot;+ Cli.blueText(&quot;Login&quot;));</span>
-<span class="nc" id="L597">        System.out.println(&quot;2. &quot;+ Cli.blueText(&quot;Sign Up&quot;));</span>
-<span class="nc" id="L598">        System.out.println(&quot;3. &quot;+ Cli.blueText(&quot;Exit&quot;));</span>
+<span class="nc" id="L595">        System.out.println(blueBgText(&quot; Program &quot;));</span>
+<span class="nc" id="L596">        System.out.println(&quot;1. &quot;+ blueText(&quot;Login&quot;));</span>
+<span class="nc" id="L597">        System.out.println(&quot;2. &quot;+ blueText(&quot;Sign Up&quot;));</span>
+<span class="nc" id="L598">        System.out.println(&quot;3. &quot;+ blueText(&quot;Exit&quot;));</span>
 
 <span class="nc" id="L600">        return scanner.nextLine();</span>
     }

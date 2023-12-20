@@ -194,7 +194,6 @@ public class App {
         }
     }
     public void handelProductCatalogAndManageProducts(String type) {
-        System.out.print("testxxx");
         error.checkAndShow(type,this);
         String option= getCli().displayManageProducts(getDatabase().getCategoryList());
         getCurrentState().handleInput(option);
@@ -209,14 +208,14 @@ public class App {
         }
     }
     public void nextPrevBackAdd(String option, State backState, State addState) {
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        if (option.equals("n") && cli.getCurrentPage() != cli.totalPages) cli.nextPage();
+        else if (option.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (option.equals("b")) setState(backState);
         else if (option.equals("a")) setState(addState);
     }
     public void nextPrevBack(String option, State backState) {
-        if (option.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (option.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        if (option.equals("n") && cli.getCurrentPage() != cli.totalPages) cli.nextPage();
+        else if (option.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (option.equals("b")) setState(backState);
     }
     public void setProductArrayListBetweenState() {
@@ -227,8 +226,8 @@ public class App {
         }
     }
     public void handleView(String input) {
-        if (input.equals("n") && Cli.getCurrentPage() != Cli.totalPages) Cli.nextPage();
-        else if (input.equals("p") && Cli.getCurrentPage() != 1) Cli.prevPage();
+        if (input.equals("n") && cli.getCurrentPage() != cli.totalPages) cli.nextPage();
+        else if (input.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (input.equals("b")) setState(new ProfileState(this));
         else error.setError(getCurrentState().getStateString());
     }

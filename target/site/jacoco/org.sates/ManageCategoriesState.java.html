@@ -11,10 +11,10 @@ public class ManageCategoriesState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String option= myApp.getCli().displayManageCategories(myApp.myDatabase.getCategoryList());</span>
-<span class="nc" id="L16">        handleInput(option);</span>
-<span class="nc" id="L17">    }</span>
+<span class="fc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L15">        String option= myApp.getCli().displayManageCategories(myApp.getDatabase().getCategoryList());</span>
+<span class="fc" id="L16">        handleInput(option);</span>
+<span class="fc" id="L17">    }</span>
 
     @Override
     public void handleInput(Object input) {
@@ -25,7 +25,7 @@ public class ManageCategoriesState implements State {
 <span class="pc bpc" id="L25" title="1 of 4 branches missed.">        else if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'd') {</span>
             try{
 <span class="fc" id="L27">                int num=Integer.parseInt(option.substring(1));</span>
-<span class="fc" id="L28">                String categoryName=myApp.myDatabase.getCategoryList().get(num-1).getName();</span>
+<span class="fc" id="L28">                String categoryName=myApp.getDatabase().getCategoryList().get(num-1).getName();</span>
 <span class="fc" id="L29">                myApp.deleteCategory(categoryName);</span>
 <span class="nc" id="L30">            }catch (Exception e){</span>
 <span class="nc" id="L31">                myApp.getError().setError(getStateString());</span>
@@ -33,7 +33,7 @@ public class ManageCategoriesState implements State {
 <span class="pc bpc" id="L33" title="2 of 4 branches missed.">        } else if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
             try{
 <span class="fc" id="L35">                int num=Integer.parseInt(option.substring(1));</span>
-<span class="fc" id="L36">                myApp.categoryNameToUpdate=myApp.myDatabase.getCategoryList().get(num-1).getName();</span>
+<span class="fc" id="L36">                myApp.categoryNameToUpdate=myApp.getDatabase().getCategoryList().get(num-1).getName();</span>
 <span class="fc" id="L37">                myApp.setState(new UpdateCategoryState(myApp));</span>
 <span class="nc" id="L38">            }catch (Exception e){</span>
 <span class="nc" id="L39">                myApp.getError().setError(getStateString());</span>
@@ -42,7 +42,7 @@ public class ManageCategoriesState implements State {
 <span class="fc" id="L42">    }</span>
     @Override
     public String getStateString() {
-<span class="nc" id="L45">        return &quot;ManageCategories&quot;;</span>
+<span class="fc" id="L45">        return &quot;ManageCategories&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
