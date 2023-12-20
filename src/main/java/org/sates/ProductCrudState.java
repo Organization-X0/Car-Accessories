@@ -16,7 +16,7 @@ public class ProductCrudState implements State {
         myApp.getError().checkAndShow(getStateString(),myApp);
         String option;
         myApp.setProductArrayListBetweenState();
-        option = myApp.getCli().displayProducts(myApp.productArrayListBetweenState);
+        option = myApp.getCli().displayProducts(myApp.getProductArrayListBetweenState());
         handleInput(option);
     }
 
@@ -31,7 +31,7 @@ public class ProductCrudState implements State {
         if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                int productId = myApp.productArrayListBetweenState.get(num - 1).getId();
+                int productId = myApp.getProductArrayListBetweenState().get(num - 1).getId();
                 myApp.deleteProduct(productId);
             } catch (Exception e) {
                 myApp.getError().setError(myApp.getCurrentState().getStateString());
@@ -39,7 +39,7 @@ public class ProductCrudState implements State {
         } else if (!option.isEmpty() && option.charAt(0) == 'u') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                myApp.productIdToUpdate = myApp.productArrayListBetweenState.get(num - 1).getId();
+                myApp.productIdToUpdate = myApp.getProductArrayListBetweenState().get(num - 1).getId();
                 myApp.setState(new UpdateProductState(myApp));
             } catch (Exception e) {
                 myApp.getError().setError(myApp.getCurrentState().getStateString());

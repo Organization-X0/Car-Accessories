@@ -181,3 +181,15 @@ a
 .src/test/java/org/test/UpdateCategoryTest.java,2\d\2d455b030f53989cd4be17606a7b4e83936261d8
 W
 'src/test/java/org/test/ProfileTest.java,9\6\9672ac7b8ee4e1d10b4cb134604550bcaa46762a
+`
+0src/test/java/org/test/ManageCategoriesTest.java,a\9\a91d46a6af86b5be47b2657896f949520a526958
+b
+2src/test/java/org/test/UpdateAccountStateTest.java,2\a\2a290cc5e26209ae93e832268d41b5e2e2de9673
+b
+2src/test/java/org/test/InstallerDashboardTest.java,0\e\0e3b7f2cc321ac8755b0589068274b2c6099eb86
+[
++src/test/java/org/test/ProductCrudTest.java,b\d\bd327afce5756257dba73167c501ed64fe4043ba
+^
+.src/test/java/org/test/ManageProductsTest.java,8\3\83c0e90ec00a16d70fdb5c92a1ad57dcf4038512
+^
+.src/test/java/org/test/ProductCatalogTest.java,c\7\c73a3b97b024a47af3e51be057bafe992d3d8cba
