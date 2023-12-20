@@ -59,6 +59,9 @@ public class App {
     public DataBase getDatabase() {
         return this.myDatabase;
     }
+    public ArrayList<Product> getProductArrayListBetweenState() {
+        return productArrayListBetweenState;
+    }
     public State getCurrentState(){
         return state;
     }
@@ -191,10 +194,11 @@ public class App {
         }
     }
     public void handelProductCatalogAndManageProducts(String type) {
+        System.out.print("testxxx");
         error.checkAndShow(type,this);
-        String option= Cli.displayManageProducts(myDatabase.getCategoryList());
+        String option= getCli().displayManageProducts(getDatabase().getCategoryList());
         getCurrentState().handleInput(option);
-        Cli.resetPage();
+        getCli().resetPage();
     }
     public void confirmRequest(int id) {
         Appointment appointment=myDatabase.searchAppointment(id);

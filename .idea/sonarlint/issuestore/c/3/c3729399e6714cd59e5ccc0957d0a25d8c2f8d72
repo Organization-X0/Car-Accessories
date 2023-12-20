@@ -1,6 +1,6 @@
 
 “
-java:S1319f"qThe type of "categoryArrayList" should be an interface such as "List" rather than the implementation "ArrayList".(Åå¶âùÿÿÿÿ8Ò–Ê—È1
+java:S1319f"qThe type of "categoryArrayList" should be an interface such as "List" rather than the implementation "ArrayList".(‹»ÂÄûÿÿÿÿ8Ò–Ê—È1
 Œ
 java:S1319s"pThe type of "productArrayList" should be an interface such as "List" rather than the implementation "ArrayList".(­–¶:8Ó–Ê—È1
 “
@@ -31,6 +31,8 @@ x
 java:S1104"VMake totalPages a static final constant or non-public and provide accessors if needed.(’ÀùÕûÿÿÿÿ8Õ–Ê—È1
 R
 java:S1444"0Make this "public static totalPages" field final(’ÀùÕûÿÿÿÿ8Ö–Ê—È1
+S
+java:S2696;"6Make the enclosing method "static" or remove this set.(Öîÿ×8Í—Ê—È1
 G	java:S106C"+Replace this use of System.out by a logger.(˜Ì¨µ8Ä—Ê—È1
 L	java:S106D"+Replace this use of System.out by a logger.(¼šÌ øÿÿÿÿ8Ä—Ê—È1
 ]	java:S125E"<This block of commented-out lines of code should be removed.(ë×ä¸üÿÿÿÿ8Ä—Ê—È1
@@ -55,7 +57,7 @@ N
 java:S1602z",Remove useless curly braces around statement(¿¾¦’üÿÿÿÿ8Ì—Ê—È1
 L	java:S106{"+Replace this use of System.out by a logger.(ãÜ¹šûÿÿÿÿ8Í—Ê—È1
 T
-java:S2696ƒ"6Make the enclosing method "static" or remove this set.(²Þâ8Í—Ê—È1
+java:S2696ƒ"6Make the enclosing method "static" or remove this set.(²Þâ8Ñ—Ê—È1
 M	java:S106„"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8Î—Ê—È1
 M	java:S106†"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8Î—Ê—È1
 G	java:S106ˆ"+Replace this use of System.out by a logger.(ëÍ³18Î—Ê—È1
@@ -67,7 +69,7 @@ O
 java:S1602™",Remove useless curly braces around statement(¿¾¦’üÿÿÿÿ8Ð—Ê—È1
 M	java:S106š"+Replace this use of System.out by a logger.(ãÜ¹šûÿÿÿÿ8Ñ—Ê—È1
 T
-java:S2696¢"6Make the enclosing method "static" or remove this set.(²Þâ8Ñ—Ê—È1
+java:S2696¢"6Make the enclosing method "static" or remove this set.(²Þâ8ß—Ê—È1
 M	java:S106£"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8Ñ—Ê—È1
 M	java:S106¥"+Replace this use of System.out by a logger.(Æ‡Ð€øÿÿÿÿ8Ò—Ê—È1
 H	java:S106§"+Replace this use of System.out by a logger.(Œ†â©8Ò—Ê—È1
@@ -97,7 +99,7 @@ O
 java:S1602ô",Remove useless curly braces around statement(¿¾¦’üÿÿÿÿ8Þ—Ê—È1
 H	java:S106õ"+Replace this use of System.out by a logger.(ÐÒØÊ8Þ—Ê—È1
 T
-java:S2696ø"6Make the enclosing method "static" or remove this set.(ÇŸÿÕ8ß—Ê—È1
+java:S2696ø"6Make the enclosing method "static" or remove this set.(ÇŸÿÕ8ä—Ê—È1
 M	java:S106ù"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8ß—Ê—È1
 M	java:S106û"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8ß—Ê—È1
 H	java:S106ý"+Replace this use of System.out by a logger.(Òä³Û8ß—Ê—È1
@@ -116,7 +118,7 @@ O
 java:S1602¡",Remove useless curly braces around statement(¿¾¦’üÿÿÿÿ8ã—Ê—È1
 H	java:S106¢"+Replace this use of System.out by a logger.(ððýß8ä—Ê—È1
 Y
-java:S2696ª"6Make the enclosing method "static" or remove this set.(åÅ” ùÿÿÿÿ8ä—Ê—È1
+java:S2696ª"6Make the enclosing method "static" or remove this set.(åÅ” ùÿÿÿÿ8ö—Ê—È1
 M	java:S106«"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8å—Ê—È1
 M	java:S106­"+Replace this use of System.out by a logger.(Æ‡Ð€øÿÿÿÿ8å—Ê—È1
 H	java:S106¯"+Replace this use of System.out by a logger.(Œ†â©8å—Ê—È1
@@ -168,7 +170,7 @@ O
 java:S1602­",Remove useless curly braces around statement(¿¾¦’üÿÿÿÿ8õ—Ê—È1
 M	java:S106®"+Replace this use of System.out by a logger.(ãÜ¹šûÿÿÿÿ8ö—Ê—È1
 Y
-java:S2696¶"6Make the enclosing method "static" or remove this set.(œÞÞêúÿÿÿÿ8ö—Ê—È1
+java:S2696¶"6Make the enclosing method "static" or remove this set.(œÞÞêúÿÿÿÿ8ù—Ê—È1
 M	java:S106·"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8ö—Ê—È1
 M	java:S106¹"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8÷—Ê—È1
 M	java:S106»"+Replace this use of System.out by a logger.(¾öÃþÿÿÿÿ8÷—Ê—È1
@@ -177,7 +179,7 @@ M	java:S106¿"+Replace this use of System.out by a logger.(Èã§Îþÿÿÿÿ8ø—Ê—È1
 M	java:S106Å"+Replace this use of System.out by a logger.(Ÿ‹Ÿíÿÿÿÿÿ8ø—Ê—È1
 H	java:S106Ê"+Replace this use of System.out by a logger.(üÏšð8ù—Ê—È1
 T
-java:S2696Ñ"6Make the enclosing method "static" or remove this set.(’ØÇ¸8ù—Ê—È1
+java:S2696Ñ"6Make the enclosing method "static" or remove this set.(’ØÇ¸8ý—Ê—È1
 M	java:S106Ò"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8ù—Ê—È1
 M	java:S106Ô"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8ù—Ê—È1
 M	java:S106Ö"+Replace this use of System.out by a logger.(¾öÃþÿÿÿÿ8ú—Ê—È1
@@ -193,7 +195,7 @@ O
 java:S1602ï",Remove useless curly braces around statement(¿¾¦’üÿÿÿÿ8ü—Ê—È1
 H	java:S106ð"+Replace this use of System.out by a logger.(ððýß8ý—Ê—È1
 Y
-java:S2696ø"6Make the enclosing method "static" or remove this set.(åÅ” ùÿÿÿÿ8ý—Ê—È1
+java:S2696ø"6Make the enclosing method "static" or remove this set.(åÅ” ùÿÿÿÿ8€˜Ê—È1
 M	java:S106ù"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8ý—Ê—È1
 M	java:S106û"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8þ—Ê—È1
 H	java:S106ý"+Replace this use of System.out by a logger.(†Éî‹8þ—Ê—È1
@@ -203,7 +205,7 @@ M	java:S106ƒ"+Replace this use of System.out by a logger.(‰œþšýÿÿÿÿ8ÿ—Ê—È1
 M	java:S106‰"+Replace this use of System.out by a logger.(Ä×‰©ùÿÿÿÿ8ÿ—Ê—È1
 M	java:S106Ž"+Replace this use of System.out by a logger.(£ÂÁûÿÿÿÿ8€˜Ê—È1
 T
-java:S2696•"6Make the enclosing method "static" or remove this set.(‹× 8€˜Ê—È1
+java:S2696•"6Make the enclosing method "static" or remove this set.(‹× 8ƒ˜Ê—È1
 M	java:S106–"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8€˜Ê—È1
 M	java:S106˜"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8˜Ê—È1
 G	java:S106š"+Replace this use of System.out by a logger.(üñäc8˜Ê—È1
@@ -213,7 +215,7 @@ M	java:S106 "+Replace this use of System.out by a logger.(¬ ŒÕÿÿÿÿÿ8‚˜Ê—È1
 M	java:S106¦"+Replace this use of System.out by a logger.(”×Ø‘þÿÿÿÿ8‚˜Ê—È1
 M	java:S106«"+Replace this use of System.out by a logger.( ý¼õúÿÿÿÿ8ƒ˜Ê—È1
 Y
-java:S2696­"6Make the enclosing method "static" or remove this set.(á’´ƒûÿÿÿÿ8ƒ˜Ê—È1
+java:S2696­"6Make the enclosing method "static" or remove this set.(á’´ƒûÿÿÿÿ8ß–è¶È1
 M	java:S106®"+Replace this use of System.out by a logger.(¡¬¢ýÿÿÿÿ8ƒ˜Ê—È1
 M	java:S106°"+Replace this use of System.out by a logger.(ßËöþÿÿÿÿ8ƒ˜Ê—È1
 G	java:S106²"+Replace this use of System.out by a logger.(üñäc8ƒ˜Ê—È1

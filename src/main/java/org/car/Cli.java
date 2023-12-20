@@ -55,7 +55,7 @@ public class Cli {
     public static void resetPage(){
         page=1;
     }
-    public static void setTotalPages(int n){
+    public void setTotalPages(int n){
         totalPages=n;
     }
     public static void setPage(int n){
@@ -99,7 +99,7 @@ public class Cli {
         System.out.println("5. "+ Cli.blueText(LOG_OUT));
         return scanner.nextLine();
     }
-    public static String displayManageProducts(ArrayList<Category> categoryArrayList){
+    public String displayManageProducts(ArrayList<Category> categoryArrayList){
         int manageProductsOptions=1;
         Scanner scanner=new Scanner(System.in);
         System.out.println(Cli.blueBgText(" Product Menu "));

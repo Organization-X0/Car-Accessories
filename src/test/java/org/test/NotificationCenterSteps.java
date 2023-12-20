@@ -33,7 +33,7 @@ public class NotificationCenterSteps {
     }
     @Given("the current page is not the total pages")
     public void the_current_page_is_not_the_total_pages() {
-        Cli.setTotalPages(5);
+        myApp.getCli().setTotalPages(5);
         Cli.setPage(2);
         pageNow= Cli.getCurrentPage();
     }
@@ -50,7 +50,7 @@ public class NotificationCenterSteps {
 
     @Given("the current page is not the first page")
     public void the_current_page_is_not_the_first_page() {
-        Cli.setTotalPages(5);
+        myApp.getCli().setTotalPages(5);
         Cli.setPage(3);
         pageNow= Cli.getCurrentPage();
     }

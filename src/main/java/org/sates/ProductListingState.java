@@ -19,7 +19,7 @@ public class ProductListingState implements State {
         myApp.getError().checkAndShow(getStateString(),myApp);
         String option;
         myApp.setProductArrayListBetweenState();
-        option = myApp.getCli().displayCustomerProducts(myApp.productArrayListBetweenState);
+        option = myApp.getCli().displayCustomerProducts(myApp.getProductArrayListBetweenState());
         handleInput(option);
 
         if(!option.isEmpty() && option.charAt(0) == 'f' && !myApp.getError().getLocation().equals(getStateString())){
@@ -42,7 +42,7 @@ public class ProductListingState implements State {
         else if (!option.isEmpty() && option.charAt(0) == 'f') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                productName = myApp.productArrayListBetweenState.get(num - 1).getName();
+                productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();
                 User account=myApp.searchAccount(myApp.getEmail());
                 account.addOrder(myApp.searchProduct(num));
                 account.pushNotification("You bought this product \""+ myApp.getCli().blueText(productName)+"\" successfully.");
