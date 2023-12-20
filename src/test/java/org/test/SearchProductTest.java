@@ -31,7 +31,8 @@ public class SearchProductTest {
         when(myApp.getCli()).thenReturn(cli);
         when(cli.displaySearchProduct()).thenReturn("item1");
         when(myApp.getError()).thenReturn(error);
-        when(error.getLocation()).thenReturn("AdminDashboard");
+        when(error.getLocation()).thenReturn("SearchProduct"); // Assuming "SearchProduct" is the state string
+        when(myApp.whoLoggedIn()).thenReturn("admin"); // Mock the method to return "admin"
         // Create an instance of your class under test, passing the mock as a parameter
         SearchProductState state = spy(new SearchProductState(myApp));
 
@@ -43,6 +44,7 @@ public class SearchProductTest {
 
         // Then
         verify(cli).displaySearchProduct();
+        verify(myApp).setState(any(ManageProductsState.class)); // Verify that setState was called with an instance of ManageProductsState
     }
 
     @Test
@@ -51,7 +53,7 @@ public class SearchProductTest {
         when(myApp.getCli()).thenReturn(cli);
         when(cli.displaySearchProduct()).thenReturn("item1");
         when(myApp.getError()).thenReturn(error);
-        when(error.getLocation()).thenReturn("CustomerDashboard");
+        when(error.getLocation()).thenReturn("null");
         // Create an instance of your class under test, passing the mock as a parameter
         SearchProductState state = spy(new SearchProductState(myApp));
 
