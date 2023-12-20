@@ -10,8 +10,7 @@ import org.sates.InstallationRequestsState;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class InstallationRequestSteps {
     App myApp;
@@ -31,6 +30,10 @@ public class InstallationRequestSteps {
     @Then("the appointment {string} should be confirmed")
     public void the_appointment_should_be_confirmed(String input) {
         assertNotNull(myApp.myDatabase.searchApprovedAppointment(Integer.parseInt(input)));
+    }
+    @Then("an error should be shown")
+    public void an_error_should_be_shown() {
+        assertNotEquals("Null", myApp.error.getLocation());
     }
 
 }

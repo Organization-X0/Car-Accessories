@@ -169,6 +169,13 @@ Feature: Admin Dashboard
       |AppointmentNum|UserEmail      |ProductName|CarMake|Date     |
       |1             |user1@gmail.com|item1      |bmw    |2023-11-8|
 
+
+  Scenario: Invalid option
+    Given an admin is logged in
+    And admin enters manage installation page "4"
+    When the admin enters an invalid option "invalidOption"
+    Then an error should be shown
+
   Scenario: Test nextPage Manage Appointment
     Given inside manage appointment
     And the current page is not the total pages
