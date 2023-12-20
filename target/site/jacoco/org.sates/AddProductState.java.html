@@ -15,15 +15,15 @@ public class AddProductState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L18">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L19">        Map&lt;String,String&gt; data = myApp.getCli().displayAddProduct(myApp.myDatabase.getCategoryList());</span>
-<span class="nc" id="L20">        dataIsEmpty=data.values().stream().allMatch(String::isEmpty);</span>
-<span class="nc" id="L21">        handleInput(data);</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
-<span class="nc bnc" id="L23" title="All 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Product added successfully! &quot;,true);</span>
-<span class="nc" id="L24">            myApp.setState(new ManageProductsState(myApp));</span>
+<span class="fc" id="L18">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L19">        Map&lt;String,String&gt; data = myApp.getCli().displayAddProduct(myApp.getDatabase().getCategoryList());</span>
+<span class="fc" id="L20">        dataIsEmpty=data.values().stream().allMatch(String::isEmpty);</span>
+<span class="fc" id="L21">        handleInput(data);</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Product added successfully! &quot;,true);</span>
+<span class="fc" id="L24">            myApp.setState(new ManageProductsState(myApp));</span>
         }
-<span class="nc" id="L26">    }</span>
+<span class="fc" id="L26">    }</span>
 
     @Override
     @SuppressWarnings(&quot;unchecked&quot;)
@@ -36,9 +36,9 @@ public class AddProductState implements State {
 <span class="nc" id="L36">                throw new Exception();</span>
 <span class="pc bpc" id="L37" title="1 of 2 branches missed.">            if(dataIsEmpty) return;</span>
 <span class="fc" id="L38">            int categoryNumber= Integer.parseInt(data.get(&quot;category&quot;));</span>
-<span class="fc" id="L39">            myApp.addProduct(data.get(&quot;name&quot;),myApp.myDatabase.getCategoryList().get(categoryNumber-1).getName(),data.get(&quot;description&quot;),Double.parseDouble(data.get(&quot;price&quot;)));</span>
-<span class="nc" id="L40">        }catch (Exception e){</span>
-<span class="nc" id="L41">            myApp.getError().setError(getStateString());</span>
+<span class="fc" id="L39">            myApp.addProduct(data.get(&quot;name&quot;),myApp.getDatabase().getCategoryList().get(categoryNumber-1).getName(),data.get(&quot;description&quot;),Double.parseDouble(data.get(&quot;price&quot;)));</span>
+<span class="fc" id="L40">        }catch (Exception e){</span>
+<span class="fc" id="L41">            myApp.getError().setError(getStateString());</span>
 <span class="fc" id="L42">        }</span>
 <span class="fc" id="L43">    }</span>
 

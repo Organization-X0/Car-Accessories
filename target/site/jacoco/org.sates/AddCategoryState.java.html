@@ -11,13 +11,13 @@ public class AddCategoryState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String name= myApp.getCli().displayAddCategory();</span>
-<span class="nc" id="L16">        handleInput(name);</span>
-<span class="nc bnc" id="L17" title="All 4 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString()) &amp;&amp; !name.isEmpty()){</span>
-<span class="nc" id="L18">            myApp.getCli().displayMsg(&quot; Category added successfully! &quot;,true);</span>
+<span class="fc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L15">        String name= myApp.getCli().displayAddCategory();</span>
+<span class="fc" id="L16">        handleInput(name);</span>
+<span class="pc bpc" id="L17" title="2 of 4 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString()) &amp;&amp; !name.isEmpty()){</span>
+<span class="fc" id="L18">            myApp.getCli().displayMsg(&quot; Category added successfully! &quot;,true);</span>
         }
-<span class="nc" id="L20">    }</span>
+<span class="fc" id="L20">    }</span>
 
     
     @Override
@@ -34,7 +34,7 @@ public class AddCategoryState implements State {
 
     @Override
     public String getStateString() {
-<span class="nc" id="L37">        return &quot;AddCategory&quot;;</span>
+<span class="fc" id="L37">        return &quot;AddCategory&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

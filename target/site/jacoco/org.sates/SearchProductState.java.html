@@ -26,7 +26,7 @@ public class SearchProductState implements State {
     public void handleInput(Object input) {
 <span class="fc" id="L27">        String productName = (String) input;</span>
 
-<span class="fc" id="L29">        myApp.productArrayListBetweenState =myApp.myDatabase.searchProducts(productName);</span>
+<span class="fc" id="L29">        myApp.productArrayListBetweenState =myApp.getDatabase().searchProducts(productName);</span>
 <span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (myApp.whoLoggedIn().equals(&quot;admin&quot;)){</span>
 <span class="nc" id="L31">            myApp.setState(new ProductCrudState(myApp));</span>
         } else {

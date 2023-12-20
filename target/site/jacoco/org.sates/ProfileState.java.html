@@ -11,12 +11,12 @@ public class ProfileState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L15">        String name=myApp.searchAccount(myApp.getEmail()).getFullName();</span>
-<span class="nc" id="L16">        String phone=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
-<span class="nc" id="L17">        String option= myApp.getCli().displayProfile(name,myApp.getEmail(),phone);</span>
-<span class="nc" id="L18">        handleInput(option);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L15">        String name=myApp.searchAccount(myApp.getEmail()).getFullName();</span>
+<span class="fc" id="L16">        String phone=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
+<span class="fc" id="L17">        String option= myApp.getCli().displayProfile(name,myApp.getEmail(),phone);</span>
+<span class="fc" id="L18">        handleInput(option);</span>
+<span class="fc" id="L19">    }</span>
 
     @Override
     public void handleInput(Object input) {
@@ -33,7 +33,7 @@ public class ProfileState implements State {
 
     @Override
     public String getStateString() {
-<span class="nc" id="L36">        return &quot;Profile&quot;;</span>
+<span class="fc" id="L36">        return &quot;Profile&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

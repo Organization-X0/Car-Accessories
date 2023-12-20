@@ -17,3 +17,20 @@ Feature: Product Catalog
     And the user enter search page
     And  searches for a product with product name
     Then the user should see filtered product listings
+
+  Scenario: Handle View Products
+    Given inside view products
+    And the current page is not the total pages
+    When the input is "n"
+    Then the system should navigate to the next page
+
+  Scenario: Handle View Products
+    Given inside view products
+    And the current page is not the first page
+    When the input is "p"
+    Then the system should navigate to the previous page
+
+  Scenario: Handle View Products
+    Given inside view products
+    When the input is "b"
+    Then the system should navigate to product Catalog

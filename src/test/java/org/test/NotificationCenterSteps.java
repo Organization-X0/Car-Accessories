@@ -34,8 +34,8 @@ public class NotificationCenterSteps {
     @Given("the current page is not the total pages")
     public void the_current_page_is_not_the_total_pages() {
         myApp.getCli().setTotalPages(5);
-        Cli.setPage(2);
-        pageNow= Cli.getCurrentPage();
+        myApp.getCli().setPage(2);
+        pageNow= myApp.getCli().getCurrentPage();
     }
 
     @When("the input is {string}")
@@ -45,19 +45,19 @@ public class NotificationCenterSteps {
 
     @Then("the system should navigate to the next page")
     public void the_system_should_navigate_to_the_next_page() {
-        assertEquals(pageNow+1, Cli.getCurrentPage());
+        assertEquals(pageNow+1, myApp.getCli().getCurrentPage());
     }
 
     @Given("the current page is not the first page")
     public void the_current_page_is_not_the_first_page() {
         myApp.getCli().setTotalPages(5);
-        Cli.setPage(3);
-        pageNow= Cli.getCurrentPage();
+        myApp.getCli().setPage(3);
+        pageNow= myApp.getCli().getCurrentPage();
     }
 
     @Then("the system should navigate to the previous page")
     public void the_system_should_navigate_to_the_previous_page() {
-        assertEquals(pageNow-1, Cli.getCurrentPage());
+        assertEquals(pageNow-1, myApp.getCli().getCurrentPage());
     }
     @Given("inside notification center And a installer is logged in")
     public void inside_notification_center_and_a_installer_is_logged_in() {

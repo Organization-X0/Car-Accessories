@@ -16,13 +16,13 @@ public class ManageInstallationAppointmentState implements State {
     @Override
     public void handle() {
 <span class="nc" id="L18">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L19">        String option= myApp.getCli().displayInstallationAppointments(myApp.myDatabase.getRequestedAppointmentsList());</span>
+<span class="nc" id="L19">        String option= myApp.getCli().displayInstallationAppointments(myApp.getDatabase().getRequestedAppointmentsList());</span>
 <span class="nc" id="L20">        handleInput(option);</span>
 <span class="nc" id="L21">    }</span>
 
     @Override
     public void handleInput(Object input) {
-<span class="fc" id="L25">        ArrayList&lt;Appointment&gt; appointmentArrayList = myApp.myDatabase.getRequestedAppointmentsList();</span>
+<span class="fc" id="L25">        ArrayList&lt;Appointment&gt; appointmentArrayList = myApp.getDatabase().getRequestedAppointmentsList();</span>
 <span class="fc" id="L26">        String option=(String) input;</span>
 
 <span class="fc" id="L28">        myApp.nextPrevBackAdd(option,new AdminDashboardState(myApp),new AddAppointmentState(myApp));</span>

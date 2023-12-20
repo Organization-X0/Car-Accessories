@@ -57,5 +57,14 @@ public class ProductCatalogSteps {
     public void the_user_should_see_filtered_product_listings() {
         assertTrue(myApp.getCurrentState() instanceof ProductListingState);
     }
+    @Given("inside view products")
+    public void inside_view_products() {
+        myApp.setState(new ProductListingState(myApp));
+    }
+
+    @Then("the system should navigate to product Catalog")
+    public void the_system_should_navigate_to_product_catalog() {
+        assertTrue(myApp.getCurrentState() instanceof ProductCatalogState);
+    }
 
 }

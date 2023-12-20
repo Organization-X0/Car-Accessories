@@ -12,10 +12,10 @@ public class LoginState implements State{
 <span class="fc" id="L12">    }</span>
     @Override
     public void handle() {
-<span class="nc" id="L15">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L16">        Map&lt;String, String&gt; loginData = myApp.getCli().displayLogin();</span>
-<span class="nc" id="L17">        handleInput(loginData);</span>
-<span class="nc" id="L18">    }</span>
+<span class="fc" id="L15">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L16">        Map&lt;String, String&gt; loginData = myApp.getCli().displayLogin();</span>
+<span class="fc" id="L17">        handleInput(loginData);</span>
+<span class="fc" id="L18">    }</span>
 
     @Override
     @SuppressWarnings(&quot;unchecked&quot;)

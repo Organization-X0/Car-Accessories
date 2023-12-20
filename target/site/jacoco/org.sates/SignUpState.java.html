@@ -13,10 +13,10 @@ public class SignUpState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L16">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="nc" id="L17">        Map&lt;String, String&gt; signUpData = myApp.getCli().displaySignUp();</span>
-<span class="nc" id="L18">        handleInput(signUpData);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L16">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L17">        Map&lt;String, String&gt; signUpData = myApp.getCli().displaySignUp();</span>
+<span class="fc" id="L18">        handleInput(signUpData);</span>
+<span class="fc" id="L19">    }</span>
 
     @Override
     @SuppressWarnings(&quot;unchecked&quot;)

@@ -15,19 +15,19 @@ public class ProductListingState implements State {
 
     @Override
     public void handle() {
-<span class="nc" id="L18">        flag=true;</span>
-<span class="nc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L18">        flag=true;</span>
+<span class="fc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
         String option;
-<span class="nc" id="L21">        myApp.setProductArrayListBetweenState();</span>
-<span class="nc" id="L22">        option = myApp.getCli().displayCustomerProducts(myApp.productArrayListBetweenState);</span>
-<span class="nc" id="L23">        handleInput(option);</span>
+<span class="fc" id="L21">        myApp.setProductArrayListBetweenState();</span>
+<span class="fc" id="L22">        option = myApp.getCli().displayCustomerProducts(myApp.getProductArrayListBetweenState());</span>
+<span class="fc" id="L23">        handleInput(option);</span>
 
-<span class="nc bnc" id="L25" title="All 6 branches missed.">        if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !myApp.getError().getLocation().equals(getStateString())){</span>
-<span class="nc" id="L26">            String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
-<span class="nc" id="L27">            myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
+<span class="pc bpc" id="L25" title="3 of 6 branches missed.">        if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !myApp.getError().getLocation().equals(getStateString())){</span>
+<span class="fc" id="L26">            String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
+<span class="fc" id="L27">            myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
         }
 
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L30">    }</span>
 
 
     @Override
@@ -36,13 +36,13 @@ public class ProductListingState implements State {
 <span class="fc" id="L36">            myApp.setProductArrayListBetweenState();</span>
         }
 <span class="fc" id="L38">        String option = (String) input;</span>
-<span class="pc bpc" id="L39" title="3 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();</span>
-<span class="pc bpc" id="L40" title="3 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();</span>
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        else if (option.equals(&quot;b&quot;)) myApp.setState(new ProductCatalogState(myApp));</span>
+<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();</span>
+<span class="pc bpc" id="L40" title="1 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        else if (option.equals(&quot;b&quot;)) myApp.setState(new ProductCatalogState(myApp));</span>
 <span class="pc bpc" id="L42" title="2 of 4 branches missed.">        else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'f') {</span>
             try {
 <span class="fc" id="L44">                int num = Integer.parseInt(option.substring(1));</span>
-<span class="fc" id="L45">                productName = myApp.productArrayListBetweenState.get(num - 1).getName();</span>
+<span class="fc" id="L45">                productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();</span>
 <span class="fc" id="L46">                User account=myApp.searchAccount(myApp.getEmail());</span>
 <span class="fc" id="L47">                account.addOrder(myApp.searchProduct(num));</span>
 <span class="fc" id="L48">                account.pushNotification(&quot;You bought this product \&quot;&quot;+ myApp.getCli().blueText(productName)+&quot;\&quot; successfully.&quot;);</span>
@@ -55,7 +55,7 @@ public class ProductListingState implements State {
 <span class="fc" id="L55">    }</span>
     @Override
     public String getStateString() {
-<span class="nc" id="L58">        return &quot;ProductListing&quot;;</span>
+<span class="fc" id="L58">        return &quot;ProductListing&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

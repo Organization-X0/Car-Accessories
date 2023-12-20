@@ -1,12 +1,12 @@
 org\test\RunCucumberTest.class
 org\test\InstallerDashboardSteps.class
-org\test\UserRolesSteps.class
 org\test\AdminDashboardTest.class
-org\test\AdminDashboardSteps.class
 org\test\CustomerDashboardSteps.class
 org\test\SignUpSteps.class
-org\test\StartTest.class
 org\test\InstallationRequestSteps.class
+org\test\UserRolesSteps.class
+org\test\AdminDashboardSteps.class
+org\test\StartTest.class
 org\test\ProductCatalogSteps.class
 org\test\StartSteps.class
 org\test\NotificationCenterSteps.class
