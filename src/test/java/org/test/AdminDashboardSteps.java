@@ -188,8 +188,8 @@ public class AdminDashboardSteps {
 
     @When("the admin deletes appointment {string}")
     public void the_admin_deletes_appointment(String appointmentNum) {
-        int num=Integer.parseInt(appointmentNum);
-        myApp.deleteAppointment(num);
+            int num = Integer.parseInt(appointmentNum);
+            myApp.deleteAppointment(num);
     }
     @Then("the appointment should be deleted {string}")
     public void the_appointment_should_be_deleted(String appointmentNum) {
@@ -276,5 +276,9 @@ public class AdminDashboardSteps {
     @Then("the application should throw an Error")
     public void the_application_should_throw_an_error() {
         assertNotNull(myApp.getError().getLocation());
+    }
+    @When("the admin enters an invalid option {string}")
+    public void the_admin_enters_an_invalid_option(String input) {
+        myApp.getCurrentState().handleInput(input);
     }
 }
