@@ -13,12 +13,12 @@ public class Category {
         product.setId(Product.getNextId());
         productArrayList.add(product);
     }
-    public Product searchOneProduct(int id){
-        return productArrayList.stream()
-                .filter(product -> product.getId()==(id))
-                .findFirst()
-                .orElse(null);
-    }
+//    public Product searchOneProduct(int id){
+//        return productArrayList.stream()
+//                .filter(product -> product.getId()==(id))
+//                .findFirst()
+//                .orElse(null);
+//    }
     public ArrayList<Product> getProductsList() {
         return productArrayList;
     }

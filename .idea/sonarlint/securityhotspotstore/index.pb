@@ -195,3 +195,7 @@ b
 .src/test/java/org/test/ProductCatalogTest.java,c\7\c73a3b97b024a47af3e51be057bafe992d3d8cba
 J
 features/userRoles.feature,6\6\66c16b58263c6c56b414b3d886fedf461437099e
+m
+=src/test/java/org/test/ManageInstallationAppointmentTest.java,b\f\bf78c07676091d39ea9d6cd260bbfcb31b681eed
+T
+$src/main/java/org/data/Category.java,f\4\f444159cbd7fc4949144388b601841559cf95368
