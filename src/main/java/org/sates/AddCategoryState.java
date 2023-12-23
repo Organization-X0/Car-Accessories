@@ -22,13 +22,9 @@ public class AddCategoryState implements State {
     @Override
     public void handleInput(Object input) {
         String name = (String)input;
-        try{
             if(!name.isEmpty())
                 myApp.addCategory(name);
             myApp.setState(new ManageCategoriesState(myApp));
-        }catch (Exception e){
-            myApp.getError().setError(getStateString());
-        }
     }
 
     @Override
