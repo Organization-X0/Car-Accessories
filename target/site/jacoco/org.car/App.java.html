@@ -222,7 +222,7 @@ public class App {
 <span class="fc bfc" id="L222" title="All 2 branches covered.">        if(handleManageProductOutput==1){</span>
 <span class="fc" id="L223">            productArrayListBetweenState =myDatabase.getAllProducts();</span>
 <span class="pc bpc" id="L224" title="1 of 2 branches missed.">        } else if(handleManageProductOutput!=2){</span>
-<span class="fc" id="L225">            productArrayListBetweenState =myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();</span>
+<span class="fc" id="L225">            productArrayListBetweenState = (ArrayList&lt;Product&gt;) myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();</span>
         }
 <span class="fc" id="L227">    }</span>
     public void handleView(String input) {

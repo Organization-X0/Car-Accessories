@@ -16,7 +16,7 @@ public class Appointment {
         this.date=date;
         this.time=time;
     }
-    public Appointment(){};
+    public Appointment(){}
 
     public static int getNextId(){
         return ++lastId;
@@ -37,7 +37,7 @@ public class Appointment {
     }
     public void setId(int id){
         this.id=id;
-    };
+    }
 
     public String getEmail() {
         return email;
@@ -75,8 +75,5 @@ public class Appointment {
     }
     public String getStringTime(){
         return Time.timeToPrint(this.time);
-    }
-    public void setTime(Time time){
-        this.time=time;
     }
 }

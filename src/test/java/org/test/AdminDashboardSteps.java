@@ -281,4 +281,11 @@ public class AdminDashboardSteps {
     public void the_admin_enters_an_invalid_option(String input) {
         myApp.getCurrentState().handleInput(input);
     }
+
+    @Then("an error should be displayed")
+    public void an_error_should_be_displayed() {
+        assertEquals("ManageCategories", myApp.getCurrentState().getStateString());
+    }
+
+
 }

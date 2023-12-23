@@ -1,25 +1,20 @@
 package org.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Category {
     String name;
     private final ArrayList<Product> productArrayList;
     public Category(String name){
         this.name=name;
-        productArrayList=new ArrayList<Product>();
+        productArrayList= new ArrayList<>();
     }
     public void addProduct(Product product) {
         product.setId(Product.getNextId());
         productArrayList.add(product);
     }
-//    public Product searchOneProduct(int id){
-//        return productArrayList.stream()
-//                .filter(product -> product.getId()==(id))
-//                .findFirst()
-//                .orElse(null);
-//    }
-    public ArrayList<Product> getProductsList() {
+    public List<Product> getProductsList() {
         return productArrayList;
     }
     public void deleteProduct(Product productDelete){

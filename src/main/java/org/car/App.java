@@ -222,7 +222,7 @@ public class App {
         if(handleManageProductOutput==1){
             productArrayListBetweenState =myDatabase.getAllProducts();
         } else if(handleManageProductOutput!=2){
-            productArrayListBetweenState =myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();
+            productArrayListBetweenState = (ArrayList<Product>) myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();
         }
     }
     public void handleView(String input) {

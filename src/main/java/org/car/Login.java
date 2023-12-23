@@ -8,8 +8,8 @@ public class Login {
     public Login(DataBase dataBase){
        this.myDatabase=dataBase;
     }
-    public boolean loginNow(String Email,String password){
-        User user=myDatabase.searchAccount(Email);
+    public boolean loginNow(String email,String password){
+        User user=myDatabase.searchAccount(email);
         if(user==null){
             return false;
         }
