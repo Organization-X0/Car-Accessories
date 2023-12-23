@@ -47,6 +47,17 @@ Feature: Admin Dashboard
       | Decorates|
       | Radio    |
 
+  Scenario Outline: Add a category with invalid input
+    Given an admin is logged in
+    And admin enters manage categories page
+    When the admin adds new category "<category>"
+    Then an error should be displayed
+    Examples:
+      | category |
+      |          |
+      | 123456   |
+
+
   Scenario Outline: Update an existing category
     Given an admin is logged in
     And admin enters manage categories page
@@ -67,6 +78,27 @@ Feature: Admin Dashboard
       | categoryNum  |
       | 3            |
       | 2            |
+
+  Scenario Outline: Delete a non-existing category
+    Given an admin is logged in
+    And admin enters manage categories page
+    When the admin deletes the category "<categoryNum>"
+    Then an error should be displayed
+    Examples:
+      | categoryNum  |
+      | 100          |
+      | 200          |
+
+  Scenario Outline: Update a non-existing category
+    Given an admin is logged in
+    And admin enters manage categories page
+    When the admin updates the category "<oldCategoryNum>" to "<newCategory>"
+    Then an error should be displayed
+    Examples:
+      | oldCategoryNum | newCategory |
+      | 100            | Category z  |
+      | 200            | Category w  |
+
 
   Scenario Outline: Add a new product
     Given an admin is logged in

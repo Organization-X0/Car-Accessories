@@ -205,3 +205,5 @@ S
 #src/main/java/org/car/MyLogger.java,6\7\6778906e84756d9f9df5f6592a18b1ca483e5d6d
 V
 &src/main/java/org/car/MyException.java,b\3\b35fea0cf2b62c03388363c50a103dcd20c39866
+W
+'src/main/java/org/data/Appointment.java,8\1\81ba481007f4b2c435ceb68d25391ab9be676bad

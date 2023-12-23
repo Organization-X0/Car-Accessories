@@ -8,8 +8,8 @@ public class Login {
 <span class="fc" id="L8">    public Login(DataBase dataBase){</span>
 <span class="fc" id="L9">       this.myDatabase=dataBase;</span>
 <span class="fc" id="L10">    }</span>
-    public boolean loginNow(String Email,String password){
-<span class="fc" id="L12">        User user=myDatabase.searchAccount(Email);</span>
+    public boolean loginNow(String email,String password){
+<span class="fc" id="L12">        User user=myDatabase.searchAccount(email);</span>
 <span class="fc bfc" id="L13" title="All 2 branches covered.">        if(user==null){</span>
 <span class="fc" id="L14">            return false;</span>
         }
