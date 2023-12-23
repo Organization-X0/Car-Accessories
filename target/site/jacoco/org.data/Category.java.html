@@ -13,12 +13,12 @@ public class Category {
 <span class="fc" id="L13">        product.setId(Product.getNextId());</span>
 <span class="fc" id="L14">        productArrayList.add(product);</span>
 <span class="fc" id="L15">    }</span>
-    public Product searchOneProduct(int id){
-<span class="nc" id="L17">        return productArrayList.stream()</span>
-<span class="nc bnc" id="L18" title="All 2 branches missed.">                .filter(product -&gt; product.getId()==(id))</span>
-<span class="nc" id="L19">                .findFirst()</span>
-<span class="nc" id="L20">                .orElse(null);</span>
-    }
+//    public Product searchOneProduct(int id){
+//        return productArrayList.stream()
+//                .filter(product -&gt; product.getId()==(id))
+//                .findFirst()
+//                .orElse(null);
+//    }
     public ArrayList&lt;Product&gt; getProductsList() {
 <span class="fc" id="L23">        return productArrayList;</span>
     }

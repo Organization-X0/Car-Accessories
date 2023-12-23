@@ -36,7 +36,6 @@ public class AddAppointmentTest {
     @Test
     public void testHandleAdmin() {
         // Given
-        when(myApp.getDatabase()).thenReturn(myDatabase);
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         when(myApp.getCli()).thenReturn(cli);
@@ -44,7 +43,6 @@ public class AddAppointmentTest {
         when(myApp.getError()).thenReturn(error);
         when(myApp.whoLoggedIn()).thenReturn("admin");
         when(error.getLocation()).thenReturn("SomeOtherState");
-        when(myApp.getDatabase().getRequestedAppointmentsList()).thenReturn(new ArrayList<>());
         // Create an instance of your class under test, passing the mock as a parameter
         AddAppointmentState state = new AddAppointmentState(myApp); // replace YourStateClass with the actual class name
 
@@ -60,7 +58,6 @@ public class AddAppointmentTest {
     @Test
     public void testHandleCustomer() {
         // Given
-        when(myApp.getDatabase()).thenReturn(myDatabase);
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         when(myApp.getCli()).thenReturn(cli);
@@ -68,7 +65,6 @@ public class AddAppointmentTest {
         when(myApp.getError()).thenReturn(error);
         when(myApp.whoLoggedIn()).thenReturn("customer");
         when(error.getLocation()).thenReturn("SomeOtherState");
-        when(myApp.getDatabase().getRequestedAppointmentsList()).thenReturn(new ArrayList<>());
         // Create an instance of your class under test, passing the mock as a parameter
         AddAppointmentState state = new AddAppointmentState(myApp); // replace YourStateClass with the actual class name
 

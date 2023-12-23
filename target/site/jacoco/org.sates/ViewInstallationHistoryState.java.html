@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ViewInstallationHistoryState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.sates</a> &gt; <span class="el_source">ViewInstallationHistoryState.java</span></div><h1>ViewInstallationHistoryState.java</h1><pre class="source lang-java linenums">package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class ViewInstallationHistoryState implements State {
     private final App myApp;
-<span class="fc" id="L8">    public ViewInstallationHistoryState(App myApp) {</span>
-<span class="fc" id="L9">        this.myApp=myApp;</span>
-<span class="fc" id="L10">    }</span>
+<span class="fc" id="L7">    public ViewInstallationHistoryState(App myApp) {</span>
+<span class="fc" id="L8">        this.myApp=myApp;</span>
+<span class="fc" id="L9">    }</span>
 
     @Override
     public void handle() {
-<span class="fc" id="L14">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="fc" id="L15">        String option= myApp.getCli().displayInstallationHistory(myApp.searchAccount(myApp.getEmail()).getInstallations());</span>
-<span class="fc" id="L16">        handleInput(option);</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L13">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L14">        String option= myApp.getCli().displayInstallationHistory(myApp.searchAccount(myApp.getEmail()).getInstallations());</span>
+<span class="fc" id="L15">        handleInput(option);</span>
+<span class="fc" id="L16">    }</span>
 
     @Override
     public void handleInput(Object input) {
-<span class="fc" id="L21">        myApp.handleView((String) input);</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L20">        myApp.handleView((String) input);</span>
+<span class="fc" id="L21">    }</span>
 
 
     @Override
     public String getStateString() {
-<span class="fc" id="L27">        return &quot;ViewInstallationHistory&quot;;</span>
+<span class="fc" id="L26">        return &quot;ViewInstallationHistory&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
