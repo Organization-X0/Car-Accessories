@@ -58,4 +58,13 @@ public class InstallerDashboardSteps {
         assertEquals(myApp.getCurrentState().getStateString(), myApp.getError().getLocation());
     }
 
+    @When("the installer enters {string}")
+    public void theInstallerEnters(String input) {
+        myApp.getCurrentState().handleInput(input);
+    }
+
+    @When("the installer tries to delete the appointment {string}")
+    public void theInstallerTriesToDeleteTheAppointment(String input) {
+        myApp.getCurrentState().handleInput(input);
+    }
 }

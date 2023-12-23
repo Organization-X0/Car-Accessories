@@ -9,3 +9,8 @@ Feature: User Login
     Given on the login page
     When invalid username or password are entered
     Then an error message should be seen
+
+  Scenario: Invalid input type
+    Given on the login page
+    When input of invalid type is entered
+    Then an error message should be seen

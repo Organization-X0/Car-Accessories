@@ -35,3 +35,23 @@ Feature: Installation Dashboard
     And installer enters Schedule of Appointments page
     When the installer confirm the Appointment
     Then the appointment should be deleted from Schedule  Appointments
+
+  Scenario Outline: Delete a non-existing appointment
+    Given an installer is logged in
+    And installer enters Schedule of Appointments page
+    When the installer tries to delete the appointment "<appointmentNum>"
+    Then an error should be displayed
+    Examples:
+      | appointmentNum |
+      | d100           |
+      | d200           |
+
+  Scenario Outline: Enter an invalid option
+    Given an installer is logged in
+    And installer enters Schedule of Appointments page
+    When the installer enters "<option>"
+    Then an error should be displayed
+    Examples:
+      | option |
+      | z      |
+      | abc    |

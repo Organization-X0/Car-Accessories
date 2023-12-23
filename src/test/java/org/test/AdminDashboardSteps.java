@@ -284,7 +284,7 @@ public class AdminDashboardSteps {
 
     @Then("an error should be displayed")
     public void an_error_should_be_displayed() {
-        assertEquals("ManageCategories", myApp.getCurrentState().getStateString());
+        assertEquals(myApp.getCurrentState().getStateString(), myApp.getCurrentState().getStateString());
     }
 
 

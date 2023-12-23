@@ -207,3 +207,5 @@ V
 &src/main/java/org/car/MyException.java,b\3\b35fea0cf2b62c03388363c50a103dcd20c39866
 W
 'src/main/java/org/data/Appointment.java,8\1\81ba481007f4b2c435ceb68d25391ab9be676bad
+c
+3src/test/java/org/test/InstallerDashboardSteps.java,2\2\228a8b0f0d608b780dd04c168891fc2b22719180
