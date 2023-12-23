@@ -140,8 +140,8 @@ public class AdminDashboardSteps {
     }
     @Then("the account should be updated {string},{string}")
     public void the_account_should_be_updated(String newName, String newPhone) {
-        assertEquals(myApp.searchAccount(myApp.userEmailToUpdate).getFullName(),newName);
-        assertEquals(myApp.searchAccount(myApp.userEmailToUpdate).getPhone(),newPhone);
+        assertEquals(myApp.searchAccount(myApp.getUserEmailToUpdate()).getFullName(),newName);
+        assertEquals(myApp.searchAccount(myApp.getUserEmailToUpdate()).getPhone(),newPhone);
     }
     @When("the admin delete account {string}")
     public void the_admin_delete_account(String accountNum) {

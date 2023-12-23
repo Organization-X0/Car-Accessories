@@ -1,7 +1,7 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
+import org.car.MyException;
 
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public class SignUpState implements State {
             if (input instanceof Map)
                 signUpData = (Map<String, String>) input;
             else
-                throw new Exception();
+                throw new MyException();
 
             myApp.signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
         }catch (Exception e){

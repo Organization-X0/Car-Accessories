@@ -20,9 +20,9 @@ public class UpdateCategoryState implements State {
         String newName = (String) input;
 
         if(!newName.isEmpty()){
-            myApp.searchCategory(myApp.categoryNameToUpdate).getProductsList()
+            myApp.searchCategory(myApp.getCategoryNameToUpdate()).getProductsList()
                     .forEach(product -> product.setCategory(newName));
-            myApp.updateCategory(myApp.categoryNameToUpdate,newName);
+            myApp.updateCategory(myApp.getCategoryNameToUpdate(),newName);
         }
     }
     @Override

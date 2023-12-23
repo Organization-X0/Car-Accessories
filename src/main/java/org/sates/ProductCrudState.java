@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class ProductCrudState implements State {
     private final App myApp;
@@ -39,7 +38,7 @@ public class ProductCrudState implements State {
         } else if (!option.isEmpty() && option.charAt(0) == 'u') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                myApp.productIdToUpdate = myApp.getProductArrayListBetweenState().get(num - 1).getId();
+                myApp.setProductIdToUpdate(myApp.getProductArrayListBetweenState().get(num - 1).getId());
                 myApp.setState(new UpdateProductState(myApp));
             } catch (Exception e) {
                 myApp.getError().setError(myApp.getCurrentState().getStateString());

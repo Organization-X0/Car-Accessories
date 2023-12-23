@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class SearchProductState implements State {
     private final App myApp;
@@ -26,7 +25,7 @@ public class SearchProductState implements State {
     public void handleInput(Object input) {
         String productName = (String) input;
 
-        myApp.productArrayListBetweenState =myApp.getDatabase().searchProducts(productName);
+        myApp.setProductArrayListBetweenState(myApp.getDatabase().searchProducts(productName));
         if (myApp.whoLoggedIn().equals("admin")){
             myApp.setState(new ProductCrudState(myApp));
         } else {

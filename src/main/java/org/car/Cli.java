@@ -26,7 +26,7 @@ public class Cli {
     public static final String PRODUCT_NAME_DATA = "productName";
     public static final String CAR_MAKE_DATA = "carMake";
     private int page=1;
-    public int totalPages=1;
+    private int totalPages=1;
     public static Ansi errorText(String text){
         return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();
     }
@@ -58,6 +58,9 @@ public class Cli {
     public void setTotalPages(int n){
         totalPages=n;
     }
+    public int getTotalPages(){
+        return totalPages;
+    }
     public void setPage(int n){
         page=n;
     }
@@ -66,7 +69,6 @@ public class Cli {
         Map<String,String>data=new HashMap<>();
         System.out.println(blueBgText(" Login "));
         System.out.print(blueText("Email:"));
-//        scanner.nextLine();
         String email=scanner.nextLine();
         System.out.print(blueText("Password:"));
         String pass=scanner.nextLine();
@@ -99,7 +101,7 @@ public class Cli {
         System.out.println("5. "+ blueText(LOG_OUT));
         return scanner.nextLine();
     }
-    public String displayManageProducts(ArrayList<Category> categoryArrayList){
+    public String displayManageProducts(List<Category> categoryArrayList){
         int manageProductsOptions=1;
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText(" Product Menu "));
@@ -112,21 +114,20 @@ public class Cli {
         return scanner.nextLine();
     }
 
-    public String displayCustomerProducts(ArrayList<Product> productArrayList){
+    public String displayCustomerProducts(List<Product> productArrayList){
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText("All Products:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, productArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> {
-            System.out.println((i + 1) + ". " + blueText(
-                    productArrayList.get(i).getName() +
-                            CATEGORY_TO_PRINT +
-                            productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
-                            productArrayList.get(i).getPrice()
-            ));
-        });
+        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+                productArrayList.get(i).getName() +
+                        CATEGORY_TO_PRINT +
+                        productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
+                        productArrayList.get(i).getPrice() + " | Description:"+productArrayList.get(i).getDescription() +
+                        " | Available:"+productArrayList.get(i).isAvailability()
+        )));
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
         System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
@@ -143,21 +144,20 @@ public class Cli {
 
         return scanner.nextLine();
     }
-    public String displayProducts(ArrayList<Product> productArrayList){
+    public String displayProducts(List<Product> productArrayList){
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText("All Products:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, productArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> {
-            System.out.println((i + 1) + ". " + blueText(
-                    productArrayList.get(i).getName() +
-                            CATEGORY_TO_PRINT +
-                            productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
-                            productArrayList.get(i).getPrice()
-            ));
-        });
+        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+                productArrayList.get(i).getName() +
+                        CATEGORY_TO_PRINT +
+                        productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
+                        productArrayList.get(i).getPrice()+ " | Description:"+productArrayList.get(i).getDescription() +
+                        " | Available:"+productArrayList.get(i).isAvailability()
+        )));
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
         System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
@@ -175,7 +175,7 @@ public class Cli {
         return scanner.nextLine();
     }
 
-    public Map<String,String> displayAddProduct(ArrayList<Category> categoryArrayList){
+    public Map<String,String> displayAddProduct(List<Category> categoryArrayList){
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(blueBgText(" ADD PRODUCT "));
@@ -217,7 +217,7 @@ public class Cli {
         data.put("price",scanner.nextLine());
         return data;
     }
-    public String displayManageCategories(ArrayList<Category> categoryArrayList){
+    public String displayManageCategories(List<Category> categoryArrayList){
         Scanner scanner=new Scanner(System.in);
         int i=1;
         System.out.println(blueBgText("CATEGORIES"));
@@ -234,16 +234,14 @@ public class Cli {
         System.out.println(blueText("Category name: "));
         return scanner.nextLine();
     }
-    public String displayManageAccounts(ArrayList<User> userArrayList) {
+    public String displayManageAccounts(List<User> userArrayList) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText(" MANAGE ACCOUNTS "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, userArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> {
-            System.out.println((i+1)+". "+ blueText(userArrayList.get(i).getFullName()+", "+userArrayList.get(i).getEmail()+", "+userArrayList.get(i).getPhone()));
-        });
+        IntStream.range(start, end).forEach(i -> System.out.println((i+1)+". "+ blueText(userArrayList.get(i).getFullName()+", "+userArrayList.get(i).getEmail()+", "+userArrayList.get(i).getPhone())));
 
         totalPages=(int)Math.ceil(userArrayList.size()/10.0);
         System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
@@ -279,21 +277,19 @@ public class Cli {
         System.out.println(blueText("Category name: "));
         return scanner.nextLine();
     }
-    public String  displayInstallationAppointments(ArrayList<Appointment> appointmentArrayList){
+    public String  displayInstallationAppointments(List<Appointment> appointmentArrayList){
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText("Manage Installation Appointments:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, appointmentArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> {
-            System.out.println((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
-                    appointmentArrayList.get(i).getDate()+" | "+
-                    appointmentArrayList.get(i).getProductName()+" | "+
-                    appointmentArrayList.get(i).getCarMake()+" | "+
-                    appointmentArrayList.get(i).getStringTime()
-            ));
-        });
+        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
+                appointmentArrayList.get(i).getDate()+" | "+
+                appointmentArrayList.get(i).getProductName()+" | "+
+                appointmentArrayList.get(i).getCarMake()+" | "+
+                appointmentArrayList.get(i).getStringTime()
+        )));
 
         totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
         System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
@@ -328,7 +324,7 @@ public class Cli {
         }
         return availableTimes;
     }
-    public Map<String, String> displayAddAppointment(ArrayList<Appointment> appointmentsList, App myApp) {
+    public Map<String, String> displayAddAppointment(App myApp) {
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
         System.out.println(blueBgText(" ADD APPOINTMENT "));
@@ -344,8 +340,8 @@ public class Cli {
         data.put("date",scanner.nextLine());
 
         int i=0;
-        myApp.availableTimes=getAvailableTimes(myApp,data.get("date"));
-        for(Time time:myApp.availableTimes){
+        myApp.setAvailableTimes(getAvailableTimes(myApp,data.get("date")));
+        for(Time time:myApp.getAvailableTimes()){
             i++;
             System.out.println(blueText(i+". ")+Time.timeToPrint(time));
         }
@@ -353,7 +349,7 @@ public class Cli {
         return data;
     }
 
-    public Map<String, String> displayAddAppointmentCustomer(App myApp,ArrayList<Appointment> appointmentsList) {
+    public Map<String, String> displayAddAppointmentCustomer(App myApp) {
         Scanner scanner = new Scanner(System.in);
         Map<String, String> data = new HashMap<>();
         System.out.println(blueBgText(" ADD APPOINTMENT "));
@@ -368,8 +364,8 @@ public class Cli {
         data.put("date", scanner.nextLine());
 
         int i=0;
-        myApp.availableTimes=getAvailableTimes(myApp,data.get("date"));
-        for(Time time:myApp.availableTimes){
+        myApp.setAvailableTimes(getAvailableTimes(myApp,data.get("date")));
+        for(Time time:myApp.getAvailableTimes()){
             i++;
             System.out.println(blueText(i+". ")+Time.timeToPrint(time));
         }
@@ -419,21 +415,19 @@ public class Cli {
         return scanner.nextLine();
     }
 
-    public String displayOrderHistory(ArrayList<Product> ordersArrayList) {
+    public String displayOrderHistory(List<Product> ordersArrayList) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText("Order History:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, ordersArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> {
-            System.out.println((i + 1) + ". " + blueText(
-                    ordersArrayList.get(i).getName() +
-                            CATEGORY_TO_PRINT +
-                            ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +
-                            ordersArrayList.get(i).getPrice()
-            ));
-        });
+        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+                ordersArrayList.get(i).getName() +
+                        CATEGORY_TO_PRINT +
+                        ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +
+                        ordersArrayList.get(i).getPrice()
+        )));
 
         totalPages=(int)Math.ceil(ordersArrayList.size()/10.0);
         System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
@@ -448,7 +442,7 @@ public class Cli {
 
         return scanner.nextLine();
     }
-    public String displayInstallationHistory(ArrayList<Appointment> installationsArrayList ) {
+    public String displayInstallationHistory(List<Appointment> installationsArrayList ) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText("Installation Requests History:"));
 
@@ -485,21 +479,19 @@ public class Cli {
         System.out.println("4. "+ blueText(LOG_OUT));
         return scanner.nextLine();
     }
-    public String displayInstallationRequests(ArrayList<Appointment> appointmentArrayList) {
+    public String displayInstallationRequests(List<Appointment> appointmentArrayList) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText(" Installation Requests "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, appointmentArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> {
-            System.out.println((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
-                    appointmentArrayList.get(i).getDate()+" | "+
-                    appointmentArrayList.get(i).getProductName()+" | "+
-                    appointmentArrayList.get(i).getCarMake()+" | "+
-                    appointmentArrayList.get(i).getStringTime()
-            ));
-        });
+        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
+                appointmentArrayList.get(i).getDate()+" | "+
+                appointmentArrayList.get(i).getProductName()+" | "+
+                appointmentArrayList.get(i).getCarMake()+" | "+
+                appointmentArrayList.get(i).getStringTime()
+        )));
 
         totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
         System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
@@ -516,7 +508,7 @@ public class Cli {
 
         return scanner.nextLine();
     }
-     public String displayScheduleOfAppointments(ArrayList<Appointment> approvedAppointmentArrayList) {
+     public String displayScheduleOfAppointments(List<Appointment> approvedAppointmentArrayList) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText(" Schedule Of Appointments "));
 
@@ -545,7 +537,7 @@ public class Cli {
 
         return scanner.nextLine();
     }
-    public String displayNotificationCenter(ArrayList<String> notifications) {
+    public String displayNotificationCenter(List<String> notifications) {
         Scanner scanner=new Scanner(System.in);
         System.out.println(blueBgText(" Notification Center "));
 

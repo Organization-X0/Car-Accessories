@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class InstallerDashboardState implements State{
     private final App myApp;

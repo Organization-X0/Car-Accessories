@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class ManageAccountsState implements State {
     private final App myApp;
@@ -32,7 +31,7 @@ public class ManageAccountsState implements State {
         } else if(!option.isEmpty() && option.charAt(0) == 'u') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                myApp.userEmailToUpdate=myApp.getDatabase().getCustomerList().get(num-1).getEmail();
+                myApp.setUserEmailToUpdate(myApp.getDatabase().getCustomerList().get(num-1).getEmail());
                 myApp.setState(new UpdateAccountState(myApp));
             }catch (Exception e){
                 myApp.getError().setError(getStateString());

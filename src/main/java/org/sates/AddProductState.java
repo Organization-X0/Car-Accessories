@@ -1,7 +1,7 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
+import org.car.MyException;
 
 import java.util.Map;
 
@@ -33,7 +33,7 @@ public class AddProductState implements State {
             if(input instanceof Map)
                 data=(Map<String, String>) input;
             else
-                throw new Exception();
+                throw new MyException();
             if(dataIsEmpty) return;
             int categoryNumber= Integer.parseInt(data.get("category"));
             myApp.addProduct(data.get("name"),myApp.getDatabase().getCategoryList().get(categoryNumber-1).getName(),data.get("description"),Double.parseDouble(data.get("price")));

@@ -40,7 +40,7 @@ public class AddAppointmentTest {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         when(myApp.getCli()).thenReturn(cli);
-        when(myApp.getCli().displayAddAppointment(any(), any())).thenReturn(data);
+        when(myApp.getCli().displayAddAppointment(any())).thenReturn(data);
         when(myApp.getError()).thenReturn(error);
         when(myApp.whoLoggedIn()).thenReturn("admin");
         when(error.getLocation()).thenReturn("SomeOtherState");
@@ -52,7 +52,7 @@ public class AddAppointmentTest {
         state.handle();
 
         // Then
-        verify(cli).displayAddAppointment(any(), any());
+        verify(cli).displayAddAppointment(any());
         verify(cli).displayMsg(" Appointment added successfully! ", true);
         verify(myApp).setState(any(ManageInstallationAppointmentState.class));
     }
@@ -64,7 +64,7 @@ public class AddAppointmentTest {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         when(myApp.getCli()).thenReturn(cli);
-        when(myApp.getCli().displayAddAppointmentCustomer(any(), any())).thenReturn(data);
+        when(myApp.getCli().displayAddAppointmentCustomer(any())).thenReturn(data);
         when(myApp.getError()).thenReturn(error);
         when(myApp.whoLoggedIn()).thenReturn("customer");
         when(error.getLocation()).thenReturn("SomeOtherState");
@@ -76,7 +76,7 @@ public class AddAppointmentTest {
         state.handle();
 
         // Then
-        verify(cli).displayAddAppointmentCustomer(any(), any());
+        verify(cli).displayAddAppointmentCustomer(any());
         verify(cli).displayMsg(" Appointment added successfully! ", true);
         verify(myApp).setState(any(CustomerDashboardState.class));
     }

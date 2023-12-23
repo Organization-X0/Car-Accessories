@@ -39,6 +39,6 @@ public class StartSteps {
     }
     @Then("the App should exit")
     public void the_app_should_exit() {
-        assertTrue(myApp.exit);
+        assertTrue(myApp.getExit());
     }
 }

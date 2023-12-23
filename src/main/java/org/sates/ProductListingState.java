@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 import org.data.User;
 
 public class ProductListingState implements State {
@@ -36,7 +35,7 @@ public class ProductListingState implements State {
             myApp.setProductArrayListBetweenState();
         }
         String option = (String) input;
-        if (option.equals("n") && myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();
+        if (option.equals("n") && myApp.getCli().getCurrentPage() != myApp.getCli().getTotalPages()) myApp.getCli().nextPage();
         else if (option.equals("p") && myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();
         else if (option.equals("b")) myApp.setState(new ProductCatalogState(myApp));
         else if (!option.isEmpty() && option.charAt(0) == 'f') {
