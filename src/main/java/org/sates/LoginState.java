@@ -1,7 +1,7 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
+import org.car.MyException;
 
 import java.util.Map;
 
@@ -25,7 +25,7 @@ public class LoginState implements State{
             if (input instanceof Map)
                 loginData = (Map<String, String>) input;
             else
-                throw new Exception();
+                throw new MyException();
 
             myApp.login(loginData.get("email"),loginData.get("password"));
         }catch (Exception e){

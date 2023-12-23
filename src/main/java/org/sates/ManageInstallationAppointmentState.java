@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 import org.data.Appointment;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class ManageInstallationAppointmentState implements State {
         } else if (!option.isEmpty() && option.charAt(0) == 'u') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                myApp.appointmentIdToUpdate = appointmentArrayList.get(num - 1).getId();
+                myApp.setAppointmentIdToUpdate(appointmentArrayList.get(num - 1).getId());
                 myApp.setState(new UpdateAppointmentState(myApp));
             } catch (Exception e) {
                 myApp.getError().setError(getStateString());

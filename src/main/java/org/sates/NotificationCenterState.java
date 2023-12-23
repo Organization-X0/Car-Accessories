@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class NotificationCenterState implements State{
     private final App myApp;
@@ -19,7 +18,7 @@ public class NotificationCenterState implements State{
     public void handleInput(Object input) {
         String option=(String) input;
 
-        if (option.equals("n") && myApp.getCli().getCurrentPage() != myApp.getCli().totalPages) myApp.getCli().nextPage();
+        if (option.equals("n") && myApp.getCli().getCurrentPage() != myApp.getCli().getTotalPages()) myApp.getCli().nextPage();
         else if (option.equals("p") && myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();
         else if (option.equals("b")){
             if(myApp.whoLoggedIn().equals("customer")) myApp.setState(new CustomerDashboardState(myApp));

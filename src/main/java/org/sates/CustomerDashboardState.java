@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 import org.data.User;
 
 public class CustomerDashboardState implements State {

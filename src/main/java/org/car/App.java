@@ -4,34 +4,34 @@ import org.data.*;
 import org.sates.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class App {
-    public boolean availableTimesShown;
     private State state;
 
+    private boolean availableTimesShown;
     public final SignUp mySignUp;
     public final Login myLogin;
-    public int handleManageProductOutput=1;
-    public int productIdToUpdate;
-    public int appointmentIdToUpdate;
-    public boolean exit;
+    private int handleManageProductOutput=1;
+    private int productIdToUpdate;
+    private int appointmentIdToUpdate;
+    private boolean exit;
     public final DataBase myDatabase;
     public final Cli cli;
     public final Error error;
-    public String categoryNameToUpdate;
-    public String userEmailToUpdate;
-    public ArrayList<Product> productArrayListBetweenState;
-    public ArrayList<Time> availableTimes;
+    private String categoryNameToUpdate;
+    private String userEmailToUpdate;
+    private ArrayList<Product> productArrayListBetweenState;
+    private ArrayList<Time> availableTimes;
     private String email;
 
 
     public App(){
 
         exit=false;
-        availableTimesShown=false;
         myDatabase=new DataBase();
         mySignUp=new SignUp(myDatabase);
         myLogin=new Login(myDatabase);
@@ -59,7 +59,7 @@ public class App {
     public DataBase getDatabase() {
         return this.myDatabase;
     }
-    public ArrayList<Product> getProductArrayListBetweenState() {
+    public List<Product> getProductArrayListBetweenState() {
         return productArrayListBetweenState;
     }
     public State getCurrentState(){
@@ -208,13 +208,13 @@ public class App {
         }
     }
     public void nextPrevBackAdd(String option, State backState, State addState) {
-        if (option.equals("n") && cli.getCurrentPage() != cli.totalPages) cli.nextPage();
+        if (option.equals("n") && cli.getCurrentPage() != cli.getTotalPages()) cli.nextPage();
         else if (option.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (option.equals("b")) setState(backState);
         else if (option.equals("a")) setState(addState);
     }
     public void nextPrevBack(String option, State backState) {
-        if (option.equals("n") && cli.getCurrentPage() != cli.totalPages) cli.nextPage();
+        if (option.equals("n") && cli.getCurrentPage() != cli.getTotalPages()) cli.nextPage();
         else if (option.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (option.equals("b")) setState(backState);
     }
@@ -226,7 +226,7 @@ public class App {
         }
     }
     public void handleView(String input) {
-        if (input.equals("n") && cli.getCurrentPage() != cli.totalPages) cli.nextPage();
+        if (input.equals("n") && cli.getCurrentPage() != cli.getTotalPages()) cli.nextPage();
         else if (input.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (input.equals("b")) setState(new ProfileState(this));
         else error.setError(getCurrentState().getStateString());
@@ -241,7 +241,7 @@ public class App {
             } else if (intOption == 3 + myDatabase.getCategoryList().size()) {
                 setState(third);
             } else {
-                throw new Exception("invalid input");
+                throw new MyException();
             }
             handleManageProductOutput = intOption;
         } catch (Exception e) {
@@ -255,7 +255,7 @@ public class App {
             if (input instanceof Map)
                 data = (Map<String, String>) input;
             else
-                throw new Exception();
+                throw new MyException();
             State stateToUpdate;
             if(type.equals("UpdateAppointment")){
                 Appointment appointment= new Appointment();
@@ -269,7 +269,7 @@ public class App {
                     appointment.setCarMake(data.get("carMake"));
                 if (!data.get("date").isEmpty()) {
                     if (!App.isValidDate(data.get("date")))
-                        throw new Exception();
+                        throw new MyException();
                     appointment.setDate(data.get("date"));
                 }
                 updateAppointment(appointmentIdToUpdate,appointment);
@@ -294,7 +294,7 @@ public class App {
                     user.setPhone(data.get("phone"));
                     //check
                     if(data.get("phone").length()!=10)
-                        throw new Exception();
+                        throw new MyException();
                     Integer.parseInt(data.get("phone"));
                 }
                 if (whoLoggedIn().equals("admin")){
@@ -318,4 +318,50 @@ public class App {
         return matcher.matches();
     }
 
+    public void setProductIdToUpdate(int productIdToUpdate) {
+        this.productIdToUpdate = productIdToUpdate;
+    }
+
+    public void setAppointmentIdToUpdate(int appointmentIdToUpdate) {
+        this.appointmentIdToUpdate = appointmentIdToUpdate;
+    }
+    public boolean getExit(){
+        return exit;
+    }
+    public void setExit(boolean value){
+        exit=value;
+    }
+
+    public String getCategoryNameToUpdate() {
+        return categoryNameToUpdate;
+    }
+
+    public void setCategoryNameToUpdate(String categoryNameToUpdate) {
+        this.categoryNameToUpdate = categoryNameToUpdate;
+    }
+
+    public void setUserEmailToUpdate(String userEmailToUpdate) {
+        this.userEmailToUpdate = userEmailToUpdate;
+    }
+    public String getUserEmailToUpdate() {
+        return userEmailToUpdate;
+    }
+    public void setProductArrayListBetweenState(List<Product> arrayListBetweenState){
+        productArrayListBetweenState= (ArrayList<Product>) arrayListBetweenState;
+    }
+
+    public void setAvailableTimes(List<Time> availableTimes) {
+        this.availableTimes = (ArrayList<Time>) availableTimes;
+    }
+    public List<Time> getAvailableTimes() {
+        return availableTimes;
+    }
+
+    public void setAvailableTimesShown(boolean b) {
+        availableTimesShown=b;
+    }
+
+    public boolean isAvailableTimesShown() {
+        return availableTimesShown;
+    }
 }

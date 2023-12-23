@@ -112,7 +112,7 @@ public class CustomerDashboardSteps {
     }
     @Then("the customer should see the available time slots for service")
     public void the_customer_should_see_the_available_time_slots_for_service() {
-        assertTrue(myApp.availableTimesShown);
+        assertTrue(myApp.isAvailableTimesShown());
     }
     @Then("the customer chooses the {string} for the service")
     public void the_customer_chooses_the_for_the_service(String time_slot) {

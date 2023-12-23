@@ -1,7 +1,6 @@
 package org.sates;
 
 import org.car.App;
-import org.car.Error;
 
 public class ManageCategoriesState implements State {
     private final App myApp;
@@ -33,7 +32,7 @@ public class ManageCategoriesState implements State {
         } else if(!option.isEmpty() && option.charAt(0) == 'u') {
             try{
                 int num=Integer.parseInt(option.substring(1));
-                myApp.categoryNameToUpdate=myApp.getDatabase().getCategoryList().get(num-1).getName();
+                myApp.setCategoryNameToUpdate(myApp.getDatabase().getCategoryList().get(num-1).getName());
                 myApp.setState(new UpdateCategoryState(myApp));
             }catch (Exception e){
                 myApp.getError().setError(getStateString());
