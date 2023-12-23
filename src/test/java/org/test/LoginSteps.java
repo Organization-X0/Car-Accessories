@@ -56,4 +56,8 @@ if (myApp.whoLoggedIn().equals("admin")){
         assertEquals(myApp.getError().getLocation(), myApp.getCurrentState().getStateString());
     }
 
+    @When("input of invalid type is entered")
+    public void inputOfInvalidTypeIsEntered() {
+        myApp.getCurrentState().handleInput("test");
+    }
 }

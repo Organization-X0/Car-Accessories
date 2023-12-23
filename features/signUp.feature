@@ -9,3 +9,8 @@ Feature: User Sign Up
     Given on the sign up page
     When invalid details or missing information are entered
     Then Show error message indicates what went wrong
+
+  Scenario: Invalid input type
+    Given on the sign up page
+    When input of invalid type is entered
+    Then an error message should be seen

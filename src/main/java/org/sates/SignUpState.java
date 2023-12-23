@@ -30,7 +30,7 @@ public class SignUpState implements State {
 
             myApp.signUp(signUpData.get("fullName"), signUpData.get("email"), signUpData.get("phone"), signUpData.get("password"));
         }catch (Exception e){
-            //Error
+            myApp.error.setError(getStateString());
         }
     }
     @Override

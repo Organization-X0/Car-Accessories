@@ -29,7 +29,7 @@ public class LoginState implements State{
 
             myApp.login(loginData.get("email"),loginData.get("password"));
         }catch (Exception e){
-            //Error
+            myApp.error.setError(getStateString());
         }
     }
     @Override
