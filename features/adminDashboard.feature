@@ -57,6 +57,12 @@ Feature: Admin Dashboard
       |          |
       | 123456   |
 
+  Scenario: Add a category that already exists
+    Given an admin is logged in
+    And admin enters manage categories page
+    When the admin adds new category "Interior"
+    Then an error should be displayed
+
 
   Scenario Outline: Update an existing category
     Given an admin is logged in
