@@ -199,8 +199,6 @@ m
 =src/test/java/org/test/ManageInstallationAppointmentTest.java,b\f\bf78c07676091d39ea9d6cd260bbfcb31b681eed
 T
 $src/main/java/org/data/Category.java,f\4\f444159cbd7fc4949144388b601841559cf95368
-Q
-!src/main/java/org/car/Logger.java,4\5\459e17f424853b9e094a71dae5f5f1bd9b1f3cb9
 S
 #src/main/java/org/car/MyLogger.java,6\7\6778906e84756d9f9df5f6592a18b1ca483e5d6d
 V
