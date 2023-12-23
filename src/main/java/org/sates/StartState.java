@@ -21,9 +21,6 @@ public class StartState implements State{
             case "1" -> myApp.setState(new LoginState(myApp));
             case "2" -> myApp.setState(new SignUpState(myApp));
             case "3" -> myApp.setExit(true);
-            case "a" -> myApp.login("admin@gmail.com","a123");
-            case "i" -> myApp.login("installer@gmail.com","i123");
-            case "c" -> myApp.login("user1@gmail.com","u123");
             default -> myApp.getError().setError(getStateString());
         }
     }
