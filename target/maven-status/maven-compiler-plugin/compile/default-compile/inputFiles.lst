@@ -10,12 +10,14 @@ C:\Car Accessories\src\main\java\org\sates\InstallerDashboardState.java
 C:\Car Accessories\src\main\java\org\sates\AddProductState.java
 C:\Car Accessories\src\main\java\org\car\Error.java
 C:\Car Accessories\src\main\java\org\sates\ManageCategoriesState.java
+C:\Car Accessories\src\main\java\org\car\MyLogger.java
 C:\Car Accessories\src\main\java\org\sates\UpdateProductState.java
 C:\Car Accessories\src\main\java\org\sates\ManageInstallationAppointmentState.java
 C:\Car Accessories\src\main\java\org\sates\State.java
 C:\Car Accessories\src\main\java\org\sates\SearchProductState.java
 C:\Car Accessories\src\main\java\org\sates\InstallationRequestsState.java
 C:\Car Accessories\src\main\java\org\sates\ProductCrudState.java
+C:\Car Accessories\src\main\java\org\car\MyException.java
 C:\Car Accessories\src\main\java\org\data\Category.java
 C:\Car Accessories\src\main\java\org\sates\ProductListingState.java
 C:\Car Accessories\src\main\java\org\sates\AddCategoryState.java
