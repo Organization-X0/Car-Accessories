@@ -16,7 +16,7 @@ public class SignUp {
     public boolean signUpNow(String fullName,String email,String phone,String password){
 <span class="fc" id="L17">        Pattern pattern = Pattern.compile(regexPattern);</span>
 <span class="fc" id="L18">        Matcher matcher = pattern.matcher(email);</span>
-<span class="pc bpc" id="L19" title="5 of 12 branches missed.">        if(matcher.matches() &amp;&amp; (fullName.length()&gt;=3 &amp;&amp; fullName.length()&lt;=50 &amp;&amp; (password.length()&gt;=3 &amp;&amp; password.length()&lt;=20 &amp;&amp; (phone.length()==10)))){</span>
+<span class="fc bfc" id="L19" title="All 12 branches covered.">        if(matcher.matches() &amp;&amp; (fullName.length()&gt;=3 &amp;&amp; fullName.length()&lt;=50 &amp;&amp; (password.length()&gt;=3 &amp;&amp; password.length()&lt;=20 &amp;&amp; (phone.length()==10)))){</span>
 <span class="fc" id="L20">                        User user =new User(fullName,email,password,phone);</span>
 <span class="fc" id="L21">                        myDataBase.addUser(user);</span>
 <span class="fc" id="L22">                        return true;</span>
