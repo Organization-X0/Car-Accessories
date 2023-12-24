@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class App {
+    public static final String PHONE = "phone";
     private State state;
 
     private boolean availableTimesShown;
@@ -220,7 +221,7 @@ public class App {
     }
     public void setProductArrayListBetweenState() {
         if(handleManageProductOutput==1){
-            productArrayListBetweenState =myDatabase.getAllProducts();
+            productArrayListBetweenState = (ArrayList<Product>) myDatabase.getAllProducts();
         } else if(handleManageProductOutput!=2){
             productArrayListBetweenState = (ArrayList<Product>) myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();
         }
@@ -290,12 +291,12 @@ public class App {
                 if (!data.get("fullName").isEmpty()){
                     user.setFullName(data.get("fullName"));
                 }
-                if (!data.get("phone").isEmpty()){
-                    user.setPhone(data.get("phone"));
+                if (!data.get(PHONE).isEmpty()){
+                    user.setPhone(data.get(PHONE));
                     //check
-                    if(data.get("phone").length()!=10)
+                    if(data.get(PHONE).length()!=10)
                         throw new MyException();
-                    Integer.parseInt(data.get("phone"));
+                    Integer.parseInt(data.get(PHONE));
                 }
                 if (whoLoggedIn().equals("admin")){
                     updateAccount(userEmailToUpdate,user);

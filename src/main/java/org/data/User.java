@@ -1,6 +1,7 @@
 package org.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     private String fullName;
@@ -17,14 +18,14 @@ public class User {
         this.email=email;
         this.password=password;
         this.phone=phone;
-        orders=new ArrayList<Product>();
-        installations=new ArrayList<Appointment>();
-        notifications=new ArrayList<String>();
+        orders=new ArrayList<>();
+        installations=new ArrayList<>();
+        notifications=new ArrayList<>();
         notificationCount=0;
     }
     public User(){
         this.email=null;
-    };
+    }
 
     public void setFullName(String fullName){
         this.fullName=fullName;
@@ -51,17 +52,17 @@ public class User {
     public void addOrder(Product product) {
         orders.add(product);
     }
-    public ArrayList<Product> getOrders() {
+    public List<Product> getOrders() {
         return orders;
     }
     public void addInstallations(Appointment appointment) {
         installations.add(appointment);
     }
-    public ArrayList<Appointment> getInstallations() {
+    public List<Appointment> getInstallations() {
         return installations;
     }
 
-    public ArrayList<String> getNotifications() {
+    public List<String> getNotifications() {
         return notifications;
     }
     public void pushNotification(String notification){
