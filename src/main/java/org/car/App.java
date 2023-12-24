@@ -25,7 +25,7 @@ public class App {
     public final Error error;
     private String categoryNameToUpdate;
     private String userEmailToUpdate;
-    private ArrayList<Product> productArrayListBetweenState;
+    private List<Product> productArrayListBetweenState;
     private ArrayList<Time> availableTimes;
     private String email;
 
@@ -221,9 +221,9 @@ public class App {
     }
     public void setProductArrayListBetweenState() {
         if(handleManageProductOutput==1){
-            productArrayListBetweenState = (ArrayList<Product>) myDatabase.getAllProducts();
+            productArrayListBetweenState =  myDatabase.getAllProducts();
         } else if(handleManageProductOutput!=2){
-            productArrayListBetweenState = (ArrayList<Product>) myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();
+            productArrayListBetweenState = myDatabase.getCategoryList().get(handleManageProductOutput-3).getProductsList();
         }
     }
     public void handleView(String input) {
@@ -348,7 +348,7 @@ public class App {
         return userEmailToUpdate;
     }
     public void setProductArrayListBetweenState(List<Product> arrayListBetweenState){
-        productArrayListBetweenState= (ArrayList<Product>) arrayListBetweenState;
+        productArrayListBetweenState= arrayListBetweenState;
     }
 
     public void setAvailableTimes(List<Time> availableTimes) {

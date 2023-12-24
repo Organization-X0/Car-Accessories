@@ -16,15 +16,12 @@ public class SignUp {
     public boolean signUpNow(String fullName,String email,String phone,String password){
 <span class="fc" id="L17">        Pattern pattern = Pattern.compile(regexPattern);</span>
 <span class="fc" id="L18">        Matcher matcher = pattern.matcher(email);</span>
-<span class="fc bfc" id="L19" title="All 2 branches covered.">        if(matcher.matches())</span>
-<span class="pc bpc" id="L20" title="2 of 4 branches missed.">            if(fullName.length()&gt;=3 &amp;&amp; fullName.length()&lt;=50)</span>
-<span class="pc bpc" id="L21" title="2 of 4 branches missed.">                if(password.length()&gt;=3 &amp;&amp; password.length()&lt;=20)</span>
-<span class="pc bpc" id="L22" title="1 of 2 branches missed.">                    if(phone.length()==10){</span>
-<span class="fc" id="L23">                        User user =new User(fullName,email,password,phone);</span>
-<span class="fc" id="L24">                        myDataBase.addUser(user);</span>
-<span class="fc" id="L25">                        return true;</span>
+<span class="pc bpc" id="L19" title="5 of 12 branches missed.">        if(matcher.matches() &amp;&amp; (fullName.length()&gt;=3 &amp;&amp; fullName.length()&lt;=50 &amp;&amp; (password.length()&gt;=3 &amp;&amp; password.length()&lt;=20 &amp;&amp; (phone.length()==10)))){</span>
+<span class="fc" id="L20">                        User user =new User(fullName,email,password,phone);</span>
+<span class="fc" id="L21">                        myDataBase.addUser(user);</span>
+<span class="fc" id="L22">                        return true;</span>
                     }
-<span class="fc" id="L27">        return false;</span>
+<span class="fc" id="L24">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
