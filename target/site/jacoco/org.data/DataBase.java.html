@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataBase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.data</a> &gt; <span class="el_source">DataBase.java</span></div><h1>DataBase.java</h1><pre class="source lang-java linenums">package org.data;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public class DataBase {
     private final ArrayList&lt;User&gt; usersList;
@@ -11,11 +11,11 @@ public class DataBase {
 <span class="fc" id="L11">    public DataBase(){</span>
 
 <span class="fc" id="L13">        usersList= new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L14">        usersList.add(new User(&quot;user1&quot;,&quot;user1@gmail.com&quot;,&quot;u123&quot;,&quot;0599123456&quot;));</span>
-<span class="fc" id="L15">        usersList.add(new User(&quot;user2&quot;,&quot;user2@gmail.com&quot;,&quot;u123&quot;,&quot;0599123456&quot;));</span>
-<span class="fc" id="L16">        usersList.add(new User(&quot;user3&quot;,&quot;user3@gmail.com&quot;,&quot;u123&quot;,&quot;0599123456&quot;));</span>
-<span class="fc" id="L17">        usersList.add(new User(&quot;admin&quot;,&quot;admin@gmail.com&quot;,&quot;a123&quot;,&quot;0123456789&quot;));</span>
-<span class="fc" id="L18">        usersList.add(new User(&quot;installer&quot;,&quot;installer@gmail.com&quot;,&quot;i123&quot;,&quot;0123456789&quot;));</span>
+<span class="fc" id="L14">        usersList.add(new User(&quot;user1&quot;,&quot;user1@gmail.com&quot;,&quot;u123&quot;,&quot;0599123450&quot;));</span>
+<span class="fc" id="L15">        usersList.add(new User(&quot;user2&quot;,&quot;user2@gmail.com&quot;,&quot;u123&quot;,&quot;0599123451&quot;));</span>
+<span class="fc" id="L16">        usersList.add(new User(&quot;user3&quot;,&quot;user3@gmail.com&quot;,&quot;u123&quot;,&quot;0599123452&quot;));</span>
+<span class="fc" id="L17">        usersList.add(new User(&quot;admin&quot;,&quot;admin@gmail.com&quot;,&quot;a123&quot;,&quot;0123456783&quot;));</span>
+<span class="fc" id="L18">        usersList.add(new User(&quot;installer&quot;,&quot;installer@gmail.com&quot;,&quot;i123&quot;,&quot;0123456784&quot;));</span>
 
 
 <span class="fc" id="L21">        Product.resetLastId();</span>
@@ -24,20 +24,20 @@ public class DataBase {
 <span class="fc" id="L24">        categoryList.add(new Category(&quot;Interior&quot;));</span>
 <span class="fc" id="L25">        categoryList.add(new Category(&quot;Exterior&quot;));</span>
 <span class="fc" id="L26">        categoryList.add(new Category(&quot;Electronics&quot;));</span>
-<span class="fc" id="L27">        categoryList.get(0).addProduct(new Product(&quot;item1&quot;,categoryList.get(0).getName(),&quot;Don't buy please.&quot;,1.3,true));</span>
-<span class="fc" id="L28">        categoryList.get(0).addProduct(new Product(&quot;item2&quot;,categoryList.get(0).getName(),&quot;Don't buy please.&quot;,5.3,true));</span>
-<span class="fc" id="L29">        categoryList.get(0).addProduct(new Product(&quot;item3&quot;,categoryList.get(0).getName(),&quot;Don't buy please.&quot;,2.3,true));</span>
-<span class="fc" id="L30">        categoryList.get(0).addProduct(new Product(&quot;item4&quot;,categoryList.get(0).getName(),&quot;Don't buy please.&quot;,1.3,true));</span>
+<span class="fc" id="L27">        categoryList.get(0).addProduct(new Product(&quot;item1&quot;,categoryList.get(0).getName(),&quot;item1 is good.&quot;,1.3,true));</span>
+<span class="fc" id="L28">        categoryList.get(0).addProduct(new Product(&quot;item2&quot;,categoryList.get(0).getName(),&quot;item2 is good.&quot;,5.3,true));</span>
+<span class="fc" id="L29">        categoryList.get(0).addProduct(new Product(&quot;item3&quot;,categoryList.get(0).getName(),&quot;item3 is good.&quot;,2.3,true));</span>
+<span class="fc" id="L30">        categoryList.get(0).addProduct(new Product(&quot;item4&quot;,categoryList.get(0).getName(),&quot;item4 is good.&quot;,1.3,true));</span>
 
-<span class="fc" id="L32">        categoryList.get(1).addProduct(new Product(&quot;item1&quot;,categoryList.get(1).getName(),&quot;Don't buy please.&quot;,1.3,true));</span>
-<span class="fc" id="L33">        categoryList.get(1).addProduct(new Product(&quot;item2&quot;,categoryList.get(1).getName(),&quot;Don't buy please.&quot;,1.3,true));</span>
-<span class="fc" id="L34">        categoryList.get(1).addProduct(new Product(&quot;item3&quot;,categoryList.get(1).getName(),&quot;Don't buy please.&quot;,2.4,true));</span>
-<span class="fc" id="L35">        categoryList.get(1).addProduct(new Product(&quot;item4&quot;,categoryList.get(1).getName(),&quot;Don't buy please.&quot;,6.6,true));</span>
+<span class="fc" id="L32">        categoryList.get(1).addProduct(new Product(&quot;item5&quot;,categoryList.get(1).getName(),&quot;item5 is good.&quot;,1.3,true));</span>
+<span class="fc" id="L33">        categoryList.get(1).addProduct(new Product(&quot;item6&quot;,categoryList.get(1).getName(),&quot;item6 is good.&quot;,1.3,true));</span>
+<span class="fc" id="L34">        categoryList.get(1).addProduct(new Product(&quot;item7&quot;,categoryList.get(1).getName(),&quot;item7 is good.&quot;,2.4,true));</span>
+<span class="fc" id="L35">        categoryList.get(1).addProduct(new Product(&quot;item8&quot;,categoryList.get(1).getName(),&quot;item8 is good.&quot;,6.6,true));</span>
 
-<span class="fc" id="L37">        categoryList.get(2).addProduct(new Product(&quot;item1&quot;,categoryList.get(2).getName(),&quot;Don't buy please.&quot;,7.3,true));</span>
-<span class="fc" id="L38">        categoryList.get(2).addProduct(new Product(&quot;item2&quot;,categoryList.get(2).getName(),&quot;Don't buy please.&quot;,0.3,true));</span>
-<span class="fc" id="L39">        categoryList.get(2).addProduct(new Product(&quot;item3&quot;,categoryList.get(2).getName(),&quot;Don't buy please.&quot;,2.4,true));</span>
-<span class="fc" id="L40">        categoryList.get(2).addProduct(new Product(&quot;item4&quot;,categoryList.get(2).getName(),&quot;Don't buy please.&quot;,6.6,true));</span>
+<span class="fc" id="L37">        categoryList.get(2).addProduct(new Product(&quot;item9&quot;,categoryList.get(2).getName(),&quot;item9 is good.&quot;,7.3,true));</span>
+<span class="fc" id="L38">        categoryList.get(2).addProduct(new Product(&quot;item10&quot;,categoryList.get(2).getName(),&quot;item10 is good.&quot;,0.3,true));</span>
+<span class="fc" id="L39">        categoryList.get(2).addProduct(new Product(&quot;item11&quot;,categoryList.get(2).getName(),&quot;item11 is good.&quot;,2.4,true));</span>
+<span class="fc" id="L40">        categoryList.get(2).addProduct(new Product(&quot;item12&quot;,categoryList.get(2).getName(),&quot;item12 is good.&quot;,6.6,true));</span>
 
 <span class="fc" id="L42">        Appointment.resetLastId();</span>
 <span class="fc" id="L43">        requestedAppointmentsList = new ArrayList&lt;&gt;();</span>
@@ -62,7 +62,7 @@ public class DataBase {
 <span class="fc" id="L62">                .findFirst()</span>
 <span class="fc" id="L63">                .orElse(null);</span>
     }
-    public ArrayList&lt;User&gt; getCustomerList(){
+    public List&lt;User&gt; getCustomerList(){
 <span class="fc" id="L66">        ArrayList&lt;User&gt; customers=new ArrayList&lt;&gt;();</span>
 <span class="fc" id="L67">        usersList.forEach(user-&gt;{</span>
 <span class="fc bfc" id="L68" title="All 4 branches covered.">           if(!user.getEmail().equals(&quot;admin@gmail.com&quot;) &amp;&amp; !user.getEmail().equals(&quot;installer@gmail.com&quot;)){</span>
@@ -83,7 +83,7 @@ public class DataBase {
 <span class="fc" id="L83">                .findFirst()</span>
 <span class="fc" id="L84">                .orElse(null);</span>
     }
-    public ArrayList&lt;Category&gt; getCategoryList(){
+    public List&lt;Category&gt; getCategoryList(){
 <span class="fc" id="L87">        return categoryList;</span>
     }
     public Product searchOneProduct(int id){
@@ -93,27 +93,27 @@ public class DataBase {
 <span class="fc" id="L93">                .findFirst()</span>
 <span class="fc" id="L94">                .orElse(null);</span>
     }
-    public ArrayList&lt;Product&gt; searchProducts(String name){
-<span class="fc" id="L97">        return (ArrayList&lt;Product&gt;) categoryList.stream()</span>
+    public List&lt;Product&gt; searchProducts(String name){
+<span class="fc" id="L97">        return categoryList.stream()</span>
 <span class="fc" id="L98">            .flatMap(category -&gt; category.getProductsList().stream())</span>
 <span class="fc" id="L99">            .filter(product -&gt; product.getName().equals(name))</span>
-<span class="fc" id="L100">            .collect(Collectors.toList());</span>
+<span class="fc" id="L100">            .toList();</span>
     }
     public void deleteProduct(Product productDelete){
 <span class="fc" id="L103">        categoryList.stream()</span>
 <span class="fc" id="L104">                .filter(category -&gt; category.getName().equals(productDelete.getCategory()))</span>
 <span class="fc" id="L105">                .findFirst().ifPresent(categoryObj -&gt; categoryObj.deleteProduct(productDelete));</span>
 <span class="fc" id="L106">    }</span>
-    public ArrayList&lt;Product&gt; getAllProducts(){
-<span class="fc" id="L108">        ArrayList&lt;Product&gt; allProducts=new ArrayList&lt;Product&gt;();</span>
+    public List&lt;Product&gt; getAllProducts(){
+<span class="fc" id="L108">        ArrayList&lt;Product&gt; allProducts=new ArrayList&lt;&gt;();</span>
 <span class="fc" id="L109">        categoryList.forEach(category -&gt; allProducts.addAll(category.getProductsList()));</span>
 <span class="fc" id="L110">        return allProducts;</span>
     }
-    public ArrayList&lt;Appointment&gt; searchAppointmentsByDate(String date){
-<span class="nc" id="L113">        return (ArrayList&lt;Appointment&gt;) requestedAppointmentsList.stream().filter(appointment -&gt; appointment.getDate().equals(date))</span>
-<span class="nc" id="L114">                .collect(Collectors.toList());</span>
+    public List&lt;Appointment&gt; searchAppointmentsByDate(String date){
+<span class="nc" id="L113">        return requestedAppointmentsList.stream().filter(appointment -&gt; appointment.getDate().equals(date))</span>
+<span class="nc" id="L114">                .toList();</span>
     }
-    public ArrayList&lt;Appointment&gt; getRequestedAppointmentsList(){
+    public List&lt;Appointment&gt; getRequestedAppointmentsList(){
 <span class="fc" id="L117">        return requestedAppointmentsList;</span>
     }
     public void addAppointment(Appointment appointment){
@@ -123,7 +123,7 @@ public class DataBase {
     public void addApprovedAppointment(Appointment appointment) {
 <span class="fc" id="L124">        approvedAppointmentArrayList.add(appointment);</span>
 <span class="fc" id="L125">    }</span>
-    public ArrayList&lt;Appointment&gt; getApprovedAppointmentArrayList(){
+    public List&lt;Appointment&gt; getApprovedAppointmentArrayList(){
 <span class="fc" id="L127">        return approvedAppointmentArrayList;</span>
     }
     public Appointment searchAppointment(int id){

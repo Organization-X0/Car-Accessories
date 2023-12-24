@@ -1,6 +1,7 @@
 package org.sates;
 
 import org.car.App;
+import org.car.Cli;
 import org.data.User;
 
 public class ProductListingState implements State {
@@ -44,7 +45,7 @@ public class ProductListingState implements State {
                 productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();
                 User account=myApp.searchAccount(myApp.getEmail());
                 account.addOrder(myApp.searchProduct(num));
-                account.pushNotification("You bought this product \""+ myApp.getCli().blueText(productName)+"\" successfully.");
+                account.pushNotification("You bought this product \""+ Cli.blueText(productName)+"\" successfully.");
                 account.increaseNotificationCount();
             } catch (Exception e) {
                 myApp.getError().setError(myApp.getCurrentState().getStateString());

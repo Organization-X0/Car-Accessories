@@ -21,6 +21,7 @@ public class Cli {
     public static final String YYYY_MM_DD_D = "YYYY-MM-DD/D: ";
     public static final String PRODUCT_NAME_DATA = "productName";
     public static final String CAR_MAKE_DATA = "carMake";
+    public static final String ESCAPE_ANSI = "\033[0m";
     private int page=1;
     private int totalPages=1;
     private final MyLogger myLogger;
@@ -28,16 +29,16 @@ public class Cli {
         myLogger=new MyLogger();
     }
     public static String errorText(String text){
-        return "\033[41m\033[97m" + text + "\033[0m";
+        return "\033[41m\033[97m" + text + ESCAPE_ANSI;
     }
     public static String blueBgText(String text){
-        return "\033[44m\033[97m"+text+"\033[0m";
+        return "\033[44m\033[97m"+text+ ESCAPE_ANSI;
     }
     public static String blueText(String text){
-        return "\033[34m" + text + "\033[0m";
+        return "\033[34m" + text + ESCAPE_ANSI;
     }
     public static String greenBgText(String text){
-        return "\033[42m\033[97m" + text + "\033[0m";
+        return "\033[42m\033[97m" + text + ESCAPE_ANSI;
     }
 
     public void nextPage(){
@@ -307,7 +308,7 @@ public class Cli {
     private ArrayList<Time> getAvailableTimes(App myApp,String date){
 
         ArrayList<Time> availableTimes=new ArrayList<>();
-        ArrayList<Appointment> appointmentsWithThisDate = myApp.myDatabase.searchAppointmentsByDate(date);
+        ArrayList<Appointment> appointmentsWithThisDate = (ArrayList<Appointment>) myApp.myDatabase.searchAppointmentsByDate(date);
         boolean flag=false;
         for (Time time : Time.values()){
             flag=false;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddAppointmentState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Car-Accessories</a> &gt; <a href="index.source.html" class="el_package">org.sates</a> &gt; <span class="el_source">AddAppointmentState.java</span></div><h1>AddAppointmentState.java</h1><pre class="source lang-java linenums">package org.sates;
 
 import org.car.App;
-import org.car.Error;
 import org.car.MyException;
 import org.data.User;
 
@@ -11,70 +10,70 @@ public class AddAppointmentState implements State {
     public static final String EMAIL = &quot;email&quot;;
     private final App myApp;
     private boolean dataIsEmpty;
-<span class="fc" id="L14">    public AddAppointmentState(App myApp) {</span>
-<span class="fc" id="L15">        this.myApp=myApp;</span>
-<span class="fc" id="L16">    }</span>
+<span class="fc" id="L13">    public AddAppointmentState(App myApp) {</span>
+<span class="fc" id="L14">        this.myApp=myApp;</span>
+<span class="fc" id="L15">    }</span>
 
     @Override
     public void handle() {
         Map&lt;String,String&gt; data;
-<span class="fc" id="L21">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) data = myApp.getCli().displayAddAppointment(myApp);</span>
-<span class="fc" id="L23">        else data = myApp.getCli().displayAddAppointmentCustomer(myApp);</span>
-<span class="fc" id="L24">        dataIsEmpty=setDataIsEmpty(data);</span>
-<span class="fc" id="L25">        handleInput(data);</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Appointment added successfully! &quot;,true);</span>
-<span class="fc" id="L28">            myApp.setAvailableTimesShown(false);</span>
-<span class="fc bfc" id="L29" title="All 2 branches covered.">            if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) myApp.setState(new ManageInstallationAppointmentState(myApp));</span>
-<span class="fc" id="L30">            else myApp.setState(new CustomerDashboardState(myApp));</span>
+<span class="fc" id="L20">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) data = myApp.getCli().displayAddAppointment(myApp);</span>
+<span class="fc" id="L22">        else data = myApp.getCli().displayAddAppointmentCustomer(myApp);</span>
+<span class="fc" id="L23">        dataIsEmpty=setDataIsEmpty(data);</span>
+<span class="fc" id="L24">        handleInput(data);</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(!myApp.getError().getLocation().equals(getStateString())){</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            if(!dataIsEmpty) myApp.getCli().displayMsg(&quot; Appointment added successfully! &quot;,true);</span>
+<span class="fc" id="L27">            myApp.setAvailableTimesShown(false);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            if(myApp.whoLoggedIn().equals(&quot;admin&quot;)) myApp.setState(new ManageInstallationAppointmentState(myApp));</span>
+<span class="fc" id="L29">            else myApp.setState(new CustomerDashboardState(myApp));</span>
         }
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L31">    }</span>
 
     private boolean setDataIsEmpty(Map&lt;String, String&gt; data) {
-<span class="fc" id="L35">        boolean dataIsEmptyL=true;</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (var entry : data.entrySet()) {</span>
-<span class="fc bfc" id="L37" title="All 4 branches covered.">            if (!entry.getKey().equals(EMAIL) &amp;&amp; !entry.getValue().isEmpty()) {</span>
-<span class="fc" id="L38">               dataIsEmptyL=false;</span>
+<span class="fc" id="L34">        boolean dataIsEmptyL=true;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (var entry : data.entrySet()) {</span>
+<span class="fc bfc" id="L36" title="All 4 branches covered.">            if (!entry.getKey().equals(EMAIL) &amp;&amp; !entry.getValue().isEmpty()) {</span>
+<span class="fc" id="L37">               dataIsEmptyL=false;</span>
             }
-<span class="fc" id="L40">        }</span>
-<span class="fc" id="L41">        return dataIsEmptyL;</span>
+<span class="fc" id="L39">        }</span>
+<span class="fc" id="L40">        return dataIsEmptyL;</span>
     }
 
     @Override
     @SuppressWarnings(&quot;unchecked&quot;)
     public void handleInput(Object input) {
         try{
-<span class="fc" id="L48">            myApp.setAvailableTimesShown(true);</span>
+<span class="fc" id="L47">            myApp.setAvailableTimesShown(true);</span>
             Map&lt;String,String&gt; data;
-<span class="fc bfc" id="L50" title="All 2 branches covered.">            if(input instanceof Map)</span>
-<span class="fc" id="L51">                data=(Map&lt;String, String&gt;) input;</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            if(input instanceof Map)</span>
+<span class="fc" id="L50">                data=(Map&lt;String, String&gt;) input;</span>
             else
-<span class="fc" id="L53">                throw new MyException();</span>
+<span class="fc" id="L52">                throw new MyException();</span>
 
-<span class="fc" id="L55">            dataIsEmpty=setDataIsEmpty(data);</span>
+<span class="fc" id="L54">            dataIsEmpty=setDataIsEmpty(data);</span>
             //check data
-<span class="fc bfc" id="L57" title="All 2 branches covered.">            if(dataIsEmpty) return;</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">            if(!App.isValidDate(data.get(&quot;date&quot;)))</span>
-<span class="fc" id="L59">                throw new MyException();</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">            if(myApp.getDatabase().searchAccount(data.get(EMAIL))==null)</span>
-<span class="fc" id="L61">                throw new MyException();</span>
-<span class="fc" id="L62">            int timeSlot= Integer.parseInt(data.get(&quot;time&quot;));</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">            if(timeSlot&lt;=0) throw new MyException();</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if(dataIsEmpty) return;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if(!App.isValidDate(data.get(&quot;date&quot;)))</span>
+<span class="fc" id="L58">                throw new MyException();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if(myApp.getDatabase().searchAccount(data.get(EMAIL))==null)</span>
+<span class="fc" id="L60">                throw new MyException();</span>
+<span class="fc" id="L61">            int timeSlot= Integer.parseInt(data.get(&quot;time&quot;));</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if(timeSlot&lt;=0) throw new MyException();</span>
 
-<span class="nc" id="L65">            myApp.addAppointment(data.get(EMAIL),data.get(&quot;productName&quot;),data.get(&quot;carMake&quot;),data.get(&quot;date&quot;),timeSlot);</span>
-<span class="nc" id="L66">            User installer=myApp.searchAccount(&quot;installer@gmail.com&quot;);</span>
-<span class="nc" id="L67">            installer.pushNotification(&quot;New installation request added.&quot;);</span>
-<span class="nc" id="L68">            installer.increaseNotificationCount();</span>
+<span class="nc" id="L64">            myApp.addAppointment(data.get(EMAIL),data.get(&quot;productName&quot;),data.get(&quot;carMake&quot;),data.get(&quot;date&quot;),timeSlot);</span>
+<span class="nc" id="L65">            User installer=myApp.searchAccount(&quot;installer@gmail.com&quot;);</span>
+<span class="nc" id="L66">            installer.pushNotification(&quot;New installation request added.&quot;);</span>
+<span class="nc" id="L67">            installer.increaseNotificationCount();</span>
 
-<span class="fc" id="L70">        }catch (Exception e){</span>
-<span class="fc" id="L71">            myApp.getError().setError(getStateString());</span>
-<span class="nc" id="L72">        }</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L69">        }catch (Exception e){</span>
+<span class="fc" id="L70">            myApp.getError().setError(getStateString());</span>
+<span class="nc" id="L71">        }</span>
+<span class="fc" id="L72">    }</span>
 
     @Override
     public String getStateString() {
-<span class="fc" id="L77">        return &quot;AddAppointment&quot;;</span>
+<span class="fc" id="L76">        return &quot;AddAppointment&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -20,7 +20,7 @@ public class InstallationRequestsState implements State {
 
     @Override
     public void handleInput(Object input) {
-<span class="fc" id="L23">        ArrayList&lt;Appointment&gt; appointmentArrayList = myApp.getDatabase().getRequestedAppointmentsList();</span>
+<span class="fc" id="L23">        ArrayList&lt;Appointment&gt; appointmentArrayList = (ArrayList&lt;Appointment&gt;) myApp.getDatabase().getRequestedAppointmentsList();</span>
 <span class="fc" id="L24">        String option=(String) input;</span>
 <span class="fc" id="L25">        myApp.nextPrevBack(option,new InstallerDashboardState(myApp));</span>
 <span class="pc bpc" id="L26" title="2 of 4 branches missed.">        if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'c') {</span>

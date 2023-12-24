@@ -21,7 +21,7 @@ public class ManageInstallationAppointmentState implements State {
 
     @Override
     public void handleInput(Object input) {
-        ArrayList<Appointment> appointmentArrayList = myApp.getDatabase().getRequestedAppointmentsList();
+        ArrayList<Appointment> appointmentArrayList = (ArrayList<Appointment>) myApp.getDatabase().getRequestedAppointmentsList();
         String option=(String) input;
 
         myApp.nextPrevBackAdd(option,new AdminDashboardState(myApp),new AddAppointmentState(myApp));
