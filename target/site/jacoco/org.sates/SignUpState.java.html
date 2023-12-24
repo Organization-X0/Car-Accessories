@@ -23,14 +23,14 @@ public class SignUpState implements State {
     public void handleInput(Object input) {
         try {
             Map&lt;String, String&gt; signUpData;
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            if (input instanceof Map)</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (input instanceof Map)</span>
 <span class="fc" id="L27">                signUpData = (Map&lt;String, String&gt;) input;</span>
             else
-<span class="nc" id="L29">                throw new MyException();</span>
+<span class="fc" id="L29">                throw new MyException();</span>
 
 <span class="fc" id="L31">            myApp.signUp(signUpData.get(&quot;fullName&quot;), signUpData.get(&quot;email&quot;), signUpData.get(&quot;phone&quot;), signUpData.get(&quot;password&quot;));</span>
-<span class="nc" id="L32">        }catch (Exception e){</span>
-            //Error
+<span class="fc" id="L32">        }catch (Exception e){</span>
+<span class="fc" id="L33">            myApp.error.setError(getStateString());</span>
 <span class="fc" id="L34">        }</span>
 <span class="fc" id="L35">    }</span>
     @Override

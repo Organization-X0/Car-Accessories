@@ -2,13 +2,12 @@
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-<span class="nc" id="L5">public class MyLogger {</span>
-<span class="nc" id="L6">    private static final Logger LOGGER = LoggerFactory.getLogger(MyLogger.class);</span>
+<span class="fc" id="L5">public class MyLogger {</span>
+<span class="fc" id="L6">    private static final Logger LOGGER = LoggerFactory.getLogger(MyLogger.class);</span>
 
-    public void logInfo(String logging) {
-<span class="nc" id="L9">        LOGGER.info(&quot;\033[44m\033[97mThis text is very white on a blue background!\033[0m&quot;);</span>
-<span class="nc" id="L10">        LOGGER.info(&quot;\033[32m{}\033[0m&quot;,logging);</span>
-<span class="nc" id="L11">    }</span>
+    public void log(String logging) {
+<span class="nc" id="L9">        LOGGER.info(logging);</span>
+<span class="nc" id="L10">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
