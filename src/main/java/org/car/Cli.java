@@ -1,13 +1,9 @@
 package org.car;
 
 import org.data.*;
-import org.fusesource.jansi.Ansi;
 
 import java.util.*;
 import java.util.stream.IntStream;
-
-import static org.fusesource.jansi.Ansi.*;
-import static org.fusesource.jansi.Ansi.Color.*;
 
 public class Cli {
 
@@ -27,20 +23,21 @@ public class Cli {
     public static final String CAR_MAKE_DATA = "carMake";
     private int page=1;
     private int totalPages=1;
-    public static Ansi errorText(String text){
-        return ansi().eraseScreen().fgBright(WHITE).bgBright(RED).a(text).reset();
+    private final MyLogger myLogger;
+    public Cli(){
+        myLogger=new MyLogger();
     }
-    public static Ansi blueBgText(String text){
-        return ansi().eraseScreen().bg(BLUE).fgBright(WHITE).a(text).reset();
+    public static String errorText(String text){
+        return "\033[41m\033[97m" + text + "\033[0m";
     }
-    public Ansi blueBoldText(String text){
-        return ansi().eraseScreen().fgBright(BLUE).a(text).reset();
+    public static String blueBgText(String text){
+        return "\033[44m\033[97m"+text+"\033[0m";
     }
-    public static Ansi blueText(String text){
-        return ansi().eraseScreen().fg(BLUE).a(text).reset();
+    public static String blueText(String text){
+        return "\033[34m" + text + "\033[0m";
     }
-    public static Ansi greenBgText(String text){
-        return ansi().eraseScreen().bg(GREEN).fgBright(WHITE).a(text).reset();
+    public static String greenBgText(String text){
+        return "\033[42m\033[97m" + text + "\033[0m";
     }
 
     public void nextPage(){
@@ -67,10 +64,10 @@ public class Cli {
     public Map<String,String> displayLogin(){
         Scanner scanner=new Scanner(System.in);
         Map<String,String>data=new HashMap<>();
-        System.out.println(blueBgText(" Login "));
-        System.out.print(blueText("Email:"));
+        myLogger.log(blueBgText(" Login "));
+        myLogger.log(blueText("Email:"));
         String email=scanner.nextLine();
-        System.out.print(blueText("Password:"));
+        myLogger.log(blueText("Password:"));
         String pass=scanner.nextLine();
         data.put(EMAIL,email);
         data.put("password",pass);
@@ -80,48 +77,48 @@ public class Cli {
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data = new HashMap<>();
 
-        System.out.print(blueBgText(" Sing Up ")+"\n"+ blueText("Full Name: "));
+        myLogger.log(blueBgText(" Sing Up ")+"\n"+ blueText("Full Name: "));
         scanner.nextLine();
         data.put("fullName",scanner.nextLine());
-        System.out.print(blueText("Email: "));
+        myLogger.log(blueText("Email: "));
         data.put(EMAIL,scanner.nextLine());
-        System.out.print(blueText("Phone: "));
+        myLogger.log(blueText("Phone: "));
         data.put("phone",scanner.nextLine());
-        System.out.print(blueText("Password: "));
+        myLogger.log(blueText("Password: "));
         data.put("password",scanner.nextLine());
         return data;
     }
     public String displayAdminDashboard(){
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Admin Dashboard:"));
-        System.out.println("1. "+ blueText("Manage Products"));
-        System.out.println("2. "+ blueText("Manage Categories"));
-        System.out.println("3. "+ blueText("Manage User Accounts"));
-        System.out.println("4. "+ blueText("Manage Installation Appointments."));
-        System.out.println("5. "+ blueText(LOG_OUT));
+        myLogger.log(blueBgText("Admin Dashboard:"));
+        myLogger.log("1. "+ blueText("Manage Products"));
+        myLogger.log("2. "+ blueText("Manage Categories"));
+        myLogger.log("3. "+ blueText("Manage User Accounts"));
+        myLogger.log("4. "+ blueText("Manage Installation Appointments."));
+        myLogger.log("5. "+ blueText(LOG_OUT));
         return scanner.nextLine();
     }
     public String displayManageProducts(List<Category> categoryArrayList){
         int manageProductsOptions=1;
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" Product Menu "));
-        System.out.println((manageProductsOptions++)+". "+ blueText("All Products"));
-        System.out.println((manageProductsOptions++)+". "+ blueText("Search for a Product"));
+        myLogger.log(blueBgText(" Product Menu "));
+        myLogger.log((manageProductsOptions++)+". "+ blueText("All Products"));
+        myLogger.log((manageProductsOptions++)+". "+ blueText("Search for a Product"));
         for(Category category : categoryArrayList){
-            System.out.println((manageProductsOptions++)+". "+ blueText(category.getName()+ " " + CATEGORY));
+            myLogger.log((manageProductsOptions++)+". "+ blueText(category.getName()+ " " + CATEGORY));
         }
-        System.out.println(manageProductsOptions+". "+ blueText("Back to Dashboard"));
+        myLogger.log(manageProductsOptions+". "+ blueText("Back to Dashboard"));
         return scanner.nextLine();
     }
 
     public String displayCustomerProducts(List<Product> productArrayList){
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("All Products:"));
+        myLogger.log(blueBgText("All Products:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, productArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(
                 productArrayList.get(i).getName() +
                         CATEGORY_TO_PRINT +
                         productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
@@ -130,28 +127,28 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         } else if(totalPages==1){
-            System.out.println("[ f<int>:buy product |b:back ]");
+            myLogger.log("[ f<int>:buy product |b:back ]");
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | f<int>:buy product | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | f<int>:buy product | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | f<int>:buy product | b:back ]");
+            myLogger.log("[ n:next page | f<int>:buy product | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | f<int>:buy product | b:back ]");
+            myLogger.log("[ p:prev page | f<int>:buy product | b:back ]");
 
         return scanner.nextLine();
     }
     public String displayProducts(List<Product> productArrayList){
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("All Products:"));
+        myLogger.log(blueBgText("All Products:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, productArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(
                 productArrayList.get(i).getName() +
                         CATEGORY_TO_PRINT +
                         productArrayList.get(i).getCategory() + PRICE_TO_PRINT +
@@ -160,17 +157,17 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(productArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println("[ a:add | b:back ]");
+            myLogger.log("[ a:add | b:back ]");
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | a:add | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ n:next page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if(totalPages==1)
-            System.out.println(FULL_CRUD);
+            myLogger.log(FULL_CRUD);
         else if(page==totalPages)
-            System.out.println("[ p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
 
         return scanner.nextLine();
     }
@@ -178,113 +175,113 @@ public class Cli {
     public Map<String,String> displayAddProduct(List<Category> categoryArrayList){
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
-        System.out.println(blueBgText(" ADD PRODUCT "));
+        myLogger.log(blueBgText(" ADD PRODUCT "));
 
-        System.out.println(blueText("Choose " + CATEGORY + ": "));
+        myLogger.log(blueText("Choose " + CATEGORY + ": "));
         int i=1;
         for(Category category : categoryArrayList){
-            System.out.println((i++)+". "+ blueText(category.getName()+ " " + CATEGORY));
+            myLogger.log((i++)+". "+ blueText(category.getName()+ " " + CATEGORY));
         }
 
         String categoryOption = scanner.nextLine();
 
         data.put(CATEGORY,categoryOption);
-        System.out.println(blueText(PRODUCT_NAME));
+        myLogger.log(blueText(PRODUCT_NAME));
         data.put("name",scanner.nextLine());
-        System.out.println(blueText("Description: "));
+        myLogger.log(blueText("Description: "));
         data.put("description",scanner.nextLine());
-        System.out.println(blueText("Price : "));
+        myLogger.log(blueText("Price : "));
         data.put("price",scanner.nextLine());
         return data;
     }
     public String displaySearchProduct(){
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("SEARCH"));
-        System.out.print(blueText("Product name:"));
+        myLogger.log(blueBgText("SEARCH"));
+        myLogger.log(blueText("Product name:"));
         return scanner.nextLine();
     }
     public Map<String,String> displayUpdateProduct(){
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
-        System.out.println(blueBgText(" UPDATE PRODUCT "));
-        System.out.println(IF_U_WANT_UPDATE);
+        myLogger.log(blueBgText(" UPDATE PRODUCT "));
+        myLogger.log(IF_U_WANT_UPDATE);
 
-        System.out.println(blueText(PRODUCT_NAME));
+        myLogger.log(blueText(PRODUCT_NAME));
         data.put("name",scanner.nextLine());
-        System.out.println(blueText("Description: "));
+        myLogger.log(blueText("Description: "));
         data.put("description",scanner.nextLine());
-        System.out.println(blueText("Price : "));
+        myLogger.log(blueText("Price : "));
         data.put("price",scanner.nextLine());
         return data;
     }
     public String displayManageCategories(List<Category> categoryArrayList){
         Scanner scanner=new Scanner(System.in);
         int i=1;
-        System.out.println(blueBgText("CATEGORIES"));
+        myLogger.log(blueBgText("CATEGORIES"));
         for(Category category : categoryArrayList){
-            System.out.println((i++)+". "+ blueText(category.getName()+ " " + CATEGORY));
+            myLogger.log((i++)+". "+ blueText(category.getName()+ " " + CATEGORY));
         }
-        System.out.println(FULL_CRUD);
+        myLogger.log(FULL_CRUD);
         return scanner.nextLine();
     }
     public String displayAddCategory() {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" ADD CATEGORY "));
+        myLogger.log(blueBgText(" ADD CATEGORY "));
 
-        System.out.println(blueText("Category name: "));
+        myLogger.log(blueText("Category name: "));
         return scanner.nextLine();
     }
     public String displayManageAccounts(List<User> userArrayList) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" MANAGE ACCOUNTS "));
+        myLogger.log(blueBgText(" MANAGE ACCOUNTS "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, userArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i+1)+". "+ blueText(userArrayList.get(i).getFullName()+", "+userArrayList.get(i).getEmail()+", "+userArrayList.get(i).getPhone())));
+        IntStream.range(start, end).forEach(i -> myLogger.log((i+1)+". "+ blueText(userArrayList.get(i).getFullName()+", "+userArrayList.get(i).getEmail()+", "+userArrayList.get(i).getPhone())));
 
         totalPages=(int)Math.ceil(userArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | d<int>:delete | u<int>:update | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ n:next page | d<int>:delete | u<int>:update | b:back ]");
         else if(totalPages==1)
-            System.out.println("[ d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ d<int>:delete | u<int>:update | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ p:prev page | d<int>:delete | u<int>:update | b:back ]");
 
         return scanner.nextLine();
     }
     public Map<String, String> displayUpdateAccount() {
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
-        System.out.println(blueBgText(" UPDATE ACCOUNT "));
-        System.out.println(IF_U_WANT_UPDATE);
-        System.out.println(blueText("Full Name: "));
+        myLogger.log(blueBgText(" UPDATE ACCOUNT "));
+        myLogger.log(IF_U_WANT_UPDATE);
+        myLogger.log(blueText("Full Name: "));
         data.put("fullName", scanner.nextLine());
-        System.out.println(blueText("Phone: "));
+        myLogger.log(blueText("Phone: "));
         data.put("phone", scanner.nextLine());
         return data;
     }
     public String displayUpdateCategory() {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" UPDATE CATEGORY "));
-        System.out.println("If you don't want to update name just press enter.");
+        myLogger.log(blueBgText(" UPDATE CATEGORY "));
+        myLogger.log("If you don't want to update name just press enter.");
 
-        System.out.println(blueText("Category name: "));
+        myLogger.log(blueText("Category name: "));
         return scanner.nextLine();
     }
     public String  displayInstallationAppointments(List<Appointment> appointmentArrayList){
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Manage Installation Appointments:"));
+        myLogger.log(blueBgText("Manage Installation Appointments:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, appointmentArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
                 appointmentArrayList.get(i).getDate()+" | "+
                 appointmentArrayList.get(i).getProductName()+" | "+
                 appointmentArrayList.get(i).getCarMake()+" | "+
@@ -292,17 +289,17 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println("[ a:add | b:back ]");
+            myLogger.log("[ a:add | b:back ]");
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | a:add | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ n:next page | a:add | d<int>:delete | u<int>:update | b:back ]");
         else if(totalPages==1)
-            System.out.println(FULL_CRUD);
+            myLogger.log(FULL_CRUD);
         else if(page==totalPages)
-            System.out.println("[ p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
+            myLogger.log("[ p:prev page | a:add | d<int>:delete | u<int>:update | b:back ]");
 
         return scanner.nextLine();
     }
@@ -327,23 +324,23 @@ public class Cli {
     public Map<String, String> displayAddAppointment(App myApp) {
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
-        System.out.println(blueBgText(" ADD APPOINTMENT "));
+        myLogger.log(blueBgText(" ADD APPOINTMENT "));
 
-        System.out.println(blueText("Email of user: "));
+        myLogger.log(blueText("Email of user: "));
         data.put(EMAIL,scanner.nextLine());
-        System.out.println(blueText(PRODUCT_NAME));
+        myLogger.log(blueText(PRODUCT_NAME));
         data.put(PRODUCT_NAME_DATA,scanner.nextLine());
-        System.out.println(blueText(CAR_MAKE));
+        myLogger.log(blueText(CAR_MAKE));
         data.put(CAR_MAKE_DATA,scanner.nextLine());
-        System.out.println(blueText("Date"));
-        System.out.println(blueText(YYYY_MM_DD_D));
+        myLogger.log(blueText("Date"));
+        myLogger.log(blueText(YYYY_MM_DD_D));
         data.put("date",scanner.nextLine());
 
         int i=0;
         myApp.setAvailableTimes(getAvailableTimes(myApp,data.get("date")));
         for(Time time:myApp.getAvailableTimes()){
             i++;
-            System.out.println(blueText(i+". ")+Time.timeToPrint(time));
+            myLogger.log(blueText(i+". ")+Time.timeToPrint(time));
         }
         data.put("time",scanner.nextLine());
         return data;
@@ -352,22 +349,22 @@ public class Cli {
     public Map<String, String> displayAddAppointmentCustomer(App myApp) {
         Scanner scanner = new Scanner(System.in);
         Map<String, String> data = new HashMap<>();
-        System.out.println(blueBgText(" ADD APPOINTMENT "));
+        myLogger.log(blueBgText(" ADD APPOINTMENT "));
 
         data.put(EMAIL, myApp.getEmail());
-        System.out.println(blueText(PRODUCT_NAME));
+        myLogger.log(blueText(PRODUCT_NAME));
         data.put(PRODUCT_NAME_DATA, scanner.nextLine());
-        System.out.println(blueText(CAR_MAKE));
+        myLogger.log(blueText(CAR_MAKE));
         data.put(CAR_MAKE_DATA, scanner.nextLine());
-        System.out.println(blueText("Date"));
-        System.out.println(blueText(YYYY_MM_DD_D));
+        myLogger.log(blueText("Date"));
+        myLogger.log(blueText(YYYY_MM_DD_D));
         data.put("date", scanner.nextLine());
 
         int i=0;
         myApp.setAvailableTimes(getAvailableTimes(myApp,data.get("date")));
         for(Time time:myApp.getAvailableTimes()){
             i++;
-            System.out.println(blueText(i+". ")+Time.timeToPrint(time));
+            myLogger.log(blueText(i+". ")+Time.timeToPrint(time));
         }
         data.put("time",scanner.nextLine());
         return data;
@@ -375,54 +372,53 @@ public class Cli {
     public Map<String, String> displayUpdateAppointment() {
         Scanner scanner=new Scanner(System.in);
         Map<String,String> data=new HashMap<>();
-        System.out.println(blueBgText(" APPOINTMENT PRODUCT "));
-        System.out.println(IF_U_WANT_UPDATE);
+        myLogger.log(blueBgText(" APPOINTMENT PRODUCT "));
+        myLogger.log(IF_U_WANT_UPDATE);
 
-        System.out.println(blueText("Email of user: "));
+        myLogger.log(blueText("Email of user: "));
         data.put(EMAIL,scanner.nextLine());
-        System.out.println(blueText(PRODUCT_NAME));
+        myLogger.log(blueText(PRODUCT_NAME));
         data.put(PRODUCT_NAME_DATA,scanner.nextLine());
-        System.out.println(blueText(CAR_MAKE));
+        myLogger.log(blueText(CAR_MAKE));
         data.put(CAR_MAKE_DATA,scanner.nextLine());
-        System.out.println(blueText("Date"));
-        System.out.println(blueText(YYYY_MM_DD_D));
+        myLogger.log(blueText("Date"));
+        myLogger.log(blueText(YYYY_MM_DD_D));
         data.put("date",scanner.nextLine());
         return data;
     }
 
     public String displayCustomerDashboard(User account) {
-        System.out.println( account.getNotificationCount());
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Customer Dashboard:"));
-        System.out.println("1. "+ blueText("Product Catalog"));
-        System.out.println("2. "+ blueText("Request services"));
-        System.out.println("3. "+ blueText("Profile"));
-        System.out.println("4. "+ blueText("Notifications:")+ blueBgText(" "+account.getNotificationCount()+" "));
-        System.out.println("5. "+ blueText(LOG_OUT));
+        myLogger.log(blueBgText("Customer Dashboard:"));
+        myLogger.log("1. "+ blueText("Product Catalog"));
+        myLogger.log("2. "+ blueText("Request services"));
+        myLogger.log("3. "+ blueText("Profile"));
+        myLogger.log("4. "+ blueText("Notifications:")+ blueBgText(" "+account.getNotificationCount()+" "));
+        myLogger.log("5. "+ blueText(LOG_OUT));
         return scanner.nextLine();
     }
     public String displayProfile(String name, String email, String phone) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Profile:"));
-        System.out.println(blueText("Name: ")+name);
-        System.out.println(blueText("email: ")+email);
-        System.out.println(blueText("phone: ")+phone);
-        System.out.println("=================================");
-        System.out.println("1. "+ blueText("Edit Profile"));
-        System.out.println("2. "+ blueText("View Order History"));
-        System.out.println("3. "+ blueText("View Installation Requests History"));
-        System.out.println("4. "+ blueText("Back to Customer Dashboard"));
+        myLogger.log(blueBgText("Profile:"));
+        myLogger.log(blueText("Name: ")+name);
+        myLogger.log(blueText("email: ")+email);
+        myLogger.log(blueText("phone: ")+phone);
+        myLogger.log("=================================");
+        myLogger.log("1. "+ blueText("Edit Profile"));
+        myLogger.log("2. "+ blueText("View Order History"));
+        myLogger.log("3. "+ blueText("View Installation Requests History"));
+        myLogger.log("4. "+ blueText("Back to Customer Dashboard"));
         return scanner.nextLine();
     }
 
     public String displayOrderHistory(List<Product> ordersArrayList) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Order History:"));
+        myLogger.log(blueBgText("Order History:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, ordersArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(
                 ordersArrayList.get(i).getName() +
                         CATEGORY_TO_PRINT +
                         ordersArrayList.get(i).getCategory() + PRICE_TO_PRINT +
@@ -430,26 +426,26 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(ordersArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0 || totalPages==1){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         }else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | b:back ]");
+            myLogger.log("[ n:next page | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | b:back ]");
+            myLogger.log("[ p:prev page | b:back ]");
 
         return scanner.nextLine();
     }
     public String displayInstallationHistory(List<Appointment> installationsArrayList ) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Installation Requests History:"));
+        myLogger.log(blueBgText("Installation Requests History:"));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, installationsArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(
                 installationsArrayList.get(i).getDate()+" | "+
                         installationsArrayList.get(i).getProductName()+" | "+
                         installationsArrayList.get(i).getCarMake()+" | "+
@@ -457,36 +453,36 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(installationsArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0 || totalPages==1){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         }else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | b:back ]");
+            myLogger.log("[ n:next page | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | b:back ]");
+            myLogger.log("[ p:prev page | b:back ]");
 
         return scanner.nextLine();
     }
 
     public String displayInstallerDashboard(User account) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText("Installer Dashboard:"));
-        System.out.println("1. "+ blueText("Schedule of Appointments"));
-        System.out.println("2. "+ blueText("Installation Requests"));
-        System.out.println("3. "+ blueText("Notifications:")+ blueBgText(" "+account.getNotificationCount()+" "));
-        System.out.println("4. "+ blueText(LOG_OUT));
+        myLogger.log(blueBgText("Installer Dashboard:"));
+        myLogger.log("1. "+ blueText("Schedule of Appointments"));
+        myLogger.log("2. "+ blueText("Installation Requests"));
+        myLogger.log("3. "+ blueText("Notifications:")+ blueBgText(" "+account.getNotificationCount()+" "));
+        myLogger.log("4. "+ blueText(LOG_OUT));
         return scanner.nextLine();
     }
     public String displayInstallationRequests(List<Appointment> appointmentArrayList) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" Installation Requests "));
+        myLogger.log(blueBgText(" Installation Requests "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, appointmentArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(appointmentArrayList.get(i).getEmail()+" | "+
                 appointmentArrayList.get(i).getDate()+" | "+
                 appointmentArrayList.get(i).getProductName()+" | "+
                 appointmentArrayList.get(i).getCarMake()+" | "+
@@ -494,28 +490,28 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(appointmentArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | c<int>:confirm | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | c<int>:confirm | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | c<int>:confirm | b:back ]");
+            myLogger.log("[ n:next page | c<int>:confirm | b:back ]");
         else if(totalPages==1)
-            System.out.println("[ c<int>:confirm | b:back ]");
+            myLogger.log("[ c<int>:confirm | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | c<int>:confirm | b:back ]");
+            myLogger.log("[ p:prev page | c<int>:confirm | b:back ]");
 
         return scanner.nextLine();
     }
      public String displayScheduleOfAppointments(List<Appointment> approvedAppointmentArrayList) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" Schedule Of Appointments "));
+        myLogger.log(blueBgText(" Schedule Of Appointments "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, approvedAppointmentArrayList.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " + blueText(approvedAppointmentArrayList.get(i).getEmail()+" | "+
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " + blueText(approvedAppointmentArrayList.get(i).getEmail()+" | "+
                 approvedAppointmentArrayList.get(i).getDate()+" | "+
                 approvedAppointmentArrayList.get(i).getProductName()+" | "+
                 approvedAppointmentArrayList.get(i).getCarMake()+" | "+
@@ -523,71 +519,71 @@ public class Cli {
         )));
 
         totalPages=(int)Math.ceil(approvedAppointmentArrayList.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | d<int>:done | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | d<int>:done | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | d<int>:done | b:back ]");
+            myLogger.log("[ n:next page | d<int>:done | b:back ]");
         else if(totalPages==1)
-            System.out.println("[ d<int>:done | b:back ]");
+            myLogger.log("[ d<int>:done | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | d<int>:done | b:back ]");
+            myLogger.log("[ p:prev page | d<int>:done | b:back ]");
 
         return scanner.nextLine();
     }
     public String displayNotificationCenter(List<String> notifications) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println(blueBgText(" Notification Center "));
+        myLogger.log(blueBgText(" Notification Center "));
 
         int start = (page - 1) * 10;
         int end = Math.min(start + 10, notifications.size());
 
-        IntStream.range(start, end).forEach(i -> System.out.println((i + 1) + ". " +notifications.get(i)));
+        IntStream.range(start, end).forEach(i -> myLogger.log((i + 1) + ". " +notifications.get(i)));
 
         totalPages=(int)Math.ceil(notifications.size()/10.0);
-        System.out.println(PAGE_TO_PRINT +page+"/"+totalPages);
+        myLogger.log(PAGE_TO_PRINT +page+"/"+totalPages);
         if(totalPages==0){
-            System.out.println(B_BACK);
+            myLogger.log(B_BACK);
         } else if(page<totalPages && page>1)
-            System.out.println("[ n:next page | p:prev page | d<int>:done | b:back ]");
+            myLogger.log("[ n:next page | p:prev page | d<int>:done | b:back ]");
         else if (page<totalPages && page==1)
-            System.out.println("[ n:next page | d<int>:done | b:back ]");
+            myLogger.log("[ n:next page | d<int>:done | b:back ]");
         else if(totalPages==1)
-            System.out.println("[ d<int>:done | b:back ]");
+            myLogger.log("[ d<int>:done | b:back ]");
         else if(page==totalPages)
-            System.out.println("[ p:prev page | d<int>:done | b:back ]");
+            myLogger.log("[ p:prev page | d<int>:done | b:back ]");
 
         return scanner.nextLine();
     }
     public void displayMsg(String msg,boolean success){
         Scanner scanner=new Scanner(System.in);
         if(success)
-            System.out.println(greenBgText(msg));
+            myLogger.log(greenBgText(msg));
         else
-            System.out.println(errorText(msg));
+            myLogger.log(errorText(msg));
 
-        System.out.println("[press enter...]");
+        myLogger.log("[press enter...]");
         scanner.nextLine();
     }
     public void displayAfterPurchase(String productName,String phoneNumber){
         Scanner scanner=new Scanner(System.in);
-        System.out.println("=====================================================");
-        System.out.println("Thank You for purchasing \""+ blueText(productName)+"\".");
-        System.out.println("We’ll call you on \""+ blueText(phoneNumber)+"\" within 20 minutes for confirmation.");
-        System.out.println("We value your choice.");
-        System.out.println("=====================================================");
-        System.out.println("[press enter...]");
+        myLogger.log("=====================================================");
+        myLogger.log("Thank You for purchasing \""+ blueText(productName)+"\".");
+        myLogger.log("We’ll call you on \""+ blueText(phoneNumber)+"\" within 20 minutes for confirmation.");
+        myLogger.log("We value your choice.");
+        myLogger.log("=====================================================");
+        myLogger.log("[press enter...]");
         scanner.nextLine();
     }
     public String displayStart(){
         Scanner scanner=new Scanner(System.in);
 
-        System.out.println(blueBgText(" Program "));
-        System.out.println("1. "+ blueText("Login"));
-        System.out.println("2. "+ blueText("Sign Up"));
-        System.out.println("3. "+ blueText("Exit"));
+        myLogger.log(blueBgText(" Program "));
+        myLogger.log("1. "+ blueText("Login"));
+        myLogger.log("2. "+ blueText("Sign Up"));
+        myLogger.log("3. "+ blueText("Exit"));
 
         return scanner.nextLine();
     }
