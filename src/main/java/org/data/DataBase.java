@@ -25,7 +25,7 @@ public class DataBase {
         categoryList.add(new Category("Exterior"));
         categoryList.add(new Category("Electronics"));
         categoryList.get(0).addProduct(new Product("item1",categoryList.get(0).getName(),"item1 is good.",1.3,true));
-        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"item2 is good.",5.3,true));
+        categoryList.get(0).addProduct(new Product("item2",categoryList.get(0).getName(),"item2 is good.",5.3,false));
         categoryList.get(0).addProduct(new Product("item3",categoryList.get(0).getName(),"item3 is good.",2.3,true));
         categoryList.get(0).addProduct(new Product("item4",categoryList.get(0).getName(),"item4 is good.",1.3,true));
 

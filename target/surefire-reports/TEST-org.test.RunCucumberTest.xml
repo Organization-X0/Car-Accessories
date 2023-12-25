@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.test.RunCucumberTest" time="1.59" tests="133" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.test.RunCucumberTest" time="1.586" tests="137" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Users\abods\.jdks\openjdk-20.0.2\bin"/>
-    <property name="sun.java.command" value="C:\Users\abods\AppData\Local\Temp\surefire808852999175294951\surefirebooter-20231225154649406_3.jar C:\Users\abods\AppData\Local\Temp\surefire808852999175294951 2023-12-25T15-46-49_261-jvmRun1 surefire-20231225154649406_1tmp surefire_0-20231225154649406_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\abods\AppData\Local\Temp\surefire8975243884553245794\surefirebooter-20231225160804794_3.jar C:\Users\abods\AppData\Local\Temp\surefire8975243884553245794 2023-12-25T16-08-04_645-jvmRun1 surefire-20231225160804794_1tmp surefire_0-20231225160804794_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Car Accessories\target\test-classes;C:\Car Accessories\target\classes;C:\Users\abods\.m2\repository\org\jacoco\jacoco-maven-plugin\0.8.11\jacoco-maven-plugin-0.8.11.jar;C:\Users\abods\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.24\plexus-utils-3.0.24.jar;C:\Users\abods\.m2\repository\org\apache\maven\shared\file-management\3.1.0\file-management-3.1.0.jar;C:\Users\abods\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\abods\.m2\repository\org\apache\maven\reporting\maven-reporting-api\3.0\maven-reporting-api-3.0.jar;C:\Users\abods\.m2\repository\org\apache\maven\doxia\doxia-sink-api\1.0\doxia-sink-api-1.0.jar;C:\Users\abods\.m2\repository\org\jacoco\org.jacoco.agent\0.8.11\org.jacoco.agent-0.8.11-runtime.jar;C:\Users\abods\.m2\repository\org\jacoco\org.jacoco.core\0.8.11\org.jacoco.core-0.8.11.jar;C:\Users\abods\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\abods\.m2\repository\org\ow2\asm\asm-commons\9.6\asm-commons-9.6.jar;C:\Users\abods\.m2\repository\org\ow2\asm\asm-tree\9.6\asm-tree-9.6.jar;C:\Users\abods\.m2\repository\org\jacoco\org.jacoco.report\0.8.11\org.jacoco.report-0.8.11.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-core\6.11.0\cucumber-core-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-gherkin\6.11.0\cucumber-gherkin-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-gherkin-messages\6.11.0\cucumber-gherkin-messages-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\messages\15.0.0\messages-15.0.0.jar;C:\Users\abods\.m2\repository\io\cucumber\tag-expressions\3.0.1\tag-expressions-3.0.1.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-expressions\10.3.0\cucumber-expressions-10.3.0.jar;C:\Users\abods\.m2\repository\io\cucumber\datatable\3.5.0\datatable-3.5.0.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-plugin\6.11.0\cucumber-plugin-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\docstring\6.11.0\docstring-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\html-formatter\13.0.0\html-formatter-13.0.0.jar;C:\Users\abods\.m2\repository\io\cucumber\create-meta\4.0.0\create-meta-4.0.0.jar;C:\Users\abods\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\abods\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\abods\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-java\6.11.0\cucumber-java-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-junit\6.11.0\cucumber-junit-6.11.0.jar;C:\Users\abods\.m2\repository\io\cucumber\cucumber-picocontainer\7.11.2\cucumber-picocontainer-7.11.2.jar;C:\Users\abods\.m2\repository\org\picocontainer\picocontainer\2.15\picocontainer-2.15.jar;C:\Users\abods\.m2\repository\org\mockito\mockito-core\4.1.0\mockito-core-4.1.0.jar;C:\Users\abods\.m2\repository\net\bytebuddy\byte-buddy\1.12.1\byte-buddy-1.12.1.jar;C:\Users\abods\.m2\repository\net\bytebuddy\byte-buddy-agent\1.12.1\byte-buddy-agent-1.12.1.jar;C:\Users\abods\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.jar;C:\Users\abods\.m2\repository\org\mockito\mockito-junit-jupiter\4.1.0\mockito-junit-jupiter-4.1.0.jar;C:\Users\abods\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.1\junit-jupiter-api-5.8.1.jar;C:\Users\abods\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\abods\.m2\repository\org\junit\platform\junit-platform-commons\1.8.1\junit-platform-commons-1.8.1.jar;C:\Users\abods\.m2\repository\org\slf4j\slf4j-api\2.0.7\slf4j-api-2.0.7.jar;C:\Users\abods\.m2\repository\org\slf4j\slf4j-simple\2.0.7\slf4j-simple-2.0.7.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\abods\AppData\Local\Temp\surefire808852999175294951\surefirebooter-20231225154649406_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\abods\AppData\Local\Temp\surefire8975243884553245794\surefirebooter-20231225160804794_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20.0.2+9-78"/>
@@ -59,137 +59,141 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="Confirm an appointment request" classname="Appointment Confirmation" time="0.248"/>
+  <testcase name="Confirm an appointment request" classname="Appointment Confirmation" time="0.223"/>
   <testcase name="Confirm an appointment request with invalid number #1" classname="Appointment Confirmation" time="0.016"/>
-  <testcase name="Confirm an appointment request with invalid number #2" classname="Appointment Confirmation" time="0.013"/>
-  <testcase name="Confirm an appointment request with invalid option" classname="Appointment Confirmation" time="0.015"/>
-  <testcase name="Admin Dashboard page to Manage Products" classname="Admin Dashboard" time="0.013"/>
+  <testcase name="Confirm an appointment request with invalid number #2" classname="Appointment Confirmation" time="0.014"/>
+  <testcase name="Confirm an appointment request with invalid option" classname="Appointment Confirmation" time="0.012"/>
+  <testcase name="Admin Dashboard page to Manage Products" classname="Admin Dashboard" time="0.011"/>
   <testcase name="Admin Dashboard page to Manage Categories" classname="Admin Dashboard" time="0.011"/>
-  <testcase name="Admin Dashboard page to Manage User Accounts" classname="Admin Dashboard" time="0.011"/>
-  <testcase name="Admin Dashboard page to Manage Installation Appointments" classname="Admin Dashboard" time="0.01"/>
+  <testcase name="Admin Dashboard page to Manage User Accounts" classname="Admin Dashboard" time="0.009"/>
+  <testcase name="Admin Dashboard page to Manage Installation Appointments" classname="Admin Dashboard" time="0.011"/>
   <testcase name="Admin Dashboard page to Log out" classname="Admin Dashboard" time="0.01"/>
-  <testcase name="Invalid input admin dashboard #1" classname="Admin Dashboard" time="0.009"/>
-  <testcase name="Invalid input admin dashboard #2" classname="Admin Dashboard" time="0.011"/>
-  <testcase name="Invalid input admin dashboard #3" classname="Admin Dashboard" time="0.01"/>
-  <testcase name="Invalid input admin dashboard #4" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Add a new category #1" classname="Admin Dashboard" time="0.01"/>
+  <testcase name="Invalid input admin dashboard #1" classname="Admin Dashboard" time="0.01"/>
+  <testcase name="Invalid input admin dashboard #2" classname="Admin Dashboard" time="0.009"/>
+  <testcase name="Invalid input admin dashboard #3" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Invalid input admin dashboard #4" classname="Admin Dashboard" time="0.007"/>
+  <testcase name="Add a new category #1" classname="Admin Dashboard" time="0.009"/>
   <testcase name="Add a new category #2" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Add a new category #3" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Add a category with invalid input #1" classname="Admin Dashboard" time="0.009"/>
+  <testcase name="Add a new category #3" classname="Admin Dashboard" time="0.01"/>
+  <testcase name="Add a category with invalid input #1" classname="Admin Dashboard" time="0.008"/>
   <testcase name="Add a category with invalid input #2" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Add a category that already exists" classname="Admin Dashboard" time="0.012"/>
-  <testcase name="Update an existing category #1" classname="Admin Dashboard" time="0.01"/>
+  <testcase name="Add a category that already exists" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Update an existing category #1" classname="Admin Dashboard" time="0.015"/>
   <testcase name="Update an existing category #2" classname="Admin Dashboard" time="0.008"/>
   <testcase name="Delete a category #1" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Delete a category #2" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Delete a non-existing category #1" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Delete a non-existing category #2" classname="Admin Dashboard" time="0.006"/>
-  <testcase name="Update a non-existing category #1" classname="Admin Dashboard" time="0.007"/>
+  <testcase name="Delete a category #2" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Delete a non-existing category #1" classname="Admin Dashboard" time="0.007"/>
+  <testcase name="Delete a non-existing category #2" classname="Admin Dashboard" time="0.007"/>
+  <testcase name="Update a non-existing category #1" classname="Admin Dashboard" time="0.009"/>
   <testcase name="Update a non-existing category #2" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Add a new product #1" classname="Admin Dashboard" time="0.009"/>
+  <testcase name="Add a new product #1" classname="Admin Dashboard" time="0.012"/>
   <testcase name="Add a new product #2" classname="Admin Dashboard" time="0.008"/>
   <testcase name="Update an existing product #1" classname="Admin Dashboard" time="0.01"/>
   <testcase name="Update an existing product #2" classname="Admin Dashboard" time="0.008"/>
   <testcase name="Delete an existing product #1" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Delete an existing product #2" classname="Admin Dashboard" time="0.006"/>
-  <testcase name="Update the name or the phone to account #1" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Update the name or the phone to account #2" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Delete an existing product #2" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Update the name or the phone to account #1" classname="Admin Dashboard" time="0.009"/>
+  <testcase name="Update the name or the phone to account #2" classname="Admin Dashboard" time="0.007"/>
   <testcase name="Delete user account #1" classname="Admin Dashboard" time="0.011"/>
   <testcase name="Delete user account #2" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="View customer accounts" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="View customer accounts" classname="Admin Dashboard" time="0.011"/>
   <testcase name="Schedule installation appointments #1" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Schedule installation appointments #2" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Schedule installation appointments #2" classname="Admin Dashboard" time="0.007"/>
   <testcase name="Schedule installation appointments Empty Data" classname="Admin Dashboard" time="0.006"/>
   <testcase name="Schedule installation appointments Invalid Date or Non-existent Account #1" classname="Admin Dashboard" time="0.007"/>
   <testcase name="Schedule installation appointments Invalid Date or Non-existent Account #2" classname="Admin Dashboard" time="0.007"/>
   <testcase name="Delete installation appointments" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Update an appointment" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Invalid option" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Test nextPage Manage Appointment" classname="Admin Dashboard" time="0.008"/>
-  <testcase name="Test previous page Manage Appointment" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Test back from Manage Appointment" classname="Admin Dashboard" time="0.007"/>
+  <testcase name="Update an appointment" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Invalid option" classname="Admin Dashboard" time="0.006"/>
+  <testcase name="Test nextPage Manage Appointment" classname="Admin Dashboard" time="0.007"/>
+  <testcase name="Test previous page Manage Appointment" classname="Admin Dashboard" time="0.006"/>
+  <testcase name="Test back from Manage Appointment" classname="Admin Dashboard" time="0.006"/>
   <testcase name="Test notification deletion" classname="Admin Dashboard" time="0.007"/>
   <testcase name="Test error handling #1" classname="Admin Dashboard" time="0.006"/>
-  <testcase name="Test error handling #2" classname="Admin Dashboard" time="0.008"/>
+  <testcase name="Test error handling #2" classname="Admin Dashboard" time="0.007"/>
   <testcase name="Test error handling #3" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Test error handling #4" classname="Admin Dashboard" time="0.007"/>
-  <testcase name="Customer Dashboard page to Product Catalog" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Test error handling #4" classname="Admin Dashboard" time="0.006"/>
+  <testcase name="Customer Dashboard page to Product Catalog" classname="Customer Dashboard #1" time="0.007"/>
   <testcase name="Customer Dashboard page to Request Services" classname="Customer Dashboard #1" time="0.006"/>
-  <testcase name="Customer Dashboard page to Profile Page" classname="Customer Dashboard #1" time="0.008"/>
-  <testcase name="Customer Dashboard page to Notification Center" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Customer Dashboard page to Log out" classname="Customer Dashboard #1" time="0.007"/>
+  <testcase name="Customer Dashboard page to Profile Page" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Customer Dashboard page to Notification Center" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Customer Dashboard page to Log out" classname="Customer Dashboard #1" time="0.006"/>
   <testcase name="Invalid input customer dashboard #1" classname="Customer Dashboard #1" time="0.006"/>
   <testcase name="Invalid input customer dashboard #2" classname="Customer Dashboard #1" time="0.006"/>
-  <testcase name="Invalid input customer dashboard #3" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Invalid input customer dashboard #4" classname="Customer Dashboard #1" time="0.006"/>
-  <testcase name="Make purchases #1" classname="Customer Dashboard #1" time="0.01"/>
+  <testcase name="Invalid input customer dashboard #3" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Invalid input customer dashboard #4" classname="Customer Dashboard #1" time="0.005"/>
+  <testcase name="Make purchases #1" classname="Customer Dashboard #1" time="0.009"/>
   <testcase name="Make purchases #2" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Make purchases #3" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="View orders history" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Customer request installation service #1" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Customer request installation service #2" classname="Customer Dashboard #1" time="0.007"/>
+  <testcase name="Make purchases #3" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Attempt to purchase an unavailable product" classname="Customer Dashboard #1" time="0.007"/>
+  <testcase name="Handle invalid product number #1" classname="Customer Dashboard #1" time="0.007"/>
+  <testcase name="Handle invalid product number #2" classname="Customer Dashboard #1" time="0.007"/>
+  <testcase name="Handle invalid product number #3" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="View orders history" classname="Customer Dashboard #1" time="0.008"/>
+  <testcase name="Customer request installation service #1" classname="Customer Dashboard #1" time="0.008"/>
+  <testcase name="Customer request installation service #2" classname="Customer Dashboard #1" time="0.006"/>
   <testcase name="Customer request installation service #3" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Handle View installation history #1" classname="Customer Dashboard #1" time="0.008"/>
-  <testcase name="Handle View installation history #2" classname="Customer Dashboard #1" time="0.007"/>
+  <testcase name="Handle View installation history #1" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Handle View installation history #2" classname="Customer Dashboard #1" time="0.006"/>
   <testcase name="Handle View installation history #3" classname="Customer Dashboard #1" time="0.006"/>
   <testcase name="Handle View order history #1" classname="Customer Dashboard #1" time="0.006"/>
-  <testcase name="Handle View order history #2" classname="Customer Dashboard #1" time="0.007"/>
-  <testcase name="Handle View order history #3" classname="Customer Dashboard #1" time="0.005"/>
-  <testcase name="Installation Dashboard page to Schedule of Appointments" classname="Installation Dashboard" time="0.007"/>
-  <testcase name="Installation Dashboard page to Installation requests" classname="Installation Dashboard" time="0.007"/>
-  <testcase name="Installation Dashboard page to Notification Center" classname="Installation Dashboard" time="0.006"/>
-  <testcase name="Installation Dashboard page to Log out" classname="Installation Dashboard" time="0.01"/>
-  <testcase name="Invalid input Installation dashboard #1" classname="Installation Dashboard" time="0.009"/>
-  <testcase name="Invalid input Installation dashboard #2" classname="Installation Dashboard" time="0.008"/>
-  <testcase name="Invalid input Installation dashboard #3" classname="Installation Dashboard" time="0.006"/>
-  <testcase name="Invalid input Installation dashboard #4" classname="Installation Dashboard" time="0.005"/>
-  <testcase name="Confirm a Appointment" classname="Installation Dashboard" time="0.01"/>
-  <testcase name="Delete a non-existing appointment #1" classname="Installation Dashboard" time="0.008"/>
+  <testcase name="Handle View order history #2" classname="Customer Dashboard #1" time="0.005"/>
+  <testcase name="Handle View order history #3" classname="Customer Dashboard #1" time="0.006"/>
+  <testcase name="Installation Dashboard page to Schedule of Appointments" classname="Installation Dashboard" time="0.008"/>
+  <testcase name="Installation Dashboard page to Installation requests" classname="Installation Dashboard" time="0.006"/>
+  <testcase name="Installation Dashboard page to Notification Center" classname="Installation Dashboard" time="0.007"/>
+  <testcase name="Installation Dashboard page to Log out" classname="Installation Dashboard" time="0.006"/>
+  <testcase name="Invalid input Installation dashboard #1" classname="Installation Dashboard" time="0.005"/>
+  <testcase name="Invalid input Installation dashboard #2" classname="Installation Dashboard" time="0.006"/>
+  <testcase name="Invalid input Installation dashboard #3" classname="Installation Dashboard" time="0.008"/>
+  <testcase name="Invalid input Installation dashboard #4" classname="Installation Dashboard" time="0.006"/>
+  <testcase name="Confirm a Appointment" classname="Installation Dashboard" time="0.006"/>
+  <testcase name="Delete a non-existing appointment #1" classname="Installation Dashboard" time="0.006"/>
   <testcase name="Delete a non-existing appointment #2" classname="Installation Dashboard" time="0.007"/>
   <testcase name="Enter an invalid option #1" classname="Installation Dashboard" time="0.006"/>
-  <testcase name="Enter an invalid option #2" classname="Installation Dashboard" time="0.006"/>
-  <testcase name="Successful Login" classname="User Login" time="0.007"/>
-  <testcase name="Unsuccessful Login" classname="User Login" time="0.006"/>
-  <testcase name="Invalid input type" classname="User Login" time="0.008"/>
-  <testcase name="Test next page navigation" classname="Customer Dashboard #2" time="0.009"/>
+  <testcase name="Enter an invalid option #2" classname="Installation Dashboard" time="0.005"/>
+  <testcase name="Successful Login" classname="User Login" time="0.006"/>
+  <testcase name="Unsuccessful Login" classname="User Login" time="0.007"/>
+  <testcase name="Invalid input type" classname="User Login" time="0.005"/>
+  <testcase name="Test next page navigation" classname="Customer Dashboard #2" time="0.006"/>
   <testcase name="Test previous page navigation" classname="Customer Dashboard #2" time="0.007"/>
-  <testcase name="Test dashboard navigation #1" classname="Customer Dashboard #2" time="0.006"/>
-  <testcase name="Test dashboard navigation #2" classname="Customer Dashboard #2" time="0.006"/>
+  <testcase name="Test dashboard navigation #1" classname="Customer Dashboard #2" time="0.005"/>
+  <testcase name="Test dashboard navigation #2" classname="Customer Dashboard #2" time="0.009"/>
   <testcase name="Test notification deletion #1" classname="Customer Dashboard #2" time="0.007"/>
   <testcase name="Test notification deletion #2" classname="Customer Dashboard #2" time="0.006"/>
   <testcase name="Test error handling #1" classname="Customer Dashboard #2" time="0.006"/>
   <testcase name="Test error handling #2" classname="Customer Dashboard #2" time="0.005"/>
-  <testcase name="Test error handling #3" classname="Customer Dashboard #2" time="0.005"/>
+  <testcase name="Test error handling #3" classname="Customer Dashboard #2" time="0.006"/>
   <testcase name="Test error handling #4" classname="Customer Dashboard #2" time="0.006"/>
-  <testcase name="View Categories" classname="Product Catalog" time="0.007"/>
+  <testcase name="View Categories" classname="Product Catalog" time="0.006"/>
   <testcase name="View Product Listings" classname="Product Catalog" time="0.007"/>
-  <testcase name="Search and Filter Products" classname="Product Catalog" time="0.007"/>
+  <testcase name="Search and Filter Products" classname="Product Catalog" time="0.006"/>
   <testcase name="Handle View Products #1" classname="Product Catalog" time="0.006"/>
-  <testcase name="Handle View Products #2" classname="Product Catalog" time="0.006"/>
-  <testcase name="Handle View Products #3" classname="Product Catalog" time="0.007"/>
-  <testcase name="Successful Sign Up" classname="User Sign Up" time="0.007"/>
-  <testcase name="Unsuccessful Sign Up" classname="User Sign Up" time="0.006"/>
-  <testcase name="Invalid input type" classname="User Sign Up" time="0.007"/>
+  <testcase name="Handle View Products #2" classname="Product Catalog" time="0.009"/>
+  <testcase name="Handle View Products #3" classname="Product Catalog" time="0.006"/>
+  <testcase name="Successful Sign Up" classname="User Sign Up" time="0.006"/>
+  <testcase name="Unsuccessful Sign Up" classname="User Sign Up" time="0.007"/>
+  <testcase name="Invalid input type" classname="User Sign Up" time="0.005"/>
   <testcase name="Sign Up with valid email but short full name" classname="User Sign Up" time="0.006"/>
-  <testcase name="Sign Up with valid email but long full name" classname="User Sign Up" time="0.007"/>
-  <testcase name="Sign Up with valid email but short password" classname="User Sign Up" time="0.006"/>
+  <testcase name="Sign Up with valid email but long full name" classname="User Sign Up" time="0.006"/>
+  <testcase name="Sign Up with valid email but short password" classname="User Sign Up" time="0.005"/>
   <testcase name="Sign Up with valid email but long password" classname="User Sign Up" time="0.006"/>
-  <testcase name="Sign Up with valid email but invalid phone number" classname="User Sign Up" time="0.006"/>
-  <testcase name="Go to login page" classname="Navigation" time="0.007"/>
-  <testcase name="Go to signup page" classname="Navigation" time="0.007"/>
-  <testcase name="exit from the app" classname="Navigation" time="0.007"/>
+  <testcase name="Sign Up with valid email but invalid phone number" classname="User Sign Up" time="0.005"/>
+  <testcase name="Go to login page" classname="Navigation" time="0.006"/>
+  <testcase name="Go to signup page" classname="Navigation" time="0.005"/>
+  <testcase name="exit from the app" classname="Navigation" time="0.006"/>
   <testcase name="Invalid input #1" classname="Navigation" time="0.006"/>
-  <testcase name="Invalid input #2" classname="Navigation" time="0.005"/>
+  <testcase name="Invalid input #2" classname="Navigation" time="0.006"/>
   <testcase name="Invalid input #3" classname="Navigation" time="0.005"/>
-  <testcase name="Invalid input #4" classname="Navigation" time="0.006"/>
-  <testcase name="profile page to Edit profile" classname="User Profile" time="0.007"/>
+  <testcase name="Invalid input #4" classname="Navigation" time="0.007"/>
+  <testcase name="profile page to Edit profile" classname="User Profile" time="0.009"/>
   <testcase name="profile page to view order history" classname="User Profile" time="0.006"/>
   <testcase name="profile page to view installation history" classname="User Profile" time="0.006"/>
   <testcase name="profile page to back to customer dashboard" classname="User Profile" time="0.006"/>
-  <testcase name="Customer can edit their profile" classname="User Profile" time="0.008"/>
+  <testcase name="Customer can edit their profile" classname="User Profile" time="0.007"/>
   <testcase name="Customers can view order history" classname="User Profile" time="0.006"/>
-  <testcase name="Customers can view installation requests" classname="User Profile" time="0.005"/>
-  <testcase name="Admin role" classname="User Roles" time="0.006"/>
-  <testcase name="Customer role" classname="User Roles" time="0.005"/>
-  <testcase name="Installer role" classname="User Roles" time="0.005"/>
+  <testcase name="Customers can view installation requests" classname="User Profile" time="0.007"/>
+  <testcase name="Admin role" classname="User Roles" time="0.005"/>
+  <testcase name="Customer role" classname="User Roles" time="0.006"/>
+  <testcase name="Installer role" classname="User Roles" time="0.006"/>
 </testsuite>

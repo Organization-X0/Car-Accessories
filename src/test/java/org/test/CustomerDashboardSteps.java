@@ -139,4 +139,9 @@ public class CustomerDashboardSteps {
     public void inside_view_order_history() {
         myApp.setState(new ViewOrderHistoryState(myApp));
     }
+
+    @Then("the purchase should not be completed")
+    public void thePurchaseShouldNotBeCompleted() {
+        assertNotEquals(myApp.searchAccount(myApp.getEmail()).getOrders().size(),size+1);
+    }
 }

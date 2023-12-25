@@ -44,8 +44,28 @@ Feature: Customer Dashboard
     Examples:
       | categoryNum | product |
       | 1            | 5       |
-      | 3            | 2       |
+      | 3            | 1       |
       | 4            | 3       |
+
+  Scenario Outline: Attempt to purchase an unavailable product
+    Given an customer is logged in
+    And the customer enters the product catalog page and chooses the "<categoryNum>"
+    When the customer buys "<product>" from the product catalog
+    Then the purchase should not be completed
+    Examples:
+      | categoryNum | product |
+      | 1            | 2       |
+
+  Scenario Outline: Handle invalid product number
+    Given an customer is logged in
+    And the customer enters the product catalog page and chooses the "<categoryNum>"
+    When the customer buys "<product>" from the product catalog
+    Then an error should be shown
+    Examples:
+      | categoryNum | product |
+      | 1            | 50       |
+      | 3            | 260       |
+      | 4            | 300       |
 
   Scenario: View orders history
     Given an customer is logged in

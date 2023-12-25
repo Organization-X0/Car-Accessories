@@ -45,7 +45,7 @@ public class ProductListingState implements State {
 <span class="pc bpc" id="L45" title="2 of 4 branches missed.">        else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'f') {</span>
             try {
 <span class="fc" id="L47">                int num = Integer.parseInt(option.substring(1));</span>
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">                if(myApp.getProductArrayListBetweenState().get(num-1).isAvailability()) {</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">                if(myApp.getProductArrayListBetweenState().get(num-1).isAvailability()) {</span>
 <span class="fc" id="L49">                    productAvailable=true;</span>
 <span class="fc" id="L50">                    productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();</span>
 <span class="fc" id="L51">                    User account = myApp.searchAccount(myApp.getEmail());</span>
@@ -53,11 +53,11 @@ public class ProductListingState implements State {
 <span class="fc" id="L53">                    account.pushNotification(&quot;You bought this product \&quot;&quot; + Cli.blueText(productName) + &quot;\&quot; successfully.&quot;);</span>
 <span class="fc" id="L54">                    account.increaseNotificationCount();</span>
 <span class="fc" id="L55">                }else{</span>
-<span class="nc" id="L56">                    productAvailable=false;</span>
+<span class="fc" id="L56">                    productAvailable=false;</span>
                 }
-<span class="nc" id="L58">            } catch (Exception e) {</span>
-<span class="nc" id="L59">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
-<span class="pc" id="L60">            }</span>
+<span class="fc" id="L58">            } catch (Exception e) {</span>
+<span class="fc" id="L59">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
+<span class="fc" id="L60">            }</span>
         }
 <span class="nc" id="L62">        else myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="fc" id="L63">    }</span>
