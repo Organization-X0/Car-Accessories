@@ -30,13 +30,10 @@ public class ProductListingTest {
         @Test
         public void testHandle() {
             // Given
-            when(myApp.getEmail()).thenReturn("user1@gmail.com");
-            when(myApp.searchAccount(myApp.getEmail())).thenReturn(user);
             when(myApp.getCli()).thenReturn(cli);
             when(cli.displayCustomerProducts(any())).thenReturn("f");
             when(myApp.getError()).thenReturn(error);
             when(error.getLocation()).thenReturn("null");
-            when(user.getPhone()).thenReturn("1234567890");
             // Create an instance of your class under test, passing the mock as a parameter
             ProductListingState state = spy(new ProductListingState(myApp));
             doNothing().when(state).handleInput(any());

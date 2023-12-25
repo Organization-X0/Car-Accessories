@@ -8,54 +8,62 @@ public class ProductListingState implements State {
     private final App myApp;
 <span class="fc" id="L9">    private boolean flag=false;</span>
     private String productName;
+    private boolean productAvailable;
 
-<span class="fc" id="L12">    public ProductListingState(App myApp) {</span>
-<span class="fc" id="L13">        this.myApp=myApp;</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L13">    public ProductListingState(App myApp) {</span>
+<span class="fc" id="L14">        this.myApp=myApp;</span>
+<span class="fc" id="L15">    }</span>
 
     @Override
     public void handle() {
-<span class="fc" id="L18">        flag=true;</span>
-<span class="fc" id="L19">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
+<span class="fc" id="L19">        flag=true;</span>
+<span class="fc" id="L20">        myApp.getError().checkAndShow(getStateString(),myApp);</span>
         String option;
-<span class="fc" id="L21">        myApp.setProductArrayListBetweenState();</span>
-<span class="fc" id="L22">        option = myApp.getCli().displayCustomerProducts(myApp.getProductArrayListBetweenState());</span>
-<span class="fc" id="L23">        handleInput(option);</span>
-
-<span class="pc bpc" id="L25" title="3 of 6 branches missed.">        if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !myApp.getError().getLocation().equals(getStateString())){</span>
-<span class="fc" id="L26">            String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
-<span class="fc" id="L27">            myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
-        }
-
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L22">        myApp.setProductArrayListBetweenState();</span>
+<span class="fc" id="L23">        option = myApp.getCli().displayCustomerProducts(myApp.getProductArrayListBetweenState());</span>
+<span class="fc" id="L24">        handleInput(option);</span>
+<span class="pc bpc" id="L25" title="3 of 6 branches missed.">       if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !myApp.getError().getLocation().equals(getStateString())){</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">           if(productAvailable){</span>
+<span class="nc" id="L27">               String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
+<span class="nc" id="L28">               myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
+<span class="nc" id="L29">           }else{</span>
+<span class="fc" id="L30">               myApp.getCli().displayCanNotPurchase();</span>
+           }
+       }
+<span class="fc" id="L33">    }</span>
 
 
     @Override
     public void handleInput(Object input) {
-<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if(!flag){</span>
-<span class="fc" id="L36">            myApp.setProductArrayListBetweenState();</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if(!flag){</span>
+<span class="fc" id="L39">            myApp.setProductArrayListBetweenState();</span>
         }
-<span class="fc" id="L38">        String option = (String) input;</span>
-<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != myApp.getCli().getTotalPages()) myApp.getCli().nextPage();</span>
-<span class="pc bpc" id="L40" title="1 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        else if (option.equals(&quot;b&quot;)) myApp.setState(new ProductCatalogState(myApp));</span>
-<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'f') {</span>
+<span class="fc" id="L41">        String option = (String) input;</span>
+<span class="pc bpc" id="L42" title="1 of 4 branches missed.">        if (option.equals(&quot;n&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != myApp.getCli().getTotalPages()) myApp.getCli().nextPage();</span>
+<span class="pc bpc" id="L43" title="1 of 4 branches missed.">        else if (option.equals(&quot;p&quot;) &amp;&amp; myApp.getCli().getCurrentPage() != 1) myApp.getCli().prevPage();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        else if (option.equals(&quot;b&quot;)) myApp.setState(new ProductCatalogState(myApp));</span>
+<span class="pc bpc" id="L45" title="2 of 4 branches missed.">        else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'f') {</span>
             try {
-<span class="fc" id="L44">                int num = Integer.parseInt(option.substring(1));</span>
-<span class="fc" id="L45">                productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();</span>
-<span class="fc" id="L46">                User account=myApp.searchAccount(myApp.getEmail());</span>
-<span class="fc" id="L47">                account.addOrder(myApp.searchProduct(num));</span>
-<span class="fc" id="L48">                account.pushNotification(&quot;You bought this product \&quot;&quot;+ Cli.blueText(productName)+&quot;\&quot; successfully.&quot;);</span>
-<span class="fc" id="L49">                account.increaseNotificationCount();</span>
-<span class="nc" id="L50">            } catch (Exception e) {</span>
-<span class="nc" id="L51">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
-<span class="pc" id="L52">            }</span>
+<span class="fc" id="L47">                int num = Integer.parseInt(option.substring(1));</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">                if(myApp.getProductArrayListBetweenState().get(num-1).isAvailability()) {</span>
+<span class="fc" id="L49">                    productAvailable=true;</span>
+<span class="fc" id="L50">                    productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();</span>
+<span class="fc" id="L51">                    User account = myApp.searchAccount(myApp.getEmail());</span>
+<span class="fc" id="L52">                    account.addOrder(myApp.searchProduct(num));</span>
+<span class="fc" id="L53">                    account.pushNotification(&quot;You bought this product \&quot;&quot; + Cli.blueText(productName) + &quot;\&quot; successfully.&quot;);</span>
+<span class="fc" id="L54">                    account.increaseNotificationCount();</span>
+<span class="fc" id="L55">                }else{</span>
+<span class="nc" id="L56">                    productAvailable=false;</span>
+                }
+<span class="nc" id="L58">            } catch (Exception e) {</span>
+<span class="nc" id="L59">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
+<span class="pc" id="L60">            }</span>
         }
-<span class="nc" id="L54">        else myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
-<span class="fc" id="L55">    }</span>
+<span class="nc" id="L62">        else myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
+<span class="fc" id="L63">    }</span>
     @Override
     public String getStateString() {
-<span class="fc" id="L58">        return &quot;ProductListing&quot;;</span>
+<span class="fc" id="L66">        return &quot;ProductListing&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

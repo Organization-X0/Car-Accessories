@@ -26,7 +26,7 @@ public class ProductCrudState implements State {
         }
         String option = (String) input;
 
-        myApp.nextPrevBackAdd(option,new ManageProductsState(myApp),new AddProductState(myApp));
+        if(myApp.nextPrevBackAdd(option,new ManageProductsState(myApp),new AddProductState(myApp))) return;
         if (!option.isEmpty() && option.charAt(0) == 'd') {
             try {
                 int num = Integer.parseInt(option.substring(1));

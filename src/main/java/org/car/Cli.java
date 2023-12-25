@@ -22,6 +22,7 @@ public class Cli {
     public static final String PRODUCT_NAME_DATA = "productName";
     public static final String CAR_MAKE_DATA = "carMake";
     public static final String ESCAPE_ANSI = "\033[0m";
+    public static final String PRESS_ENTER = "[press enter...]";
     private int page=1;
     private int totalPages=1;
     private final MyLogger myLogger;
@@ -79,7 +80,6 @@ public class Cli {
         Map<String,String> data = new HashMap<>();
 
         myLogger.log(blueBgText(" Sing Up ")+"\n"+ blueText("Full Name: "));
-        scanner.nextLine();
         data.put("fullName",scanner.nextLine());
         myLogger.log(blueText("Email: "));
         data.put(EMAIL,scanner.nextLine());
@@ -213,6 +213,9 @@ public class Cli {
         data.put("description",scanner.nextLine());
         myLogger.log(blueText("Price : "));
         data.put("price",scanner.nextLine());
+        myLogger.log(blueText("Available : "));
+        myLogger.log(blueText("t/f"));
+        data.put("available",scanner.nextLine());
         return data;
     }
     public String displayManageCategories(List<Category> categoryArrayList){
@@ -308,8 +311,8 @@ public class Cli {
     private ArrayList<Time> getAvailableTimes(App myApp,String date){
 
         ArrayList<Time> availableTimes=new ArrayList<>();
-        ArrayList<Appointment> appointmentsWithThisDate = (ArrayList<Appointment>) myApp.myDatabase.searchAppointmentsByDate(date);
-        boolean flag=false;
+        List<Appointment> appointmentsWithThisDate = myApp.myDatabase.searchAppointmentsByDate(date);
+        boolean flag;
         for (Time time : Time.values()){
             flag=false;
             for (Appointment appointment : appointmentsWithThisDate) {
@@ -565,7 +568,7 @@ public class Cli {
         else
             myLogger.log(errorText(msg));
 
-        myLogger.log("[press enter...]");
+        myLogger.log(PRESS_ENTER);
         scanner.nextLine();
     }
     public void displayAfterPurchase(String productName,String phoneNumber){
@@ -575,7 +578,7 @@ public class Cli {
         myLogger.log("We’ll call you on \""+ blueText(phoneNumber)+"\" within 20 minutes for confirmation.");
         myLogger.log("We value your choice.");
         myLogger.log("=====================================================");
-        myLogger.log("[press enter...]");
+        myLogger.log(PRESS_ENTER);
         scanner.nextLine();
     }
     public String displayStart(){
@@ -589,4 +592,12 @@ public class Cli {
         return scanner.nextLine();
     }
 
+    public void displayCanNotPurchase() {
+        Scanner scanner=new Scanner(System.in);
+        myLogger.log("=======================================================================");
+        myLogger.log("Sorry! The product you tried to purchase is not available right now.");
+        myLogger.log("=======================================================================");
+        myLogger.log(PRESS_ENTER);
+        scanner.nextLine();
+    }
 }

@@ -26,7 +26,7 @@ public class ProductCrudState implements State {
         }
 <span class="fc" id="L27">        String option = (String) input;</span>
 
-<span class="fc" id="L29">        myApp.nextPrevBackAdd(option,new ManageProductsState(myApp),new AddProductState(myApp));</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(myApp.nextPrevBackAdd(option,new ManageProductsState(myApp),new AddProductState(myApp))) return;</span>
 <span class="pc bpc" id="L30" title="1 of 4 branches missed.">        if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'd') {</span>
             try {
 <span class="fc" id="L32">                int num = Integer.parseInt(option.substring(1));</span>
@@ -35,7 +35,7 @@ public class ProductCrudState implements State {
 <span class="nc" id="L35">            } catch (Exception e) {</span>
 <span class="nc" id="L36">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="pc" id="L37">            }</span>
-<span class="pc bpc" id="L38" title="1 of 4 branches missed.">        } else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
+<span class="pc bpc" id="L38" title="2 of 4 branches missed.">        } else if (!option.isEmpty() &amp;&amp; option.charAt(0) == 'u') {</span>
             try {
 <span class="fc" id="L40">                int num = Integer.parseInt(option.substring(1));</span>
 <span class="fc" id="L41">                myApp.setProductIdToUpdate(myApp.getProductArrayListBetweenState().get(num - 1).getId());</span>
@@ -44,7 +44,7 @@ public class ProductCrudState implements State {
 <span class="nc" id="L44">                myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
 <span class="pc" id="L45">            }</span>
         } else {
-<span class="fc" id="L47">            myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
+<span class="nc" id="L47">            myApp.getError().setError(myApp.getCurrentState().getStateString());</span>
         }
 <span class="fc" id="L49">    }</span>
     @Override
