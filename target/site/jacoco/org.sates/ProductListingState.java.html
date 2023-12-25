@@ -23,10 +23,10 @@ public class ProductListingState implements State {
 <span class="fc" id="L23">        option = myApp.getCli().displayCustomerProducts(myApp.getProductArrayListBetweenState());</span>
 <span class="fc" id="L24">        handleInput(option);</span>
 <span class="pc bpc" id="L25" title="3 of 6 branches missed.">       if(!option.isEmpty() &amp;&amp; option.charAt(0) == 'f' &amp;&amp; !myApp.getError().getLocation().equals(getStateString())){</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">           if(productAvailable){</span>
-<span class="nc" id="L27">               String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
-<span class="nc" id="L28">               myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
-<span class="nc" id="L29">           }else{</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">           if(productAvailable){</span>
+<span class="fc" id="L27">               String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();</span>
+<span class="fc" id="L28">               myApp.getCli().displayAfterPurchase(productName,phoneNumber);</span>
+<span class="fc" id="L29">           }else{</span>
 <span class="fc" id="L30">               myApp.getCli().displayCanNotPurchase();</span>
            }
        }

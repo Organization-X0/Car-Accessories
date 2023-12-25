@@ -12,6 +12,8 @@ import org.sates.AddCategoryState;
 import org.sates.ProductCatalogState;
 import org.sates.ProductListingState;
 
+import java.lang.reflect.Field;
+
 import static org.mockito.Mockito.*;
 
 
@@ -34,15 +36,26 @@ public class ProductListingTest {
             when(cli.displayCustomerProducts(any())).thenReturn("f");
             when(myApp.getError()).thenReturn(error);
             when(error.getLocation()).thenReturn("null");
+            when(myApp.searchAccount(any())).thenReturn(user);
+            when(user.getPhone()).thenReturn("1234567890");
             // Create an instance of your class under test, passing the mock as a parameter
             ProductListingState state = spy(new ProductListingState(myApp));
             doNothing().when(state).handleInput(any());
+            // Set productAvailable field to true using reflection
+            try {
+                Field field = ProductListingState.class.getDeclaredField("productAvailable");
+                field.setAccessible(true);
+                field.set(state, true);
+            }catch (Exception e){
+                //Error
+            }
 
             // When
             state.handle();
 
             // Then
             verify(cli).displayCustomerProducts(any());
+            verify(cli).displayAfterPurchase(any(), any());
         }
 
 }
