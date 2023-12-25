@@ -8,6 +8,7 @@ public class ProductListingState implements State {
     private final App myApp;
     private boolean flag=false;
     private String productName;
+    private boolean productAvailable;
 
     public ProductListingState(App myApp) {
         this.myApp=myApp;
@@ -21,12 +22,14 @@ public class ProductListingState implements State {
         myApp.setProductArrayListBetweenState();
         option = myApp.getCli().displayCustomerProducts(myApp.getProductArrayListBetweenState());
         handleInput(option);
-
-        if(!option.isEmpty() && option.charAt(0) == 'f' && !myApp.getError().getLocation().equals(getStateString())){
-            String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();
-            myApp.getCli().displayAfterPurchase(productName,phoneNumber);
-        }
-
+       if(!option.isEmpty() && option.charAt(0) == 'f' && !myApp.getError().getLocation().equals(getStateString())){
+           if(productAvailable){
+               String phoneNumber=myApp.searchAccount(myApp.getEmail()).getPhone();
+               myApp.getCli().displayAfterPurchase(productName,phoneNumber);
+           }else{
+               myApp.getCli().displayCanNotPurchase();
+           }
+       }
     }
 
 
@@ -42,11 +45,16 @@ public class ProductListingState implements State {
         else if (!option.isEmpty() && option.charAt(0) == 'f') {
             try {
                 int num = Integer.parseInt(option.substring(1));
-                productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();
-                User account=myApp.searchAccount(myApp.getEmail());
-                account.addOrder(myApp.searchProduct(num));
-                account.pushNotification("You bought this product \""+ Cli.blueText(productName)+"\" successfully.");
-                account.increaseNotificationCount();
+                if(myApp.getProductArrayListBetweenState().get(num-1).isAvailability()) {
+                    productAvailable=true;
+                    productName = myApp.getProductArrayListBetweenState().get(num - 1).getName();
+                    User account = myApp.searchAccount(myApp.getEmail());
+                    account.addOrder(myApp.searchProduct(num));
+                    account.pushNotification("You bought this product \"" + Cli.blueText(productName) + "\" successfully.");
+                    account.increaseNotificationCount();
+                }else{
+                    productAvailable=false;
+                }
             } catch (Exception e) {
                 myApp.getError().setError(myApp.getCurrentState().getStateString());
             }

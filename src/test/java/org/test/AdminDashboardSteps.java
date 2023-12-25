@@ -112,6 +112,7 @@ public class AdminDashboardSteps {
         data.put("name",productName);
         data.put("description",description);
         data.put("price",price);
+        data.put("available","t");
         myApp.getCurrentState().handleInput(data);
     }
     @Then("the product should be updated {string}, {string}")

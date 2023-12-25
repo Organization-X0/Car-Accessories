@@ -208,11 +208,14 @@ public class App {
             searchAccount(appointment.getEmail()).addInstallations(appointment);
         }
     }
-    public void nextPrevBackAdd(String option, State backState, State addState) {
+    public boolean nextPrevBackAdd(String option, State backState, State addState) {
+        boolean flag=true;
         if (option.equals("n") && cli.getCurrentPage() != cli.getTotalPages()) cli.nextPage();
         else if (option.equals("p") && cli.getCurrentPage() != 1) cli.prevPage();
         else if (option.equals("b")) setState(backState);
         else if (option.equals("a")) setState(addState);
+        else flag=false;
+        return flag;
     }
     public void nextPrevBack(String option, State backState) {
         if (option.equals("n") && cli.getCurrentPage() != cli.getTotalPages()) cli.nextPage();
@@ -285,6 +288,8 @@ public class App {
                     product.setName(data.get("name"));
                 if (!data.get("description").isEmpty())
                     product.setDescription(data.get("description"));
+                if (!data.get("available").isEmpty())
+                    product.setAvailability(data.get("available").equals("t"));
                 updateProduct(productIdToUpdate,product);
             }else{
                 User user =new User();
